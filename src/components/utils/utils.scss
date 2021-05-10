@@ -1,0 +1,99 @@
+.label{
+  color: $primary;
+  display: block;
+  font-size: 17px;
+  left: 20px;
+  pointer-events: none;
+  position: absolute;
+  top: 0;
+  transform: translateY(75%);
+  transition-duration: .15s;
+  transition-property: font-size,transform;
+}
+
+.input{
+  background-clip: padding-box;
+  background-color: #fff;
+  border: none;
+  border-radius: 2px;
+  box-sizing: border-box;
+  display: block;
+  font-size: 17px;
+  line-height: 1.41;
+  padding: 30px 20px 5px;
+  width: 100%;
+  transition-duration: .15s;
+  transition-property: box-shadow;
+  &:focus{
+    box-shadow: 0 20px 20px 0 #0000001C;
+    outline:0px;
+    +.label{
+      font-size: 14px;
+      transform: translateY(50%);
+    }
+  }
+  &.is-filled{
+    +.label{
+      font-size: 14px;
+      transform: translateY(50%);
+    }
+  }
+}
+
+.btn-meeting{
+  border-radius: 500px;
+  line-height: 1;
+  padding: 14.5px;
+  transform: translate3d(0px,0px,0px);
+  transition-duration: 33ms;
+  transition-property: background-color, transform;
+}
+
+.btn-fill{
+  background-color: aqua;
+  border: none;
+  color: brown;
+  margin-bottom: 18px;
+  &:hover{
+    transform: scale(1.04);
+    background-color: blue;
+    color: #FFF;
+  }
+}
+
+.border-btn{
+  background-color: transparent;
+  color: blueviolet;
+  border: solid 1px #FFFFFF;
+  margin-bottom: 18px;
+  &:hover{
+    transform: scale(1.04);
+    background-color: blueviolet;
+    color: coral;
+  }
+}
+
+.divider{
+  display: table;
+  font-size: 16px;
+  line-height: 24px;
+  letter-spacing: 2px;
+  margin: 0px auto 1em;
+  color: rgb(117, 117, 117);
+  position: relative;
+  text-align: center;
+  width: 95%;
+  &:before, &:after{
+    border-top: 1px solid rgb(189, 189, 189);
+    content: "";
+    display: table-cell;
+    position: relative;
+    top: 0.8em;
+    width: 45%;
+  }
+}
+
+.form-container{
+  margin-top: 2rem;
+  width: 450px;
+}
