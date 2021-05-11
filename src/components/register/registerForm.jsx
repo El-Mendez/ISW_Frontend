@@ -116,7 +116,7 @@ function RegisterForm() {
         <div className="position-relative mt-2">
           <input
             className={`input ${registerFilled.password ? 'is-filled' : ' '}`}
-            type="text"
+            type="password"
             name="password"
             onInput={handleInputChange}
             {...register('password')}
