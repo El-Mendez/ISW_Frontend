@@ -12,19 +12,19 @@ import Search from '../search/search';
 
 function Home() {
   const { url } = useRouteMatch();
-  const [hobby, setHobby] = useState(0);
+  const [hobby, setHobby] = useState("");
   return (
     <div>
       <Navbar />
       <Switch>
-        <Route path={`${url}`}>
-          <Search
+        <Route path={`${url}/recomendaciones`}>
+          <HomeView
             hobby={hobby}
             setHobby={setHobby}
           />
         </Route>
-        <Route path={`${url}/recomendaciones`}>
-          <HomeView
+        <Route path={url}>
+          <Search
             hobby={hobby}
             setHobby={setHobby}
           />
