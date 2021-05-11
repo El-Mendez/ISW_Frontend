@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import Menu from './menu';
 import Services from './services';
-import logo from '../../assets/logo.png';
+import logo from '../../assets/logo.svg';
 
 function NavBar() {
   // Scroll position
