@@ -12,7 +12,7 @@ import Search from '../search/search';
 
 function Home() {
   const { url } = useRouteMatch();
-  const [hobby, setHobby] = useState("");
+  const [hobby, setHobby] = useState('');
   return (
     <div>
       <Navbar />
