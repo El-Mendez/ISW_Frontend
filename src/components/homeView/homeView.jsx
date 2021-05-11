@@ -5,6 +5,7 @@ import Suggestion from '../suggestions/suggestions';
 
 function HomeView(props) {
   const item = props;
+  console.log('test');
   console.log(item.hobby);
   return (
     <div className="home">

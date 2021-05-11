@@ -10,23 +10,34 @@ import Perfil from '../perfil/perfil';
 import HomeView from '../homeView/homeView';
 import Search from '../search/search';
 
+
 function Home() {
   const { url } = useRouteMatch();
-  const [hobby, setHobby] = useState('');
+
+  const [data, setData] = useState({
+    hobby: 'Test',
+  });
+
+  const updateData = (hobby) => {
+    console.log('Test');
+    setData({
+      hobby: hobby,
+    })
+  }
+
   return (
     <div>
       <Navbar />
       <Switch>
         <Route path={`${url}/recomendaciones`}>
           <HomeView
-            hobby={hobby}
-            setHobby={setHobby}
+            hobby={hobby_test}
           />
         </Route>
         <Route path={url}>
           <Search
-            hobby={hobby}
-            setHobby={setHobby}
+            setHobby={(hobby) => updateData(hobby)}
+            hobby = {data.hobby}
           />
         </Route>
       </Switch>
