@@ -2,7 +2,6 @@ import React, { useState, useEffect } from 'react';
 import Menu from './menu';
 import Services from './services';
 
-
 function NavBar() {
   // Scroll position
   // @author: rbk
