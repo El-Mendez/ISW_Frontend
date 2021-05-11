@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import {
   Switch,
   Route,
@@ -8,18 +8,26 @@ import 'bootstrap/dist/js/bootstrap';
 import Navbar from '../navbar/navbar';
 import Perfil from '../perfil/perfil';
 import HomeView from '../homeView/homeView';
+import Search from '../search/search';
 
 function Home() {
   const { url } = useRouteMatch();
+  const [hobby, setHobby] = useState(0);
   return (
     <div>
       <Navbar />
       <Switch>
         <Route path={`${url}`}>
-          <HomeView />
+          <Search
+            hobby={hobby}
+            setHobby={setHobby}
+          />
         </Route>
-        <Route path={`${url}/perfil`}>
-          <Perfil />
+        <Route path={`${url}/recomendaciones`}>
+          <HomeView
+            hobby={hobby}
+            setHobby={setHobby}
+          />
         </Route>
       </Switch>
     </div>
