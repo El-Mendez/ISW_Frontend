@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { useForm } from 'react-hook-form';
 import Axios from 'axios';
+import history from '../history';
 
 import { zodResolver } from '@hookform/resolvers/zod';
 import * as z from 'zod';
@@ -11,6 +12,9 @@ const schema = z.object({
 });
 
 function LoginForm() {
+
+  const get_user = 'http://3.15.200.46:8000/api/login/'
+
   const { register, handleSubmit, formState: { errors } } = useForm({
     resolver: zodResolver(schema),
   });
@@ -34,18 +38,12 @@ function LoginForm() {
             password: loginData.password
           }
         );
-        console.log('data '+ data.length);
-        if(data.length === 1){
-          console.log('just testing')
-          console.log(history().location);
-          history().push(`/home`);
-          history().go();
-          console.log(history().location);
-        }else{
-          alert('Usuario o contraseña incorrectos');
-        }
+        console.log(data);
+        history.push(`/home`);
+        history.go();
       } catch (error) {
         console.log(error);
+        alert('Usuario o contraseña incorrectos');
       }
     };
     fetchData();
@@ -72,7 +70,11 @@ function LoginForm() {
     }
   };
 
-  const onSubmit = (data) => console.log(data);
+  const onSubmit = (data) => {
+    console.log(data);
+    getUser();
+  };
+
 
   return (
     <>
