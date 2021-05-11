@@ -6,7 +6,6 @@ import {
 } from 'react-router-dom';
 import 'bootstrap/dist/js/bootstrap';
 import Navbar from '../navbar/navbar';
-import Perfil from '../perfil/perfil';
 import HomeView from '../homeView/homeView';
 import Search from '../search/search';
 
@@ -29,10 +28,8 @@ function Home() {
     <div>
       <Navbar />
       <Switch>
-        <Route path={`${url}/recomendaciones`}>
-          <HomeView
-            hobby={hobby_test}
-          />
+        <Route path={`${url}/recomendaciones/:hobby`}>
+          <HomeView />
         </Route>
         <Route path={url}>
           <Search

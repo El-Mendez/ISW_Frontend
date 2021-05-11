@@ -1,17 +1,14 @@
 import React from 'react';
-import { BsPencil } from 'react-icons/bs';
-import user from '../../assets/user.png';
 import Suggestion from '../suggestions/suggestions';
+import {  useParams } from 'react-router-dom';
 
-function HomeView(props) {
-  const item = props;
-  console.log('test');
-  console.log(item.hobby);
+function HomeView() {
+  let { hobby } = useParams();
   return (
     <div className="home">
       <div className="suggestions">
         {
-          item.hobby === 'Jugar videojuegos' || item.hobby === 'Leer' || item.hobby === 'Salir con amigos' ? (
+          hobby === 'Jugar videojuegos' || hobby === 'Leer' || hobby === 'Salir con amigos' ? (
             <Suggestion
               nombre="Pepe Gonzales"
               username="Pepe_G52"
@@ -21,7 +18,7 @@ function HomeView(props) {
           ) : ''
         }
         {
-          item.hobby === 'Hacer deporte' || item.hobby === 'Jugar videojuegos' || item.hobby === 'Escuchar música' ? (
+          hobby === 'Hacer deporte' || hobby === 'Jugar videojuegos' || hobby === 'Escuchar música' ? (
             <Suggestion
               nombre="Juan Perez"
               username="JuanPe52"
@@ -31,7 +28,7 @@ function HomeView(props) {
           ) : ''
         }
         {
-          item.hobby === 'Ver series' || item.hobby === 'Leer' || item.hobby === 'Salir con amigos' ? (
+          hobby === 'Ver series' || hobby === 'Leer' || hobby === 'Salir con amigos' ? (
             <Suggestion
               nombre="Laura Lopez"
               username="LauLo"
@@ -41,7 +38,7 @@ function HomeView(props) {
           ) : ''
           }
         {
-          item.hobby === 'Jugar videojuegos' || item.hobby === 'Hacer deporte' ? (
+          hobby === 'Jugar videojuegos' || hobby === 'Hacer deporte' ? (
             <Suggestion
               nombre="Andrez Hernandez"
               username="AndrezH"
@@ -51,7 +48,7 @@ function HomeView(props) {
           ) : ''
             }
         {
-            item.hobby === 'Jugar videojuegos' || item.hobby === 'Leer' ? (
+            hobby === 'Jugar videojuegos' || hobby === 'Leer' ? (
               <Suggestion
                 nombre="Jose Estrada"
                 username="Jose658"

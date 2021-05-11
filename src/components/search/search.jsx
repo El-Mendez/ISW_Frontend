@@ -12,12 +12,11 @@ function Perfil(props) {
   const handleHobby = (e) => {
     console.log(e.target.value);
     hobby = e.target.value;
-    item.setHobby(e.target.value);
   };
 
   const handleClick = () => {
     console.log(item.hobby)
-    history().push(`${url}/recomendaciones`);
+    history().push(`${url}/recomendaciones/${hobby}`);
     history().go();
   };
 
