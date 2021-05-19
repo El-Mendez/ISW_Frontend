@@ -2,6 +2,8 @@ import React, { useState } from 'react';
 import { useForm } from 'react-hook-form';
 import Axios from 'axios';
 import history from '../history';
+import GoogleLog from './GoogleLogin'
+
 
 import { zodResolver } from '@hookform/resolvers/zod';
 import * as z from 'zod';
@@ -14,6 +16,8 @@ const schema = z.object({
 function LoginForm() {
 
   const get_user = 'http://3.15.200.46:8000/api/login/'
+
+  
 
   const { register, handleSubmit, formState: { errors } } = useForm({
     resolver: zodResolver(schema),
@@ -75,8 +79,10 @@ function LoginForm() {
     getUser();
   };
 
-
   return (
+
+    
+
     <>
       <form onSubmit={handleSubmit(onSubmit)}>
         {/* Username */}
@@ -111,6 +117,7 @@ function LoginForm() {
         </div>
         {/* REGISTER BUTTON */}
         <button onSubmit={onSubmit} className="btn btn-meeting btn-fill my-3 w-100">INICIAR SESIÓN</button>
+        <GoogleLog/>
       </form>
     </>
   );
