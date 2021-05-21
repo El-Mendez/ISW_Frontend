@@ -1,8 +1,29 @@
 .perfil {
-    display:flex;
-    justify-content: center;
-    align-items: center;
+    position:relative;
+    margin-top: 10vh;
     p{ 
-        font-size: 10vh;
+        font-size: 300%;
     }
+    img{
+        width: 50%;
+        height: 100%;
+        border-radius: 50%;
+    }
+}
+
+.userImage{
+    text-align: right;
+}
+
+.userInformation{
+    :first-child{
+        margin-top: 2vh;
+    }
+    margin-left: 5vh;
+}
+
+.info{
+    margin-top: 4vh;
+    border-radius: 15px;
+    background-color: #dddddd;
 }

@@ -85,7 +85,7 @@ li ~ li{
     margin-left: 24px;
     height: fit-content;
     cursor: pointer;
-    color: #FFFFFF;
+    color: #4D4940;
     &:hover{
         color: #FFC100;
     }
@@ -298,4 +298,13 @@ div[aria-expanded="true"]{
 
 .mt-24{
     margin-top: 24px;
+}
+
+.noDecorations{
+    text-decoration: none;
+}
+.temporary-style{
+    width: 153px;
+    position: absolute;
+    top: 5px;
 }
