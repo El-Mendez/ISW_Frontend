@@ -6,7 +6,7 @@
   "scripts": {
     "test": "cucumber-js features",
     "start": "webpack serve --mode development --open",
-    "build": "webpack --mode production"
+    "build": "webpack --mode production --performance-hints false"
   },
   "repository": {
     "type": "git",
