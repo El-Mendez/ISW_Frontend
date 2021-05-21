@@ -116,7 +116,7 @@ function LoginForm() {
           </small>
         </div>
         {/* REGISTER BUTTON */}
-        <button onSubmit={onSubmit} className="btn btn-meeting btn-fill my-3 w-100">INICIAR SESIÓN</button>
+        <button onSubmit={onSubmit} className="btn btn-meeting btn-fill my-3 w-100">INICIA SESIÓN</button>
         <GoogleLog/>
       </form>
     </>
