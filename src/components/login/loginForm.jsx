@@ -17,7 +17,7 @@ function LoginForm() {
 
   const get_user = 'http://127.0.0.1:8000/api/login/'
 
-  
+
 
   const { register, handleSubmit, formState: { errors } } = useForm({
     resolver: zodResolver(schema),
@@ -43,7 +43,7 @@ function LoginForm() {
           }
         );
         console.log(data);
-        history.push(`/home`);
+        history.push(`/data`);
         history.go();
       } catch (error) {
         console.log(error);
@@ -81,7 +81,7 @@ function LoginForm() {
 
   return (
 
-    
+
 
     <>
       <form onSubmit={handleSubmit(onSubmit)}>

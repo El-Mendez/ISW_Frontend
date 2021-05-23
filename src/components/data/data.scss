@@ -12,14 +12,14 @@
 
 .progress-number{
   font-weight: 900;
-  color: #423f3f;
+  color: #F5F6F4;
 }
 
 .progress-activate-circle{
   width: 45px;
   height: 45px;
   border-radius: 50%;
-  background-color: #FFC100;
+  background-color: $serenity;
   border: 2px solid #423f3f;
   .progress-number{
     font-size: 25px;
@@ -30,11 +30,10 @@
   width: 40px;
   height: 40px;
   border-radius: 50%;
-  background-color: #5f6368;
-  border: 2px solid #5f6368;
+  background-color: $gray;
+  border: 2px solid $gray;
   .progress-number{
     font-weight: 500;
-    color: #F5F6F4;
   }
 }
 

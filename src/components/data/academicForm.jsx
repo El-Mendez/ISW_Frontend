@@ -3,6 +3,7 @@ import React, { useState } from 'react';
 import { zodResolver } from '@hookform/resolvers/zod';
 import * as z from 'zod';
 import { useForm } from 'react-hook-form';
+import history from '../history';
 
 const schema = z.object({
   carrera: z.string(),
@@ -46,6 +47,13 @@ function AcademicForm() {
 
   const onSubmit = (data) => {
     console.log(data);
+    history.push(`/home`);
+    history.go();
+  }
+
+  const handleBack = () => {
+    history.push(`${url}/contact`);
+    history.go();
   }
 
   return (
@@ -67,7 +75,7 @@ function AcademicForm() {
       <form onSubmit={handleSubmit(onSubmit)}>
         {/* DATA */}
         <div className="container px-5">
-          <h1>Información de Contacto</h1>
+          <h1>Información Académica</h1>
           {/* Carrera */}
           <div className="position-relative mt-3">
             <input
@@ -101,13 +109,12 @@ function AcademicForm() {
         </div>
         {/* NEXT BUTTON */}
         <div className="d-flex bg-gold w-100 mt-5 justify-content-between">
-          <button onSubmit={onSubmit} className={`btn btn-data my-1 ms-3`}>
+          <button onSubmit={handleBack} className={`btn btn-data my-1 ms-3`}>
             <span className="material-icons position-absolute before-icon">arrow_back</span>
             ANTERIOR
           </button>
-          <button onSubmit={onSubmit} className={`btn btn-data my-1 me-3`}>SIGUIENTE
-            <span
-              className="material-icons position-absolute ms-1">arrow_forward</span>
+          <button onSubmit={onSubmit} className={`btn btn-data my-1 me-3`}> SIGUIENTE
+            <span className="material-icons position-absolute ms-1">arrow_forward</span>
           </button>
         </div>
       </form>

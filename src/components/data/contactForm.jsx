@@ -3,14 +3,16 @@ import React, { useState } from 'react';
 import { zodResolver } from '@hookform/resolvers/zod';
 import * as z from 'zod';
 import { useForm } from 'react-hook-form';
+import history from '../history';
+import { useRouteMatch } from 'react-router-dom';
 
 const schema = z.object({
   facebook: z.string(),
   instagram: z.string(),
-  phone: z.number(),
 });
 
 function ContactForm() {
+  let { url } = useRouteMatch();
 
   const { register, handleSubmit, formState: { errors } } = useForm({
     mode: 'On Change',
@@ -50,6 +52,13 @@ function ContactForm() {
 
   const onSubmit = (data) => {
     console.log(data);
+    history.push(`${url}/academic`);
+    history.go();
+  }
+
+  const handleBack = () => {
+    history.push(`${url}`);
+    history.go();
   }
 
   return (
@@ -109,7 +118,7 @@ function ContactForm() {
               type="number"
               name="phone"
               onInput={handleInputChange}
-              {...register('phone')}
+
             />
             <label className="label">Número de teléfono</label>
             <small className="text-danger text-small d-block mb-2">
@@ -120,7 +129,7 @@ function ContactForm() {
         </div>
         {/* NEXT BUTTON */}
         <div className="d-flex bg-gold w-100 mt-5 justify-content-between">
-          <button onSubmit={onSubmit} className={`btn btn-data my-1 ms-3`}>
+          <button onSubmit={handleBack} className={`btn btn-data my-1 ms-3`}>
             <span className="material-icons position-absolute before-icon">arrow_back</span>
             ANTERIOR
           </button>

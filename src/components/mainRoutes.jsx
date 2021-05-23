@@ -4,8 +4,7 @@ import LogIn from './login/login';
 import SignUp from './register/register';
 import Custom404 from './404/custom_404';
 import Home from './home/home';
-import ContactForm from './data/contactForm';
-import AcademicForm from './data/academicForm';
+import UserData from './data/data';
 
 export default function MainRoutes() {
   return (
@@ -15,7 +14,7 @@ export default function MainRoutes() {
         <Route path="/signUp" component={SignUp} />
         <Route path="/404" component={Custom404} />
         <Route path="/home" component={Home} />
-        <Route path="/data" component={AcademicForm} />
+        <Route path="/data" component={UserData} />
       </Switch>
     </Router>
   );

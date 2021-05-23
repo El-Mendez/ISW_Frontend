@@ -1,8 +1,9 @@
 import React, { useState } from 'react';
-
 import { zodResolver } from '@hookform/resolvers/zod';
 import * as z from 'zod';
 import { useForm } from 'react-hook-form';
+import history from '../history';
+import { useRouteMatch } from 'react-router-dom';
 
 const schema = z.object({
   name: z.string().nonempty({ message: 'Ingresa su nombre completo' }),
@@ -11,6 +12,7 @@ const schema = z.object({
 });
 
 function PersonalForm() {
+  let { url } = useRouteMatch();
 
   const { register, handleSubmit, formState: { errors } } = useForm({
     mode: 'On Change',
@@ -48,7 +50,8 @@ function PersonalForm() {
 
   const onSubmit = (data) => {
     console.log(data);
-    createUser();
+    history.push(`${url}/contact`);
+    history.go();
   }
 
   return (
