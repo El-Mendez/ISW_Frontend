@@ -9,6 +9,8 @@
 @import '../components/perfil/perfil';
 @import '../components/carousel/carousel';
 @import '../components/search/search';
+@import '../components/data/data.scss';
+
 
 body {
     overflow-x:hidden;
@@ -37,6 +39,7 @@ body {
 body{
     background-color: #e9e8e8 !important;
 }
+<<<<<<< Updated upstream
 
 .goog{
     width: 100%;
@@ -45,3 +48,5 @@ body{
     justify-content: center;
     align-items: center;
 }
+=======
+>>>>>>> Stashed changes
