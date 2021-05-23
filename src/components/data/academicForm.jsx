@@ -52,6 +52,7 @@ function AcademicForm() {
   }
 
   const handleBack = () => {
+    console.log('wtf')
     history.push(`${url}/contact`);
     history.go();
   }

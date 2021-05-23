@@ -57,7 +57,7 @@ function ContactForm() {
   }
 
   const handleBack = () => {
-    history.push(`${url}`);
+    history.push('/data');
     history.go();
   }
 
@@ -129,7 +129,7 @@ function ContactForm() {
         </div>
         {/* NEXT BUTTON */}
         <div className="d-flex bg-gold w-100 mt-5 justify-content-between">
-          <button onSubmit={handleBack} className={`btn btn-data my-1 ms-3`}>
+          <button onClick={handleBack} className={`btn btn-data my-1 ms-3`}>
             <span className="material-icons position-absolute before-icon">arrow_back</span>
             ANTERIOR
           </button>
