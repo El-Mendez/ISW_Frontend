@@ -14,7 +14,7 @@ const schema = z.object({
 
 function RegisterForm() {
 
-  const post_user = 'http://127.0.0.1:8000/api/register/';
+  const post_user = 'http://api.meetinguvg.me/api/register/';
 
   const { register, handleSubmit, formState: { errors } } = useForm({
     resolver: zodResolver(schema),

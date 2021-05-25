@@ -15,7 +15,7 @@ const schema = z.object({
 
 function LoginForm() {
 
-  const get_user = 'http://127.0.0.1:8000/api/login/'
+  const get_user = 'http://api.meetinguvg.me/api/login/';
 
 
 
