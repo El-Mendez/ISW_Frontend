@@ -7,7 +7,7 @@ export default function Menu() {
     <div className="products">
       <ul className="navbar-nav mr-auto mt-2 mt-lg-0">
         <li className="nav-item product-font ml-20">
-          <Link to={`${url}`} className="noDecorations">
+          <Link to={`${url}/profile`} className="noDecorations">
             <button className="nav-link button" type="button">
               Perfil
             </button>

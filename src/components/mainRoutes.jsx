@@ -15,6 +15,7 @@ export default function MainRoutes() {
         <Route path="/404" component={Custom404} />
         <Route path="/home" component={Home} />
         <Route path="/data" component={UserData} />
+        <Route path="/perfil" component={UserData} />
       </Switch>
     </Router>
   );

@@ -2,8 +2,10 @@ import React, { useState, useEffect } from 'react';
 import Menu from './menu';
 import Services from './services';
 import logo from '../../assets/logo.svg';
+import { Link, useRouteMatch, useParams } from 'react-router-dom';
 
 function NavBar() {
+  const { url } = useRouteMatch();
   // Scroll position
   // @author: rbk
   // Extraido y adaptado de: https://codesandbox.io/s/useeffect-scroll-event-oolh6?from-embed=&file=/src/index.js
@@ -47,11 +49,11 @@ function NavBar() {
             </button>
             <div className="d-flex flex-grow-1 justify-content-between align-items-center" style={{ height: 'inherit' }}>
               {/* LOGO */}
-              <a style={{ height: '24px' }} aria-label="Google store logo">
+              <Link to={`${url}`} style={{ height: '24px' }} aria-label="Google store logo">
                 <div className="logo-bg-large">
                   <img src={logo} alt="Logo" className="temporary-style"/>
                 </div>
-              </a>
+              </Link>
               <div className="collapse navbar-collapse align-items-center" style={{ height: 'inherit' }}>
                 <Menu />
               </div>
