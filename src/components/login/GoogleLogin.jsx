@@ -1,11 +1,17 @@
 import React from 'react';
 import GoogleLogin from 'react-google-login';
+import history from '../history';
 
-function GoogleLog(){ 
+function GoogleLog(){
 
     const respuestaGoogle=(respuesta)=>{
         console.log(respuesta);
         console.log(respuesta.profileObj);
+        console.log(respuesta.error);
+        if (respuesta.error !== 'popup_closed_by_user'){
+          history.push(`/data`);
+          history.go();
+        }
     }
 
     return(
@@ -16,12 +22,12 @@ function GoogleLog(){
             buttonText = "Ingresar con Google"
             onSuccess={respuestaGoogle}
             onFailure={respuestaGoogle}
-            cookiePolicy={'single_host_origin'}         
+            cookiePolicy={'single_host_origin'}
             />
         </div>
 
     )
-    
+
 }
 
 export default GoogleLog;
