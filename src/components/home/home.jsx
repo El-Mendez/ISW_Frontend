@@ -28,6 +28,15 @@ function Home() {
     <div>
       <Navbar />
       <Switch>
+        <Route path={`${url}/recomendaciones/:hobby`}>
+          <HomeView />
+        </Route>
+        <Route path={`${url}/search`}>
+          <Search
+            setHobby={(hobby) => updateData(hobby)}
+            hobby={data.hobby}
+          />
+        </Route>
         <Route path={`${url}`}>
           {/* Aqui se pasara los datos del usuario de la base de datos */}
           <Perfil
@@ -41,15 +50,6 @@ function Home() {
             facebook="Pablo586"
             twitter="@PabloAge"
             instagram={valor}
-          />
-        </Route>
-        <Route path={`${url}/recomendaciones/:hobby`}>
-          <HomeView />
-        </Route>
-        <Route path={`${url}/search/`}>
-          <Search
-            setHobby={(hobby) => updateData(hobby)}
-            hobby={data.hobby}
           />
         </Route>
       </Switch>
