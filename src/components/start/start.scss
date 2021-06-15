@@ -1,0 +1,49 @@
+.start-img{
+  position: absolute;
+  top: 0;
+  width: 100%;
+  object-fit: contain;
+}
+
+.logo-container{
+  height: 67px;
+  width: 225px;
+}
+
+.img-size{
+  width: inherit;
+  height: inherit;
+}
+
+.sub-1{
+  text-decoration: none;
+  display: inline-block;
+  margin: 0;
+  font-weight: 500;
+  font-size: 25px;
+  line-height: 18px;
+  color: #423f3f;
+}
+
+.start-link{
+  cursor: pointer;
+  position: relative;
+  &:after{
+    content: '';
+    position: absolute;
+    bottom: -10px;
+    left: 0;
+    height: 2px;
+    width: 0;
+    background-color: #FFC100;
+    transition: width 0.6s;
+    transition-timing-function: cubic-bezier(1, 0, 0, 1);
+  }
+  &:hover{
+    color: #423f3f;
+    &:after{
+      width: 100%;
+    }
+  }
+}
+
