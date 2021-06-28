@@ -1,9 +1,12 @@
 import React from 'react';
 import logo from '../../assets/logo.svg';
 import { Link, useRouteMatch } from 'react-router-dom';
+import ModalLogin from "./modalLogin";
 
 function NavBar() {
   const { url } = useRouteMatch();
+
+  const [login, setLogin] = React.useState(false);
 
   return (
       <div>
@@ -30,7 +33,7 @@ function NavBar() {
                     <img src={logo} alt="Logo" className="img-size"/>
                 </Link>
                 <div className="d-flex">
-                  <a className="sub-1 me-3 start-link">Iniciar sesión</a>
+                  <a className="sub-1 me-3 start-link" onClick={() => setLogin(true)}>Iniciar sesión</a>
                   <div className="border-end border-primary" style={{height: '20px'}}/>
                   <a className="sub-1 ms-3 start-link">Registrarse</a>
                 </div>
@@ -38,6 +41,10 @@ function NavBar() {
             </nav>
           </div>
         </div>
+        <ModalLogin
+            show={login}
+            onHide={() => setLogin(false)}
+        />
       </div>
 
   );

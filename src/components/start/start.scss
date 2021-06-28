@@ -47,3 +47,10 @@
   }
 }
 
+.btn-close{
+  &:focus &:focus-visible{
+    box-shadow: none !important;
+  }
+}
+
+
