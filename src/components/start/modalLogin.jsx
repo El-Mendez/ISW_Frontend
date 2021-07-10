@@ -4,7 +4,6 @@ import GoogleLogin from 'react-google-login';
 import Axios from 'axios';
 import { useForm } from 'react-hook-form';
 import history from '../history';
-import GoogleLog from '../login/GoogleLogin';
 
 
 import { zodResolver } from '@hookform/resolvers/zod';

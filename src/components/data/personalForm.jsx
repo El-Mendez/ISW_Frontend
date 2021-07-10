@@ -1,14 +1,19 @@
 import React, { useState } from 'react';
-import { zodResolver } from '@hookform/resolvers/zod';
-import * as z from 'zod';
 import { useForm } from 'react-hook-form';
 import history from '../history';
 import { useRouteMatch } from 'react-router-dom';
+
+import { zodResolver } from '@hookform/resolvers/zod';
+import * as z from 'zod';
 
 const schema = z.object({
   name: z.string().nonempty({ message: 'Ingresa su nombre completo' }),
   sex: z.string().nonempty({ message: 'Seleccione su sexo' }),
   school: z.string().nonempty({message: 'Ingresa una contraseña'}).min(8,{message: 'Mínimo 8 caracteres'}),
+  carrera: z.string(),
+  cursos: z.string(),
+  facebook: z.string(),
+  instagram: z.string()
 });
 
 function PersonalForm() {
@@ -22,11 +27,18 @@ function PersonalForm() {
     name: '',
     sex: '',
     school: '',
+    carrera: '',
+    cursos: '',
+    facebook: '',
+    instagram: '',
   });
 
   const [filled, setFilled] = useState({
     name: false,
     school: false,
+    carrera: false,
+    facebook: false,
+    instagram: false,
   });
 
   const handleInputChange = (e) => {
@@ -50,30 +62,21 @@ function PersonalForm() {
 
   const onSubmit = (data) => {
     console.log(data);
-    history.push(`${url}/contact`);
+    history.push(`${url}/home`);
     history.go();
   }
 
   return (
     <div className="container px-0 bg-secondary pt-2">
-      {/* Progress */}
-      <div className="d-flex justify-content-center align-items-center my-4">
-        <div className="progress-activate-circle d-flex justify-content-center activate">
-          <h2 className="progress-number">1</h2>
-        </div>
-        <div className="progress-line"/>
-        <div className="progress-deactivate-circle d-flex justify-content-center">
-          <h2 className="progress-number">2</h2>
-        </div>
-        <div className="progress-line"/>
-        <div className="progress-deactivate-circle d-flex justify-content-center">
-          <h2 className="progress-number">3</h2>
-        </div>
-      </div>
       <form onSubmit={handleSubmit(onSubmit)}>
         {/* DATA */}
-        <div className="container px-5">
-          <h1>Información Personal</h1>
+        <div className="container px-5 my-5">
+          <div className="d-flex align-items-center px-0">
+            <div className="progress-activate-circle d-flex justify-content-center activate me-3">
+              <h2 className="progress-number">1</h2>
+            </div>
+            <h1>Información Personal</h1>
+          </div>
           {/* Name */}
           <div className="position-relative mt-3">
             <input
@@ -122,6 +125,98 @@ function PersonalForm() {
             <small className="text-danger text-small d-block mb-2">
               {/* <Exclamation_icon/> */}
               {errors.school?.message}
+            </small>
+          </div>
+        </div>
+
+        <div className="container px-5 my-5">
+            <div className="d-flex align-items-center px-0">
+              <div className="progress-activate-circle d-flex justify-content-center activate me-3">
+                <h2 className="progress-number">2</h2>
+              </div>
+              <h1>Información Académica</h1>
+            </div>
+          {/* Carrera */}
+          <div className="position-relative mt-3">
+            <input
+                className={`border border-1 input ${filled.carrera ? 'is-filled' : ' '}`}
+                type="text"
+                name="carrera"
+                onInput={handleInputChange}
+                {...register('carrera')}
+            />
+            <label className="label">Carrera</label>
+            <small className="text-danger text-small d-block mb-2">
+              {/* <Exclamation_icon/> */}
+              {errors.carrera?.message}
+            </small>
+          </div>
+          {/* Courses */}
+          <div className="position-relative mt-3">
+            <input
+                className={`input border border-1 ${filled.cursos ? 'is-filled' : ' '}`}
+                type="text"
+                name="cursos"
+                onInput={handleInputChange}
+                {...register('cursos')}
+            />
+            <label className="label">Cursos</label>
+            <small className="text-danger text-small d-block mb-2">
+              {/* <Exclamation_icon/> */}
+              {errors.cursos?.message}
+            </small>
+          </div>
+        </div>
+        <div className="container px-5">
+            <div className="d-flex align-items-center px-0">
+              <div className="progress-activate-circle d-flex justify-content-center activate me-3">
+                <h2 className="progress-number">3</h2>
+              </div>
+              <h1>Información de Contacto</h1>
+            </div>
+          {/* Facebook */}
+          <div className="position-relative mt-3">
+            <input
+                className={`border border-1 input ${filled.facebook ? 'is-filled' : ' '}`}
+                type="text"
+                name="facebook"
+                onInput={handleInputChange}
+                {...register('facebook')}
+            />
+            <label className="label">Facebook</label>
+            <small className="text-danger text-small d-block mb-2">
+              {/* <Exclamation_icon/> */}
+              {errors.facebook?.message}
+            </small>
+          </div>
+          {/* Instagram */}
+          <div className="position-relative mt-3">
+            <input
+                className={`input border border-1 ${filled.instagram ? 'is-filled' : ' '}`}
+                type="text"
+                name="instagram"
+                onInput={handleInputChange}
+                {...register('instagram')}
+            />
+            <label className="label">Intagram</label>
+            <small className="text-danger text-small d-block mb-2">
+              {/* <Exclamation_icon/> */}
+              {errors.instagram?.message}
+            </small>
+          </div>
+          {/* Phone number */}
+          <div className="position-relative mt-3">
+            <input
+                className={`input border border-1 ${filled.phone ? 'is-filled' : ' '}`}
+                type="number"
+                name="phone"
+                onInput={handleInputChange}
+
+            />
+            <label className="label">Número de teléfono</label>
+            <small className="text-danger text-small d-block mb-2">
+              {/* <Exclamation_icon/> */}
+              {errors.phone?.message}
             </small>
           </div>
         </div>
