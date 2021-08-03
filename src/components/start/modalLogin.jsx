@@ -59,8 +59,8 @@ export default function ModalLogin(props) {
         console.log(respuesta.profileObj);
         console.log(respuesta.error);
         if (respuesta.error !== 'popup_closed_by_user'){
-            history.push(`/data`);
-            history.go();
+            //history.push(`/data`);
+            //history.go();
         }
     };
 
@@ -176,6 +176,7 @@ export default function ModalLogin(props) {
                         buttonText = "Continúa con Google"
                         onSuccess={googleLogin}
                         onFailure={googleLogin}
+                        hostedDomain={"uvg.edu.gt"}
                         cookiePolicy={'single_host_origin'}
                     />
                 </div>
