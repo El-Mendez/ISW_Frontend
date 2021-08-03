@@ -28,10 +28,10 @@ export default function Menu() {
           </button>
         </li>
       </ul>
-      <Help
+      {/* <Help
         show={message}
         onHide={() => setMessage(false)}
-      />
+      /> */}
     </div>
 
   );
