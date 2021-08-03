@@ -63,6 +63,7 @@
     "react-router-dom": "^5.2.0",
     "sass-loader": "^11.0.1",
     "style-loader": "^2.0.0",
+    "universal-cookie": "^4.0.4",
     "yup": "^0.32.9",
     "zod": "^1.11.13"
   }

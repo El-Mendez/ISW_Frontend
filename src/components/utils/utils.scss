@@ -15,7 +15,7 @@
   background-clip: padding-box;
   background-color: #fff;
   border: 1.6px solid #423f3f80;
-  border-radius: 10px;
+  border-radius: .25rem;
   box-sizing: border-box;
   display: flex;
   font-size: 17px;
@@ -36,22 +36,6 @@
   &:focus{
     outline:0;
   }
-  //background-clip: padding-box;
-  //background-color: #fff;
-  //border: 1.6px solid #423f3f80;
-  //border-radius: 10px;
-  //box-sizing: border-box;
-  //display: block;
-  //font-size: 17px;
-  //line-height: 1.41;
-  //padding: 15px 15px 15px 50px;
-  //width: 100%;
-  //transition-duration: .15s;
-  //transition-property: box-shadow;
-  //&:focus{
-  //  box-shadow: 0 20px 20px 0 #0000001C;
-  //  outline:0;
-  //}
 }
 
 .input-icon {

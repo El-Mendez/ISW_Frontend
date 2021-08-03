@@ -5,13 +5,14 @@ import Axios from 'axios';
 import { useForm } from 'react-hook-form';
 import history from '../history';
 import logo from '../../assets/logo.svg';
+import Cookies from 'universal-cookie';
 
 
 import { zodResolver } from '@hookform/resolvers/zod';
 import * as z from 'zod';
 
 const schema = z.object({
-    carne: z.number().min(3, {message: 'EL mínimo de un carné UVG es de 3 dígitos'}),
+    carne: z.string().min(3, {message: 'EL mínimo de un carné UVG es de 3 dígitos'}),
     password: z.string().nonempty({ message: 'Ingrese una contraseña' }).min(8, { message: 'Mínimo 8 caracteres' }),
 });
 
@@ -19,7 +20,7 @@ const schema = z.object({
 export default function ModalLogin(props) {
 
     const get_user = 'http://api.meetinguvg.me/free/login';
-
+    const cookies = new Cookies();
     const { register, handleSubmit, formState: { errors } } = useForm({
         resolver: zodResolver(schema),
     });
@@ -34,7 +35,7 @@ export default function ModalLogin(props) {
         password: false,
     });
 
-    function getUser(){
+    function auth(){
         console.log("Loading...");
         const fetchData = async () => {
             try {
@@ -44,6 +45,8 @@ export default function ModalLogin(props) {
                         password: user.password
                     }
                 );
+                cookies.set('jwt', data.token, {path: '/'})
+                console.log(cookies.get('jwt'))
                 history.push(`/data`);
                 history.go();
             } catch (error) {
@@ -65,8 +68,6 @@ export default function ModalLogin(props) {
     };
 
     const handleInputChange = (e) => {
-        console.log(e.target.value);
-        console.log('wtf');
         setUser({
             ...user,
             [e.target.name]: e.target.value,
@@ -86,8 +87,7 @@ export default function ModalLogin(props) {
     };
 
     const onSubmit = (data) => {
-        console.log(data);
-        getUser();
+        auth();
     };
 
     const cleanUp = () => {
@@ -120,7 +120,6 @@ export default function ModalLogin(props) {
             <button type="button" className="btn-close m-0" aria-label="Close" onClick={cleanUp}/>
         </Modal.Header>
         <Modal.Body>
-
             <div className="auth-container">
                 <form onSubmit={handleSubmit(onSubmit)}>
                     {/* Username */}
