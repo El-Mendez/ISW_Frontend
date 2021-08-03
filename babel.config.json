@@ -2,15 +2,7 @@
   "presets": [
   [
     "@babel/preset-env",
-    {
-      "targets": {
-        "edge": "12",
-        "firefox": "52",
-        "chrome": "57",
-        "safari": "10.1",
-        "ie": "11"
-      }
-    },
+
     {
       "useBuiltIns": "usage",
       "corejs": 3
