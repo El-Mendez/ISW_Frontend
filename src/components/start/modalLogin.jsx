@@ -45,8 +45,7 @@ export default function ModalLogin(props) {
                         password: user.password
                     }
                 );
-                cookies.set('jwt', data.token, {path: '/'})
-                console.log(cookies.get('jwt'))
+                cookies.set('session', data.token, {path: '/'})
                 history.push(`/data`);
                 history.go();
             } catch (error) {
