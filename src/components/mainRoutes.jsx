@@ -1,4 +1,4 @@
-import React, {useEffect} from 'react';
+import React, {useEffect, useState} from 'react';
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 import Start from './start/start';
 import Custom404 from './404/custom_404';
@@ -13,7 +13,7 @@ export default function MainRoutes() {
 
     const cookies = new Cookies();
     const token = cookies.get('session')
-    let openSession = false;
+    const [session, setSession] = useState(false);
 
     function persistenSession(){
         console.log("Loading...");
@@ -26,7 +26,8 @@ export default function MainRoutes() {
                         }
                     }
                 );
-                openSession = true;
+                setSession(true);
+                console.log(res)
             } catch (error) {
                 console.log(error);
             }
@@ -41,9 +42,9 @@ export default function MainRoutes() {
     <Router>
       <Switch>
         <Route exact path="/" >
-            {openSession
-                ? <Start/>
-                : <PersonalForm/>
+            {session
+                ? <PersonalForm/>
+                : <Start/>
             }
         </Route>
         {/*<Route exact path="/" component={Start} />*/}
