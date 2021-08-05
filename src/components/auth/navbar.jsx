@@ -2,13 +2,18 @@ import React from 'react';
 import logo from '../../assets/logo.svg';
 import { Link, useRouteMatch } from 'react-router-dom';
 import Login from "./Login";
-import ModalRegister from "./modalRegister";
+import history from "../history";
 
 function NavBar() {
   const { url } = useRouteMatch();
 
   const [login, setLogin] = React.useState(false);
   const [register, setRegister] = React.useState(false);
+
+  const handleClick = () => {
+    history.push(`/signUp`);
+    history.go();
+  }
 
   return (
       <div>
@@ -37,7 +42,7 @@ function NavBar() {
                 <div className="d-flex">
                   <a className="sub-1 me-3 start-link" onClick={() => setLogin(true)}>Iniciar sesión</a>
                   <div className="border-end border-primary" style={{height: '20px'}}/>
-                  <a className="sub-1 ms-3 start-link" onClick={() => setRegister(true)}>Registrarse</a>
+                  <a className="sub-1 ms-3 start-link" onClick={handleClick}>Registrarse</a>
                 </div>
               </div>
             </nav>
@@ -47,10 +52,6 @@ function NavBar() {
             show={login}
             onHide={() => setLogin(false)}
         />
-          <ModalRegister
-              show={register}
-              onHide={() => setRegister(false)}
-          />
       </div>
 
   );
