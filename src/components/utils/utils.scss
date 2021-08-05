@@ -11,34 +11,41 @@
   transition-property: font-size,transform;
 }
 
-.input{
+.input-container{
   background-clip: padding-box;
   background-color: #fff;
-  border: none;
-  border-radius: 2px;
+  border: 1.6px solid #423f3f80;
+  border-radius: .25rem;
   box-sizing: border-box;
-  display: block;
+  display: flex;
   font-size: 17px;
   line-height: 1.41;
-  padding: 30px 20px 5px;
+  padding: 15px 15px 10px 10px;
   width: 100%;
   transition-duration: .15s;
   transition-property: box-shadow;
   &:focus{
     box-shadow: 0 20px 20px 0 #0000001C;
-    outline:0px;
-    +.label{
-      font-size: 14px;
-      transform: translateY(50%);
-    }
-  }
-  &.is-filled{
-    +.label{
-      font-size: 14px;
-      transform: translateY(50%);
-    }
   }
 }
+
+.input{
+  border: none;
+  background-color: inherit;
+  width: 100%;
+  &:focus{
+    outline:0;
+  }
+}
+
+.input-icon {
+  font-size: 2rem;
+  color: $primary;
+  &.is-filled{
+      color: $gold
+  }
+}
+
 
 .btn-meeting{
   border-radius: 500px;
@@ -50,14 +57,18 @@
 }
 
 .btn-fill{
-  background-color: aqua;
+  background-color: $primary;
   border: none;
-  color: brown;
-  margin-bottom: 18px;
+  color: #fff;
+  padding: 0.7rem 21px;
+  font-size: 14px;
+  font-weight: 500;
+  border-radius: 0.25rem;
+  transition: color 0.15s ease-in-out, background-color 0.15s ease-in-out, border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
   &:hover{
     transform: scale(1.04);
-    background-color: blue;
-    color: #FFF;
+    background-color: #413e36;
+    border-color: #3e3a33;
   }
 }
 
@@ -97,3 +108,16 @@
   margin-top: 2rem;
   width: 450px;
 }
+
+@mixin make-container($padding-x: $container-padding-x) {
+  width: 100%;
+  padding-right: $padding-x;
+  padding-left: $padding-x;
+  margin-right: auto;
+  margin-left: auto;
+}
+
+.auth-container {
+  @include make-container(var(--bs-gutter-x, 3rem));
+}
+

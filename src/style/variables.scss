@@ -1,8 +1,8 @@
-@import url('https://fonts.googleapis.com/css?family=Google+Sans:300,400,500,600,700');
+@import url('https://fonts.googleapis.com/css?family=Google+Sans:300,400,500,600,700,900');
 @import url('https://fonts.googleapis.com/css?family=Roboto');
-@import url('https://fonts.googleapis.com/icon?family=Material+Icons"');
+@import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@300&family=Exo+2&family=Mate+SC&family=Montserrat&display=swap');
 
-$font-family-base: Google Sans, Roboto, Arial, sans-serif;
+$font-family-base: 'Exo 2', Mate SC, Roboto, Arial, sans-serif;
 $sidebar-bg-color: #4D4940 !important;
 $icon-bg-color: #FFC100 !important;
 
@@ -12,6 +12,17 @@ $navbar-light-active-color: #FFC100;
 $body-color: #423f3f;
 $border-width: 0.1rem;
 
+
+// COLORS
+$primary: #4D4940;
+$secondary: #f8f8f8;
+$gray: #b2b5b9;
+$celadon: #D0D8D0;
+$gold: #FFC100;
+$serenity: #93B2C0;
+$beige: #DFC390;
+$charcoal: #4C5063;
+
 $theme-colors: (
         "primary": #4D4940,
         "secondary": #f8f8f8,
@@ -20,4 +31,16 @@ $theme-colors: (
         "serenity": #93B2C0,
         "beige": #DFC390,
         "charcoal": #4C5063,
+        "gray": #e9e8e8,
 );
+//MODAL
+$modal-header-padding: 8px;
+$modal-content-border-radius: 0px;
+$modal-content-border-width: 0px;
+$modal-content-bg: #f8f8f8;
+$modal-footer-border-width: 2px;
+$modal-sm: 650px;
+
+/* CLOSE BUTTON */
+$btn-close-focus-shadow: none;
+$btn-close-padding-x: .5em;
