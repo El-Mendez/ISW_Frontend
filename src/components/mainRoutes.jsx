@@ -6,10 +6,10 @@ import Home from './home/home';
 import PersonalForm from "./data/personalForm";
 import Cookies from 'universal-cookie';
 import Axios from "axios";
+import { AUTH } from './utils/rutas'
 
 
 export default function MainRoutes() {
-    const get_auth = 'http://api.meetinguvg.me/auth/ping';
 
     const cookies = new Cookies();
     const token = cookies.get('session')
@@ -19,7 +19,7 @@ export default function MainRoutes() {
         console.log("Loading...");
         const request = async () => {
             try {
-                const res = await Axios.get(get_auth,
+                const res = await Axios.get(AUTH,
                     {
                         headers:{
                             Authorization: `Bearer ${token}`

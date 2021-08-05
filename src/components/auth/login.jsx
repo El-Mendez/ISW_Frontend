@@ -6,6 +6,7 @@ import { useForm } from 'react-hook-form';
 import history from '../history';
 import logo from '../../assets/logo.svg';
 import Cookies from 'universal-cookie';
+import { LOGIN } from '../utils/rutas';
 
 
 import { zodResolver } from '@hookform/resolvers/zod';
@@ -19,7 +20,6 @@ const schema = z.object({
 
 export default function Login(props) {
 
-    const get_user = 'http://api.meetinguvg.me/free/login';
     const cookies = new Cookies();
     const { register, handleSubmit, formState: { errors } } = useForm({
         resolver: zodResolver(schema),
@@ -39,7 +39,7 @@ export default function Login(props) {
         console.log("Loading...");
         const fetchData = async () => {
             try {
-                const { data } = await Axios.post(get_user,
+                const { data } = await Axios.post(LOGIN,
                     {
                         carne: user.carne,
                         password: user.password

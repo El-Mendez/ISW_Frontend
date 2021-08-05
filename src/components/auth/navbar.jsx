@@ -1,7 +1,7 @@
 import React from 'react';
 import logo from '../../assets/logo.svg';
 import { Link, useRouteMatch } from 'react-router-dom';
-import Login from "./modalLogin";
+import Login from "./Login";
 import ModalRegister from "./modalRegister";
 
 function NavBar() {
