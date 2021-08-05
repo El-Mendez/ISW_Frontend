@@ -1,6 +1,6 @@
 import React, {useEffect, useState} from 'react';
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
-import Start from './start/start';
+import Routes from './auth/routes';
 import Custom404 from './404/custom_404';
 import Home from './home/home';
 import PersonalForm from "./data/personalForm";
@@ -43,8 +43,8 @@ export default function MainRoutes() {
       <Switch>
         <Route exact path="/" >
             {session
-                ? <PersonalForm/>
-                : <Start/>
+                ? <Home/>
+                : <Routes/>
             }
         </Route>
         {/*<Route exact path="/" component={Start} />*/}

@@ -17,7 +17,7 @@ const schema = z.object({
 });
 
 
-export default function ModalLogin(props) {
+export default function Login(props) {
 
     const get_user = 'http://api.meetinguvg.me/free/login';
     const cookies = new Cookies();

@@ -1,7 +1,7 @@
 import React from 'react';
 import logo from '../../assets/logo.svg';
 import { Link, useRouteMatch } from 'react-router-dom';
-import ModalLogin from "./modalLogin";
+import Login from "./modalLogin";
 import ModalRegister from "./modalRegister";
 
 function NavBar() {
@@ -43,7 +43,7 @@ function NavBar() {
             </nav>
           </div>
         </div>
-        <ModalLogin
+        <Login
             show={login}
             onHide={() => setLogin(false)}
         />
