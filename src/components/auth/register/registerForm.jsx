@@ -1,15 +1,14 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import Axios from 'axios';
 import { useForm } from 'react-hook-form';
 import history from '../../history';
 import Cookies from 'universal-cookie';
-import { SIGNUP } from '../../utils/rutas';
-import AsyncSelect from 'react-select/async';
-import Search from "../../utils/search";
+import { SIGNUP, SEARCH_CAREER } from '../../utils/rutas';
+import Select from 'react-select';
+import logo from "../../../assets/logo.svg";
 
 import { zodResolver } from '@hookform/resolvers/zod';
 import * as z from 'zod';
-import logo from "../../../assets/logo.svg";
 
 // Validación de datos ingresados por el usuario
 const schema = z.object({
@@ -19,7 +18,6 @@ const schema = z.object({
     password: z.string().nonempty({ message: 'Ingrese una contraseña' }).min(8, { message: 'Mínimo 8 caracteres' }),
 });
 
-
 export default function Register() {
 
     const cookies = new Cookies();
@@ -28,11 +26,13 @@ export default function Register() {
         resolver: zodResolver(schema),
     });
 
+    const [result, setResult] = useState([]);
+
     const [user, setUser] = useState({
         carne: 0,
         nombre: '',
         apellido: '',
-        carrera: '',
+        carreraId: '',
         password: '',
     });
 
@@ -43,13 +43,34 @@ export default function Register() {
         password: false,
     });
 
+
+    useEffect(() => {
+        searchCareer();
+    }, [])
+
     // Búsqueda de carreras por lo que ingrese el usuario
-    Search(user.carrera)
+    function searchCareer(){
+        const fetchData = async () => {
+            try {
+                const res = await Axios.get(SEARCH_CAREER);
+                res.data.map(item => {
+                    setResult(prevState => {
+                        return [...prevState, {value: item.id, label: item.nombre}]
+                    })
+                })
+            } catch (error) {
+                console.log(error);
+            }
+        };
+        fetchData();
+    };
 
     // Envía la información del usuario a la base de datos
     // Retorna error si el carné ya está guardado o no se pasaron todos los parámetros
     function signUp(){
         console.log("Loading...");
+        console.log(user)
+        console.log(user.carne, user.nombre, user.apellido)
         const fetchData = async () => {
             try {
                 const { data } = await Axios.post(SIGNUP,
@@ -74,6 +95,7 @@ export default function Register() {
 
     // Actualiza los estados a medida que el usuario escribe
     const handleInputChange = (e) => {
+        console.log(e.target.name)
         setUser({
             ...user,
             [e.target.name]: e.target.value,
@@ -92,6 +114,14 @@ export default function Register() {
         }
     };
 
+    const handleChange = e => {
+        setUser({
+            ...user,
+            carreraId: e.value
+        }
+    );
+    }
+
     // Valida la información ingresada en el formulario y hace el request
     const onSubmit = (data) => {
         signUp();
@@ -100,14 +130,11 @@ export default function Register() {
     return (
         <>
             <div className="register-container mx-3">
-                <div className="d-flex flex-column align-items-center justify-content-center mb-4">
+                <div className="d-flex flex-column align-items-center justify-content-center">
                     <p className="welcome">
                         BIENVENIDO A
                     </p>
                     <img src={logo} alt="Logo" className="img-size w-50"/>
-                    {/*<p className="mt-1 description text-center px-4">*/}
-                    {/*    Regístrate e inicia a ampliar tu círculo social con un solo click*/}
-                    {/*</p>*/}
                 </div>
                 <form onSubmit={handleSubmit(onSubmit)}>
                     {/* Carne */}
@@ -116,7 +143,7 @@ export default function Register() {
                             assignment_ind
                         </span>
                         <input
-                            className={`input ms-1 ${filled.carne ? 'is-filled' : ' '}`}
+                            className="input ms-1"
                             type="number"
                             name="carne"
                             placeholder="Número de carné"
@@ -187,25 +214,38 @@ export default function Register() {
                         </div>
                     </div>
                     {/* Carrera */}
-                    <div className="mb-z4">
-                        <AsyncSelect
-                            placeholder="Ingrese la carrera"
+                    <div className="mt-z4">
+                        <Select
+                            className="basic-single"
+                            classNamePrefix="select"
+                            isClearable={true}
+                            isSearchable={true}
+                            value={result.find(obj => obj.value === user.carreraId)}
+                            onChange={handleChange}
+                            name="carreraId"
+                            options={result}
+                            theme={theme => ({
+                                ...theme,
+                                padding: '15px',
+                            })}
                         />
                     </div>
-
-                    <input
-                        type="text"
-                        name="carrera"
-                        placeholder="Ingrese carrera"
-                        onInput={handleInputChange}
-                    />
+                    <small className="text-danger text-small d-block mb-2 mt-1">
+                        <div className="d-flex align-items-center ps-2">
+                            {/*{errors.carne*/}
+                            {/*    ? <span className="material-icons me-1">error_outline</span>*/}
+                            {/*    : null*/}
+                            {/*}*/}
+                            {/*{errors.carne?.message}*/}
+                        </div>
+                    </small>
                     {/* Password */}
-                    <div className="input-container mt-3">
+                    <div className="input-container">
                          <span className={`material-icons input-icon ${filled.password ? 'is-filled' : ' '}`}>
                             lock
                         </span>
                         <input
-                            className={`input ms-1 ${filled.password ? 'is-filled' : ' '}`}
+                            className="input ms-1"
                             type="password"
                             name="password"
                             placeholder="Contraseña"
@@ -223,12 +263,12 @@ export default function Register() {
                         </div>
                     </small>
                     {/* LOGIN BUTTON */}
-                    <div className="d-flex justify-content-between align-items-center mt-4 px-2">
-                        <a>¿Ya tienes cuenta? Inicia Sesión</a>
-                        <button onSubmit={onSubmit} className="btn-fill arrow-button">Registrarse
+                    <div className="d-flex flex-column justify-content-center align-items-center mt-4 px-2">
+                        <button onSubmit={onSubmit} className="btn-fill arrow-button w-50">Registrarse
                             <span
                                 className="material-icons position-absolute ms-1">arrow_forward</span>
                         </button>
+                        <a>¿Ya tienes cuenta? Inicia Sesión</a>
                     </div>
                 </form>
             </div>
