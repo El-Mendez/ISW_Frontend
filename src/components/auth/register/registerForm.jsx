@@ -4,10 +4,12 @@ import { useForm } from 'react-hook-form';
 import history from '../../history';
 import Cookies from 'universal-cookie';
 import { SIGNUP } from '../../utils/rutas';
-
+import AsyncSelect from 'react-select/async';
+import Search from "../../utils/search";
 
 import { zodResolver } from '@hookform/resolvers/zod';
 import * as z from 'zod';
+import logo from "../../../assets/logo.svg";
 
 // Validación de datos ingresados por el usuario
 const schema = z.object({
@@ -30,7 +32,7 @@ export default function Register() {
         carne: 0,
         nombre: '',
         apellido: '',
-        carreraId: 0,
+        carrera: '',
         password: '',
     });
 
@@ -42,7 +44,7 @@ export default function Register() {
     });
 
     // Búsqueda de carreras por lo que ingrese el usuario
-
+    // Search(user.carrera)
 
     // Envía la información del usuario a la base de datos
     // Retorna error si el carné ya está guardado o no se pasaron todos los parámetros
@@ -97,12 +99,21 @@ export default function Register() {
 
     return (
         <>
-            <div className="auth-container">
+            <div className="register-container mx-3">
+                <div className="d-flex flex-column align-items-center justify-content-center mb-4">
+                    <p className="welcome">
+                        BIENVENIDO A
+                    </p>
+                    <img src={logo} alt="Logo" className="img-size w-50"/>
+                    {/*<p className="mt-1 description text-center px-4">*/}
+                    {/*    Regístrate e inicia a ampliar tu círculo social con un solo click*/}
+                    {/*</p>*/}
+                </div>
                 <form onSubmit={handleSubmit(onSubmit)}>
                     {/* Carne */}
                     <div className="input-container">
                          <span className={`material-icons input-icon ${filled.carne ? 'is-filled' : ' '}`}>
-                            person
+                            assignment_ind
                         </span>
                         <input
                             className={`input ms-1 ${filled.carne ? 'is-filled' : ' '}`}
@@ -122,70 +133,72 @@ export default function Register() {
                             {errors.carne?.message}
                         </div>
                     </small>
-                    {/* Nombre */}
-                    <div className="input-container">
+                    {/* Nombre y Apellido */}
+                    <div className="row">
+                        {/* Nombre */}
+                        <div className="col">
+                            <div className="input-container">
                          <span className={`material-icons input-icon ${filled.nombre ? 'is-filled' : ' '}`}>
                             person
                         </span>
-                        <input
-                            className="input ms-1"
-                            type="text"
-                            name="nombre"
-                            placeholder="Nombre"
-                            onInput={handleInputChange}
-                            {...register('nombre')}
-                        />
-                    </div>
-                    <small className="text-danger text-small d-block mb-2 mt-1">
-                        <div className="d-flex align-items-center ps-2">
-                            {errors.nombre
-                                ? <span className="material-icons me-1">error_outline</span>
-                                : null
-                            }
-                            {errors.nombre?.message}
+                                <input
+                                    className="input ms-1"
+                                    type="text"
+                                    name="nombre"
+                                    placeholder="Nombre"
+                                    onInput={handleInputChange}
+                                    {...register('nombre')}
+                                />
+                            </div>
+                            <small className="text-danger text-small d-block mb-2 mt-1">
+                                <div className="d-flex align-items-center ps-2">
+                                    {errors.nombre
+                                        ? <span className="material-icons me-1">error_outline</span>
+                                        : null
+                                    }
+                                    {errors.nombre?.message}
+                                </div>
+                            </small>
                         </div>
-                    </small>
-                    {/* Apellido */}
-                    <div className="input-container">
+                        {/* Apellido */}
+                        <div className="col">
+                            <div className="input-container">
                          <span className={`material-icons input-icon ${filled.apellido ? 'is-filled' : ' '}`}>
                             person
                         </span>
-                        <input
-                            className="input ms-1"
-                            type="text"
-                            name="apellido"
-                            placeholder="Apellido"
-                            onInput={handleInputChange}
-                            {...register('apellido')}
+                                <input
+                                    className="input ms-1"
+                                    type="text"
+                                    name="apellido"
+                                    placeholder="Apellido"
+                                    onInput={handleInputChange}
+                                    {...register('apellido')}
+                                />
+                            </div>
+                            <small className="text-danger text-small d-block mb-2 mt-1">
+                                <div className="d-flex align-items-center ps-2">
+                                    {errors.apellido
+                                        ? <span className="material-icons me-1">error_outline</span>
+                                        : null
+                                    }
+                                    {errors.apellido?.message}
+                                </div>
+                            </small>
+                        </div>
+                    </div>
+                    {/* Carrera */}
+                    <div className="mb-z4">
+                        <AsyncSelect
+                            placeholder="Ingrese la carrera"
                         />
                     </div>
-                    <small className="text-danger text-small d-block mb-2 mt-1">
-                        <div className="d-flex align-items-center ps-2">
-                            {errors.apellido
-                                ? <span className="material-icons me-1">error_outline</span>
-                                : null
-                            }
-                            {errors.apellido?.message}
-                        </div>
-                    </small>
-                    {/* Carrera */}
-                    {/*<div className="input-container">*/}
-                    {/*     <span className={`material-icons input-icon ${filled.apellido ? 'is-filled' : ' '}`}>*/}
-                    {/*        person*/}
-                    {/*    </span>*/}
-                    {/*    <input*/}
-                    {/*        className="input ms-1"*/}
-                    {/*        type="text"*/}
-                    {/*        name="apellido"*/}
-                    {/*        placeholder="Apellido"*/}
-                    {/*        onInput={handleInputChange}*/}
-                    {/*        {...register('apellido')}*/}
-                    {/*    />*/}
-                    {/*</div>*/}
-                    {/*<small className="text-danger text-small d-block mb-2">*/}
-                    {/*    /!* <Exclamation_icon/> *!/*/}
-                    {/*    {errors.apellido?.message}*/}
-                    {/*</small>*/}
+
+                    {/*<input*/}
+                    {/*    type="text"*/}
+                    {/*    name="carrera"*/}
+                    {/*    placeholder="Ingrese carrera"*/}
+                    {/*    onInput={handleInputChange}*/}
+                    {/*/>*/}
                     {/* Password */}
                     <div className="input-container mt-3">
                          <span className={`material-icons input-icon ${filled.password ? 'is-filled' : ' '}`}>
@@ -211,8 +224,8 @@ export default function Register() {
                     </small>
                     {/* LOGIN BUTTON */}
                     <div className="d-flex justify-content-between align-items-center mt-4 px-2">
-                        <a>¿Olvidaste tu contraseña?</a>
-                        <button onSubmit={onSubmit} className="btn-fill arrow-button">INICIAR SESIÓN
+                        <a>¿Ya tienes cuenta? Inicia Sesión</a>
+                        <button onSubmit={onSubmit} className="btn-fill arrow-button">Registrarse
                             <span
                                 className="material-icons position-absolute ms-1">arrow_forward</span>
                         </button>

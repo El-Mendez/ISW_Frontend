@@ -2,9 +2,9 @@
 // No necesita estar loggeado → no auth
 const LOGIN = 'http://api.meetinguvg.me/free/login';
 const SIGNUP = 'http://api.meetinguvg.me/free/signup';
-const SEARCH_CAREER = 'http://api.meetinguvg.me/free/carrera/:nombre';
-const SEARCH_HOBBY = 'http://api.meetinguvg.me/free/hobby/:nombre';
-const SEARCH_COURSE = 'http://api.meetinguvg.me/free/course/:nombre';
+const SEARCH_CAREER = 'http://api.meetinguvg.me/free/carrera';
+const SEARCH_HOBBY = 'http://api.meetinguvg.me/free/hobby/';
+const SEARCH_COURSE = 'http://api.meetinguvg.me/free/course/';
 
 // Necesita estar loggeado
 const AUTH = 'http://api.meetinguvg.me/auth/ping';

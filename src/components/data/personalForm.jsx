@@ -5,6 +5,7 @@ import { useRouteMatch } from 'react-router-dom';
 
 import { zodResolver } from '@hookform/resolvers/zod';
 import * as z from 'zod';
+import AsyncSelect from "react-select/async/dist/react-select.esm";
 
 const schema = z.object({
   name: z.string().nonempty({ message: 'Ingresa su nombre completo' }),
@@ -71,100 +72,23 @@ function PersonalForm() {
       <form onSubmit={handleSubmit(onSubmit)}>
         {/* DATA */}
         <div className="container px-5 my-5">
-          <div className="d-flex align-items-center px-0">
-            <div className="progress-activate-circle d-flex justify-content-center activate me-3">
-              <h2 className="progress-number">1</h2>
-            </div>
-            <h1>Información Personal</h1>
-          </div>
-          {/* Name */}
-          <div className="position-relative mt-3">
-            <input
-              className={`border border-1 input ${filled.name ? 'is-filled' : ' '}`}
-              type="text"
-              name="name"
-              onInput={handleInputChange}
-              {...register('name')}
-            />
-            <label className="label">Nombre completo</label>
-            <small className="text-danger text-small d-block mb-2">
-              {/* <Exclamation_icon/> */}
-              {errors.name?.message}
-            </small>
-          </div>
-          {/* Sex */}
-          <div className="position-relative mt-3 border border-1">
-            <p className="ms-1 mb-0">Sexo</p>
-            <input type="radio"
-                   id="femenino"
-                   value="femenino"
-                   className="ms-3"
-                   {...register("sex", { required: true })} />
-            <label htmlFor="femenino" className="ms-1">Femenino</label>
-            <input type="radio"
-                   id="masculino"
-                   className="ms-5"
-                   value="masculino"
-                   {...register("sex", { required: true })} />
-            <label htmlFor="masculino" className="ms-1">Masculino</label><br/>
-            <small className="text-danger text-small d-block mb-2">
-              {/* <Exclamation_icon/> */}
-              {errors.sex?.message}
-            </small>
-          </div>
-          {/* School */}
-          <div className="position-relative mt-3">
-            <input
-              className={`input border border-1 ${filled.school ? 'is-filled' : ' '}`}
-              type="school"
-              name="school"
-              onInput={handleInputChange}
-              {...register('school')}
-            />
-            <label className="label">Colegio anterior</label>
-            <small className="text-danger text-small d-block mb-2">
-              {/* <Exclamation_icon/> */}
-              {errors.school?.message}
-            </small>
-          </div>
-        </div>
-
-        <div className="container px-5 my-5">
             <div className="d-flex align-items-center px-0">
               <div className="progress-activate-circle d-flex justify-content-center activate me-3">
-                <h2 className="progress-number">2</h2>
+                <h2 className="progress-number">1</h2>
               </div>
               <h1>Información Académica</h1>
             </div>
-          {/* Carrera */}
-          <div className="position-relative mt-3">
-            <input
-                className={`border border-1 input ${filled.carrera ? 'is-filled' : ' '}`}
-                type="text"
-                name="carrera"
-                onInput={handleInputChange}
-                {...register('carrera')}
+          {/* Cursos */}
+          <div className="mb-z4">
+            <AsyncSelect
+                placeholder="Ingrese los cursos"
             />
-            <label className="label">Carrera</label>
-            <small className="text-danger text-small d-block mb-2">
-              {/* <Exclamation_icon/> */}
-              {errors.carrera?.message}
-            </small>
           </div>
-          {/* Courses */}
-          <div className="position-relative mt-3">
-            <input
-                className={`input border border-1 ${filled.cursos ? 'is-filled' : ' '}`}
-                type="text"
-                name="cursos"
-                onInput={handleInputChange}
-                {...register('cursos')}
+          {/* Hobbies */}
+          <div className="mb-z4">
+            <AsyncSelect
+                placeholder="Añada sus hobbies"
             />
-            <label className="label">Cursos</label>
-            <small className="text-danger text-small d-block mb-2">
-              {/* <Exclamation_icon/> */}
-              {errors.cursos?.message}
-            </small>
           </div>
         </div>
         <div className="container px-5">
@@ -175,50 +99,74 @@ function PersonalForm() {
               <h1>Información de Contacto</h1>
             </div>
           {/* Facebook */}
-          <div className="position-relative mt-3">
+          <div className="input-container mt-3">
+             <span className={`material-icons input-icon ${filled.facebook ? 'is-filled' : ' '}`}>
+                lock
+            </span>
             <input
-                className={`border border-1 input ${filled.facebook ? 'is-filled' : ' '}`}
-                type="text"
+                className="input ms-1"
+                type="facebook"
                 name="facebook"
+                placeholder="Perfil de Facebook"
                 onInput={handleInputChange}
                 {...register('facebook')}
             />
-            <label className="label">Facebook</label>
-            <small className="text-danger text-small d-block mb-2">
-              {/* <Exclamation_icon/> */}
-              {errors.facebook?.message}
-            </small>
           </div>
+          <small className="text-danger text-small d-block mb-2 mt-1">
+            <div className="d-flex align-items-center ps-2">
+              {errors.facebook
+                  ? <span className="material-icons me-1">error_outline</span>
+                  : null
+              }
+              {errors.facebook?.message}
+            </div>
+          </small>
           {/* Instagram */}
-          <div className="position-relative mt-3">
+          <div className="input-container mt-3">
+             <span className={`material-icons input-icon ${filled.instagram ? 'is-filled' : ' '}`}>
+                lock
+            </span>
             <input
-                className={`input border border-1 ${filled.instagram ? 'is-filled' : ' '}`}
-                type="text"
+                className="input ms-1"
+                type="instagram"
                 name="instagram"
+                placeholder="Perfil de Instagram"
                 onInput={handleInputChange}
                 {...register('instagram')}
             />
-            <label className="label">Intagram</label>
-            <small className="text-danger text-small d-block mb-2">
-              {/* <Exclamation_icon/> */}
+          </div>
+          <small className="text-danger text-small d-block mb-2 mt-1">
+            <div className="d-flex align-items-center ps-2">
+              {errors.instagram
+                  ? <span className="material-icons me-1">error_outline</span>
+                  : null
+              }
               {errors.instagram?.message}
-            </small>
-          </div>
+            </div>
+          </small>
           {/* Phone number */}
-          <div className="position-relative mt-3">
+          <div className="input-container mt-3">
+             <span className={`material-icons input-icon ${filled.phone ? 'is-filled' : ' '}`}>
+                whatsapp
+            </span>
             <input
-                className={`input border border-1 ${filled.phone ? 'is-filled' : ' '}`}
-                type="number"
+                className="input ms-1"
+                type="phone"
                 name="phone"
+                placeholder="Número de teléfono"
                 onInput={handleInputChange}
-
+                {...register('phone')}
             />
-            <label className="label">Número de teléfono</label>
-            <small className="text-danger text-small d-block mb-2">
-              {/* <Exclamation_icon/> */}
-              {errors.phone?.message}
-            </small>
           </div>
+          <small className="text-danger text-small d-block mb-2 mt-1">
+            <div className="d-flex align-items-center ps-2">
+              {errors.phone
+                  ? <span className="material-icons me-1">error_outline</span>
+                  : null
+              }
+              {errors.phone?.message}
+            </div>
+          </small>
         </div>
         {/* NEXT BUTTON */}
         <div className="d-flex bg-gold w-100 mt-5 justify-content-end">

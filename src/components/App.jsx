@@ -3,7 +3,7 @@ import MainRoutes from './mainRoutes';
 
 export default function App() {
   return (
-    <div>
+    <div className="vh-100">
       <MainRoutes />
     </div>
   );

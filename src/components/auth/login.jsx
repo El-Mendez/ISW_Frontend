@@ -39,7 +39,7 @@ export default function Login(props) {
         console.log("Loading...");
         const fetchData = async () => {
             try {
-                const { data } = await Axios.post(LOGIN,
+                const { data } = await Axios.post('http://api.meetinguvg.me/free/login',
                     {
                         carne: user.carne,
                         password: user.password
