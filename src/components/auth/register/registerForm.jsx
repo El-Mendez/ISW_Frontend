@@ -44,7 +44,7 @@ export default function Register() {
     });
 
     // Búsqueda de carreras por lo que ingrese el usuario
-    // Search(user.carrera)
+    Search(user.carrera)
 
     // Envía la información del usuario a la base de datos
     // Retorna error si el carné ya está guardado o no se pasaron todos los parámetros
@@ -193,12 +193,12 @@ export default function Register() {
                         />
                     </div>
 
-                    {/*<input*/}
-                    {/*    type="text"*/}
-                    {/*    name="carrera"*/}
-                    {/*    placeholder="Ingrese carrera"*/}
-                    {/*    onInput={handleInputChange}*/}
-                    {/*/>*/}
+                    <input
+                        type="text"
+                        name="carrera"
+                        placeholder="Ingrese carrera"
+                        onInput={handleInputChange}
+                    />
                     {/* Password */}
                     <div className="input-container mt-3">
                          <span className={`material-icons input-icon ${filled.password ? 'is-filled' : ' '}`}>

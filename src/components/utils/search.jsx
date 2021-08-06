@@ -29,10 +29,13 @@ export default function Search(career) {
      method: 'GET',
      url: SEARCH_CAREER,
      params:{
-       nombre: 'Computaci'
+       nombre: career
      }
    }).then(res => {
      console.log(res.data)
+   }).catch((error) => {
+       console.log('what')
+       console.log(error)
    })
   }, [career]);
 
