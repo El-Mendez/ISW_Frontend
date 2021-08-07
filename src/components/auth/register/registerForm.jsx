@@ -9,6 +9,7 @@ import logo from "../../../assets/logo.svg";
 
 import { zodResolver } from '@hookform/resolvers/zod';
 import * as z from 'zod';
+import {Link} from "react-router-dom";
 
 // Validación de datos ingresados por el usuario
 const schema = z.object({
@@ -264,11 +265,16 @@ export default function Register() {
                     </small>
                     {/* LOGIN BUTTON */}
                     <div className="d-flex flex-column justify-content-center align-items-center mt-4 px-2">
-                        <button onSubmit={onSubmit} className="btn-fill arrow-button w-50">Registrarse
+                        <button onSubmit={onSubmit} className="btn-fill arrow-button w-50">REGISTRARSE
                             <span
                                 className="material-icons position-absolute ms-1">arrow_forward</span>
                         </button>
-                        <a>¿Ya tienes cuenta? Inicia Sesión</a>
+                        <span className="mt-2">
+                            ¿Ya tienes cuenta?
+                            <Link to='/' className="ms-1 text-gold">
+                                 Inicia Sesión
+                            </Link>
+                        </span>
                     </div>
                 </form>
             </div>
