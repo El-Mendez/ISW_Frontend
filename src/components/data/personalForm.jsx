@@ -1,46 +1,150 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useForm } from 'react-hook-form';
 import history from '../history';
-import { useRouteMatch } from 'react-router-dom';
+import { SiInstagram, SiFacebook, SiWhatsapp } from "react-icons/si";
+import Cookies from 'universal-cookie';
 
 import { zodResolver } from '@hookform/resolvers/zod';
 import * as z from 'zod';
-import AsyncSelect from "react-select/async/dist/react-select.esm";
+import Select from 'react-select';
+import makeAnimated from 'react-select/animated';
+import Axios from "axios";
+import {SEARCH_HOBBY, SEARCH_COURSE, ASSIGN_HOBBY, ASSIGN_SECTION} from "../utils/rutas";
 
 const schema = z.object({
-  name: z.string().nonempty({ message: 'Ingresa su nombre completo' }),
-  sex: z.string().nonempty({ message: 'Seleccione su sexo' }),
-  school: z.string().nonempty({message: 'Ingresa una contraseña'}).min(8,{message: 'Mínimo 8 caracteres'}),
-  carrera: z.string(),
-  cursos: z.string(),
   facebook: z.string(),
-  instagram: z.string()
+  instagram: z.string(),
 });
 
 function PersonalForm() {
-  let { url } = useRouteMatch();
 
   const { register, handleSubmit, formState: { errors } } = useForm({
     mode: 'On Change',
     resolver: zodResolver(schema),
   });
+
+  const animatedComponents = makeAnimated();
+  const cookies = new Cookies();
+  const token = cookies.get('session')
+  const [hobbies, setHobbies] = useState([]);
+  const [cursos, setCursos] = useState([]);
+
   const [data, setData] = useState({
-    name: '',
-    sex: '',
-    school: '',
-    carrera: '',
-    cursos: '',
+    hobbies: [],
+    cursos: [],
     facebook: '',
     instagram: '',
+    phone: 0
   });
 
   const [filled, setFilled] = useState({
-    name: false,
-    school: false,
-    carrera: false,
     facebook: false,
     instagram: false,
+    phone: false
   });
+
+  useEffect(() => {
+    searchHobbies();
+    searchCursos();
+  },[])
+
+  // Requests
+  function searchHobbies(){
+    const fetchData = async () => {
+      try {
+        const res = await Axios.get(SEARCH_HOBBY);
+        res.data.map(item => {
+          setHobbies(prevState => {
+            return [...prevState, {value: item.id, label: item.nombre}]
+          })
+        })
+      } catch (error) {
+        console.log(error);
+      }
+    };
+    fetchData();
+  };
+
+  function searchCursos(){
+    const fetchData = async () => {
+      try {
+        const res = await Axios.get(SEARCH_COURSE);
+        res.data.map(item => {
+          item.secciones.map(section => {
+            setCursos(prevState => {
+              return [...prevState, {value: section.seccionId, label: item.cursoNombre + ' → sección ' + section.seccion}]
+          })
+          })
+        })
+      } catch (error) {
+        console.log(error);
+      }
+    };
+    fetchData();
+  };
+
+  function assignSection(){
+    const request = async () => {
+      try {
+        const { data } = await Axios.post(ASSIGN_SECTION,
+            {
+              seccionId: data.cursos
+            },
+            {
+              headers:{
+                Authorization: `Bearer ${token}`
+              }
+            }
+        );
+        setSession(true);
+      } catch (error) {
+        console.log(error);
+      }
+    };
+    request();
+  };
+
+  function assignHobby(){
+    const request = async () => {
+      try {
+        const { data } = await Axios.post(ASSIGN_HOBBY,
+            {
+              hobbyId: data.hobbies
+            },
+            {
+              headers:{
+                Authorization: `Bearer ${token}`
+              }
+            }
+        );
+        setSession(true);
+      } catch (error) {
+        console.log(error);
+      }
+    };
+    request();
+  };
+
+  const onHobbiesChange = selectedHobbies => {
+    selectedHobbies.map(item => {
+      setData({
+        ...data,
+        hobbies: item.value
+      })
+    })
+
+  }
+
+  const onCoursesChange = selectCourses => {
+    selectCourses.map(item => {
+      console.log(item)
+      setData({
+        ...data,
+        cursos: [...data.cursos, item.value]
+      })
+    })
+
+  }
 
   const handleInputChange = (e) => {
     setData({
@@ -61,10 +165,16 @@ function PersonalForm() {
     }
   };
 
-  const onSubmit = (data) => {
-    console.log(data);
-    history.push(`${url}/home`);
-    history.go();
+  const onSubmit = (datos) => {
+    console.log(data.cursos)
+    try{
+      assignSection();
+      assignHobby();
+      history.push('/home');
+      history.go();
+    }catch (e){
+      console.log(e)
+    }
   }
 
   return (
@@ -76,18 +186,30 @@ function PersonalForm() {
               <div className="progress-activate-circle d-flex justify-content-center activate me-3">
                 <h2 className="progress-number">1</h2>
               </div>
-              <h1>Información Académica</h1>
+              <h1>Información Personal</h1>
             </div>
           {/* Cursos */}
-          <div className="mb-z4">
-            <AsyncSelect
-                placeholder="Ingrese los cursos"
+          <div className="mt-z4">
+            <Select
+                isMulti
+                closeMenuOnSelect={false}
+                components={animatedComponents}
+                placeholder="Cursos"
+                value={cursos.find(obj => obj.value === data.cursos)}
+                onChange={onCoursesChange}
+                options={cursos}
             />
           </div>
           {/* Hobbies */}
-          <div className="mb-z4">
-            <AsyncSelect
-                placeholder="Añada sus hobbies"
+          <div className="mt-z4">
+            <Select
+                isMulti
+                closeMenuOnSelect={false}
+                components={animatedComponents}
+                placeholder="Hobbies"
+                value={hobbies.find(obj => obj.value === data.hobbies)}
+                onChange={onHobbiesChange}
+                options={hobbies}
             />
           </div>
         </div>
@@ -101,7 +223,7 @@ function PersonalForm() {
           {/* Facebook */}
           <div className="input-container mt-3">
              <span className={`material-icons input-icon ${filled.facebook ? 'is-filled' : ' '}`}>
-                lock
+                <SiFacebook/>
             </span>
             <input
                 className="input ms-1"
@@ -124,7 +246,7 @@ function PersonalForm() {
           {/* Instagram */}
           <div className="input-container mt-3">
              <span className={`material-icons input-icon ${filled.instagram ? 'is-filled' : ' '}`}>
-                lock
+                <SiInstagram/>
             </span>
             <input
                 className="input ms-1"
@@ -147,7 +269,7 @@ function PersonalForm() {
           {/* Phone number */}
           <div className="input-container mt-3">
              <span className={`material-icons input-icon ${filled.phone ? 'is-filled' : ' '}`}>
-                whatsapp
+                <SiWhatsapp/>
             </span>
             <input
                 className="input ms-1"
@@ -155,7 +277,6 @@ function PersonalForm() {
                 name="phone"
                 placeholder="Número de teléfono"
                 onInput={handleInputChange}
-                {...register('phone')}
             />
           </div>
           <small className="text-danger text-small d-block mb-2 mt-1">
