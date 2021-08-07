@@ -18,9 +18,9 @@ function NavBar() {
   return (
       <div>
         {/* NavBar menu */}
-        <div className={'bg-secondary fixed-top'}>
-          <div style={{ height: '72px' }}>
-            <nav className="navbar navbar-expand-lg navbar-light text-light">
+        <div className={'bg-white fixed-top'} style={{opacity: 0.85,
+            height: '90px'}}>
+            <nav className="navbar navbar-expand-sm navbar-light text-light">
               <button
                   className="navbar-toggler mr-3"
                   type="button"
@@ -47,7 +47,6 @@ function NavBar() {
               </div>
             </nav>
           </div>
-        </div>
         <Login
             show={login}
             onHide={() => setLogin(false)}

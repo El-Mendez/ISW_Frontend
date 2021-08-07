@@ -17,7 +17,6 @@ export default function MainRoutes() {
     const [session, setSession] = useState(false);
 
     function persistenSession(){
-        console.log("Loading...");
         const request = async () => {
             try {
                 const res = await Axios.get(AUTH,
@@ -28,7 +27,6 @@ export default function MainRoutes() {
                     }
                 );
                 setSession(true);
-                console.log(res)
             } catch (error) {
                 console.log(error);
             }

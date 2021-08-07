@@ -46,7 +46,7 @@ export default function Login(props) {
                     }
                 );
                 cookies.set('session', data.token, {path: '/'})
-                history.push(`/data`);
+                history.push(`/home`);
                 history.go();
             } catch (error) {
                 console.log(error);
