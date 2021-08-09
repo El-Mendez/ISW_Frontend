@@ -1,7 +1,7 @@
 import React from 'react';
 import logo from '../../assets/logo.svg';
 import { Link, useRouteMatch } from 'react-router-dom';
-import Login from "./Login";
+import Login from "./login";
 import history from "../history";
 
 function NavBar() {
