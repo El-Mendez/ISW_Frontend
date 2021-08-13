@@ -21,19 +21,6 @@ function NavBar() {
         <div className={'bg-white fixed-top'} style={{opacity: 0.85,
             height: '90px'}}>
             <nav className="navbar navbar-expand-sm navbar-light text-light">
-              <button
-                  className="navbar-toggler mr-3"
-                  type="button"
-                  data-toggle="collapse"
-                  data-target="#products"
-                  aria-controls="products"
-                  aria-expanded="false"
-                  aria-label="Toggle navigation"
-              >
-              <span className="material-icons">
-                menu
-              </span>
-              </button>
               <div className="d-flex flex-grow-1 justify-content-between align-items-center" style={{ height: 'inherit' }}>
                 {/* LOGO */}
                 <Link to={`${url}`} aria-label="Google store logo" className="logo-container">

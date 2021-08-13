@@ -4,7 +4,16 @@
   width: 100%;
   object-fit: contain;
 }
-
+@media screen and (max-width: 600px) {
+  .logo-container{
+  display:none;
+  }
+  }
+@media screen and (max-width: 280px) {
+  .sub-1{
+    font-size: 18px !important;
+  }
+  }
 .logo-container{
   height: 67px;
   width: 225px;
