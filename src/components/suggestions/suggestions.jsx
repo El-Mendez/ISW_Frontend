@@ -1,40 +1,81 @@
-import React from 'react';
-import { BsPencil } from 'react-icons/bs';
-import user from '../../assets/user.png';
+import React, { useState } from 'react';
+import {
+    Switch,
+    Route,
+    useRouteMatch,
+} from 'react-router-dom';
+import 'bootstrap/dist/js/bootstrap';
+import Navbar from '../navbar/navbar';
+import Search from '../search/search';
+import Perfil from '../perfil/perfil';
+import Suggestion from '../suggestions/suggestions';
 
-function Suggestions(props) {
-  const item = props;
-  return (
-    <div className="container datosUsuario">
-      <div className="row">
-        <div className="image col-4">
-          <div className="userPicture mt-1">
-            <img src={user} alt="User profile" width="150px" height="150px" className="rounded-circle" />
-          </div>
+function Home() {
+    const { url } = useRouteMatch();
+    const valor = null;
+    const [data, setData] = useState({
+        hobby: 'Test',
+    });
+
+    const updateData = (hobby) => {
+        console.log('Test');
+        setData({
+            hobby: hobby,
+        })
+    }
+
+    return (
+        <div>
+            <Navbar />
+            <Switch>
+                <Route path={`${url}/recomendaciones/:hobby`}>
+                    <HomeView />
+                </Route>
+                <Route path={`${url}/search`}>
+                    <Search
+                        setHobby={(hobby) => updateData(hobby)}
+                        hobby={data.hobby}
+                    />
+                </Route>
+                <Route path={`${url}/profile`}>
+                    <Perfil
+                        nombres="Pablo Andres"
+                        apellidos="Gonzales Estrada"
+                        userName="Pablo_AGE"
+                        carrera="Ingeniería Industrial"
+                        hobbies="Escuchar música, Jugar videojuegos, Leer, Hacer deporte, Salir con amigos"
+                        descripcion="Hola! Me llamo Pablo. Me gusta que me llamen por mi primer nombre y no por el segundo. Estudio Ingeniería Industrial. Tengo 19 años. Vivo con mis padres y mi hermano pequeño. Tengo varios hobbies, pero sin duda algúna, mi favorito es hacer deporte. Me gusta mucho jugar futbol.
+            Redes sociales"
+                        facebook="Pablo586"
+                        twitter="@PabloAge"
+                        instagram={valor}
+                    />
+                </Route>
+                <Route path={`${url}`}>
+                    {/* Aqui se pasara los datos del usuario de la base de datos */}
+                    <Suggestion
+                        nombre="Laura Lopez"
+                        username="LauLo"
+                        carrera=" Ingeniería Industrial"
+                        hobbies=" Ver series, Leer, Salir con amigos "
+                    />
+                    <Suggestion
+                        nombre="Juan Perez"
+                        username="JuanPe52"
+                        carrera=" Ingeniería Industrial"
+                        hobbies=" Hacer deporte, Jugar videojuegos, Escuchar música"
+                    />
+                    <Suggestion
+                        nombre="Pepe Gonzales"
+                        username="Pepe_G52"
+                        carrera=" Ingeniería Industrial"
+                        hobbies=" Jugar videojuegos, Leer, Salir con amigos"
+                    />
+                </Route>
+            </Switch>
         </div>
-        <div className="col datos">
-          <div className="row">
-            <h1>{item.nombre}</h1>
-          </div>
-          <div className="row">
-            <h2>{item.username}</h2>
-          </div>
-          <div className="row">
-            <h2>
-              Carrera:
-              {item.carrera}
-            </h2>
-          </div>
-          <div className="row">
-            <h2>
-              Hobbies:
-              {item.hobbies}
-            </h2>
-          </div>
-        </div>
-      </div>
-    </div>
-  );
+    );
 }
 
-export default Suggestions;
+export default Home;
+

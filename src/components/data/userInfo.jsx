@@ -3,7 +3,6 @@ import { useForm } from 'react-hook-form';
 import history from '../history';
 import { SiInstagram, SiFacebook, SiWhatsapp } from "react-icons/si";
 import Cookies from 'universal-cookie';
-
 import { zodResolver } from '@hookform/resolvers/zod';
 import * as z from 'zod';
 import Select from 'react-select';
@@ -16,7 +15,7 @@ const schema = z.object({
   instagram: z.string(),
 });
 
-function PersonalForm() {
+function UserInfo() {
 
   const { register, handleSubmit, formState: { errors } } = useForm({
     mode: 'On Change',
@@ -301,4 +300,4 @@ function PersonalForm() {
   );
 }
 
-export default PersonalForm;
+export default UserInfo;
