@@ -14,6 +14,11 @@
     font-size: 18px !important;
   }
   }
+@media screen and (max-width: 992px) {
+  .w-100{
+    display:none;
+  }
+  }
 .logo-container{
   height: 67px;
   width: 225px;

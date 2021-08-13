@@ -14,18 +14,6 @@ function Services() {
   }
   return (
     <div className="d-flex align-items-center">
-      {/* Search */}
-      <div className="services" style={{ height: '24px' }}>
-        <span className="material-icons">
-          search
-        </span>
-      </div>
-      {/* Help */}
-      <div className="services " style={{ height: '24px' }}>
-        <span className="material-icons">
-          help
-        </span>
-      </div>
       <Link to="/" className="noDecorations">
         <div className="services " style={{ height: '24px' }} onClick={logout}>
           <span className="material-icons">
