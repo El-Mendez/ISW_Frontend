@@ -225,6 +225,7 @@ export default function Register() {
                             onChange={handleChange}
                             name="carreraId"
                             options={result}
+                            placeholder="Selecciona una carrera"
                             theme={theme => ({
                                 ...theme,
                                 padding: '15px',

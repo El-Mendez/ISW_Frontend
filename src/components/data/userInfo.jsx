@@ -28,7 +28,7 @@ function UserInfo() {
   const [hobbies, setHobbies] = useState([]);
   const [cursos, setCursos] = useState([]);
 
-  const [data, setData] = useState({
+  const [user, setUser] = useState({
     hobbies: [],
     cursos: [],
     facebook: '',
@@ -47,7 +47,7 @@ function UserInfo() {
     searchCursos();
   },[])
 
-  // Requests
+  // Requests para mostrar cursos y hobbies al usuario
   function searchHobbies(){
     const fetchData = async () => {
       try {
@@ -87,7 +87,7 @@ function UserInfo() {
       try {
         const { data } = await Axios.post(ASSIGN_SECTION,
             {
-              seccionId: data.cursos
+              seccionesId: user.cursos
             },
             {
               headers:{
@@ -95,7 +95,6 @@ function UserInfo() {
               }
             }
         );
-        setSession(true);
       } catch (error) {
         console.log(error);
       }
@@ -108,7 +107,7 @@ function UserInfo() {
       try {
         const { data } = await Axios.post(ASSIGN_HOBBY,
             {
-              hobbyId: data.hobbies
+              hobbyId: user.hobbies
             },
             {
               headers:{
@@ -116,7 +115,6 @@ function UserInfo() {
               }
             }
         );
-        setSession(true);
       } catch (error) {
         console.log(error);
       }
@@ -126,28 +124,28 @@ function UserInfo() {
 
   const onHobbiesChange = selectedHobbies => {
     selectedHobbies.map(item => {
-      setData({
-        ...data,
-        hobbies: item.value
+      setUser({
+        ...user,
+        hobbies: [...user.hobbies, item.value]
       })
     })
 
   }
 
-  const onCoursesChange = selectCourses => {
-    selectCourses.map(item => {
+  const onCoursesChange = selectedCourses => {
+    selectedCourses.map(item => {
       console.log(item)
-      setData({
-        ...data,
-        cursos: [...data.cursos, item.value]
+      setUser({
+        ...user,
+        cursos: [...user.cursos, item.value]
       })
     })
 
   }
 
   const handleInputChange = (e) => {
-    setData({
-      ...data,
+    setUser({
+      ...user,
       [e.target.name]: e.target.value,
     });
 
@@ -165,12 +163,14 @@ function UserInfo() {
   };
 
   const onSubmit = (datos) => {
-    console.log(data.cursos)
+    console.log(user.hobbies)
     try{
       assignSection();
       assignHobby();
-      history.push('/home');
-      history.go();
+      setTimeout
+      // history.push('/home');
+      // history.go();
+      console.log('working fine')
     }catch (e){
       console.log(e)
     }
@@ -193,8 +193,8 @@ function UserInfo() {
                 isMulti
                 closeMenuOnSelect={false}
                 components={animatedComponents}
-                placeholder="Cursos"
-                value={cursos.find(obj => obj.value === data.cursos)}
+                placeholder="Agrega tus cursos"
+                value={cursos.find(obj => obj.value === user.cursos)}
                 onChange={onCoursesChange}
                 options={cursos}
             />
@@ -205,8 +205,8 @@ function UserInfo() {
                 isMulti
                 closeMenuOnSelect={false}
                 components={animatedComponents}
-                placeholder="Hobbies"
-                value={hobbies.find(obj => obj.value === data.hobbies)}
+                placeholder="Agrega tus hobbies"
+                value={hobbies.find(obj => obj.value === user.hobbies)}
                 onChange={onHobbiesChange}
                 options={hobbies}
             />
@@ -217,7 +217,10 @@ function UserInfo() {
               <div className="progress-activate-circle d-flex justify-content-center activate me-3">
                 <h2 className="progress-number">3</h2>
               </div>
-              <h1>Información de Contacto</h1>
+              <div className="d-flex align-items-center">
+                <h1>Información de Contacto</h1>
+                <p className="text-small m-0 ms-2">(Opcional)</p>
+              </div>
             </div>
           {/* Facebook */}
           <div className="input-container mt-3">
@@ -287,6 +290,7 @@ function UserInfo() {
               {errors.phone?.message}
             </div>
           </small>
+
         </div>
         {/* NEXT BUTTON */}
         <div className="d-flex bg-gold w-100 mt-5 justify-content-end">
