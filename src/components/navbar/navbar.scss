@@ -342,7 +342,7 @@ div[aria-expanded="true"]{
     box-shadow: rgba(0, 0, 0, 0.15) 0px 5px 15px;
     p{
         &:hover{
-            color: white;
+            color: $icon-bg-color;
         }
         cursor: pointer;
         &:first-child{
