@@ -31,6 +31,11 @@
     width: 48px;
     color: #5f6368 !important;
 }
+@media screen and (max-width: 600px) {
+    .logo-bg-large{
+    display:none;
+    }
+    }
 
 .logo-bg-large{
     height: 24px;
@@ -82,10 +87,10 @@ li ~ li{
 }
 
 .services{
-    margin-left: 24px;
+    margin-right: 24px;
     height: fit-content;
     cursor: pointer;
-    color: #4D4940;
+    color: #999690;
     &:hover{
         color: #FFC100 !important;
     }
@@ -307,4 +312,42 @@ div[aria-expanded="true"]{
     width: 153px;
     position: absolute;
     top: 5px;
+}
+
+
+.contenedor{
+    position: absolute;
+    width: fit-content;
+    height: 0;
+    top: 60%;
+    right: 4.5%;
+}
+.triangle{
+    width: 0;
+    height: 0;
+    border-left: 16px solid transparent;
+    border-right: 16px solid transparent;
+    border-bottom: 20px solid $primary;
+    position: relative;
+    right: -167px;
+    top: 5px;
+
+    
+}
+.cuadrado{
+    width: 200px;
+    height: 100px;
+    background-color: $primary;   
+    border-radius: 7px;
+    box-shadow: rgba(0, 0, 0, 0.15) 0px 5px 15px;
+    p{
+        &:hover{
+            color: white;
+        }
+        cursor: pointer;
+        &:first-child{
+            margin-top: 10%;
+        }
+        color: #d6d6d6;
+    }
 }
