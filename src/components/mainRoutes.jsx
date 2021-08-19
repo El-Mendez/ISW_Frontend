@@ -45,10 +45,10 @@ export default function MainRoutes() {
               ? <Route exact path="/"  component={Start} />
               : <Route path="/home" component={Dashboard} />
           }
-        <Route exact path="/"  component={Start} />
+        {/*<Route exact path="/"  component={Start} />*/}
         <Route exact path="/signUp" component={Register} />
         <Route path="/404" component={Custom404} />
-        <Route path="/home" component={Dashboard} />
+        {/*<Route path="/home" component={Dashboard} />*/}
         <Route path="/data" component={UserInfo} />
         <Route path="/perfil" component={UserInfo} />
         <Route path="/recovery-password" component={Forgot_password} />
