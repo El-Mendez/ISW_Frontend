@@ -8,6 +8,7 @@ import logo from "../../assets/logo.svg";
 
 import { zodResolver } from '@hookform/resolvers/zod';
 import * as z from 'zod';
+import {Link} from "react-router-dom";
 
 // Validación de datos ingresados por el usuario
 const schema = z.object({
@@ -15,7 +16,7 @@ const schema = z.object({
   confirm_password: z.string().nonempty({ message: 'Ingrese una contraseña' }).min(8, { message: 'Mínimo 8 caracteres' }),
 });
 
-export default function Register() {
+export default function ResetPassword() {
 
   const cookies = new Cookies();
   const { register, handleSubmit, formState: { errors } } = useForm({
@@ -91,9 +92,13 @@ export default function Register() {
   };
 
   return (
-        <div className="register-container mx-3">
-          <img src={logo} alt="Logo" className="img-size w-50"/>
-          <h2>Cuenta</h2>
+      <div className="vh-100 d-flex align-items-center justify-content-center">
+        <div className="forgot-password-container mx-3">
+          <div className="d-flex align-items-center justify-content-center">
+            <img src={logo} alt="Logo" className="img-size w-75"/>
+            <div className="border-end border-primary d-none d-sm-block" style={{height: '35px', opacity:0.7}}/>
+            <p className="display-6 ms-3 mb-0 d-none d-sm-block" style={{opacity:'0.8'}}>Cuenta</p>
+          </div>
           <form onSubmit={handleSubmit(onSubmit)}>
             {/* Password */}
             <div className="input-container">
@@ -142,17 +147,11 @@ export default function Register() {
               </div>
             </small>
             {/* Reset password button */}
-            <div className="d-flex flex-column justify-content-center align-items-center mt-4 px-2">
-              <button onSubmit={onSubmit} className="btn-fill arrow-button w-50">SIGUIENTE
-                <span
-                    className="material-icons position-absolute ms-1">arrow_forward</span>
-              </button>
-              <button onSubmit={onSubmit} className="btn-fill arrow-button w-50">CANCELAR
-                <span
-                    className="material-icons position-absolute ms-1">arrow_forward</span>
-              </button>
+            <div className="d-flex justify-content-end mt-4">
+              <Link to={'/'} className="btn-fill link-design">RESTABLECER</Link>
             </div>
           </form>
         </div>
+      </div>
   );
 }

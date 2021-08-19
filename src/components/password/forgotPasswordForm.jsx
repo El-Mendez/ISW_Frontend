@@ -7,7 +7,7 @@ import * as z from 'zod';
 import {useForm} from "react-hook-form";
 import Axios from "axios";
 import {PASSWORD_RESET} from "../utils/rutas";
-import history from "../history";
+
 
 // Validación de datos ingresados por el usuario
 const schema = z.object({
@@ -70,9 +70,8 @@ export default function ForgotPasswordForm(props) {
 
   const onSubmit = (data) => {
     resetPassword()
-    props.handleClick()
+    setTimeout(()=>{props.handleClick()},1000)
   };
-
 
   return (
         <>
