@@ -8,53 +8,50 @@ import logo from "../../assets/logo.svg";
 
 import { zodResolver } from '@hookform/resolvers/zod';
 import * as z from 'zod';
-import {Link} from "react-router-dom";
+import {Link, useLocation} from "react-router-dom";
 
 // Validación de datos ingresados por el usuario
 const schema = z.object({
-  password: z.string().nonempty({ message: 'Ingrese una contraseña' }).min(8, { message: 'Mínimo 8 caracteres' }),
+  password: z.string().nonempty({message: 'Ingrese un carné'}).min(3, {message: 'EL mínimo de un carné UVG es de 3 dígitos'}),
   confirm_password: z.string().nonempty({ message: 'Ingrese una contraseña' }).min(8, { message: 'Mínimo 8 caracteres' }),
 });
 
 export default function ResetPassword() {
-
-  const cookies = new Cookies();
   const { register, handleSubmit, formState: { errors } } = useForm({
     mode:'onChange',
     resolver: zodResolver(schema),
   });
 
+  const token = new URLSearchParams(useLocation().search)
 
   const [user, setUser] = useState({
+    carne: '',
     password: '',
-    confirm_password: '',
   });
 
   const [filled, setFilled] = useState({
+    carne: false,
     password: false,
-    confirm_password: false,
   });
 
 
   // Envía la información del usuario a la base de datos
   // Retorna error si el carné ya está guardado o no se pasaron todos los parámetros
-  function signUp(){
-    console.log("Loading...");
-    console.log(user)
-    console.log(user.carne, user.nombre, user.apellido)
+  function acceptResetPassword(){
     const fetchData = async () => {
       try {
         const { data } = await Axios.post(SIGNUP,
             {
               carne: user.carne,
-              nombre: user.nombre,
-              apellido: user.apellido,
-              carreraId: user.carreraId,
-              password: user.password
+              newPassword: user.confirm_password,
+            },
+            {
+              headers:{
+                Authorization: `Bearer ${token}`
+              }
             }
         );
-        cookies.set('session', data.token, {path: '/'})
-        history.push(`/data`);
+        history.push(`/`);
         history.go();
       } catch (error) {
         console.log(error);
@@ -100,27 +97,27 @@ export default function ResetPassword() {
             <p className="display-6 ms-3 mb-0 d-none d-sm-block" style={{opacity:'0.8'}}>Cuenta</p>
           </div>
           <form onSubmit={handleSubmit(onSubmit)}>
-            {/* Password */}
+            {/* Carne */}
             <div className="input-container">
-                         <span className={`material-icons input-icon ${filled.password ? 'is-filled' : ' '}`}>
-                            lock
+                         <span className={`material-icons input-icon ${filled.carne ? 'is-filled' : ' '}`}>
+                            assignment_ind
                         </span>
               <input
                   className="input ms-1"
-                  type="password"
-                  name="password"
-                  placeholder="Nueva contraseña"
+                  type="number"
+                  name="carne"
+                  placeholder="Carné"
                   onInput={handleInputChange}
-                  {...register('password')}
+                  {...register('carne')}
               />
             </div>
             <small className="text-danger text-small d-block mb-2 mt-1">
               <div className="d-flex align-items-center ps-2">
-                {errors.password
+                {errors.carne
                     ? <span className="material-icons me-1">error_outline</span>
                     : null
                 }
-                {errors.password?.message}
+                {errors.carne?.message}
               </div>
             </small>
             {/* Confirm password */}
@@ -132,7 +129,7 @@ export default function ResetPassword() {
                   className="input ms-1"
                   type="password"
                   name="password"
-                  placeholder="Confirmar contraseña"
+                  placeholder="Nueva contraseña"
                   onInput={handleInputChange}
                   {...register('password')}
               />

@@ -71,9 +71,6 @@ export default function Register() {
     // Envía la información del usuario a la base de datos
     // Retorna error si el carné ya está guardado o no se pasaron todos los parámetros
     function signUp(){
-        console.log("Loading...");
-        console.log(user)
-        console.log(user.carne, user.nombre, user.apellido)
         const fetchData = async () => {
             try {
                 const { data } = await Axios.post(SIGNUP,
@@ -90,9 +87,7 @@ export default function Register() {
                 history.push(`/data`);
                 history.go();
             } catch (error) {
-                console.log(error.response.data);
                 console.log(error.response.status);
-                console.log(error.response.headers);
                 alert('El carné ingresado ya se encuentra registrado');
             }
         };

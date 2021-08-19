@@ -160,7 +160,7 @@ export default function Login(props) {
                     </small>
                     {/* LOGIN BUTTON */}
                     <div className="d-flex justify-content-between align-items-center mt-4 px-2">
-                        <Link to='/recovery' className="ms-1 text-gold">
+                        <Link to='/reset-password' className="ms-1 text-gold">
                             ¿Olvidaste tu contraseña?
                         </Link>
                         <button onSubmit={onSubmit} className="btn-fill arrow-button">INICIAR SESIÓN

@@ -8,8 +8,8 @@ import Axios from "axios";
 import { AUTH } from './utils/rutas'
 import Register from "./auth/register/register";
 import Dashboard from "./dashboard/dashboard";
-import Forgot_password from "./password/forgot_password";
-import ResetPassword from "./password/reset_password";
+import ForgotPassword from "./password/forgotPassword";
+import ResetPassword from "./password/resetpassword";
 
 
 export default function MainRoutes() {
@@ -42,6 +42,7 @@ export default function MainRoutes() {
   return (
     <Router>
       <Switch>
+        {/*  Arreglar al momento de salir sesión*/}
         <Route exact path="/" >
             {session
                 ? <Dashboard/>
@@ -54,8 +55,8 @@ export default function MainRoutes() {
         <Route path="/home" component={Dashboard} />
         <Route path="/data" component={UserInfo} />
         <Route path="/perfil" component={UserInfo} />
-        <Route path="/recovery" component={Forgot_password} />
-        <Route path="/recovery-password" component={ResetPassword} />
+        <Route path="/recovery" component={ResetPassword} />
+        <Route exact path="/reset-password" component={ForgotPassword} />
       </Switch>
     </Router>
   );

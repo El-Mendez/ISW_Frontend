@@ -88,7 +88,6 @@
   background-color: #FFFFFF;
   border-radius: 2rem;
   padding: 7px 50px 7px 50px;
-  //margin-left: 2rem;
   box-shadow: -2px 3px 8px 2px #01010133;
 
 }
@@ -103,4 +102,10 @@
 
 h2{
   line-height: inherit !important;
+}
+
+input{
+  &::placeholder{
+    font-family: 'Mate SC', serif;
+  }
 }
