@@ -41,7 +41,7 @@ export default function MainRoutes() {
   return (
     <Router>
       <Switch>
-        <Route path="/" >
+        <Route exact path="/" >
             {session
                 ? <Dashboard/>
                 : <Start/>
