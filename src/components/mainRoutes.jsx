@@ -45,6 +45,7 @@ export default function MainRoutes() {
               ? <Route exact path="/"  component={Dashboard} />
               : <Route path="/home" component={Dashboard} />
           }
+        <Route exact path="/"  component={Dashboard} />
         <Route exact path="/signUp" component={Register} />
         <Route path="/404" component={Custom404} />
         <Route path="/home" component={Dashboard} />
