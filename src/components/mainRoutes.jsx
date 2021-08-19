@@ -8,6 +8,7 @@ import Axios from "axios";
 import { AUTH } from './utils/rutas'
 import Register from "./auth/register/register";
 import Dashboard from "./dashboard/dashboard";
+import Forgot_password from "./password/forgot_password";
 
 
 export default function MainRoutes() {
@@ -52,6 +53,8 @@ export default function MainRoutes() {
         <Route path="/home" component={Dashboard} />
         <Route path="/data" component={UserInfo} />
         <Route path="/perfil" component={UserInfo} />
+        <Route path="/recovery-password" component={Forgot_password} />
+        <Route path="/recovery/:token" component={UserInfo} />
       </Switch>
     </Router>
   );
