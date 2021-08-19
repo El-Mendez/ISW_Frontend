@@ -11,6 +11,7 @@ import { LOGIN } from '../utils/rutas';
 
 import { zodResolver } from '@hookform/resolvers/zod';
 import * as z from 'zod';
+import {Link} from "react-router-dom";
 
 const schema = z.object({
     carne: z.string().min(3, {message: 'EL mínimo de un carné UVG es de 3 dígitos'}),
@@ -159,7 +160,9 @@ export default function Login(props) {
                     </small>
                     {/* LOGIN BUTTON */}
                     <div className="d-flex justify-content-between align-items-center mt-4 px-2">
-                        <a>¿Olvidaste tu contraseña?</a>
+                        <Link to='/recovery' className="ms-1 text-gold">
+                            ¿Olvidaste tu contraseña?
+                        </Link>
                         <button onSubmit={onSubmit} className="btn-fill arrow-button">INICIAR SESIÓN
                             <span
                                 className="material-icons position-absolute ms-1">arrow_forward</span>
