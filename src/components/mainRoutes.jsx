@@ -41,13 +41,10 @@ export default function MainRoutes() {
   return (
     <Router>
       <Switch>
-        <Route exact path="/" >
-            {session
-                ? <Dashboard/>
-                : <Start/>
-            }
-        </Route>
-        {/*<Route exact path="/" component={Start} />*/}
+          {session
+              ? <Route exact path="/"  component={Dashboard} />
+              : <Route path="/home" component={Dashboard} />
+          }
         <Route exact path="/signUp" component={Register} />
         <Route path="/404" component={Custom404} />
         <Route path="/home" component={Dashboard} />

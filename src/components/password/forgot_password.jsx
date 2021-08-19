@@ -95,12 +95,12 @@ export default function Forgot_password() {
 
     return (
         <div className="vh-100 d-flex align-content-center justify-content-center bg-beige">
-            <div className="forgot-password-container mx-3">
+            <div className="forgot-password-container mx-4">
                 <div className="d-flex flex-column justify-content-center align-items-center">
                     <img src={logo} alt="Logo" className="img-size w-50"/>
                     <h1 className="mt-1 ">Restablecimiento de contraseña</h1>
-                    <p className="text-center poppins-font">Pon tu nombre de usuario de Spotify, o la dirección de correo electrónico que usaste para registrarte.
-                        Te enviaremos un mensaje con tu nombre de usuario y un enlace para restablecer tu contraseña.</p>
+                    <p className="text-center poppins-font">Pon tu nombre de carné, o la dirección de correo electrónico que usaste para registrarte.
+                        Te enviaremos un mensaje con un enlace para restablecer tu contraseña.</p>
                 </div>
                 <form onSubmit={handleSubmit(onSubmit)}>
                     {/* Carné */}
