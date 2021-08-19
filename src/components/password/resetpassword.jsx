@@ -85,7 +85,7 @@ export default function ResetPassword() {
 
   // Valida la información ingresada en el formulario y hace el request
   const onSubmit = (data) => {
-    // signUp();
+    acceptResetPassword()
   };
 
   return (
