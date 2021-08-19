@@ -16,19 +16,7 @@ function SuggestionItem(props) {
             <h1>{item.nombre}</h1>
           </div>
           <div className="row">
-            <h2>{item.username}</h2>
-          </div>
-          <div className="row">
-            <h2>
-              Carrera:
-              {item.carrera}
-            </h2>
-          </div>
-          <div className="row">
-            <h2>
-              Hobbies:
-              {item.hobbies}
-            </h2>
+            <h2>{item.apellido}</h2>
           </div>
         </div>
       </div>

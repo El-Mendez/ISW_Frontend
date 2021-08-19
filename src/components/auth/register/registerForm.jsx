@@ -80,7 +80,8 @@ export default function Register() {
                         nombre: user.nombre,
                         apellido: user.apellido,
                         carreraId: user.carreraId,
-                        password: user.password
+                        password: user.password,
+                        correo: "cab19943@uvg.edu.gt"
                     }
                 );
                 cookies.set('session', data.token, {path: '/'})

@@ -107,7 +107,7 @@ function UserInfo() {
       try {
         const { data } = await Axios.post(ASSIGN_HOBBY,
             {
-              hobbyId: user.hobbies
+              hobbiesId: user.hobbies
             },
             {
               headers:{
