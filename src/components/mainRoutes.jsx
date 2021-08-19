@@ -42,10 +42,10 @@ export default function MainRoutes() {
     <Router>
       <Switch>
           {session
-              ? <Route exact path="/"  component={Dashboard} />
+              ? <Route exact path="/"  component={Start} />
               : <Route path="/home" component={Dashboard} />
           }
-        <Route exact path="/"  component={Dashboard} />
+        <Route exact path="/"  component={Start} />
         <Route exact path="/signUp" component={Register} />
         <Route path="/404" component={Custom404} />
         <Route path="/home" component={Dashboard} />
