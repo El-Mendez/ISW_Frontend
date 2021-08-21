@@ -9,9 +9,7 @@ export default function ForgotPassword() {
         <div className="vh-100 d-flex align-content-center justify-content-center bg-beige">
             <div className="forgot-password-container mx-4">
                 {reset
-                    ? setTimeout(()=> {
-                        <ForgotPasswordMessage/>
-                }, 2000)
+                    ? <ForgotPasswordMessage/>
                     : <ForgotPasswordForm
                         handleClick={()=> setReset(true)}
                     />

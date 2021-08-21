@@ -1,8 +1,7 @@
-import React, { useState} from 'react';
+import React, { useState, useRef} from 'react';
 import Axios from 'axios';
 import { useForm } from 'react-hook-form';
 import history from '../history';
-import Cookies from 'universal-cookie';
 import { SIGNUP } from '../utils/rutas';
 import logo from "../../assets/logo.svg";
 
@@ -12,26 +11,42 @@ import {Link, useLocation} from "react-router-dom";
 
 // Validación de datos ingresados por el usuario
 const schema = z.object({
-  password: z.string().nonempty({message: 'Ingrese un carné'}).min(3, {message: 'EL mínimo de un carné UVG es de 3 dígitos'}),
-  confirm_password: z.string().nonempty({ message: 'Ingrese una contraseña' }).min(8, { message: 'Mínimo 8 caracteres' }),
+  password: z.string().nonempty({message: 'Ingrese un carné'}).min(8, {message: 'Mínimo 8 caracteres'})
+      .regex(new RegExp(".*[A-Z].*"), "Al menos una letra mayúscula")
+      .regex(new RegExp(".*\\d.*"), "Al menos un número")
+      .regex(
+          new RegExp(".*[`~<>?,./!@#$%^&*()\\-_+=\"'|{}\\[\\];:\\\\].*"),
+          "Al menos un caracter especial"
+      ),
+  confirm_password: z.string().nonempty({ message: 'Ingrese una contraseña' }).min(8, { message: 'Mínimo 8 caracteres' })
+      .regex(new RegExp(".*[A-Z].*"), "Al menos una letra mayúscula")
+      .regex(new RegExp(".*\\d.*"), "Al menos un número")
+      .regex(
+          new RegExp(".*[`~<>?,./!@#$%^&*()\\-_+=\"'|{}\\[\\];:\\\\].*"),
+          "Al menos un caracter especial"
+      )
+}).refine((data) => data.password === data.confirm_password, {
+  message: "Las contraseñas no son iguales",
+  path: ['confirm_password'], // set path of error
 });
 
 export default function ResetPassword() {
-  const { register, handleSubmit, formState: { errors } } = useForm({
+  const { register, handleSubmit, formState: { errors }, watch} = useForm({
     mode:'onChange',
     resolver: zodResolver(schema),
   });
 
+
   const token = new URLSearchParams(useLocation().search)
 
   const [user, setUser] = useState({
-    carne: '',
     password: '',
+    confirm_password: '',
   });
 
   const [filled, setFilled] = useState({
-    carne: false,
     password: false,
+    confirm_password: false,
   });
 
 
@@ -42,7 +57,6 @@ export default function ResetPassword() {
       try {
         const { data } = await Axios.post(SIGNUP,
             {
-              carne: user.carne,
               newPassword: user.confirm_password,
             },
             {
@@ -97,33 +111,10 @@ export default function ResetPassword() {
             <p className="display-6 ms-3 mb-0 d-none d-sm-block" style={{opacity:'0.8'}}>Cuenta</p>
           </div>
           <form onSubmit={handleSubmit(onSubmit)}>
-            {/* Carne */}
-            <div className="input-container">
-                         <span className={`material-icons input-icon ${filled.carne ? 'is-filled' : ' '}`}>
-                            assignment_ind
-                        </span>
-              <input
-                  className="input ms-1"
-                  type="number"
-                  name="carne"
-                  placeholder="Carné"
-                  onInput={handleInputChange}
-                  {...register('carne')}
-              />
-            </div>
-            <small className="text-danger text-small d-block mb-2 mt-1">
-              <div className="d-flex align-items-center ps-2">
-                {errors.carne
-                    ? <span className="material-icons me-1">error_outline</span>
-                    : null
-                }
-                {errors.carne?.message}
-              </div>
-            </small>
-            {/* Confirm password */}
+            {/* Contraseña */}
             <div className="input-container">
                          <span className={`material-icons input-icon ${filled.password ? 'is-filled' : ' '}`}>
-                            lock
+                            assignment_ind
                         </span>
               <input
                   className="input ms-1"
@@ -132,6 +123,29 @@ export default function ResetPassword() {
                   placeholder="Nueva contraseña"
                   onInput={handleInputChange}
                   {...register('password')}
+              />
+            </div>
+            <small className="text-danger text-small d-block mb-2 mt-1">
+              <div className="d-flex align-items-center ps-2">
+                {errors.password
+                    ? <span className="material-icons me-1">error_outline</span>
+                    : null
+                }
+                {errors.password?.message}
+              </div>
+            </small>
+            {/* Confirm password */}
+            <div className="input-container">
+                         <span className={`material-icons input-icon ${filled.confirm_password ? 'is-filled' : ' '}`}>
+                            lock
+                        </span>
+              <input
+                  className="input ms-1"
+                  type="password"
+                  name="confirm_password"
+                  placeholder="Repite tu nueva contraseña"
+                  onInput={handleInputChange}
+                  {...register('confirm_password')}
               />
             </div>
             <small className="text-danger text-small d-block mb-2 mt-1">
