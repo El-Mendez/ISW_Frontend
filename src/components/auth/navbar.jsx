@@ -18,7 +18,7 @@ function NavBar() {
   return (
       <div>
         {/* NavBar menu */}
-        <div className={'bg-white fixed-top'} style={{opacity: 0.85,
+        <div className={'bg-transparent fixed-top'} style={{opacity: 0.85,
             height: '90px'}}>
             <nav className="navbar navbar-expand-sm navbar-light text-light">
               <div className="d-flex flex-grow-1 justify-content-between align-items-center" style={{ height: 'inherit' }}>

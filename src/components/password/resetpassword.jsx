@@ -2,7 +2,7 @@ import React, { useState, useRef} from 'react';
 import Axios from 'axios';
 import { useForm } from 'react-hook-form';
 import history from '../history';
-import { SIGNUP } from '../utils/rutas';
+import { ACCEPT_PASSWORD_RESET } from '../utils/rutas';
 import logo from "../../assets/logo.svg";
 
 import { zodResolver } from '@hookform/resolvers/zod';
@@ -30,6 +30,10 @@ const schema = z.object({
   path: ['confirm_password'], // set path of error
 });
 
+function useQuery() {
+  return new URLSearchParams(useLocation().search);
+}
+
 export default function ResetPassword() {
   const { register, handleSubmit, formState: { errors }, watch} = useForm({
     mode:'onChange',
@@ -37,7 +41,7 @@ export default function ResetPassword() {
   });
 
 
-  const token = new URLSearchParams(useLocation().search)
+  const query = useQuery();
 
   const [user, setUser] = useState({
     password: '',
@@ -55,21 +59,18 @@ export default function ResetPassword() {
   function acceptResetPassword(){
     const fetchData = async () => {
       try {
-        const { data } = await Axios.post(SIGNUP,
+        const { data } = await Axios.post(ACCEPT_PASSWORD_RESET,
             {
               newPassword: user.confirm_password,
             },
             {
               headers:{
-                Authorization: `Bearer ${token}`
+                Authorization: `Bearer ${query.get('token')}`
               }
             }
         );
-        history.push(`/`);
-        history.go();
       } catch (error) {
         console.log(error);
-        alert('El carné ingresado ya se encuentra registrado');
       }
     };
     fetchData();
@@ -77,7 +78,6 @@ export default function ResetPassword() {
 
   // Actualiza los estados a medida que el usuario escribe
   const handleInputChange = (e) => {
-    console.log(e.target.name)
     setUser({
       ...user,
       [e.target.name]: e.target.value,
@@ -100,6 +100,10 @@ export default function ResetPassword() {
   // Valida la información ingresada en el formulario y hace el request
   const onSubmit = (data) => {
     acceptResetPassword()
+    setTimeout(()=> {
+      history.push('/')
+      history.go()
+    },1000)
   };
 
   return (
@@ -159,7 +163,7 @@ export default function ResetPassword() {
             </small>
             {/* Reset password button */}
             <div className="d-flex justify-content-end mt-4">
-              <Link to={'/'} className="btn-fill link-design">RESTABLECER</Link>
+              <button onSubmit={onSubmit} className="btn-fill link-design">RESTABLECER</button>
             </div>
           </form>
         </div>
