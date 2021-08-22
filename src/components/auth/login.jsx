@@ -174,7 +174,7 @@ export default function Login(props) {
                         buttonText = "Continúa con Google"
                         onSuccess={googleLogin}
                         onFailure={googleLogin}
-                        hostedDomain={"uvg.edu.gt"}
+                        hostedDomain={"meetinguvg.me"}
                         cookiePolicy={'single_host_origin'}
                     />
                 </div>
