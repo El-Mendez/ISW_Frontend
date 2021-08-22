@@ -87,8 +87,7 @@
 .register-container{
   background-color: #FFFFFF;
   border-radius: 2rem;
-  padding: 7px 50px 50px 50px;
-  //margin-left: 2rem;
+  padding: 7px 50px 7px 50px;
   box-shadow: -2px 3px 8px 2px #01010133;
 
 }
@@ -103,4 +102,20 @@
 
 h2{
   line-height: inherit !important;
+}
+
+input{
+  &::placeholder{
+    font-family: 'Mate SC', serif;
+  }
+}
+
+.first_section{
+  position: relative;
+  z-index: 2;
+  padding-top: 20px;
+  padding-bottom: 20px;
+  padding-left: 64px;
+  padding-right: 64px;
+  margin-top: 160px !important;
 }

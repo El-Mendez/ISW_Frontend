@@ -8,7 +8,13 @@ import NavBar from "./navbar";
 export default function Home() {
     return (
         <div className="vh-100 vw-100">
-            <NavBar/>
+            <section className="col">
+                <NavBar/>
+                <div className="first_section">
+
+                </div>
+            </section>
+
             <div className= "h-100 navbar-padding bg-beige">
                 <div className="container-fluid h-100">
                     <div className="row navbar-padding h-100">

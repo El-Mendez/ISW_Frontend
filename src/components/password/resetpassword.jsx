@@ -1,28 +1,47 @@
-import React, { useState} from 'react';
+import React, { useState, useRef} from 'react';
 import Axios from 'axios';
 import { useForm } from 'react-hook-form';
 import history from '../history';
-import Cookies from 'universal-cookie';
-import { SIGNUP } from '../utils/rutas';
+import { ACCEPT_PASSWORD_RESET } from '../utils/rutas';
 import logo from "../../assets/logo.svg";
 
 import { zodResolver } from '@hookform/resolvers/zod';
 import * as z from 'zod';
+import {Link, useLocation} from "react-router-dom";
 
 // Validación de datos ingresados por el usuario
 const schema = z.object({
-  password: z.string().nonempty({ message: 'Ingrese una contraseña' }).min(8, { message: 'Mínimo 8 caracteres' }),
-  confirm_password: z.string().nonempty({ message: 'Ingrese una contraseña' }).min(8, { message: 'Mínimo 8 caracteres' }),
+  password: z.string().nonempty({message: 'Ingrese un carné'}).min(8, {message: 'Mínimo 8 caracteres'})
+      .regex(new RegExp(".*[A-Z].*"), "Al menos una letra mayúscula")
+      .regex(new RegExp(".*\\d.*"), "Al menos un número")
+      .regex(
+          new RegExp(".*[`~<>?,./!@#$%^&*()\\-_+=\"'|{}\\[\\];:\\\\].*"),
+          "Al menos un caracter especial"
+      ),
+  confirm_password: z.string().nonempty({ message: 'Ingrese una contraseña' }).min(8, { message: 'Mínimo 8 caracteres' })
+      .regex(new RegExp(".*[A-Z].*"), "Al menos una letra mayúscula")
+      .regex(new RegExp(".*\\d.*"), "Al menos un número")
+      .regex(
+          new RegExp(".*[`~<>?,./!@#$%^&*()\\-_+=\"'|{}\\[\\];:\\\\].*"),
+          "Al menos un caracter especial"
+      )
+}).refine((data) => data.password === data.confirm_password, {
+  message: "Las contraseñas no son iguales",
+  path: ['confirm_password'], // set path of error
 });
 
-export default function Register() {
+function useQuery() {
+  return new URLSearchParams(useLocation().search);
+}
 
-  const cookies = new Cookies();
-  const { register, handleSubmit, formState: { errors } } = useForm({
+export default function ResetPassword() {
+  const { register, handleSubmit, formState: { errors }, watch} = useForm({
     mode:'onChange',
     resolver: zodResolver(schema),
   });
 
+
+  const query = useQuery();
 
   const [user, setUser] = useState({
     password: '',
@@ -37,27 +56,21 @@ export default function Register() {
 
   // Envía la información del usuario a la base de datos
   // Retorna error si el carné ya está guardado o no se pasaron todos los parámetros
-  function signUp(){
-    console.log("Loading...");
-    console.log(user)
-    console.log(user.carne, user.nombre, user.apellido)
+  function acceptResetPassword(){
     const fetchData = async () => {
       try {
-        const { data } = await Axios.post(SIGNUP,
+        const { data } = await Axios.post(ACCEPT_PASSWORD_RESET,
             {
-              carne: user.carne,
-              nombre: user.nombre,
-              apellido: user.apellido,
-              carreraId: user.carreraId,
-              password: user.password
+              newPassword: user.confirm_password,
+            },
+            {
+              headers:{
+                Authorization: `Bearer ${query.get('token')}`
+              }
             }
         );
-        cookies.set('session', data.token, {path: '/'})
-        history.push(`/data`);
-        history.go();
       } catch (error) {
         console.log(error);
-        alert('El carné ingresado ya se encuentra registrado');
       }
     };
     fetchData();
@@ -65,7 +78,6 @@ export default function Register() {
 
   // Actualiza los estados a medida que el usuario escribe
   const handleInputChange = (e) => {
-    console.log(e.target.name)
     setUser({
       ...user,
       [e.target.name]: e.target.value,
@@ -87,18 +99,26 @@ export default function Register() {
 
   // Valida la información ingresada en el formulario y hace el request
   const onSubmit = (data) => {
-    // signUp();
+    acceptResetPassword()
+    setTimeout(()=> {
+      history.push('/')
+      history.go()
+    },1000)
   };
 
   return (
-        <div className="register-container mx-3">
-          <img src={logo} alt="Logo" className="img-size w-50"/>
-          <h2>Cuenta</h2>
+      <div className="vh-100 d-flex align-items-center justify-content-center">
+        <div className="forgot-password-container mx-3">
+          <div className="d-flex align-items-center justify-content-center">
+            <img src={logo} alt="Logo" className="img-size w-75"/>
+            <div className="border-end border-primary d-none d-sm-block" style={{height: '35px', opacity:0.7}}/>
+            <p className="display-6 ms-3 mb-0 d-none d-sm-block" style={{opacity:'0.8'}}>Cuenta</p>
+          </div>
           <form onSubmit={handleSubmit(onSubmit)}>
-            {/* Password */}
+            {/* Contraseña */}
             <div className="input-container">
                          <span className={`material-icons input-icon ${filled.password ? 'is-filled' : ' '}`}>
-                            lock
+                            assignment_ind
                         </span>
               <input
                   className="input ms-1"
@@ -120,16 +140,16 @@ export default function Register() {
             </small>
             {/* Confirm password */}
             <div className="input-container">
-                         <span className={`material-icons input-icon ${filled.password ? 'is-filled' : ' '}`}>
+                         <span className={`material-icons input-icon ${filled.confirm_password ? 'is-filled' : ' '}`}>
                             lock
                         </span>
               <input
                   className="input ms-1"
                   type="password"
-                  name="password"
-                  placeholder="Confirmar contraseña"
+                  name="confirm_password"
+                  placeholder="Repite tu nueva contraseña"
                   onInput={handleInputChange}
-                  {...register('password')}
+                  {...register('confirm_password')}
               />
             </div>
             <small className="text-danger text-small d-block mb-2 mt-1">
@@ -142,17 +162,11 @@ export default function Register() {
               </div>
             </small>
             {/* Reset password button */}
-            <div className="d-flex flex-column justify-content-center align-items-center mt-4 px-2">
-              <button onSubmit={onSubmit} className="btn-fill arrow-button w-50">SIGUIENTE
-                <span
-                    className="material-icons position-absolute ms-1">arrow_forward</span>
-              </button>
-              <button onSubmit={onSubmit} className="btn-fill arrow-button w-50">CANCELAR
-                <span
-                    className="material-icons position-absolute ms-1">arrow_forward</span>
-              </button>
+            <div className="d-flex justify-content-end mt-4">
+              <button onSubmit={onSubmit} className="btn-fill link-design">RESTABLECER</button>
             </div>
           </form>
         </div>
+      </div>
   );
 }

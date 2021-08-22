@@ -1,42 +1,50 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import {
   useRouteMatch,
 } from 'react-router-dom';
 import { createBrowserHistory as history } from 'history';
+import {SUGGESTIONS, AUTH} from "../utils/rutas";
+import Cookies from 'universal-cookie';
+import Axios from "axios";
+import SuggestionItem from '../suggestions/suggestionItem';
+import UserInfo from '../data/userInfo';
 
 function Perfil(props) {
   const { url } = useRouteMatch();
-  let hobby = '';
-  let item = props;
-
-  const handleHobby = (e) => {
-    console.log(e.target.value);
-    hobby = e.target.value;
+  const cookies = new Cookies();
+  const token = cookies.get('session')
+  const [suggestions, setSuggestions] = useState([]);
+  function searchFriends(){
+    const request = async () => {
+      try {
+        const res = await Axios.get(SUGGESTIONS,
+          {
+              headers:{
+                  Authorization: `Bearer ${token}`
+              }
+          }
+      );
+        console.log(res.data)
+        setSuggestions(res.data)
+      } catch (error) {
+        console.log(error);
+      }
+    };
+    request();
   };
-
-  const handleClick = () => {
-    console.log(item.hobby)
-    history().push(`${url}/recomendaciones/${hobby}`);
-    history().go();
-  };
-
+  useEffect(()=>{
+    searchFriends()
+}, [])
   return (
     <div className="busqueda">
       <div className="container">
         <div className="row align-items-center">
-          <h1>Ingresa un hobby para poder encontrar amigos</h1>
-        </div>
-        <div className="row align-items-center justify-content-center buscar">
-          <div className="col-8">
-            <form>
-              <input type="text" className="search" placeholder="Buscar.." onChange={handleHobby} />
-            </form>
-          </div>
-          <div className="col-2 botonBuscar">
-            <button onClick={handleClick}>
-              Buscar
-            </button>
-          </div>
+          {suggestions.map((user) => (
+            <SuggestionItem 
+            nombre = {user.nombre}
+            apellido = {user.apellido}
+            />
+          ))}
         </div>
       </div>
     </div>

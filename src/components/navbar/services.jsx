@@ -7,7 +7,7 @@ import history from '../history';
 function Services() {
   const { url } = useRouteMatch();
   const cookies = new Cookies();
-  const [show, setShow] = React.useState(true);
+  const [show, setShow] = React.useState(false);
   function logout() {
     cookies.remove('session')
     history.push(`/`);
@@ -28,7 +28,7 @@ function Services() {
       </Link> */}
       <div className="services container align-items" style={{ height: '28px'}}>
         <div className="row ">
-          <span class="material-icons col-4 float-left" onClick={openWindow}>
+          <span className="material-icons col-4 float-left" onClick={openWindow}>
             account_circle
           </span>
             <div className="col-8" onClick={openWindow}>

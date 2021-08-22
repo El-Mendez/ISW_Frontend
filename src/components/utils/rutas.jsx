@@ -10,5 +10,10 @@ const SEARCH_COURSE = 'http://api.meetinguvg.me/free/curso';
 const AUTH = 'http://api.meetinguvg.me/auth/ping';
 const ASSIGN_SECTION = 'http://api.meetinguvg.me/auth/seccion';
 const ASSIGN_HOBBY = 'http://api.meetinguvg.me/auth/hobby';
+const SUGGESTIONS = 'http://api.meetinguvg.me/auth/suggestions/courses';
 
-module.exports = {LOGIN, SIGNUP, SEARCH_CAREER, SEARCH_COURSE, SEARCH_HOBBY, AUTH, ASSIGN_SECTION, ASSIGN_HOBBY}
+const PASSWORD_RESET = 'http://api.meetinguvg.me/request/passwordReset'
+const ACCEPT_PASSWORD_RESET = 'http://api.meetinguvg.me/request/acceptPasswordReset'
+
+module.exports = {LOGIN, SIGNUP, SEARCH_CAREER, SEARCH_COURSE, SEARCH_HOBBY, AUTH, ASSIGN_SECTION, ASSIGN_HOBBY,
+PASSWORD_RESET, ACCEPT_PASSWORD_RESET, SUGGESTIONS}
