@@ -36,13 +36,14 @@ function Perfil(props) {
     searchFriends()
 }, [])
   return (
-    <div className="busqueda">
-      <div className="container">
+    <div className="userList">
+      <div className="container ">
         <div className="row align-items-center">
           {suggestions.map((user) => (
             <SuggestionItem 
             nombre = {user.nombre}
             apellido = {user.apellido}
+            carne = {user.carne}
             />
           ))}
         </div>

@@ -32,13 +32,13 @@ function Services() {
             account_circle
           </span>
             <div className="col-8" onClick={openWindow}>
-              Pepe 
+              User 
             </div>
         </div>
       </div>
-            {show && <div class='contenedor container '> 
-                        <div class='triangle row'></div>
-                        <div class='cuadrado row container'>
+            {show && <div className='contenedor container '> 
+                        <div className='triangle row'></div>
+                        <div className='cuadrado row container'>
                           <p className='row'>Cuenta</p>
                           <p className='row' onClick={logout}>Cerrar sesion</p>
                         </div>
