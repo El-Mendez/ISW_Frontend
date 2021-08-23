@@ -7,11 +7,11 @@ import history from '../history';
 import logo from '../../assets/logo.svg';
 import Cookies from 'universal-cookie';
 import { LOGIN } from '../utils/rutas';
-
-
 import { zodResolver } from '@hookform/resolvers/zod';
 import * as z from 'zod';
 import {Link} from "react-router-dom";
+
+const clientId = "405374042535-g3sqooe9ncnj7lm394iu27u9vd99ma16.apps.googleusercontent.com";
 
 const schema = z.object({
     carne: z.string().min(3, {message: 'EL mínimo de un carné UVG es de 3 dígitos'}),
@@ -59,13 +59,17 @@ export default function Login(props) {
 
     const googleLogin = (respuesta) =>{
         console.log(respuesta);
-        console.log(respuesta.profileObj);
+        console.log('Login Success:',respuesta.profileObj);
         console.log(respuesta.error);
-        if (respuesta.error !== 'popup_closed_by_user'){
-            //history.push(`/data`);
-            //history.go();
-        }
+        history.push(`/home`);
+        history.go();
     };
+
+    const onLoginFailure = () => {
+        console.log('Login Failed:', res);
+    };
+
+    
 
     const handleInputChange = (e) => {
         setUser({
@@ -173,11 +177,11 @@ export default function Login(props) {
                 {/* Google */}
                 <div>
                     <GoogleLogin
-                        clientId= "405374042535-g3sqooe9ncnj7lm394iu27u9vd99ma16.apps.googleusercontent.com"
+                        clientId= {clientId}
                         buttonText = "Continúa con Google"
                         onSuccess={googleLogin}
-                        onFailure={googleLogin}
-                        hostedDomain={"meetinguvg.me"}
+                        onFailure={onLoginFailure}
+                        hostedDomain={"uvg.edu.gt"}
                         cookiePolicy={'single_host_origin'}
                     />
                 </div>
