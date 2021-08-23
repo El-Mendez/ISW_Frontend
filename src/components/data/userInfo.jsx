@@ -163,17 +163,12 @@ function UserInfo() {
   };
 
   const onSubmit = (datos) => {
-    console.log(user.hobbies)
-    try{
-      assignSection();
-      assignHobby();
-      setTimeout
-      // history.push('/home');
-      // history.go();
-      console.log('working fine')
-    }catch (e){
-      console.log(e)
-    }
+    assignSection();
+    assignHobby();
+    setTimeout(() => {
+      history.push('/home');
+      history.go();
+    },1000)
   }
 
   return (
