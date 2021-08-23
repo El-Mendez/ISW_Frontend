@@ -3,7 +3,6 @@ import { useForm } from 'react-hook-form';
 import history from '../history';
 import { SiInstagram, SiFacebook, SiWhatsapp } from "react-icons/si";
 import Cookies from 'universal-cookie';
-
 import { zodResolver } from '@hookform/resolvers/zod';
 import * as z from 'zod';
 import Select from 'react-select';
@@ -16,7 +15,7 @@ const schema = z.object({
   instagram: z.string(),
 });
 
-function PersonalForm() {
+function UserInfo() {
 
   const { register, handleSubmit, formState: { errors } } = useForm({
     mode: 'On Change',
@@ -29,7 +28,7 @@ function PersonalForm() {
   const [hobbies, setHobbies] = useState([]);
   const [cursos, setCursos] = useState([]);
 
-  const [data, setData] = useState({
+  const [user, setUser] = useState({
     hobbies: [],
     cursos: [],
     facebook: '',
@@ -48,7 +47,7 @@ function PersonalForm() {
     searchCursos();
   },[])
 
-  // Requests
+  // Requests para mostrar cursos y hobbies al usuario
   function searchHobbies(){
     const fetchData = async () => {
       try {
@@ -88,7 +87,7 @@ function PersonalForm() {
       try {
         const { data } = await Axios.post(ASSIGN_SECTION,
             {
-              seccionId: data.cursos
+              seccionesId: user.cursos
             },
             {
               headers:{
@@ -96,7 +95,6 @@ function PersonalForm() {
               }
             }
         );
-        setSession(true);
       } catch (error) {
         console.log(error);
       }
@@ -109,7 +107,7 @@ function PersonalForm() {
       try {
         const { data } = await Axios.post(ASSIGN_HOBBY,
             {
-              hobbyId: data.hobbies
+              hobbiesId: user.hobbies
             },
             {
               headers:{
@@ -117,7 +115,6 @@ function PersonalForm() {
               }
             }
         );
-        setSession(true);
       } catch (error) {
         console.log(error);
       }
@@ -127,28 +124,28 @@ function PersonalForm() {
 
   const onHobbiesChange = selectedHobbies => {
     selectedHobbies.map(item => {
-      setData({
-        ...data,
-        hobbies: item.value
+      setUser({
+        ...user,
+        hobbies: [...user.hobbies, item.value]
       })
     })
 
   }
 
-  const onCoursesChange = selectCourses => {
-    selectCourses.map(item => {
+  const onCoursesChange = selectedCourses => {
+    selectedCourses.map(item => {
       console.log(item)
-      setData({
-        ...data,
-        cursos: [...data.cursos, item.value]
+      setUser({
+        ...user,
+        cursos: [...user.cursos, item.value]
       })
     })
 
   }
 
   const handleInputChange = (e) => {
-    setData({
-      ...data,
+    setUser({
+      ...user,
       [e.target.name]: e.target.value,
     });
 
@@ -166,15 +163,12 @@ function PersonalForm() {
   };
 
   const onSubmit = (datos) => {
-    console.log(data.cursos)
-    try{
-      assignSection();
-      assignHobby();
+    assignSection();
+    assignHobby();
+    setTimeout(() => {
       history.push('/home');
       history.go();
-    }catch (e){
-      console.log(e)
-    }
+    },1000)
   }
 
   return (
@@ -194,8 +188,8 @@ function PersonalForm() {
                 isMulti
                 closeMenuOnSelect={false}
                 components={animatedComponents}
-                placeholder="Cursos"
-                value={cursos.find(obj => obj.value === data.cursos)}
+                placeholder="Agrega tus cursos"
+                value={cursos.find(obj => obj.value === user.cursos)}
                 onChange={onCoursesChange}
                 options={cursos}
             />
@@ -206,8 +200,8 @@ function PersonalForm() {
                 isMulti
                 closeMenuOnSelect={false}
                 components={animatedComponents}
-                placeholder="Hobbies"
-                value={hobbies.find(obj => obj.value === data.hobbies)}
+                placeholder="Agrega tus hobbies"
+                value={hobbies.find(obj => obj.value === user.hobbies)}
                 onChange={onHobbiesChange}
                 options={hobbies}
             />
@@ -218,7 +212,10 @@ function PersonalForm() {
               <div className="progress-activate-circle d-flex justify-content-center activate me-3">
                 <h2 className="progress-number">3</h2>
               </div>
-              <h1>Información de Contacto</h1>
+              <div className="d-flex align-items-center">
+                <h1>Información de Contacto</h1>
+                <p className="text-small m-0 ms-2">(Opcional)</p>
+              </div>
             </div>
           {/* Facebook */}
           <div className="input-container mt-3">
@@ -288,6 +285,7 @@ function PersonalForm() {
               {errors.phone?.message}
             </div>
           </small>
+
         </div>
         {/* NEXT BUTTON */}
         <div className="d-flex bg-gold w-100 mt-5 justify-content-end">
@@ -301,4 +299,4 @@ function PersonalForm() {
   );
 }
 
-export default PersonalForm;
+export default UserInfo;

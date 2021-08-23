@@ -1,43 +1,12 @@
-.search {
-  width: 100%;
-  box-sizing: border-box;
-  border: 2px solid #ccc;
-  border-radius: 4px;
-  font-size: 16px;
-  background-color: white;
-  /* background-image: url('lupa.png'); */
-  background-repeat: no-repeat;
-  padding: 12px 20px 12px ; 
-  }
+.userList {   
+  height: 90vh;
+  display: flex;
+  text-align: center;
+  justify-content: center;
+  margin-top: 0%;
 
-  .busqueda {   
-    height: 90vh;
-    display: flex;
-    text-align: center;
-    justify-content: center;
-    align-items: center;
-  }
-.botonBuscar {
-   width: auto;
-   height: 100%;
-
-   button{
-       width: 10vh;
-       height: 5vh;
-       box-sizing: border-box;
-       border: 2px solid #ccc;
-       border-radius: 4px;
-       font-size: 16px;
-       background-color: white;
-       
-       &:hover {
-           background-color: rgb(224, 223, 223);
-           
-       }
-   }
 }
 
-.buscar {
-    
+.datosUsuario{
+  color: black;
 }
-

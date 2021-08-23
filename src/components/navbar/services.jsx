@@ -7,37 +7,47 @@ import history from '../history';
 function Services() {
   const { url } = useRouteMatch();
   const cookies = new Cookies();
+  const [show, setShow] = React.useState(false);
   function logout() {
     cookies.remove('session')
     history.push(`/`);
     history.go();
   }
+  function openWindow() {
+    setShow(!show)
+    console.log(show)
+  }
   return (
     <div className="d-flex align-items-center">
-      {/* Search */}
-      <div className="services" style={{ height: '24px' }}>
-        <span className="material-icons">
-          search
-        </span>
-      </div>
-      {/* Help */}
-      <div className="services " style={{ height: '24px' }}>
-        <span className="material-icons">
-          help
-        </span>
-      </div>
-      <Link to="/" className="noDecorations">
+      {/* <Link to="/" className="noDecorations">
         <div className="services " style={{ height: '24px' }} onClick={logout}>
           <span className="material-icons">
             directions_run
           </span>
         </div>
-      </Link>
+      </Link> */}
+      <div className="services container align-items" style={{ height: '28px'}}>
+        <div className="row ">
+          <span className="material-icons col-4 float-left" onClick={openWindow}>
+            account_circle
+          </span>
+            <div className="col-8" onClick={openWindow}>
+              User 
+            </div>
+        </div>
+      </div>
+            {show && <div className='contenedor container '> 
+                        <div className='triangle row'></div>
+                        <div className='cuadrado row container'>
+                          <p className='row'>Cuenta</p>
+                          <p className='row' onClick={logout}>Cerrar sesion</p>
+                        </div>
+                      </div>}
 
       {/* User image profile */}
-      <div className="services mt-1">
+      {/* <div className="services mt-1">
         <img src={user} alt="User profile" width="32px" height="32px" className="rounded-circle" />
-      </div>
+      </div> */}
     </div>
 
   );

@@ -14,6 +14,7 @@ import {Link} from "react-router-dom";
 // Validación de datos ingresados por el usuario
 const schema = z.object({
     carne: z.string().min(3, {message: 'EL mínimo de un carné UVG es de 3 dígitos'}),
+    correo: z.string().nonempty({message: 'Ingrese su correo universitario'}).email({message: 'Ingrese un correo válido'}),
     nombre: z.string().nonempty({message: 'Ingresa un nombre'}),
     apellido: z.string().nonempty({message: 'Ingresa un apellido'}),
     password: z.string().nonempty({ message: 'Ingrese una contraseña' }).min(8, { message: 'Mínimo 8 caracteres' }),
@@ -31,6 +32,7 @@ export default function Register() {
 
     const [user, setUser] = useState({
         carne: 0,
+        correo: '',
         nombre: '',
         apellido: '',
         carreraId: '',
@@ -39,11 +41,11 @@ export default function Register() {
 
     const [filled, setFilled] = useState({
         carne: false,
+        correo: false,
         nombre: false,
         apellido: false,
         password: false,
     });
-
 
     useEffect(() => {
         searchCareer();
@@ -69,25 +71,23 @@ export default function Register() {
     // Envía la información del usuario a la base de datos
     // Retorna error si el carné ya está guardado o no se pasaron todos los parámetros
     function signUp(){
-        console.log("Loading...");
-        console.log(user)
-        console.log(user.carne, user.nombre, user.apellido)
         const fetchData = async () => {
             try {
                 const { data } = await Axios.post(SIGNUP,
                     {
                         carne: user.carne,
+                        correo: user.correo,
                         nombre: user.nombre,
                         apellido: user.apellido,
                         carreraId: user.carreraId,
-                        password: user.password
+                        password: user.password,
                     }
                 );
                 cookies.set('session', data.token, {path: '/'})
                 history.push(`/data`);
                 history.go();
             } catch (error) {
-                console.log(error);
+                console.log(error.response.status);
                 alert('El carné ingresado ya se encuentra registrado');
             }
         };
@@ -161,6 +161,29 @@ export default function Register() {
                             {errors.carne?.message}
                         </div>
                     </small>
+                    {/* Correo */}
+                    <div className="input-container">
+                         <span className={`material-icons input-icon ${filled.correo ? 'is-filled' : ' '}`}>
+                            email
+                        </span>
+                        <input
+                            className="input ms-1"
+                            type="email"
+                            name="correo"
+                            placeholder="Correo electrónico"
+                            onInput={handleInputChange}
+                            {...register('correo')}
+                        />
+                    </div>
+                    <small className="text-danger text-small d-block mb-2 mt-1">
+                        <div className="d-flex align-items-center ps-2">
+                            {errors.correo
+                                ? <span className="material-icons me-1">error_outline</span>
+                                : null
+                            }
+                            {errors.correo?.message}
+                        </div>
+                    </small>
                     {/* Nombre y Apellido */}
                     <div className="row">
                         {/* Nombre */}
@@ -225,6 +248,7 @@ export default function Register() {
                             onChange={handleChange}
                             name="carreraId"
                             options={result}
+                            placeholder="Selecciona una carrera"
                             theme={theme => ({
                                 ...theme,
                                 padding: '15px',

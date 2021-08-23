@@ -2,12 +2,14 @@ import React, {useEffect, useState} from 'react';
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 import Start from './auth/home';
 import Custom404 from './404/custom_404';
-import Home from './home/home';
-import PersonalForm from "./data/personalForm";
+import UserInfo from "./data/userInfo";
 import Cookies from 'universal-cookie';
 import Axios from "axios";
 import { AUTH } from './utils/rutas'
 import Register from "./auth/register/register";
+import Dashboard from "./dashboard/dashboard";
+import ForgotPassword from "./password/forgotPassword";
+import ResetPassword from "./password/resetpassword";
 
 
 export default function MainRoutes() {
@@ -40,18 +42,21 @@ export default function MainRoutes() {
   return (
     <Router>
       <Switch>
+        {/*  Arreglar al momento de salir sesión*/}
         <Route exact path="/" >
             {session
-                ? <Home/>
+                ? <Dashboard/>
                 : <Start/>
             }
         </Route>
         {/*<Route exact path="/" component={Start} />*/}
         <Route exact path="/signUp" component={Register} />
         <Route path="/404" component={Custom404} />
-        <Route path="/home" component={Home} />
-        <Route path="/data" component={PersonalForm} />
-        <Route path="/perfil" component={PersonalForm} />
+        <Route path="/home" component={Dashboard} />
+        <Route path="/data" component={UserInfo} />
+        <Route path="/perfil" component={UserInfo} />
+        <Route path="/recovery" component={ResetPassword} />
+        <Route exact path="/reset-password" component={ForgotPassword} />
       </Switch>
     </Router>
   );

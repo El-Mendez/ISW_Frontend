@@ -1,0 +1,42 @@
+.datosUsuario{
+    color: black;
+}
+.suggestionsImages{
+    font-size: 100px;
+}
+.suggestions{
+    width: 500px;
+    margin-top: 5%;
+    &:hover{
+        cursor:default;
+    }
+    h1{
+        font-size: 40px;
+    }
+    h2{
+        font-size: 24px;
+    }
+}
+@media screen and (max-width: 500px) {
+    .suggestionsImages{
+        font-size: 80px;
+    }
+    .suggestions{
+        h1{
+            font-size: 25px;
+        }
+        h2{
+            font-size: 15px;
+        }
+    }
+    }
+
+.infoUser{
+    width: 25px;
+    height: 25px;
+    margin-right: 10px;
+    &:hover{
+        color: $icon-bg-color;
+        cursor: pointer;
+    }
+}
