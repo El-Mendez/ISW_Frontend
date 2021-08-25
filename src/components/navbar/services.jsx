@@ -10,8 +10,10 @@ function Services(props) {
   const item = props;
   function logout() {
     cookies.remove('session')
-    history.push(`/`);
-    history.go();
+    setTimeout(() => {
+      history.push('/');
+      history.go();
+    },200)
   }
   return (
     <div className="d-flex align-items-center">

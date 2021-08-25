@@ -14,7 +14,7 @@ function NavBar() {
   function openWindow() {
     setShow(!show)
   }
-  const [suggestionsOptions, setSuggestionsOptions] = React.useState(true);
+  const [suggestionsOptions, setSuggestionsOptions] = React.useState(false);
   function openWindowSuggestions() {
     setSuggestionsOptions(!suggestionsOptions)
   }
