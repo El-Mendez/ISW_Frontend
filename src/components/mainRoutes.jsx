@@ -52,13 +52,13 @@ export default function MainRoutes() {
         </Route>
         {/*<Route exact path="/" component={Start} />*/}
         <Route exact path="/signUp" component={Register} />
-        <Route path="/404" component={Custom404} />
         <Route path="/home" component={Dashboard} />
         <Route path="/data" component={UserInfo} />
         <Route path="/perfil" component={UserInfo} />
         <Route path="/recovery" component={ResetPassword} />
         <Route exact path="/reset-password" component={ForgotPassword} />
         <Route exact path="/confirm" component={ConfirmAccount} />
+        <Route path="*" component={Custom404} />
       </Switch>
     </Router>
   );
