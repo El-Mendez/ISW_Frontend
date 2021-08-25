@@ -13,8 +13,15 @@ function Dashboard() {
     <div>
       <NavBar/>
       <Switch>
-        <Route path={`${url}/search`}>
-          <Search/>
+        <Route path={`${url}/search/courses`}>
+          <Search
+          type = {0}
+          />
+        </Route>
+        <Route path={`${url}/search/hobbies`}>
+          <Search
+          type = {1}
+          />
         </Route>
       </Switch>
     </div>

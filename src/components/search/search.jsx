@@ -11,26 +11,23 @@ import SuggestionItem from '../suggestions/suggestionItem';
 import UserInfo from '../data/userInfo';
 
 function Search(props) {
+  
   const { url } = useRouteMatch();
   const cookies = new Cookies();
   const token = cookies.get('session')
-  const location = useLocation()
   const item = props
   const [suggestions, setSuggestions] = useState([]);
-  const [request, setRequest] = useState(0);
   const requests = [SUGGESTIONS, SUGGESTIONS]
-  function searchFriends(link){
+  function searchFriends(){
     const request = async () => {
       try {
-        const res = await Axios.get(link,
+        const res = await Axios.get(requests[item.type],
           {
               headers:{
                   Authorization: `Bearer ${token}`
               }
           }
       );
-        console.log(res.data)
-        console.log(location.data.name)
         setSuggestions(res.data)
       } catch (error) {
         console.log(error);
@@ -39,13 +36,7 @@ function Search(props) {
     request();
   };
   useEffect(()=>{
-    try{
-      setRequest(location.data.name)
-    }
-    catch(error){
-      console.log(error);
-    }
-    searchFriends(requests[request])
+    searchFriends()
 }, [])
   return (
     <div className="userList">

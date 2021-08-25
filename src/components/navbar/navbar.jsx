@@ -13,12 +13,10 @@ function NavBar() {
   const [show, setShow] = React.useState(false);
   function openWindow() {
     setShow(!show)
-    console.log(show)
   }
   const [suggestionsOptions, setSuggestionsOptions] = React.useState(true);
   function openWindowSuggestions() {
     setSuggestionsOptions(!suggestionsOptions)
-    console.log(suggestionsOptions)
   }
   function logit() {
     const scrollY = window.pageYOffset;

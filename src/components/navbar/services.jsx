@@ -15,13 +15,6 @@ function Services(props) {
   }
   return (
     <div className="d-flex align-items-center">
-      {/* <Link to="/" className="noDecorations">
-        <div className="services " style={{ height: '24px' }} onClick={logout}>
-          <span className="material-icons">
-            directions_run
-          </span>
-        </div>
-      </Link> */}
       <div className="services container align-items" style={{ height: '28px'}}>
         <div className="row ">
           <span className="material-icons col-4 float-left" onClick={item.openWindow}>
@@ -39,11 +32,6 @@ function Services(props) {
                           <p className='row' onClick={logout}>Cerrar sesion</p>
                         </div>
                       </div>}
-
-      {/* User image profile */}
-      {/* <div className="services mt-1">
-        <img src={user} alt="User profile" width="32px" height="32px" className="rounded-circle" />
-      </div> */}
     </div>
 
   );

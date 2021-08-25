@@ -20,35 +20,16 @@ export default function Menu(props) {
           <button className="nav-link button" type="button" onClick={item.openWindowSuggestions}>
             Recomendaciones
           </button>
-          {/* <Link to={`${url}/search`} className="noDecorations">
-            <button className="nav-link button" type="button">
-              Buscar amigos
-            </button>
-          </Link> */}
         </li>
         {item.suggestionsOptions && <div className='suggestionsOptions container '> 
-                        <div className='cuadrado2 row container'>
-                        <Link to ={{pathname: `${url}/search`, 
-                        data:{
-                          name: 1,
-                        }
-                      }}>
+                      <div className='cuadrado2 row container'>
+                        <Link to={`${url}/search/courses`} className="noDecorations">
                           <p className='row'>Por cursos en común</p>
                         </Link>
-                        <Link to ={{pathname: `${url}/search`, 
-                        data:{
-                          name: 2,
-                        }
-                      }}>
+                        <Link to={`${url}/search/hobbies`} className="noDecorations">
                           <p className='row'>Por hobbies en común</p>
                         </Link>
-                          {/* <Link to={`${url}/search`} className="noDecorations">
-                            <p className='row'>Por cursos en común</p>
-                          </Link > */}
-                        {/* <Link to={`${url}/search`} className="noDecorations">
-                          <p className='row'>Por hobbies en común</p>
-                        </Link> */}
-                        </div>
+                      </div>
                       </div>}
         <li className="nav-item product-font ml-20">
           <button className="nav-link button" type="button" onClick={() => setMessage(true)}>
