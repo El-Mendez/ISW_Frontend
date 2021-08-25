@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import {
   useRouteMatch,
-  useLocation,
 } from 'react-router-dom';
 import { createBrowserHistory as history } from 'history';
 import {SUGGESTIONS, AUTH} from "../utils/rutas";
@@ -14,15 +13,11 @@ function Search(props) {
   const { url } = useRouteMatch();
   const cookies = new Cookies();
   const token = cookies.get('session')
-  const location = useLocation()
-  const item = props
   const [suggestions, setSuggestions] = useState([]);
-  const [request, setRequest] = useState(0);
-  const requests = [SUGGESTIONS, SUGGESTIONS]
-  function searchFriends(link){
+  function searchFriends(){
     const request = async () => {
       try {
-        const res = await Axios.get(link,
+        const res = await Axios.get(SUGGESTIONS,
           {
               headers:{
                   Authorization: `Bearer ${token}`
@@ -30,7 +25,6 @@ function Search(props) {
           }
       );
         console.log(res.data)
-        console.log(location.data.name)
         setSuggestions(res.data)
       } catch (error) {
         console.log(error);
@@ -39,13 +33,7 @@ function Search(props) {
     request();
   };
   useEffect(()=>{
-    try{
-      setRequest(location.data.name)
-    }
-    catch(error){
-      console.log(error);
-    }
-    searchFriends(requests[request])
+    searchFriends()
 }, [])
   return (
     <div className="userList">

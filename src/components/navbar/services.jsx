@@ -4,18 +4,14 @@ import { Link, useRouteMatch, useParams } from 'react-router-dom';
 import Cookies from 'universal-cookie';
 import history from '../history';
 
-function Services() {
+function Services(props) {
   const { url } = useRouteMatch();
   const cookies = new Cookies();
-  const [show, setShow] = React.useState(false);
+  const item = props;
   function logout() {
     cookies.remove('session')
     history.push(`/`);
     history.go();
-  }
-  function openWindow() {
-    setShow(!show)
-    console.log(show)
   }
   return (
     <div className="d-flex align-items-center">
@@ -28,15 +24,15 @@ function Services() {
       </Link> */}
       <div className="services container align-items" style={{ height: '28px'}}>
         <div className="row ">
-          <span className="material-icons col-4 float-left" onClick={openWindow}>
+          <span className="material-icons col-4 float-left" onClick={item.openWindow}>
             account_circle
           </span>
-            <div className="col-8" onClick={openWindow}>
+            <div className="col-8" onClick={item.openWindow}>
               User 
-            </div>
+            </div>  
         </div>
       </div>
-            {show && <div className='contenedor container '> 
+            {item.show && <div className='contenedor container '> 
                         <div className='triangle row'></div>
                         <div className='cuadrado row container'>
                           <p className='row'>Cuenta</p>
