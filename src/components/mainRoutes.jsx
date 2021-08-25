@@ -10,6 +10,7 @@ import Register from "./auth/register/register";
 import Dashboard from "./dashboard/dashboard";
 import ForgotPassword from "./password/forgotPassword";
 import ResetPassword from "./password/resetpassword";
+import ConfirmAccount from "./auth/register/confirmAccount";
 
 
 export default function MainRoutes() {
@@ -57,6 +58,7 @@ export default function MainRoutes() {
         <Route path="/perfil" component={UserInfo} />
         <Route path="/recovery" component={ResetPassword} />
         <Route exact path="/reset-password" component={ForgotPassword} />
+        <Route exact path="/confirm" component={ConfirmAccount} />
       </Switch>
     </Router>
   );

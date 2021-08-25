@@ -58,6 +58,7 @@ export default function Login(props) {
     };
 
     const googleLogin = (respuesta) =>{
+        // token en respuesta.profileObj → necesito hacer un parser a json para extraer el token
         console.log(respuesta);
         console.log('Login Success:',respuesta.profileObj);
         console.log(respuesta.error);
@@ -68,8 +69,6 @@ export default function Login(props) {
     const onLoginFailure = () => {
         console.log('Login Failed:', res);
     };
-
-    
 
     const handleInputChange = (e) => {
         setUser({
@@ -101,7 +100,6 @@ export default function Login(props) {
         })
         props.onHide()
     }
-
 
   return (
       <Modal
