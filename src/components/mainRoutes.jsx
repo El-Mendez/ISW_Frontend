@@ -6,6 +6,7 @@ import UserInfo from "./data/userInfo";
 import Cookies from 'universal-cookie';
 import Axios from "axios";
 import { AUTH } from './utils/rutas'
+import ProtectedRoutes from "./protectedRoutes";
 import Register from "./auth/register/register";
 import Dashboard from "./dashboard/dashboard";
 import ForgotPassword from "./password/forgotPassword";
@@ -50,14 +51,13 @@ export default function MainRoutes() {
                 : <Start/>
             }
         </Route>
-        {/*<Route exact path="/" component={Start} />*/}
         <Route exact path="/signUp" component={Register} />
-        <Route path="/home" component={Dashboard} />
+        <ProtectedRoutes path="/home" session={session} component={Dashboard} />
         <Route path="/data" component={UserInfo} />
-        <Route path="/perfil" component={UserInfo} />
         <Route path="/recovery" component={ResetPassword} />
         <Route exact path="/reset-password" component={ForgotPassword} />
         <Route exact path="/confirm" component={ConfirmAccount} />
+        {/* Handle every other path that is not define */}
         <Route path="*" component={Custom404} />
       </Switch>
     </Router>
