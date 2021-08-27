@@ -10,7 +10,11 @@ export default function ProtectedRoutes({session, component: Component, ...rest}
                 <Component/>
                 ) :
                 (
-                    <Redirect to="/"/>
+                    <Redirect to={
+                        {
+                            pathname: "/"
+                        }
+                    }/>
                 )
             }
         />

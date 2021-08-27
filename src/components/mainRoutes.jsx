@@ -1,5 +1,5 @@
 import React, {useEffect, useState} from 'react';
-import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
+import {BrowserRouter as Router, Redirect, Route, Switch} from 'react-router-dom';
 import Start from './auth/home';
 import Custom404 from './404/custom_404';
 import UserInfo from "./data/userInfo";
@@ -31,6 +31,7 @@ export default function MainRoutes() {
                     }
                 );
                 setSession(true);
+                console.log(res)
             } catch (error) {
                 console.log(error);
             }
@@ -44,14 +45,22 @@ export default function MainRoutes() {
   return (
     <Router>
       <Switch>
-        {/*  Arreglar al momento de salir sesión*/}
+        {/*  Arreglar al momento de salir sesión */}
+        <Route exact path="/"
+           render={() => !session
+               ? (
+                   <Start/>
+               ) :
+               (
+                   <Redirect to={
+                       {
+                           pathname: "/home"
+                       }
+                   }/>
+               )
+           }
+        />
         <ProtectedRoutes path="/home" session={session} component={Dashboard} />
-        <Route exact path="/" >
-            {session
-                ? <Dashboard/>
-                : <Start/>
-            }
-        </Route>
         <Route exact path="/signUp" component={Register} />
         <Route path="/data" component={UserInfo} />
         <Route path="/recovery" component={ResetPassword} />
