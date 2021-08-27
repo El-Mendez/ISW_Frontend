@@ -1,9 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import Axios from 'axios';
 import { useForm } from 'react-hook-form';
-import history from '../../history';
 import Cookies from 'universal-cookie';
-import { SIGNUP, SEARCH_CAREER } from '../../utils/rutas';
+import { SEARCH_CAREER, ACCOUNT_REQUEST } from '../../utils/rutas';
 import Select from 'react-select';
 import logo from "../../../assets/logo.svg";
 
@@ -70,10 +69,10 @@ export default function Register() {
 
     // Envía la información del usuario a la base de datos
     // Retorna error si el carné ya está guardado o no se pasaron todos los parámetros
-    function signUp(){
+    function accountRequest(){
         const fetchData = async () => {
             try {
-                const { data } = await Axios.post(SIGNUP,
+                const { data } = await Axios.post(ACCOUNT_REQUEST,
                     {
                         carne: user.carne,
                         correo: user.correo,
@@ -83,12 +82,9 @@ export default function Register() {
                         password: user.password,
                     }
                 );
-                cookies.set('session', data.token, {path: '/'})
-                history.push(`/data`);
-                history.go();
             } catch (error) {
+                console.log(error)
                 console.log(error.response.status);
-                alert('El carné ingresado ya se encuentra registrado');
             }
         };
         fetchData();
@@ -96,7 +92,6 @@ export default function Register() {
 
     // Actualiza los estados a medida que el usuario escribe
     const handleInputChange = (e) => {
-        console.log(e.target.name)
         setUser({
             ...user,
             [e.target.name]: e.target.value,
@@ -124,8 +119,8 @@ export default function Register() {
     }
 
     // Valida la información ingresada en el formulario y hace el request
-    const onSubmit = (data) => {
-        signUp();
+    const onSubmit = () => {
+        accountRequest();
     };
 
     return (

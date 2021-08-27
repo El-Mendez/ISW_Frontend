@@ -45,6 +45,7 @@ export default function MainRoutes() {
     <Router>
       <Switch>
         {/*  Arreglar al momento de salir sesión*/}
+        <ProtectedRoutes path="/home" session={session} component={Dashboard} />
         <Route exact path="/" >
             {session
                 ? <Dashboard/>
@@ -52,7 +53,6 @@ export default function MainRoutes() {
             }
         </Route>
         <Route exact path="/signUp" component={Register} />
-        <ProtectedRoutes path="/home" session={session} component={Dashboard} />
         <Route path="/data" component={UserInfo} />
         <Route path="/recovery" component={ResetPassword} />
         <Route exact path="/reset-password" component={ForgotPassword} />

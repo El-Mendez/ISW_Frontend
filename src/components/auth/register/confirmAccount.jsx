@@ -1,12 +1,43 @@
 import React from 'react';
 import logo from "../../../assets/logo.svg";
 import history from "../../utils/history";
+import {useLocation} from "react-router-dom";
+import Axios from "axios";
+import { ACCEPT_ACCOUNT_REQUEST } from "../../utils/rutas";
+import Cookies from "universal-cookie";
+
+// Obtiene el token de la URL
+function useQuery() {
+    return new URLSearchParams(useLocation().search);
+}
 
 export default function ConfirmAccount() {
 
+    const query = useQuery();
+    const cookies = new Cookies();
+
+    const acceptAccountRequest = async () => {
+        try{
+            const { data } = await Axios.post(ACCEPT_ACCOUNT_REQUEST,
+                {},
+                {
+                    headers:{
+                        Authorization: `Bearer ${query.get('token')}`
+                    }
+                }
+            );
+            cookies.set('session', data.token, {path: '/'})
+            setTimeout(() => {
+                history.push(`/data`);
+                history.go();
+            }, 500)
+        }catch (e){
+            console.log(e)
+        }
+    }
+
     const handleClick = () => {
-        history.push('/data')
-        history.go()
+        acceptAccountRequest()
     }
 
     return (

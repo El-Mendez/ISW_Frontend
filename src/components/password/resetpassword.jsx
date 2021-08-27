@@ -4,12 +4,12 @@ import { useForm } from 'react-hook-form';
 import history from '../history';
 import { ACCEPT_PASSWORD_RESET } from '../utils/rutas';
 import logo from "../../assets/logo.svg";
+import { useLocation } from "react-router-dom";
 
 import { zodResolver } from '@hookform/resolvers/zod';
 import * as z from 'zod';
-import {Link, useLocation} from "react-router-dom";
 
-// Validación de datos ingresados por el usuario
+// Validación de contraseñas, que ambas sean iguales y que al menos sea de 8 caracteres
 const schema = z.object({
   password: z.string().nonempty({message: 'Ingrese un carné'}).min(8, {message: 'Mínimo 8 caracteres'})
       .regex(new RegExp(".*[A-Z].*"), "Al menos una letra mayúscula")
