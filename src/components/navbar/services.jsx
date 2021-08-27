@@ -38,13 +38,6 @@ function Services(props) {
           </div>
         </div>
       </div>
-            {item.show && <div className='contenedor container '>
-                        <div className='triangle row'></div>
-                        <div className='cuadrado row container'>
-                          <p className='row'>Cuenta</p>
-                          <p className='row' onClick={logout}>Cerrar sesion</p>
-                        </div>
-                      </div>}
     </div>
 
   );
