@@ -17,9 +17,9 @@ export default function Menu(props) {
           </Link>
         </li>
         <li className="nav-item product-font ml-20">
-          <div class="dropdown">
-            <button class="nav-link button">Recomendaciones</button>
-            <div class="dropdown-content container">
+          <div className="dropdown">
+            <button className="nav-link button">Recomendaciones</button>
+            <div className="dropdown-content container">
               <Link to={`${url}/search/courses`} className="noDecorations">
                 <p className='row'>Por cursos en común</p>
               </Link>
