@@ -1,6 +1,5 @@
 import React from 'react';
-import user from '../../assets/user.png';
-import { Link, useRouteMatch, useParams } from 'react-router-dom';
+import { useRouteMatch } from 'react-router-dom';
 import Cookies from 'universal-cookie';
 import history from '../history';
 
@@ -23,11 +22,11 @@ function Services(props) {
             account_circle
           </span>
             <div className="col-8" onClick={item.openWindow}>
-              User 
-            </div>  
+              User
+            </div>
         </div>
       </div>
-            {item.show && <div className='contenedor container '> 
+            {item.show && <div className='contenedor container '>
                         <div className='triangle row'></div>
                         <div className='cuadrado row container'>
                           <p className='row'>Cuenta</p>
