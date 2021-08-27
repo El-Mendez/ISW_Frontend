@@ -313,8 +313,6 @@ div[aria-expanded="true"]{
     position: absolute;
     top: 5px;
 }
-
-
 .contenedor{
     position: absolute;
     width: fit-content;
@@ -358,13 +356,29 @@ div[aria-expanded="true"]{
         color: #d6d6d6;
     }
 }
-.cuadrado2{
-    width: 50%;
-    height: 150px;
-    background-color: $primary;   
+
+// Estilo sacado y modificado de: https://www.w3schools.com/howto/howto_css_dropdown.asp
+.dropdown {
+  position: relative;
+  display: inline-block;
+  &:hover{
+    .dropdown-content {
+        display: block;
+    }
+  }
+}
+
+.dropdown-content {
+    display: none;
+    position: absolute;
+    background-color: $primary;
     border-radius: 7px;
+    width: 180px;
+    min-width: 160px;
     box-shadow: rgba(0, 0, 0, 0.15) 0px 5px 15px;
-    p{
+    z-index: 1;
+    a {
+        display: block;
         &:hover{
             color: $icon-bg-color;
         }
@@ -373,5 +387,11 @@ div[aria-expanded="true"]{
             margin-top: 10%;
         }
         color: #d6d6d6;
+        p{
+        left: 10%;
+        position: relative;
+        font-size: 15px;
+        }
     }
 }
+

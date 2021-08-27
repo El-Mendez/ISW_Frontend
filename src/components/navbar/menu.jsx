@@ -17,20 +17,18 @@ export default function Menu(props) {
           </Link>
         </li>
         <li className="nav-item product-font ml-20">
-          <button className="nav-link button" type="button" onClick={item.openWindowSuggestions}>
-            Recomendaciones
-          </button>
+          <div class="dropdown">
+            <button class="nav-link button">Recomendaciones</button>
+            <div class="dropdown-content container">
+              <Link to={`${url}/search/courses`} className="noDecorations">
+                <p className='row'>Por cursos en común</p>
+              </Link>
+              <Link to={`${url}/search/hobbies`} className="noDecorations">
+                <p className='row'>Por hobbies en común</p>
+              </Link>
+            </div>
+          </div>
         </li>
-        {item.suggestionsOptions && <div className='suggestionsOptions container '> 
-                      <div className='cuadrado2 row container'>
-                        <Link to={`${url}/search/courses`} className="noDecorations">
-                          <p className='row'>Por cursos en común</p>
-                        </Link>
-                        <Link to={`${url}/search/hobbies`} className="noDecorations">
-                          <p className='row'>Por hobbies en común</p>
-                        </Link>
-                      </div>
-                      </div>}
         <li className="nav-item product-font ml-20">
           <button className="nav-link button" type="button" onClick={() => setMessage(true)}>
             Ayuda
