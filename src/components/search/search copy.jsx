@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import {
   useRouteMatch,
-  useLocation,
 } from 'react-router-dom';
 import { createBrowserHistory as history } from 'history';
 import {SUGGESTIONS, AUTH} from "../utils/rutas";
@@ -11,23 +10,21 @@ import SuggestionItem from '../suggestions/suggestionItem';
 import UserInfo from '../data/userInfo';
 
 function Search(props) {
-  
   const { url } = useRouteMatch();
   const cookies = new Cookies();
   const token = cookies.get('session')
-  const item = props
   const [suggestions, setSuggestions] = useState([]);
-  const requests = [SUGGESTIONS, SUGGESTIONS]
   function searchFriends(){
     const request = async () => {
       try {
-        const res = await Axios.get(requests[item.type],
+        const res = await Axios.get(SUGGESTIONS,
           {
               headers:{
                   Authorization: `Bearer ${token}`
               }
           }
       );
+        console.log(res.data)
         setSuggestions(res.data)
       } catch (error) {
         console.log(error);
