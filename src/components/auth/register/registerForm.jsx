@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import Axios from 'axios';
 import { useForm } from 'react-hook-form';
-import Cookies from 'universal-cookie';
 import { SEARCH_CAREER, ACCOUNT_REQUEST } from '../../utils/rutas';
 import Select from 'react-select';
 import logo from "../../../assets/logo.svg";
@@ -19,9 +18,8 @@ const schema = z.object({
     password: z.string().nonempty({ message: 'Ingrese una contraseña' }).min(8, { message: 'Mínimo 8 caracteres' }),
 });
 
-export default function Register() {
+export default function Register(props) {
 
-    const cookies = new Cookies();
     const { register, handleSubmit, formState: { errors } } = useForm({
         mode:'onChange',
         resolver: zodResolver(schema),
@@ -30,7 +28,7 @@ export default function Register() {
     const [result, setResult] = useState([]);
 
     const [user, setUser] = useState({
-        carne: 0,
+        carne: '',
         correo: '',
         nombre: '',
         apellido: '',
@@ -82,9 +80,23 @@ export default function Register() {
                         password: user.password,
                     }
                 );
+                setTimeout(()=>{props.handleClick()},1000)
             } catch (error) {
                 console.log(error)
                 console.log(error.response.status);
+                if (error.response.status === 403){
+                    alert('El carné ingresado ya está registrado')
+                    setUser({
+                        carne: '',
+                        correo: '',
+                        nombre: '',
+                        apellido: '',
+                        carreraId: '',
+                        password: '',
+
+                    });
+
+                }
             }
         };
         fetchData();
@@ -119,13 +131,14 @@ export default function Register() {
     }
 
     // Valida la información ingresada en el formulario y hace el request
-    const onSubmit = () => {
+    const onSubmit = (e) => {
         accountRequest();
+        e.target.reset();
     };
 
     return (
         <>
-            <div className="register-container mx-3">
+            <div className="register-container mx-3" id="register-form">
                 <div className="d-flex flex-column align-items-center justify-content-center">
                     <p className="welcome">
                         BIENVENIDO A
@@ -144,6 +157,7 @@ export default function Register() {
                             name="carne"
                             placeholder="Número de carné"
                             onInput={handleInputChange}
+                            value={user.carne}
                             {...register('carne')}
                         />
                     </div>
@@ -167,6 +181,7 @@ export default function Register() {
                             name="correo"
                             placeholder="Correo electrónico"
                             onInput={handleInputChange}
+                            value={user.correo}
                             {...register('correo')}
                         />
                     </div>
@@ -193,6 +208,7 @@ export default function Register() {
                                     name="nombre"
                                     placeholder="Nombre"
                                     onInput={handleInputChange}
+                                    value={user.nombre}
                                     {...register('nombre')}
                                 />
                             </div>
@@ -218,6 +234,7 @@ export default function Register() {
                                     name="apellido"
                                     placeholder="Apellido"
                                     onInput={handleInputChange}
+                                    value={user.apellido}
                                     {...register('apellido')}
                                 />
                             </div>
@@ -233,6 +250,7 @@ export default function Register() {
                         </div>
                     </div>
                     {/* Carrera */}
+                    {/* Hacer validación para que seleccione una carrera y se limpie la casilla */}
                     <div className="mt-z4">
                         <Select
                             className="basic-single"
@@ -270,6 +288,7 @@ export default function Register() {
                             name="password"
                             placeholder="Contraseña"
                             onInput={handleInputChange}
+                            value={user.password}
                             {...register('password')}
                         />
                     </div>

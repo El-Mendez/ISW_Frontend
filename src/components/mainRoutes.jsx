@@ -12,6 +12,7 @@ import Dashboard from "./dashboard/dashboard";
 import ForgotPassword from "./password/forgotPassword";
 import ResetPassword from "./password/resetpassword";
 import ConfirmAccount from "./auth/register/confirmAccount";
+import RegisterAccountMessage from "./auth/register/registerAccountMessage";
 
 
 export default function MainRoutes() {
@@ -45,7 +46,6 @@ export default function MainRoutes() {
   return (
     <Router>
       <Switch>
-        {/*  Arreglar al momento de salir sesión */}
         <Route exact path="/"
            render={() => !session
                ? (
@@ -66,6 +66,7 @@ export default function MainRoutes() {
         <Route path="/recovery" component={ResetPassword} />
         <Route exact path="/reset-password" component={ForgotPassword} />
         <Route exact path="/confirm" component={ConfirmAccount} />
+        <Route exact path="/test" component={RegisterAccountMessage} />
         {/* Handle every other path that is not define */}
         <Route path="*" component={Custom404} />
       </Switch>
