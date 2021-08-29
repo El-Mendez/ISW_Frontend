@@ -4,7 +4,7 @@ import {
   useLocation,
 } from 'react-router-dom';
 import { createBrowserHistory as history } from 'history';
-import {SUGGESTIONS, AUTH} from "../utils/rutas";
+import {SUGGESTIONS_HOBBIES, SUGGESTIONS_COURSES} from "../utils/rutas";
 import Cookies from 'universal-cookie';
 import Axios from "axios";
 import SuggestionItem from '../suggestions/suggestionItem';
@@ -17,7 +17,7 @@ function Search(props) {
   const token = cookies.get('session')
   const item = props
   const [suggestions, setSuggestions] = useState([]);
-  const requests = [SUGGESTIONS, SUGGESTIONS]
+  const requests = [SUGGESTIONS_COURSES, SUGGESTIONS_HOBBIES]
   function searchFriends(){
     const request = async () => {
       try {
@@ -47,7 +47,7 @@ function Search(props) {
             nombre = {user.nombre}
             apellido = {user.apellido}
             carne = {user.carne}
-            />
+            key={user}/>
           ))}
         </div>
       </div>

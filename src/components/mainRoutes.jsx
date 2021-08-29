@@ -32,7 +32,6 @@ export default function MainRoutes() {
                     }
                 );
                 setSession(true);
-                console.log(res)
             } catch (error) {
                 console.log(error);
             }
