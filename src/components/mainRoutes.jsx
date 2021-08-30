@@ -1,15 +1,18 @@
 import React, {useEffect, useState} from 'react';
-import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
+import {BrowserRouter as Router, Redirect, Route, Switch} from 'react-router-dom';
 import Start from './auth/home';
 import Custom404 from './404/custom_404';
 import UserInfo from "./data/userInfo";
 import Cookies from 'universal-cookie';
 import Axios from "axios";
 import { AUTH } from './utils/rutas'
+import ProtectedRoutes from "./protectedRoutes";
 import Register from "./auth/register/register";
 import Dashboard from "./dashboard/dashboard";
 import ForgotPassword from "./password/forgotPassword";
 import ResetPassword from "./password/resetpassword";
+import ConfirmAccount from "./auth/register/confirmAccount";
+import RegisterAccountMessage from "./auth/register/registerAccountMessage";
 
 
 export default function MainRoutes() {
@@ -42,21 +45,29 @@ export default function MainRoutes() {
   return (
     <Router>
       <Switch>
-        {/*  Arreglar al momento de salir sesión*/}
-        <Route exact path="/" >
-            {session
-                ? <Dashboard/>
-                : <Start/>
-            }
-        </Route>
-        {/*<Route exact path="/" component={Start} />*/}
+        <Route exact path="/"
+           render={() => !session
+               ? (
+                   <Start/>
+               ) :
+               (
+                   <Redirect to={
+                       {
+                           pathname: "/home"
+                       }
+                   }/>
+               )
+           }
+        />
+        <ProtectedRoutes path="/home" session={session} component={Dashboard} />
         <Route exact path="/signUp" component={Register} />
-        <Route path="/404" component={Custom404} />
-        <Route path="/home" component={Dashboard} />
-        <Route path="/data" component={UserInfo} />
-        <Route path="/perfil" component={UserInfo} />
+        <ProtectedRoutes path="/data" component={UserInfo} />
         <Route path="/recovery" component={ResetPassword} />
         <Route exact path="/reset-password" component={ForgotPassword} />
+        <Route exact path="/confirm" component={ConfirmAccount} />
+        <Route exact path="/test" component={RegisterAccountMessage} />
+        {/* Handle every other path that is not define */}
+        <Route path="*" component={Custom404} />
       </Switch>
     </Router>
   );

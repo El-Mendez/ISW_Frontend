@@ -10,6 +10,14 @@ function NavBar() {
   // @author: rbk
   // Extraido y adaptado de: https://codesandbox.io/s/useeffect-scroll-event-oolh6?from-embed=&file=/src/index.js
   const [fixed, setFixed] = useState(false);
+  const [show, setShow] = React.useState(false);
+  function openWindow() {
+    setShow(!show)
+  }
+  const [suggestionsOptions, setSuggestionsOptions] = React.useState(false);
+  function openWindowSuggestions() {
+    setSuggestionsOptions(!suggestionsOptions)
+  }
   function logit() {
     const scrollY = window.pageYOffset;
     if (scrollY >= 56) {
@@ -55,9 +63,14 @@ function NavBar() {
                 </div>
               </Link>
               <div className="collapse navbar-collapse align-items-center" style={{ height: 'inherit' }}>
-                <Menu />
+                <Menu 
+                suggestionsOptions = {suggestionsOptions}
+                openWindowSuggestions = {openWindowSuggestions}/>
               </div>
-              <Services />
+                <Services 
+                show = {show}
+                openWindow = {openWindow}
+                />
             </div>
           </nav>
         </div>

@@ -1,53 +1,43 @@
 import React from 'react';
-import user from '../../assets/user.png';
-import { Link, useRouteMatch, useParams } from 'react-router-dom';
+import { useRouteMatch, Link } from 'react-router-dom';
 import Cookies from 'universal-cookie';
 import history from '../history';
 
-function Services() {
+function Services(props) {
   const { url } = useRouteMatch();
   const cookies = new Cookies();
-  const [show, setShow] = React.useState(false);
+  const item = props;
   function logout() {
     cookies.remove('session')
-    history.push(`/`);
-    history.go();
-  }
-  function openWindow() {
-    setShow(!show)
-    console.log(show)
+    setTimeout(() => {
+      history.push('/');
+      history.go();
+    },200)
   }
   return (
-    <div className="d-flex align-items-center">
-      {/* <Link to="/" className="noDecorations">
-        <div className="services " style={{ height: '24px' }} onClick={logout}>
-          <span className="material-icons">
-            directions_run
-          </span>
-        </div>
-      </Link> */}
+    <div className="d-flex align-items-center ">
       <div className="services container align-items" style={{ height: '28px'}}>
-        <div className="row ">
-          <span className="material-icons col-4 float-left" onClick={openWindow}>
-            account_circle
-          </span>
-            <div className="col-8" onClick={openWindow}>
-              User 
+        <div className="row dropdown">
+          <div className="row">
+            <span className="material-icons col-4 float-left" onClick={item.openWindow}>
+              account_circle
+            </span>
+            <div className="col-8" onClick={item.openWindow}>
+              User
             </div>
+          </div>
+          <div className="row">
+            <div className="dropdown-content container">
+            <Link to={`${url}/profile`} className="noDecorations">
+                <p className='row'>Cuenta</p>
+              </Link>
+            <a className="noDecorations" onClick={logout}>
+              <p className='row' onClick={item.logout}>Cerrar sesion</p>
+            </a>
+            </div>
+          </div>
         </div>
       </div>
-            {show && <div className='contenedor container '> 
-                        <div className='triangle row'></div>
-                        <div className='cuadrado row container'>
-                          <p className='row'>Cuenta</p>
-                          <p className='row' onClick={logout}>Cerrar sesion</p>
-                        </div>
-                      </div>}
-
-      {/* User image profile */}
-      {/* <div className="services mt-1">
-        <img src={user} alt="User profile" width="32px" height="32px" className="rounded-circle" />
-      </div> */}
     </div>
 
   );
