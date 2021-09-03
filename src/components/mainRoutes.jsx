@@ -13,7 +13,7 @@ import ForgotPassword from "./password/forgotPassword";
 import ResetPassword from "./password/resetpassword";
 import ConfirmAccount from "./auth/register/confirmAccount";
 import RegisterAccountMessage from "./auth/register/registerAccountMessage";
-
+import Profile from "./profile/profile";
 
 export default function MainRoutes() {
 
@@ -66,6 +66,7 @@ export default function MainRoutes() {
         <Route exact path="/reset-password" component={ForgotPassword} />
         <Route exact path="/confirm" component={ConfirmAccount} />
         <Route exact path="/test" component={RegisterAccountMessage} />
+        <Route exact path="/profile" component={Profile} />
         {/* Handle every other path that is not define */}
         <Route path="*" component={Custom404} />
       </Switch>

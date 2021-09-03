@@ -206,7 +206,7 @@ header {
     margin-top: 16px;
 }
 
-h2{
+.navbar-h2{
     display: inline-block;
     margin: 0;
     font-weight: 500;
@@ -215,7 +215,7 @@ h2{
     color: #423f3f;
 }
 
-h3{
+.navbar-h3{
     margin: 0;
     margin-bottom: 16px;
     font-size: 12px;
@@ -337,12 +337,12 @@ div[aria-expanded="true"]{
     right: -167px;
     top: 5px;
 
-    
+
 }
 .cuadrado{
     width: 200px;
     height: 100px;
-    background-color: $primary;   
+    background-color: $primary;
     border-radius: 7px;
     box-shadow: rgba(0, 0, 0, 0.15) 0px 5px 15px;
     p{

@@ -39,6 +39,8 @@
   "dependencies": {
     "@babel/plugin-proposal-class-properties": "^7.13.0",
     "@cucumber/cucumber": "^7.2.1",
+    "@dicebear/avatars": "^4.8.6",
+    "@dicebear/avatars-bottts-sprites": "^4.8.6",
     "@hookform/resolvers": "^2.4.0",
     "axios": "^0.21.1",
     "bootstrap": "^5.0.0",
