@@ -2,6 +2,7 @@ import React from 'react';
 import {MdClass} from 'react-icons/md'
 import {AiFillCustomerService, AiFillContacts} from 'react-icons/ai'
 function SuggestionItem(props) {
+  // TODO utilizar proptypes, utilizar id
   const item = props;
   return (
     <div className="container suggestions">

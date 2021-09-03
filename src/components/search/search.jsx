@@ -8,10 +8,10 @@ import {SUGGESTIONS_HOBBIES, SUGGESTIONS_COURSES} from "../utils/rutas";
 import Cookies from 'universal-cookie';
 import Axios from "axios";
 import SuggestionItem from '../suggestions/suggestionItem';
-import UserInfo from '../data/userInfo';
+import UserInfo from '../register/userInfo';
 
 function Search(props) {
-  
+
   const { url } = useRouteMatch();
   const cookies = new Cookies();
   const token = cookies.get('session')
@@ -43,7 +43,7 @@ function Search(props) {
       <div className="container ">
         <div className="row align-items-center">
           {suggestions.map((user) => (
-            <SuggestionItem 
+            <SuggestionItem
             nombre = {user.nombre}
             apellido = {user.apellido}
             carne = {user.carne}

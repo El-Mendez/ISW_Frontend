@@ -21,6 +21,8 @@
         "linebreak-style": ["error", "windows"],
         "no-console": "off",
         "class-methods-use-this": "error",
-        "jsx-a11y/label-has-associated-control": "off"
+        "jsx-a11y/label-has-associated-control": "off",
+        "react/jsx-props-no-spreading": ["error", { "html": "ignore", "exceptions": ["Modal"] }],
+        "react/destructuring-assignment": "off"
     }
 }
