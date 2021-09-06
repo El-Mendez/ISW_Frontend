@@ -1,12 +1,15 @@
 import React from 'react';
 import { useRouteMatch, Link } from 'react-router-dom';
 import Cookies from 'universal-cookie';
-import history from '../history';
+import history from '../utils/history';
 
 function Services(props) {
   const { url } = useRouteMatch();
   const cookies = new Cookies();
+
+  // TODO utilizar proptypes
   const item = props;
+
   function logout() {
     cookies.remove('session')
     setTimeout(() => {

@@ -2,18 +2,18 @@ import React, {useEffect, useState} from 'react';
 import {BrowserRouter as Router, Redirect, Route, Switch} from 'react-router-dom';
 import Start from './auth/home';
 import Custom404 from './404/custom_404';
-import UserInfo from "./data/userInfo";
+import UserInfo from "./register/userInfo";
 import Cookies from 'universal-cookie';
 import Axios from "axios";
 import { AUTH } from './utils/rutas'
 import ProtectedRoutes from "./protectedRoutes";
-import Register from "./auth/register/register";
+import Register from "./register/register";
 import Dashboard from "./dashboard/dashboard";
-import ForgotPassword from "./password/forgotPassword";
-import ResetPassword from "./password/resetpassword";
-import ConfirmAccount from "./auth/register/confirmAccount";
-import RegisterAccountMessage from "./auth/register/registerAccountMessage";
-
+import ForgotPassword from "./resetPassword/forgotPassword";
+import ResetPassword from "./resetPassword/resetpassword";
+import ConfirmAccount from "./register/confirmAccount";
+import RegisterAccountMessage from "./register/registerAccountMessage";
+import Profile from "./profile/profile";
 
 export default function MainRoutes() {
 
@@ -66,6 +66,7 @@ export default function MainRoutes() {
         <Route exact path="/reset-password" component={ForgotPassword} />
         <Route exact path="/confirm" component={ConfirmAccount} />
         <Route exact path="/test" component={RegisterAccountMessage} />
+        <Route exact path="/profile" component={Profile} />
         {/* Handle every other path that is not define */}
         <Route path="*" component={Custom404} />
       </Switch>

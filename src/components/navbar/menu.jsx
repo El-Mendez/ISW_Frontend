@@ -1,11 +1,9 @@
-import React, { useState } from 'react';
-import { Link, useRouteMatch, useParams } from 'react-router-dom';
-import Help from '../help/helpModal';
+import React from 'react';
+import { Link, useRouteMatch } from 'react-router-dom';
 
-export default function Menu(props) {
-  const [message, setMessage] = React.useState(false);
+export default function Menu() {
+
   const { url } = useRouteMatch();
-  const item = props;
   return (
     <div className="products">
       <ul className="navbar-nav mr-auto mt-2 mt-lg-0">
@@ -28,11 +26,6 @@ export default function Menu(props) {
               </Link>
             </div>
           </div>
-        </li>
-        <li className="nav-item product-font ml-20">
-          <button className="nav-link button" type="button" onClick={() => setMessage(true)}>
-            Ayuda
-          </button>
         </li>
       </ul>
     </div>

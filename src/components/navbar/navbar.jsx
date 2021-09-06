@@ -1,40 +1,16 @@
-import React, { useState, useEffect } from 'react';
+import React, {useState} from 'react';
 import Menu from './menu';
 import Services from './services';
 import logo from '../../assets/logo.svg';
-import { Link, useRouteMatch, useParams } from 'react-router-dom';
+import { Link, useRouteMatch } from 'react-router-dom';
 
-function NavBar() {
+export default function NavBar() {
   const { url } = useRouteMatch();
-  // Scroll position
-  // @author: rbk
-  // Extraido y adaptado de: https://codesandbox.io/s/useeffect-scroll-event-oolh6?from-embed=&file=/src/index.js
-  const [fixed, setFixed] = useState(false);
-  const [show, setShow] = React.useState(false);
-  function openWindow() {
-    setShow(!show)
-  }
-  const [suggestionsOptions, setSuggestionsOptions] = React.useState(false);
-  function openWindowSuggestions() {
-    setSuggestionsOptions(!suggestionsOptions)
-  }
-  function logit() {
-    const scrollY = window.pageYOffset;
-    if (scrollY >= 56) {
-      setFixed(true);
-    } else {
-      setFixed(false);
-    }
-  }
-  useEffect(() => {
-    function watchScroll() {
-      window.addEventListener('scroll', logit);
-    }
-    watchScroll();
-    return () => {
-      window.removeEventListener('scroll', logit);
-    };
-  });
+
+  // TODO revisar el uso de estados
+  const [show, setShow] = useState(false);
+  const [suggestionsOptions, setSuggestionsOptions] = useState(false);
+
 
   return (
     <div>
@@ -63,13 +39,13 @@ function NavBar() {
                 </div>
               </Link>
               <div className="collapse navbar-collapse align-items-center" style={{ height: 'inherit' }}>
-                <Menu 
+                <Menu
                 suggestionsOptions = {suggestionsOptions}
-                openWindowSuggestions = {openWindowSuggestions}/>
+                openWindowSuggestions = {() => {setSuggestionsOptions(!suggestionsOptions)}}/>
               </div>
-                <Services 
+                <Services
                 show = {show}
-                openWindow = {openWindow}
+                openWindow = {() => {setShow(!show)}}
                 />
             </div>
           </nav>
@@ -80,4 +56,3 @@ function NavBar() {
   );
 }
 
-export default NavBar;

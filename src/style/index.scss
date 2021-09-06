@@ -6,11 +6,12 @@
 @import '../components/utils/utils';
 @import '../components/404/404.css';
 @import '../components/navbar/navbar';
-@import '../components/perfil/perfil';
 @import '../components/search/search';
-@import '../components/data/data.scss';
-@import '../components/password/password.scss';
+@import '../components/register/data';
+@import '../components/resetPassword/password.scss';
 @import '../components/suggestions/suggestion.scss';
+@import '../components/profile/profile.scss';
+
 
 body {
     overflow-x:hidden;

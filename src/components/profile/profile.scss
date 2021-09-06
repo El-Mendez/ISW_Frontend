@@ -1,0 +1,20 @@
+h5{
+  font-size: calc(0.5rem + 0.7vw);
+}
+
+
+.select-item{
+  opacity: 0.2;
+  &:hover{
+    opacity: 1;
+  }
+  &.isSelected{
+    opacity: 1;
+  }
+}
+
+.button-styless{
+  text-decoration: none;
+  border: none;
+  background: transparent;
+}
