@@ -13,8 +13,8 @@ export default function Home() {
         <div className="first_section" />
       </section>
 
-      <div className="h-100 navbar-padding bg-beige">
-        <div className="container-fluid h-100">
+      <div className="h-100 navbar-padding bg-beige" id="test">
+        <div className="container-fluid h-100" id="test">
           <div className="row navbar-padding h-100">
             <div className="col-md-12 col-lg-4 align-self-start px-4 py-2">
               <img src={f1} alt="Hobbies" className="w-100" />
