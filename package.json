@@ -4,7 +4,7 @@
   "description": "Designing a web calculator with react and eslint",
   "main": "index.js",
   "scripts": {
-    "test": "cucumber-js features",
+    "test": "jest",
     "start": "webpack serve --mode development --open",
     "build": "webpack --mode production --performance-hints false"
   },
@@ -23,8 +23,10 @@
     "@babel/core": "^7.13.10",
     "@babel/preset-env": "^7.13.10",
     "@babel/preset-react": "^7.12.13",
+    "@testing-library/dom": "^8.2.0",
     "@testing-library/jest-dom": "^5.14.1",
     "@testing-library/react": "^12.0.0",
+    "@testing-library/user-event": "^13.2.1",
     "babel-eslint": "^10.1.0",
     "babel-jest": "^27.1.0",
     "babel-loader": "^8.2.2",
