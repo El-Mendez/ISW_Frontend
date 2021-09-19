@@ -48,6 +48,7 @@ export default function Login(props) {
         history.go();
       } catch (error) {
         console.log(error);
+        // eslint-disable-next-line no-alert
         alert('Usuario o contraseña incorrectos');
       }
     };
@@ -64,7 +65,7 @@ export default function Login(props) {
   };
 
   const onLoginFailure = () => {
-    console.log('Login Failed:', res);
+    console.log('Login Failed:');
   };
 
   const handleInputChange = (e) => {

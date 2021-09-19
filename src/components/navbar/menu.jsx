@@ -2,7 +2,6 @@ import React from 'react';
 import { Link, useRouteMatch } from 'react-router-dom';
 
 export default function Menu() {
-
   const { url } = useRouteMatch();
   return (
     <div className="products">
@@ -16,13 +15,13 @@ export default function Menu() {
         </li>
         <li className="nav-item product-font ml-20">
           <div className="dropdown">
-            <button className="nav-link button">Recomendaciones</button>
+            <button type="button" className="nav-link button">Recomendaciones</button>
             <div className="dropdown-content container">
               <Link to={`${url}/search/courses`} className="noDecorations">
-                <p className='row'>Por cursos en común</p>
+                <p className="row">Por cursos en común</p>
               </Link>
               <Link to={`${url}/search/hobbies`} className="noDecorations">
-                <p className='row'>Por hobbies en común</p>
+                <p className="row">Por hobbies en común</p>
               </Link>
             </div>
           </div>

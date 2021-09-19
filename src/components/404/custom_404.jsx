@@ -5,7 +5,7 @@ function custom404() {
   return (
     <div id="container">
       <div id="error-container">
-        <img src={thunder} id="icon" />
+        <img src={thunder} id="icon" alt="404" />
         <h1>404</h1>
         <p>No encontramos la página que buscabas</p>
       </div>

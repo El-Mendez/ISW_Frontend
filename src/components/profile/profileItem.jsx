@@ -1,24 +1,20 @@
 import React from 'react';
-import PropTypes from 'prop-types';
 
 export default function ProfileItem(props) {
+  const item = props;
   return (
     <ul>
-      {props.contact.map((item) => (
+      {item.contact.map((socialMedia, index) => (
         <li>
-          <p>
+          <p id={index}>
             Red social:
-            {item}
+            {socialMedia}
           </p>
         </li>
       ))}
     </ul>
   );
 }
-
-ProfileItem.propTypes = {
-  contact: PropTypes.arrayOf(PropTypes.string),
-};
 
 ProfileItem.defaultProps = {
   contact: ['Is', 'Not', 'Working'],

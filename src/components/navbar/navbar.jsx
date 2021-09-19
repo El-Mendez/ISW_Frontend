@@ -1,8 +1,8 @@
-import React, {useState} from 'react';
+import React, { useState } from 'react';
+import { Link, useRouteMatch } from 'react-router-dom';
 import Menu from './menu';
 import Services from './services';
 import logo from '../../assets/logo.svg';
-import { Link, useRouteMatch } from 'react-router-dom';
 
 export default function NavBar() {
   const { url } = useRouteMatch();
@@ -11,11 +11,10 @@ export default function NavBar() {
   const [show, setShow] = useState(false);
   const [suggestionsOptions, setSuggestionsOptions] = useState(false);
 
-
   return (
     <div>
       {/* NavBar menu */}
-      <div className={'navbar-container bg-secondary navbar-fixed-top'}>
+      <div className="navbar-container bg-secondary navbar-fixed-top">
         <div style={{ height: '56px' }}>
           <nav className="navbar navbar-expand-lg navbar-light text-light">
             <button
@@ -35,18 +34,19 @@ export default function NavBar() {
               {/* LOGO */}
               <Link to={`${url}`} style={{ height: '24px' }} aria-label="Google store logo">
                 <div className="logo-bg-large">
-                  <img src={logo} alt="Logo" className="temporary-style"/>
+                  <img src={logo} alt="Logo" className="temporary-style" />
                 </div>
               </Link>
               <div className="collapse navbar-collapse align-items-center" style={{ height: 'inherit' }}>
                 <Menu
-                suggestionsOptions = {suggestionsOptions}
-                openWindowSuggestions = {() => {setSuggestionsOptions(!suggestionsOptions)}}/>
-              </div>
-                <Services
-                show = {show}
-                openWindow = {() => {setShow(!show)}}
+                  suggestionsOptions={suggestionsOptions}
+                  openWindowSuggestions={() => { setSuggestionsOptions(!suggestionsOptions); }}
                 />
+              </div>
+              <Services
+                show={show}
+                openWindow={() => { setShow(!show); }}
+              />
             </div>
           </nav>
         </div>
@@ -55,4 +55,3 @@ export default function NavBar() {
 
   );
 }
-

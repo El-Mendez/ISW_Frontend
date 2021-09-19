@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { useParams } from 'react-router-dom';
 import img from '../../assets/friends.svg';
 import ProfileItem from './profileItem';
 
@@ -8,15 +9,13 @@ export default function Profile() {
     courses: false,
     hobbies: false,
   });
-
   const handleClick = (e) => {
     setIsSelected({
       [e.target.id]: true,
     });
   };
-
+  const id = useParams();
   const contact = ['test', 'testing', 'ya no recuerdo', 'ahahahah'];
-
   return (
     <div className="container">
       <div className="row">
@@ -26,7 +25,10 @@ export default function Profile() {
         <div className="col-sm-12 col-md-7 d-flex flex-column align-self-end">
           <h1>Juanito Perez</h1>
           <h5>Ingeniería en Ciencias de la computación y tecnología de la información</h5>
-          <h4 className="mt-4">Carné: 123456</h4>
+          <h4 className="mt-4">
+            Carné:
+            {id.carne}
+          </h4>
           <div className="d-flex border-1 border-bottom mt-4">
             <button onClick={handleClick} id="contact" type="button" className={`button-styless mb-2 d-flex align-content-center select-item ${isSelected.contact ? 'isSelected' : ''}`}>
               <span className="material-icons"> person </span>
