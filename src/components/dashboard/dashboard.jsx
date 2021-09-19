@@ -23,6 +23,7 @@ function Dashboard() {
           type = {1}
           />
         </Route>
+        
       </Switch>
     </div>
 

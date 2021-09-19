@@ -5,8 +5,8 @@ function SuggestionItem(props) {
   // TODO utilizar proptypes, utilizar id
   const item = props;
   return (
-    <div className="container suggestions">
-      <div className="row align-items-center">
+    <div className="container suggestions ">
+      <div className="row align-items-center items">
         <div className="col-4 ">
           <span className="material-icons suggestionsImages ">
             account_circle

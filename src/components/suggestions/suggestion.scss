@@ -7,8 +7,11 @@
 .suggestions{
     width: 500px;
     margin-top: 5%;
+    margin-bottom: 5%;
+    transition: width 0.4s ease-out;
     &:hover{
-        cursor:default;
+        cursor:pointer;
+        width: 480px;
     }
     h1{
         font-size: 40px;
@@ -22,9 +25,15 @@
         font-size: 80px;
     }
     .suggestions{
+        width: 300px;
+        &:hover{
+            cursor:pointer;
+            width: 280px;
+        }
         h1{
             font-size: 25px;
         }
+        
         h2{
             font-size: 15px;
         }
@@ -39,4 +48,16 @@
         color: $icon-bg-color;
         cursor: pointer;
     }
+}
+
+.items{
+    box-shadow: 5px 5px 15px 7px rgba(0,0,0,0.05), -5px -5px 30px 7px rgba(0,0,0,0.05);
+    background-color: rgba(240, 238, 238,0.4);
+    border-radius: 10px;
+    &:hover{
+        cursor: pointer !important;
+        box-shadow: 5px 5px 15px 7px rgba(0,0,0,0.05), -5px -5px 30px 7px rgba(0,0,0,0.1);
+        background-color: #ffbf0086;
+    }
+    transition: background-color 1s ease-out;
 }
