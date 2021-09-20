@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import Cookies from 'universal-cookie';
 import Axios from 'axios';
+import { useLocation } from 'react-router-dom';
 import { SUGGESTIONS_HOBBIES, SUGGESTIONS_COURSES } from '../utils/rutas';
 import SuggestionItem from '../suggestions/suggestionItem';
 
@@ -10,6 +11,7 @@ function Search(props) {
   const item = props;
   const [suggestions, setSuggestions] = useState([]);
   const requests = [SUGGESTIONS_COURSES, SUGGESTIONS_HOBBIES];
+  const location = useLocation();
   function searchFriends() {
     const request = async () => {
       try {
@@ -28,7 +30,7 @@ function Search(props) {
   }
   useEffect(() => {
     searchFriends();
-  }, []);
+  }, [location]);
   return (
     <div className="userList">
       <div className="container ">
