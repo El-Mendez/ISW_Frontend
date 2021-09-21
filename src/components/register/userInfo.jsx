@@ -63,9 +63,9 @@ function UserInfo() {
       try {
         const res = await Axios.get(SEARCH_COURSE);
         res.data.map((item) => (
-          item.secciones.map((section) => {
-            setCursos((prevState) => [...prevState, { value: section.seccionId, label: `${item.cursoNombre} → sección ${section.seccion}` }]);
-          })
+          item.secciones.map((section) => (
+            setCursos((prevState) => [...prevState, { value: section.seccionId, label: `${item.cursoNombre} → sección ${section.seccion}` }])
+          ))
         ));
       } catch (error) {
         console.log(error);
