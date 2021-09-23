@@ -1,26 +1,55 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
+import Axios from 'axios';
 import img from '../../assets/friends.svg';
 import ProfileItem from './profileItem';
 import Report from './report';
+import { USER_INFO } from '../utils/rutas';
 
 export default function Profile() {
   const [report, setReport] = useState(false);
+  const contact = ['test', 'testing', 'ya no recuerdo', 'ahahahah'];
+  const id = useParams();
   const [isSelected, setIsSelected] = useState({
     contact: true,
     courses: false,
     hobbies: false,
+  });
+  const [user, setUser] = useState({
+    carne: '',
+    nombre_completo: '',
+    carrera: '',
+    correo: '',
+    cursos: [],
+    hobbies: [],
+    redes_sociales: [],
   });
   const handleClick = (e) => {
     setIsSelected({
       [e.target.id]: true,
     });
   };
-  const reportUser = () => {
-    console.log('aaaa');
-  };
-  const id = useParams();
-  const contact = ['test', 'testing', 'ya no recuerdo', 'ahahahah'];
+  function userInfo() {
+    const request = async () => {
+      try {
+        const res = await Axios.get(`${USER_INFO}${id.carne}`);
+        setUser({
+          carne: res.data[0].carne,
+          nombre_completo: res.data[0].nombre_completo,
+          carrera: res.data[0].carrera,
+          correo: res.data[0].correo,
+          cursos: res.data[0].cursos,
+          hobbies: res.data[0].hobbies,
+        });
+      } catch (error) {
+        console.log(error);
+      }
+    };
+    request();
+  }
+  useEffect(() => {
+    userInfo();
+  }, []);
   return (
     <div className="container profile">
       <div className="row">
@@ -28,11 +57,11 @@ export default function Profile() {
           <img src="https://avatars.dicebear.com/api/bottts/:seed.svg" alt="Profile" className="w-75 rounded-circle" width="inherit" />
         </div>
         <div className="col-sm-12 col-md-7 d-flex flex-column align-self-end">
-          <h1>Juanito Perez</h1>
-          <h5>Ingeniería en Ciencias de la computación y tecnología de la información</h5>
+          <h1>{` ${user.nombre_completo}`}</h1>
+          <h5>{` ${user.carrera}`}</h5>
           <h4 className="mt-4">
             Carné:
-            {` ${id.carne}`}
+            {` ${user.carne}`}
           </h4>
           <div className="d-flex border-1 border-bottom mt-4">
             <button onClick={handleClick} id="contact" type="button" className={`button-styless mb-2 d-flex align-content-center select-item ${isSelected.contact ? 'isSelected' : ''}`}>
@@ -67,15 +96,24 @@ export default function Profile() {
             </p>
             <div className="ms-1 bottom-border" />
           </div>
-
           <ProfileItem
-            contact={contact}
+            contact={user.hobbies}
+            type={0}
           />
         </div>
         <div className="col-sm-12 col-md-7 d-flex flex-column ms-2">
-          <ProfileItem
-            contact={contact}
-          />
+          {isSelected.contact
+            ? (
+              <ProfileItem
+                contact={user.cursos}
+                type={1}
+              />
+            ) : (
+              <ProfileItem
+                contact={user.cursos}
+                type={0}
+              />
+            )}
         </div>
         <Report
           show={report}

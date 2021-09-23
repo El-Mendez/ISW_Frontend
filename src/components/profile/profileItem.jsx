@@ -4,10 +4,15 @@ export default function ProfileItem(props) {
   const item = props;
   return (
     <ul>
-      {item.contact.map((socialMedia, index) => (
-        <li>
-          <p id={index}>
-            Red social:
+      {item.contact.map((socialMedia) => (
+        /* Debido a que el usuario no puede tener datos
+        repetidos (redes sociales, cursos, hobbies),
+        podemos colocar como key el mismo valor y
+        evitarnos el error al querer modificar los valores
+        del usuario */
+        <li key={socialMedia}>
+          <p>
+            {item.type === 1 ? 'Red social: ' : '- ' }
             {socialMedia}
           </p>
         </li>
@@ -15,7 +20,3 @@ export default function ProfileItem(props) {
     </ul>
   );
 }
-
-ProfileItem.defaultProps = {
-  contact: ['Is', 'Not', 'Working'],
-};
