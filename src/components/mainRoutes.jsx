@@ -41,7 +41,7 @@ export default function MainRoutes() {
 
   useEffect(() => {
     persistenSession();
-  }, []);
+  }, [token]);
   return (
     <Router>
       <Switch>
@@ -68,7 +68,6 @@ export default function MainRoutes() {
         <Route exact path="/reset-password" component={ForgotPassword} />
         <Route exact path="/confirm" component={ConfirmAccount} />
         <Route exact path="/test" component={RegisterAccountMessage} />
-        <Route exact path="/profile/:carne" component={Profile} />
         {/* Handle every other path that is not define */}
         <Route path="*" component={Custom404} />
       </Switch>

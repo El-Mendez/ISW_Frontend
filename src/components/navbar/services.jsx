@@ -10,11 +10,9 @@ function Services() {
   // TODO utilizar proptypes
 
   function logout() {
-    cookies.remove('session');
-    setTimeout(() => {
-      history.push('/');
-      history.go();
-    }, 300);
+    cookies.remove('session', { path: '/' });
+    history.push('/');
+    history.go();
   }
   return (
     <div className="d-flex align-items-center ">

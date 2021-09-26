@@ -13,6 +13,7 @@ const ASSIGN_SECTION = 'http://api.meetinguvg.me/auth/seccion';
 const ASSIGN_HOBBY = 'http://api.meetinguvg.me/auth/hobby';
 const SUGGESTIONS_COURSES = 'http://api.meetinguvg.me/auth/suggestions/courses';
 const SUGGESTIONS_HOBBIES = 'http://api.meetinguvg.me/auth/suggestions/hobbies';
+const USER_INFO_AUT = 'http://api.meetinguvg.me/auth/profile';
 
 // REQUESTS
 const PASSWORD_RESET = 'http://api.meetinguvg.me/request/passwordReset';
@@ -36,4 +37,5 @@ module.exports = {
   ACCOUNT_REQUEST,
   ACCEPT_ACCOUNT_REQUEST,
   USER_INFO,
+  USER_INFO_AUT,
 };

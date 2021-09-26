@@ -1,18 +1,21 @@
 import React, { useState, useEffect } from 'react';
-import { useParams } from 'react-router-dom';
+import { useParams, useLocation } from 'react-router-dom';
 import Axios from 'axios';
-import img from '../../assets/friends.svg';
+import Cookies from 'universal-cookie';
 import ProfileItem from './profileItem';
 import Report from './report';
-import { USER_INFO } from '../utils/rutas';
+import { USER_INFO, USER_INFO_AUT } from '../utils/rutas';
 
-export default function Profile() {
+export default function Profile(props) {
   const [report, setReport] = useState(false);
-  const contact = ['test', 'testing', 'ya no recuerdo', 'ahahahah'];
+  const cookies = new Cookies();
+  const token = cookies.get('session');
   const id = useParams();
+  const location = useLocation();
+  const item = props;
   const [isSelected, setIsSelected] = useState({
-    contact: true,
-    courses: false,
+    contact: false,
+    courses: true,
     hobbies: false,
   });
   const [user, setUser] = useState({
@@ -47,9 +50,36 @@ export default function Profile() {
     };
     request();
   }
+  function userInfoAut() {
+    const request = async () => {
+      try {
+        const res = await Axios.get(USER_INFO_AUT,
+          {
+            headers: {
+              Authorization: `Bearer ${token}`,
+            },
+          });
+        setUser({
+          carne: res.data[0].carne,
+          nombre_completo: res.data[0].nombre_completo,
+          carrera: res.data[0].carrera,
+          correo: res.data[0].correo,
+          cursos: res.data[0].cursos,
+          hobbies: res.data[0].hobbies,
+        });
+      } catch (error) {
+        console.log(error);
+      }
+    };
+    request();
+  }
   useEffect(() => {
-    userInfo();
-  }, []);
+    if (typeof id.carne === 'undefined') {
+      userInfoAut();
+    } else {
+      userInfo();
+    }
+  }, [location]);
   return (
     <div className="container profile">
       <div className="row">
@@ -64,24 +94,28 @@ export default function Profile() {
             {` ${user.carne}`}
           </h4>
           <div className="d-flex border-1 border-bottom mt-4">
-            <button onClick={handleClick} id="contact" type="button" className={`button-styless mb-2 d-flex align-content-center select-item ${isSelected.contact ? 'isSelected' : ''}`}>
-              <span className="material-icons"> person </span>
-              Contacto
-            </button>
             <button onClick={handleClick} id="courses" type="button" className={`button-styless ms-3 mb-2 d-flex align-content-center select-item ${isSelected.courses ? 'isSelected' : ''}`}>
               <span className="material-icons"> library_books </span>
               Cursos
             </button>
-            <button onClick={() => setReport(true)} id="report" type="button" className="button-report ms-3 mb-2 d-flex align-content-center">
-              <span className="material-icons"> report </span>
-              <p>
-                Reportar
-              </p>
+            <button id="contact" type="button" className={`button-styless mb-2 d-flex align-content-center select-item ${isSelected.contact ? 'isSelected' : ''}`}>
+              <span className="material-icons"> person </span>
+              Contacto
             </button>
             <button onClick={handleClick} id="hobbies" type="button" className={`button-styless ms-3 mb-2 d-flex align-content-center d-md-none select-item ${isSelected.hobbies ? isSelected : ''}`}>
               <span className="material-icons"> book </span>
               Hobbies
             </button>
+            {item.type === 2
+              ? (
+                <button onClick={() => setReport(true)} id="report" type="button" className="button-report ms-3 mb-2 d-flex align-content-center">
+                  <span className="material-icons"> report </span>
+                  <p>
+                    Reportar
+                  </p>
+                </button>
+
+              ) : null}
           </div>
         </div>
       </div>
@@ -115,10 +149,14 @@ export default function Profile() {
               />
             )}
         </div>
-        <Report
-          show={report}
-          onHide={() => setReport(false)}
-        />
+        {item.type === 2
+          ? (
+            <Report
+              show={report}
+              onHide={() => setReport(false)}
+            />
+
+          ) : null}
       </div>
 
     </div>
