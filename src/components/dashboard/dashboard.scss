@@ -1,0 +1,43 @@
+.dash-container {
+    height: 100%;
+    width: 100%;
+    background-color: #ede9e0;
+    min-height: 100vh;
+    padding-top: 5vh;
+    padding-left: 10vw;
+    padding-right: 10vw;
+    padding-bottom: 5vh;
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+}
+
+.dash1{
+    font-weight: 600;
+    font-size: 3vh;
+}
+
+.rowd1{
+    
+    width: 100%;
+    height: auto;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    flex-flow: wrap;
+}
+
+.r1{
+    margin-top: 5vh;
+    height: 25vh;
+    width: 45%;
+    border-radius: 8px;
+    border: none;
+    background-color: white;
+}
+
+@media(max-width: 800px){
+    .r1{
+        width: 80%;
+    }
+}

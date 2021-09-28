@@ -12,6 +12,7 @@ export default function Home() {
         <NavBar />
         <div className="first_section" />
       </section>
+      
 
       <div className="h-100 navbar-padding bg-beige" id="test">
         <div className="container-fluid h-100" id="test">

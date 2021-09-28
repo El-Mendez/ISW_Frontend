@@ -7,12 +7,14 @@ import {
 import NavBar from '../navbar/navbar';
 import Search from '../search/search';
 import UserInfo from '../profile/profile';
+import DashContent from './dashcontent';
 
 function Dashboard() {
   const { url } = useRouteMatch();
   return (
     <div>
       <NavBar />
+      <DashContent/>
       <Switch>
         <Route path={`${url}/profile`}>
           <UserInfo
