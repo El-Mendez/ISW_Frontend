@@ -14,8 +14,10 @@ function Dashboard() {
   return (
     <div>
       <NavBar />
-      <DashContent/>
       <Switch>
+        <Route exact path={`${url}`}>
+          <DashContent />
+        </Route>
         <Route path={`${url}/profile`}>
           <UserInfo
             type={0}
