@@ -17,7 +17,7 @@
     font-size: 3vh;
 }
 
-.rowd1{
+.rowd1, .rowd2{
     
     width: 100%;
     height: auto;
@@ -28,16 +28,88 @@
 }
 
 .r1{
+    padding-left: 3vw;
+    padding-right: 3vw;
+    margin-top: 5vh;
+    height: 25vh;
+    width: 35%;
+    border-radius: 8px;
+    border: none;
+    background-color: white;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-around;
+    flex-flow: wrap;
+    box-sizing: border-box;
+    transition: 1.2s ease-in-out;
+    color: #999690;
+    cursor: pointer;
+    
+}
+
+.r1:hover{
+    transform: scale(1.03);
+    border:none;
+}
+.r2{
+    margin-top: 5vh;
+    height: 25vh;
+    width: 55%;
+    border-radius: 8px;
+    border: none;
+    background-color: white;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    box-sizing: border-box;
+    transition: 1.2s ease-in-out;
+    cursor: pointer;
+}
+.r2:hover{
+    transform: scale(1.03);
+    border:none;
+}
+
+.cr1{
+    
+    color: black;
+    font-size: 2vh;
+}
+
+.r3{
     margin-top: 5vh;
     height: 25vh;
     width: 45%;
     border-radius: 8px;
     border: none;
     background-color: white;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    box-sizing: border-box;
+    transition: 1.2s ease-in-out;
+    cursor: pointer;
+}
+
+.r3:hover{
+    transform: scale(1.03);
+    border:none;
 }
 
 @media(max-width: 800px){
-    .r1{
+    .r1, .r2, .r3{
         width: 80%;
     }
+    .dash1{
+        font-size: 3vh;
+        text-align: center;
+    }
+}
+
+.userimg{
+    width: 30%;
+    height: auto;
 }
