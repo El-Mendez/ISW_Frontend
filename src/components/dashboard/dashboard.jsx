@@ -8,6 +8,7 @@ import NavBar from '../navbar/navbar';
 import Search from '../search/search';
 import UserInfo from '../profile/profile';
 import DashContent from './dashcontent';
+import FriendsList from '../friends/friends';
 
 function Dashboard() {
   const { url } = useRouteMatch();
@@ -17,6 +18,9 @@ function Dashboard() {
       <Switch>
         <Route exact path={`${url}`}>
           <DashContent />
+        </Route>
+        <Route exact path={`${url}/friends`}>
+          <FriendsList />
         </Route>
         <Route path={`${url}/profile`}>
           <UserInfo
