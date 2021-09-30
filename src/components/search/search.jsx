@@ -26,7 +26,7 @@ function Search(props) {
         setSuggestions(res.data);
         if (res.data[0] === undefined) {
           setRecommendation(false);
-        }else{
+        } else {
           setRecommendation(true);
         }
       } catch (error) {
@@ -40,26 +40,24 @@ function Search(props) {
   }, [location]);
   return (
     <div className="userList">
-      <div className="container ">
-        {recommendation
-          ? (
-            <div className="row align-items-center">
-              {suggestions.map((user) => (
-                <SuggestionItem
-                  nombre={user.nombre}
-                  apellido={user.apellido}
-                  carne={user.carne}
-                  key={user.carne}
-                />
-              ))}
-            </div>
-          )
-          : (
-            <div>
-              <NoSuggestionItem />
-            </div>
-          )}
-      </div>
+      {recommendation ? (
+        <div className="container ">
+          <div className="row align-items-center">
+            {suggestions.map((user) => (
+              <SuggestionItem
+                nombre={user.nombre}
+                apellido={user.apellido}
+                carne={user.carne}
+                key={user.carne}
+              />
+            ))}
+          </div>
+        </div>
+      ) : (
+        <div className="container noSuggestions">
+          <NoSuggestionItem />
+        </div>
+      )}
     </div>
   );
 }

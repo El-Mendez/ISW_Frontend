@@ -1,11 +1,15 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import { useRouteMatch, Link } from 'react-router-dom';
+import Axios from 'axios';
 import Cookies from 'universal-cookie';
 import history from '../utils/history';
+import { USER_INFO_AUT } from '../utils/rutas';
 
 function Services() {
   const { url } = useRouteMatch();
   const cookies = new Cookies();
+  const token = cookies.get('session');
+  const [user, setUser] = useState('user');
 
   // TODO utilizar proptypes
 
@@ -14,6 +18,25 @@ function Services() {
     history.push('/');
     history.go();
   }
+  function searchFriends() {
+    const request = async () => {
+      try {
+        const res = await Axios.get(USER_INFO_AUT,
+          {
+            headers: {
+              Authorization: `Bearer ${token}`,
+            },
+          });
+        setUser(res.data[0].nombre_completo.split(' ', 1));
+      } catch (error) {
+        console.log(error);
+      }
+    };
+    request();
+  }
+  useEffect(() => {
+    searchFriends();
+  }, []);
   return (
     <div className="d-flex align-items-center ">
       <div className="services container align-items" style={{ height: '28px' }}>
@@ -23,7 +46,7 @@ function Services() {
               account_circle
             </span>
             <div className="col-8">
-              User
+              {user}
             </div>
           </div>
           <div className="row">

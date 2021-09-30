@@ -3,9 +3,9 @@ import noRecommendation from '../../assets/no_recommendation.svg';
 
 function NoSuggestionItem() {
   return (
-    <div className="container noSuggestionsImg">
+    <div className="">
       <img src={noRecommendation} className="noSuggestionsImg" alt="No hay recomendaciones" />
-      <h2>No hemos podido encontrar alguna recomendación para tí</h2>
+      <h2>No hemos podido encontrar alguna recomendación para ti</h2>
     </div>
   );
 }

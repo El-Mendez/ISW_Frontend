@@ -4,6 +4,14 @@
 .suggestionsImages{
     font-size: 100px;
 }
+.noSuggestions{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.noSuggestionsImg{
+    width: 70%;
+}
 .suggestions{
     width: 500px;
     margin-top: 5%;
