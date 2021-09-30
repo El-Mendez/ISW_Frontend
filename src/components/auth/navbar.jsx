@@ -12,7 +12,7 @@ function NavBar() {
     <div>
       {/* NavBar menu */}
       <div
-        className="bg-transparent fixed-top"
+        className=""
         style={{
           opacity: 0.85,
           height: '90px',
