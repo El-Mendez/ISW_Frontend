@@ -9,12 +9,23 @@ function DashContent() {
         Hola User, que bueno que estas aqui...
       </div>
 
+      <div className="dv" />
+
       <div className="rowd1">
-        <div className="r1" />
+        <div className="r1">
+          <div className="rr1" />
+          <div className="rr2" />
+        </div>
         <div className="r2" />
       </div>
 
+      <div className="dv" />
+
       <div className="rowd2">
+        <div className="r3" />
+        <div className="r3" />
+        <div className="r3" />
+        <div className="r3" />
         <div className="r3" />
         <div className="r3" />
       </div>

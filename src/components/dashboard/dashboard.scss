@@ -15,9 +15,18 @@
 .dash1{
     font-weight: 600;
     font-size: 3vh;
-    border-bottom:2px;
+    margin-left: 3vw;
+   
 }
 
+.dv{
+    margin-top: 1vh;
+    width:100%;
+    height:3px;
+    background-color: rgb(136, 136, 136);
+    border: none;
+    border-radius: 8px;
+}
 .rowd1, .rowd2{
     
     width: 100%;
@@ -29,33 +38,57 @@
 }
 
 .r1{
-    padding-left: 3vw;
-    padding-right: 3vw;
+    
     margin-top: 5vh;
-    height: 25vh;
+    height: 50vh;
     width: 35%;
-    border-radius: 8px;
-    border: none;
-    background-color: white;
     display: flex;
-    flex-direction: row;
+    flex-direction: column;
     align-items: center;
     justify-content: space-around;
     flex-flow: wrap;
     box-sizing: border-box;
-    transition: 1.2s ease-in-out;
-    color: #999690;
-    cursor: pointer;
+    margin-bottom: 5vh;
+    
     
 }
 
-.r1:hover{
+.rr1{
+    padding-left: 3vw;
+    padding-right: 3vw;
+    background-color: white;
+    height: 40%;
+    width: 100%;
+    border: none;
+    border-radius: 8px;
+    transition: 1.2s ease-in-out;
+}
+
+.rr1:hover{
     transform: scale(1.03);
     border:none;
 }
+
+.rr2{
+    margin-top: 10%;
+    padding-left: 3vw;
+    padding-right: 3vw;
+    background-color: white;
+    height: 40%;
+    width: 100%;
+    border: none;
+    border-radius: 8px;
+    transition: 1.2s ease-in-out;
+}
+
+.rr2:hover{
+    transform: scale(1.03);
+    border:none;
+}
+
 .r2{
     margin-top: 5vh;
-    height: 25vh;
+    height: auto;
     width: 55%;
     border-radius: 8px;
     border: none;
@@ -67,6 +100,7 @@
     box-sizing: border-box;
     transition: 1.2s ease-in-out;
     cursor: pointer;
+    margin-bottom: 5vh;
 }
 .r2:hover{
     transform: scale(1.03);
@@ -82,7 +116,7 @@
 .r3{
     margin-top: 5vh;
     height: 25vh;
-    width: 45%;
+    width: 15%;
     border-radius: 8px;
     border: none;
     background-color: white;
