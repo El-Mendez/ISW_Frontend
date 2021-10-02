@@ -41,7 +41,7 @@
     
     margin-top: 5vh;
     height: 50vh;
-    width: 35%;
+    width: 30%;
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -89,17 +89,15 @@
 .r2{
     margin-top: 5vh;
     height: auto;
-    width: 55%;
+    width: 60%;
     border-radius: 8px;
+    background-image: url('../../assets/Actualidad.jfif');
+    background-size: cover;
     border: none;
-    background-color: white;
     display: flex;
-    flex-direction: row;
-    align-items: center;
-    justify-content: center;
     box-sizing: border-box;
     transition: 1.2s ease-in-out;
-    cursor: pointer;
+    
     margin-bottom: 5vh;
 }
 .r2:hover{
@@ -147,4 +145,40 @@
 .userimg{
     width: 30%;
     height: auto;
+}
+
+.actu{
+    width: 100%;
+    height: auto;
+    border-radius: 8px;
+    z-index: 0;
+    
+}
+
+.actuh3{
+    background-color: green;
+    color: white;
+    font-weight: 700;
+    font-size: 3vh;
+    padding: 1vh;
+    border: none;
+    border-radius: 8px;
+
+    top: 6vh;
+    z-index: 1;
+    
+}
+
+.buttonl{
+    background-color: green;
+    color: white;
+    font-size: 2vh;
+    font-weight: 700;
+    padding: 1vh;
+    width: 30%;
+    height: 10%;
+    border:none;
+    border-radius: 8px;
+    margin-top: 40vh;
+    margin-left: 30vw;
 }

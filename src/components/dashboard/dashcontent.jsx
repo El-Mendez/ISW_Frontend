@@ -6,7 +6,7 @@ function DashContent() {
 
     <section className="dash-container">
       <div className="dash1">
-        Hola User, que bueno que estas aqui...
+        Hola, que bueno que estas aqui
       </div>
 
       <div className="dv" />
@@ -16,7 +16,13 @@ function DashContent() {
           <div className="rr1" />
           <div className="rr2" />
         </div>
-        <div className="r2" />
+        <div className="r2" href="https://noticias.uvg.edu.gt">
+          <form action="https://noticias.uvg.edu.gt"> 
+            <button className="buttonl" type="submit">
+              Ver más...
+            </button>
+          </form>
+        </div>
       </div>
 
       <div className="dv" />
