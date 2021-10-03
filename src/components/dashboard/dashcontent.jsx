@@ -13,8 +13,12 @@ function DashContent() {
 
       <div className="rowd1">
         <div className="r1">
-          <div className="rr1" />
-          <div className="rr2" />
+          <a className="rr1" href="https://uvg.instructure.com/">
+            <div />
+          </a>
+          <a className="rr2" href="https://portal.uvg.edu.gt/">
+            <div />
+          </a>
         </div>
         <div className="r2" href="https://noticias.uvg.edu.gt">
           <form action="https://noticias.uvg.edu.gt"> 

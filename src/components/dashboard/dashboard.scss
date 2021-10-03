@@ -41,7 +41,7 @@
     
     margin-top: 5vh;
     height: 50vh;
-    width: 30%;
+    width: 35%;
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -56,12 +56,14 @@
 .rr1{
     padding-left: 3vw;
     padding-right: 3vw;
-    background-color: white;
+    background-image: url('../../assets/canvas.png');
+    background-size:cover;
     height: 40%;
     width: 100%;
     border: none;
     border-radius: 8px;
     transition: 1.2s ease-in-out;
+    cursor: pointer;
 }
 
 .rr1:hover{
@@ -73,6 +75,8 @@
     margin-top: 10%;
     padding-left: 3vw;
     padding-right: 3vw;
+    background-image: url('../../assets/uvglogo.png');
+    background-size: cover;
     background-color: white;
     height: 40%;
     width: 100%;
