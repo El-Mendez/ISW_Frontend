@@ -2,14 +2,14 @@ import React, { useState, useEffect } from 'react';
 import Cookies from 'universal-cookie';
 import Axios from 'axios';
 import { useLocation } from 'react-router-dom';
-import { SUGGESTIONS_HOBBIES, SUGGESTIONS_COURSES } from '../utils/rutas';
+import { GET_FRIENDS } from '../utils/rutas';
 import SuggestionItem from '../suggestions/suggestionItem';
 import NoFriends from './noFriends';
+import { NavItem } from 'react-bootstrap';
 
 function Friends(props) {
   const [friendsList, setFriendsList] = useState([]);
-  const requests = [SUGGESTIONS_COURSES, SUGGESTIONS_HOBBIES];
-  const [friends, setFriends] = useState(false);
+  const [friends, setFriends] = useState(true);
   const cookies = new Cookies();
   const token = cookies.get('session');
   const item = props;
@@ -17,13 +17,19 @@ function Friends(props) {
   function searchFriends() {
     const request = async () => {
       try {
-        const res = await Axios.get(requests[item.type],
+        const res = await Axios.get(GET_FRIENDS,
           {
             headers: {
               Authorization: `Bearer ${token}`,
             },
           });
         setFriendsList(res.data);
+
+        if (res.data[0] === undefined) {
+          setFriends(false);
+        } else {
+          setFriends(true);
+        }
       } catch (error) {
         console.log(error);
       }
@@ -31,7 +37,7 @@ function Friends(props) {
     request();
   }
   useEffect(() => {
-
+    searchFriends();
   }, [location]);
   return (
     <div className="userList">
@@ -40,10 +46,10 @@ function Friends(props) {
           <div className="row align-items-center">
             {friendsList.map((user) => (
               <SuggestionItem
-                nombre={user.nombre}
-                apellido={user.apellido}
-                carne={user.carne}
-                key={user.carne}
+                nombre={user.nombre_completo}
+                apellido=""
+                carne={user.credencial}
+                key={user.credencial}
               />
             ))}
           </div>

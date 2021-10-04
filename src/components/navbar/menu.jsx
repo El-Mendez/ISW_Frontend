@@ -15,19 +15,32 @@ export default function Menu() {
         </li>
         <li className="nav-item product-font ml-20">
           <Link to={`${url}/friends`} className="noDecorations">
-            <button className="nav-link button" type="button">
+            <button id="friends" className="nav-link button" type="button">
               Ver amigos
             </button>
           </Link>
         </li>
         <li className="nav-item product-font ml-20">
           <div className="dropdown">
-            <button type="button" className="nav-link button">Recomendaciones</button>
+            <button type="button" className="nav-link button">Bandeja de entrada</button>
             <div className="dropdown-content container">
-              <Link to={`${url}/search/courses`} className="noDecorations">
+              <Link to={`${url}/get_request`} className="noDecorations">
+                <p className="row">Solicitudes recibidas</p>
+              </Link>
+              <Link to={`${url}/sent_request`} className="noDecorations">
+                <p className="row">Solicitudes enviadas</p>
+              </Link>
+            </div>
+          </div>
+        </li>
+        <li className="nav-item product-font ml-20">
+          <div className="dropdown">
+            <button id="recommendations" type="button" className="nav-link button">Recomendaciones</button>
+            <div className="dropdown-content container">
+              <Link id="coursesRecommendations" to={`${url}/search/courses`} className="noDecorations">
                 <p className="row">Por cursos en común</p>
               </Link>
-              <Link to={`${url}/search/hobbies`} className="noDecorations">
+              <Link id="hobbiesRecommendations" to={`${url}/search/hobbies`} className="noDecorations">
                 <p className="row">Por hobbies en común</p>
               </Link>
             </div>
