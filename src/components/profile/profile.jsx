@@ -87,7 +87,19 @@ export default function Profile(props) {
           <img src="https://avatars.dicebear.com/api/bottts/:seed.svg" alt="Profile" className="w-75 rounded-circle" width="inherit" />
         </div>
         <div className="col-sm-12 col-md-7 d-flex flex-column align-self-end">
-          <h1>{` ${user.nombre_completo}`}</h1>
+          <div className="container addName">
+            <div className="row">
+              <div className="col-6">
+                <h1>{` ${user.nombre_completo}`}</h1>
+              </div>
+              <button className="col-3 addIcon" role="button" onClick={handleClick}>
+                <p>Agregar amigo </p>
+                <span className="material-icons add">
+                  person_add
+                </span>
+              </button>
+            </div>
+          </div>
           <h5>{` ${user.carrera}`}</h5>
           <h4 className="mt-4">
             Carné:
