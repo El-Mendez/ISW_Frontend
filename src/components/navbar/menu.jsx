@@ -35,7 +35,6 @@ export default function Menu() {
         </li>
         <li className="nav-item product-font ml-20">
           <div className="dropdown">
-            <button type="button" className="nav-link button">Recomendaciones</button>
             <button id="recommendations" type="button" className="nav-link button">Recomendaciones</button>
             <div className="dropdown-content container">
               <Link id="coursesRecommendations" to={`${url}/search/courses`} className="noDecorations">
