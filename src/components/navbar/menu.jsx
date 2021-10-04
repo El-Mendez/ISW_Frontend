@@ -36,11 +36,12 @@ export default function Menu() {
         <li className="nav-item product-font ml-20">
           <div className="dropdown">
             <button type="button" className="nav-link button">Recomendaciones</button>
+            <button id="recommendations" type="button" className="nav-link button">Recomendaciones</button>
             <div className="dropdown-content container">
-              <Link to={`${url}/search/courses`} className="noDecorations">
+              <Link id="coursesRecommendations" to={`${url}/search/courses`} className="noDecorations">
                 <p className="row">Por cursos en común</p>
               </Link>
-              <Link to={`${url}/search/hobbies`} className="noDecorations">
+              <Link id="hobbiesRecommendations" to={`${url}/search/hobbies`} className="noDecorations">
                 <p className="row">Por hobbies en común</p>
               </Link>
             </div>

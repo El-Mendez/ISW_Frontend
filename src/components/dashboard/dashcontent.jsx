@@ -4,7 +4,7 @@ import './dashboard.scss';
 function DashContent() {
   return (
 
-    <section className="dash-container">
+    <section id="dash-container" className="dash-container">
       <div className="dash1">
         Hola, que bueno que estas aqui
       </div>
@@ -21,7 +21,7 @@ function DashContent() {
           </a>
         </div>
         <div className="r2" href="https://noticias.uvg.edu.gt">
-          <form action="https://noticias.uvg.edu.gt"> 
+          <form action="https://noticias.uvg.edu.gt">
             <button className="buttonl" type="submit">
               Ver más...
             </button>
