@@ -101,7 +101,7 @@ export default function Profile(props) {
     }
   }, [location]);
   return (
-    <div className="container profile">
+    <div id="profileContainer" className="container profile">
       <div className="row">
         <div className="col-sm-12 col-md-4 d-flex justify-content-center" id="profile-img">
           <img src="https://avatars.dicebear.com/api/bottts/:seed.svg" alt="Profile" className="w-75 rounded-circle" width="inherit" />
@@ -113,7 +113,7 @@ export default function Profile(props) {
                 <h1>{` ${user.nombre_completo}`}</h1>
               </div>
               {(isUser && item.type) ? (
-                <button className="col-3 addIcon" type="button" onClick={addFriend}>
+                <button id="addFriend" className="col-3 addIcon" type="button" onClick={addFriend}>
                   <p>Agregar amigo </p>
                   <span className="material-icons add">
                     person_add

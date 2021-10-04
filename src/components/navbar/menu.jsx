@@ -15,7 +15,7 @@ export default function Menu() {
         </li>
         <li className="nav-item product-font ml-20">
           <Link to={`${url}/friends`} className="noDecorations">
-            <button className="nav-link button" type="button">
+            <button id="friends" className="nav-link button" type="button">
               Ver amigos
             </button>
           </Link>
