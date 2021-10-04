@@ -7,6 +7,6 @@ import '@testing-library/jest-dom';
 
 it('Prueba de componente general de dashboard', () => {
   const component = render(<DashContent />);
-  expect(component).toBeCalled();
+  expect(Dashboard).toReturn(component);
 });
 
