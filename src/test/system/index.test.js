@@ -63,4 +63,8 @@ describe('testing', () => {
   afterEach(() => {
     cleanup();
   });
+
+  afterAll(() => {
+    driver.quit();
+  });
 });
