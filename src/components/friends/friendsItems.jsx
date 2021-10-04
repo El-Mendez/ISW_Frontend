@@ -58,7 +58,7 @@ function FriendsItems(props) {
           </span>
         </div>
         <div className="col suggestions">
-          <div className="row align-items-start" id="friendsRequest">
+          <div className="row align-items-start" id="friendsRequest" value={item.nombre}>
             <h1>{`${item.nombre} ${item.apellido}`}</h1>
           </div>
           <div className="row align-items-start">
