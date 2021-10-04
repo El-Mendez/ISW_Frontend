@@ -19,6 +19,18 @@ it('Probando dirigirse al perfil de usuario', () => {
   expect(history.location.pathname).toBe('//profile');
 
 })
+it('Probando dirigirse a la lista de amigos', () => {
+  const history = createMemoryHistory()
+  render(
+    <Router history={history}>
+      <Menu />
+    </Router>
+  );
+  const perfilItem = screen.getByText('Ver amigos');
+  userEvent.click(perfilItem);
+  expect(history.location.pathname).toBe('//friends');
+
+})
 it('Probando dirigirse a las recomendaciones por cursos', () => {
   const history = createMemoryHistory()
   render(
@@ -29,6 +41,42 @@ it('Probando dirigirse a las recomendaciones por cursos', () => {
   const courseItem = screen.getByText('Por cursos en común');
   userEvent.click(courseItem);
   expect(history.location.pathname).toBe('//search/courses');
+
+})
+it('Probando dirigirse a las solicitudes recibidas', () => {
+  const history = createMemoryHistory();
+  render(
+    <Router history={history}>
+      <Menu />
+    </Router>
+  );
+  const courseItem = screen.getByText('Solicitudes recibidas');
+  userEvent.click(courseItem);
+  expect(history.location.pathname).toBe('//get_request');
+})
+
+it('Probando dirigirse a las solicitudes enviadas', () => {
+  const history = createMemoryHistory();
+  render(
+    <Router history={history}>
+      <Menu />
+    </Router>
+  );
+  const courseItem = screen.getByText('Solicitudes enviadas');
+  userEvent.click(courseItem);
+  expect(history.location.pathname).toBe('//sent_request');
+
+})
+it('Probando dirigirse a las recomendaciones por hobbies', () => {
+  const history = createMemoryHistory()
+  render(
+    <Router history={history}>
+      <Menu />
+    </Router>
+  );
+  const courseItem = screen.getByText('Por hobbies en común');
+  userEvent.click(courseItem);
+  expect(history.location.pathname).toBe('//search/hobbies');
 
 })
 it('Probando dirigirse a las recomendaciones por hobbies', () => {
