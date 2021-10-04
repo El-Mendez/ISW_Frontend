@@ -2,14 +2,14 @@ import React, { useState, useEffect } from 'react';
 import Cookies from 'universal-cookie';
 import Axios from 'axios';
 import { useLocation } from 'react-router-dom';
-import { SUGGESTIONS_HOBBIES, SUGGESTIONS_COURSES, GET_FRIENDS } from '../utils/rutas';
-import SuggestionItem from '../suggestions/suggestionItem';
+import { RECEIVED_REQUEST } from '../utils/rutas';
+import FriendsItems from './friendsItems';
 import NoFriends from './noFriends';
 
-function Friends(props) {
+function Request(props) {
   const [friendsList, setFriendsList] = useState([]);
-  const requests = [SUGGESTIONS_COURSES, SUGGESTIONS_HOBBIES];
   const [friends, setFriends] = useState(true);
+  const [accept, setAccept] = useState(false);
   const cookies = new Cookies();
   const token = cookies.get('session');
   const item = props;
@@ -17,14 +17,13 @@ function Friends(props) {
   function searchFriends() {
     const request = async () => {
       try {
-        const res = await Axios.get(GET_FRIENDS,
+        const res = await Axios.get(RECEIVED_REQUEST,
           {
             headers: {
               Authorization: `Bearer ${token}`,
             },
           });
         setFriendsList(res.data);
-
         if (res.data[0] === undefined) {
           setFriends(false);
         } else {
@@ -38,18 +37,19 @@ function Friends(props) {
   }
   useEffect(() => {
     searchFriends();
-  }, [location]);
+  }, [location, accept]);
   return (
     <div className="userList">
       {friends ? (
         <div className="container ">
           <div className="row align-items-center">
             {friendsList.map((user) => (
-              <SuggestionItem
-                nombre={user.nombre_completo}
+              <FriendsItems
+                nombre={user.usuario_envia}
                 apellido=""
-                carne={user.credencial}
-                key={user.credencial}
+                carne={user.usuario_envia}
+                setAccept={setAccept}
+                key={user.usuario_envia}
               />
             ))}
           </div>
@@ -63,4 +63,4 @@ function Friends(props) {
   );
 }
 
-export default Friends;
+export default Request;

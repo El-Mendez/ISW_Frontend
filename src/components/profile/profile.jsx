@@ -4,10 +4,11 @@ import Axios from 'axios';
 import Cookies from 'universal-cookie';
 import ProfileItem from './profileItem';
 import Report from './report';
-import { USER_INFO, USER_INFO_AUT } from '../utils/rutas';
+import { USER_INFO, USER_INFO_AUT, SEND_REQUEST } from '../utils/rutas';
 
 export default function Profile(props) {
   const [report, setReport] = useState(false);
+  const [isUser, setIsUser] = useState(false);
   const cookies = new Cookies();
   const token = cookies.get('session');
   const id = useParams();
@@ -32,9 +33,27 @@ export default function Profile(props) {
       [e.target.id]: true,
     });
   };
+  function addFriend() {
+    const request = async () => {
+      try {
+        await Axios.post(SEND_REQUEST,
+          {
+            carne: user.carne,
+          }, {
+            headers: {
+              Authorization: `Bearer ${token}`,
+            },
+          });
+      } catch (error) {
+        console.log(error);
+      }
+    };
+    request();
+  }
   function userInfo() {
     const request = async () => {
       try {
+        setIsUser(true);
         const res = await Axios.get(`${USER_INFO}${id.carne}`);
         setUser({
           carne: res.data[0].carne,
@@ -53,6 +72,7 @@ export default function Profile(props) {
   function userInfoAut() {
     const request = async () => {
       try {
+        setIsUser(false);
         const res = await Axios.get(USER_INFO_AUT,
           {
             headers: {
@@ -92,12 +112,14 @@ export default function Profile(props) {
               <div className="col-6">
                 <h1>{` ${user.nombre_completo}`}</h1>
               </div>
-              <button className="col-3 addIcon" role="button" onClick={handleClick}>
-                <p>Agregar amigo </p>
-                <span className="material-icons add">
-                  person_add
-                </span>
-              </button>
+              {(isUser && item.type) ? (
+                <button className="col-3 addIcon" type="button" onClick={addFriend}>
+                  <p>Agregar amigo </p>
+                  <span className="material-icons add">
+                    person_add
+                  </span>
+                </button>
+              ) : null}
             </div>
           </div>
           <h5>{` ${user.carrera}`}</h5>

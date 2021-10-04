@@ -22,6 +22,19 @@ export default function Menu() {
         </li>
         <li className="nav-item product-font ml-20">
           <div className="dropdown">
+            <button type="button" className="nav-link button">Bandeja de entrada</button>
+            <div className="dropdown-content container">
+              <Link to={`${url}/get_request`} className="noDecorations">
+                <p className="row">Solicitudes recibidas</p>
+              </Link>
+              <Link to={`${url}/sent_request`} className="noDecorations">
+                <p className="row">Solicitudes enviadas</p>
+              </Link>
+            </div>
+          </div>
+        </li>
+        <li className="nav-item product-font ml-20">
+          <div className="dropdown">
             <button type="button" className="nav-link button">Recomendaciones</button>
             <div className="dropdown-content container">
               <Link to={`${url}/search/courses`} className="noDecorations">

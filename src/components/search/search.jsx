@@ -24,6 +24,7 @@ function Search(props) {
             },
           });
         setSuggestions(res.data);
+        console.log(res.data)
         if (res.data[0] === undefined) {
           setRecommendation(false);
         } else {
