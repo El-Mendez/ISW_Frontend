@@ -122,6 +122,8 @@
     border-radius: 8px;
     border: none;
     background-color: white;
+    background-image: url('../../assets/jackscave.png');
+    background-size: contain;
     display: flex;
     flex-direction: row;
     align-items: center;
@@ -135,9 +137,122 @@
     transform: scale(1.03);
     border:none;
 }
+.r31{
+    margin-top: 5vh;
+    height: 25vh;
+    width: 15%;
+    border-radius: 8px;
+    border: none;
+    background-color: white;
+    background-image: url('../../assets/aso.jpg');
+    background-size: cover;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    box-sizing: border-box;
+    transition: 1.2s ease-in-out;
+    cursor: pointer;
+}
+
+.r31:hover{
+    transform: scale(1.03);
+    border:none;
+}
+.r32{
+    margin-top: 5vh;
+    height: 25vh;
+    width: 15%;
+    border-radius: 8px;
+    border: none;
+    background-color: white;
+    background-image: url('../../assets/images.jfif');
+    background-size: cover;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    box-sizing: border-box;
+    transition: 1.2s ease-in-out;
+    cursor: pointer;
+}
+
+.r32:hover{
+    transform: scale(1.03);
+    border:none;
+}
+
+.r33{
+    margin-top: 5vh;
+    height: 25vh;
+    width: 15%;
+    border-radius: 8px;
+    border: none;
+    background-color: white;
+    background-image: url('../../assets/jackscave.png');
+    background-size: contain;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    box-sizing: border-box;
+    transition: 1.2s ease-in-out;
+    cursor: pointer;
+}
+
+.r33:hover{
+    transform: scale(1.03);
+    border:none;
+}
+
+.r34{
+    margin-top: 5vh;
+    height: 25vh;
+    width: 15%;
+    border-radius: 8px;
+    border: none;
+    background-color: white;
+    background-image: url('../../assets/jackscave.png');
+    background-size: contain;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    box-sizing: border-box;
+    transition: 1.2s ease-in-out;
+    cursor: pointer;
+}
+
+.r34:hover{
+    transform: scale(1.03);
+    border:none;
+}
+
+.r35{
+    margin-top: 5vh;
+    height: 25vh;
+    width: 15%;
+    border-radius: 8px;
+    border: none;
+    background-color: white;
+    background-image: url('../../assets/jackscave.png');
+    background-size: contain;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    box-sizing: border-box;
+    transition: 1.2s ease-in-out;
+    cursor: pointer;
+}
+
+.r35:hover{
+    transform: scale(1.03);
+    border:none;
+}
 
 @media(max-width: 800px){
-    .r1, .r2, .r3{
+    .r1, .r2, .r3, .r31, .r32, .r33, .r34, .r35{
         width: 80%;
     }
     .dash1{

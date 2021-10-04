@@ -32,12 +32,24 @@ function DashContent() {
       <div className="dv" />
 
       <div className="rowd2">
-        <div className="r3" />
-        <div className="r3" />
-        <div className="r3" />
-        <div className="r3" />
-        <div className="r3" />
-        <div className="r3" />
+        <a href="https://caveuvg.blogspot.com/2018/10/bienvenidos-jacks-cave.html" className="r3">
+          <div />
+        </a>
+        <a href="https://www.uvg.edu.gt/vida-estudiantil/asociaciones-y-clubes/" className="r31">
+          <div />
+        </a>
+        <a href="https://www.uvg.edu.gt/vida-estudiantil/arte-cultura-deporte/" className="r32">
+          <div />
+        </a>
+        <a href="#" className="r33">
+          <div />
+        </a>
+        <a href="#" className="r34">
+          <div />
+        </a>
+        <a href="#" className="r35">
+          <div />
+        </a>
       </div>
     </section>
   );
