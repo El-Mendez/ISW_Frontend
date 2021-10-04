@@ -41,15 +41,13 @@ function DashContent() {
         <a href="https://www.uvg.edu.gt/vida-estudiantil/arte-cultura-deporte/" className="r32">
           <div />
         </a>
-        <a href="#" className="r33">
+        <a href="src\assets\DECLASSIFIED_2.pdf" className="r33">
           <div />
         </a>
-        <a href="#" className="r34">
+        <a href="https://gmail.com" className="r34">
           <div />
         </a>
-        <a href="#" className="r35">
-          <div />
-        </a>
+        
       </div>
     </section>
   );
