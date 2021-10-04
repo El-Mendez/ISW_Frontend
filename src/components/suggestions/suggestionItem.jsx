@@ -8,7 +8,7 @@ function SuggestionItem(props) {
   const item = props;
   const { url } = useRouteMatch();
   return (
-    <div className="container suggestions ">
+    <div id="suggestionResult" className="container suggestions ">
       <Link to={`${url}/profile/${item.carne}`} className="noDecorations">
         <div className="row align-items-center items">
           <div className="col-4 ">
@@ -17,7 +17,7 @@ function SuggestionItem(props) {
             </span>
           </div>
           <div className="col suggestions">
-            <div className="row align-items-start">
+            <div className="row align-items-start" value={item.nombre}>
               <h1>{`${item.nombre} ${item.apellido}`}</h1>
             </div>
             <div className="row align-items-start">

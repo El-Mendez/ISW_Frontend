@@ -4,13 +4,15 @@ import Axios from 'axios';
 import { useLocation } from 'react-router-dom';
 import { SUGGESTIONS_HOBBIES, SUGGESTIONS_COURSES } from '../utils/rutas';
 import SuggestionItem from '../suggestions/suggestionItem';
+import NoSuggestionItem from '../suggestions/noSuggestionItem';
 
 function Search(props) {
+  const [suggestions, setSuggestions] = useState([]);
+  const requests = [SUGGESTIONS_COURSES, SUGGESTIONS_HOBBIES];
+  const [recommendation, setRecommendation] = useState(true);
   const cookies = new Cookies();
   const token = cookies.get('session');
   const item = props;
-  const [suggestions, setSuggestions] = useState([]);
-  const requests = [SUGGESTIONS_COURSES, SUGGESTIONS_HOBBIES];
   const location = useLocation();
   function searchFriends() {
     const request = async () => {
@@ -22,6 +24,12 @@ function Search(props) {
             },
           });
         setSuggestions(res.data);
+        console.log(res.data)
+        if (res.data[0] === undefined) {
+          setRecommendation(false);
+        } else {
+          setRecommendation(true);
+        }
       } catch (error) {
         console.log(error);
       }
@@ -33,18 +41,24 @@ function Search(props) {
   }, [location]);
   return (
     <div className="userList">
-      <div className="container ">
-        <div className="row align-items-center">
-          {suggestions.map((user) => (
-            <SuggestionItem
-              nombre={user.nombre}
-              apellido={user.apellido}
-              carne={user.carne}
-              key={user.carne}
-            />
-          ))}
+      {recommendation ? (
+        <div className="container ">
+          <div className="row align-items-center">
+            {suggestions.map((user) => (
+              <SuggestionItem
+                nombre={user.nombre}
+                apellido={user.apellido}
+                carne={user.carne}
+                key={user.carne}
+              />
+            ))}
+          </div>
         </div>
-      </div>
+      ) : (
+        <div className="container noSuggestions">
+          <NoSuggestionItem />
+        </div>
+      )}
     </div>
   );
 }

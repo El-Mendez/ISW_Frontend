@@ -12,7 +12,7 @@ function NavBar() {
     <div>
       {/* NavBar menu */}
       <div
-        className="bg-transparent fixed-top"
+        className=""
         style={{
           opacity: 0.85,
           height: '90px',
@@ -25,7 +25,7 @@ function NavBar() {
               <img src={logo} alt="Logo" className="img-size" />
             </Link>
             <div className="d-flex">
-              <button className="sub-1 me-3 start-link button-styless" onClick={() => setLogin(true)} type="button">Iniciar sesión</button>
+              <button id="logInRequest" className="sub-1 me-3 start-link button-styless" onClick={() => setLogin(true)} type="button">Iniciar sesión</button>
               <div className="border-end border-primary" style={{ height: '20px' }} />
               <Link className="sub-1 ms-3 start-link" to="/signUp">Registrarse</Link>
             </div>

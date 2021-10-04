@@ -106,6 +106,7 @@ export default function Login(props) {
       aria-labelledby="contained-modal-title-vcenter"
       size="sm"
       centered
+      id="logInModel"
     >
       <Modal.Header className="bg-purple-dark">
         <Modal.Title id="contained-modal-title-vcenter">
@@ -166,7 +167,7 @@ export default function Login(props) {
                 ¿Olvidaste tu contraseña?
               </Link>
               {/* eslint-disable-next-line react/button-has-type */}
-              <button onSubmit={onSubmit} className="btn-fill arrow-button" type="submit">
+              <button id="logIn" onSubmit={onSubmit} className="btn-fill arrow-button" type="submit">
                 INICIAR SESIÓN
                 <span
                   className="material-icons position-absolute ms-1"

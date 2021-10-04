@@ -7,6 +7,9 @@ import {
 import NavBar from '../navbar/navbar';
 import Search from '../search/search';
 import UserInfo from '../profile/profile';
+import DashContent from './dashcontent';
+import FriendsList from '../friends/friends';
+import Request from '../friends/request';
 
 function Dashboard() {
   const { url } = useRouteMatch();
@@ -14,7 +17,38 @@ function Dashboard() {
     <div>
       <NavBar />
       <Switch>
-        <Route path={`${url}/profile`}>
+        <Route exact path={`${url}`}>
+          <DashContent />
+        </Route>
+        <Route exact path={`${url}/friends`}>
+          <FriendsList />
+        </Route>
+        <Route exact path={`${url}/get_request`}>
+          <Request
+            type={0}
+          />
+        </Route>
+        <Route exact path={`${url}/sent_request`}>
+          <Request
+            type={1}
+          />
+        </Route>
+        <Route exact path={`${url}/get_request/profile/:carne`}>
+          <UserInfo
+            type={0}
+          />
+        </Route>
+        <Route exact path={`${url}/sent_request/profile/:carne`}>
+          <UserInfo
+            type={0}
+          />
+        </Route>
+        <Route exact path={`${url}/friends/profile/:carne`}>
+          <UserInfo
+            type={0}
+          />
+        </Route>
+        <Route exact path={`${url}/profile`}>
           <UserInfo
             type={0}
           />
