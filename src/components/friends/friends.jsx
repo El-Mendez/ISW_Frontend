@@ -2,13 +2,13 @@ import React, { useState, useEffect } from 'react';
 import Cookies from 'universal-cookie';
 import Axios from 'axios';
 import { useLocation } from 'react-router-dom';
-import { SUGGESTIONS_HOBBIES, SUGGESTIONS_COURSES, GET_FRIENDS } from '../utils/rutas';
+import { GET_FRIENDS } from '../utils/rutas';
 import SuggestionItem from '../suggestions/suggestionItem';
 import NoFriends from './noFriends';
+import { NavItem } from 'react-bootstrap';
 
 function Friends(props) {
   const [friendsList, setFriendsList] = useState([]);
-  const requests = [SUGGESTIONS_COURSES, SUGGESTIONS_HOBBIES];
   const [friends, setFriends] = useState(true);
   const cookies = new Cookies();
   const token = cookies.get('session');

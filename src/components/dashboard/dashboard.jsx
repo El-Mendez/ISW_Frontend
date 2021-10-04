@@ -33,12 +33,17 @@ function Dashboard() {
             type={1}
           />
         </Route>
-        <Route path={`${url}/request/profile/:carne`}>
+        <Route exact path={`${url}/get_request/profile/:carne`}>
           <UserInfo
             type={0}
           />
         </Route>
-        <Route path={`${url}/friends/profile/:carne`}>
+        <Route exact path={`${url}/sent_request/profile/:carne`}>
+          <UserInfo
+            type={0}
+          />
+        </Route>
+        <Route exact path={`${url}/friends/profile/:carne`}>
           <UserInfo
             type={0}
           />

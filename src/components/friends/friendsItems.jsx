@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { MdClass } from 'react-icons/md';
 import { AiOutlineCheck, AiOutlineClose } from 'react-icons/ai';
 import { Link, useRouteMatch } from 'react-router-dom';
@@ -63,8 +63,12 @@ function FriendsItems(props) {
           </div>
           <div className="row align-items-start">
             <div className="infoser">
-              <AiOutlineCheck onClick={acceptRequest} className="infoUser" />
-              <AiOutlineClose onClick={cancelRequest} className="infoUser" />
+              {!item.type ? (
+                <>
+                  <AiOutlineCheck onClick={acceptRequest} className="infoUser" />
+                  <AiOutlineClose onClick={cancelRequest} className="infoUser" />
+                </>
+              ) : null}
               <Link to={`${url}/profile/${item.carne}`} className="noDecorations">
                 <MdClass className="infoUser" />
               </Link>

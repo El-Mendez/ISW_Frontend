@@ -26,7 +26,7 @@ const ACCEPT_REQUEST = 'http://api.meetinguvg.me/auth/friends/acceptRequest';
 const CANCEL_REQUEST = 'http://api.meetinguvg.me/auth/friends/cancelRequest';
 const GET_FRIENDS = 'http://api.meetinguvg.me/auth/friends/getFriends';
 const RECEIVED_REQUEST = 'http://api.meetinguvg.me/auth/friends/receivedRequests';
-const SENT_REQUEST = 'http://api.meetinguvg.me/auth/friends/sentRequests';
+const SENT_REQUESTS = 'http://api.meetinguvg.me/auth/friends/sentRequests';
 
 module.exports = {
   LOGIN,
@@ -50,5 +50,5 @@ module.exports = {
   CANCEL_REQUEST,
   GET_FRIENDS,
   RECEIVED_REQUEST,
-  SENT_REQUEST,
+  SENT_REQUESTS,
 };
