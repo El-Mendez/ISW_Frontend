@@ -24,7 +24,6 @@ function Friends(props) {
             },
           });
         setFriendsList(res.data);
-        console.log(res.data)
 
         if (res.data[0] === undefined) {
           setFriends(false);

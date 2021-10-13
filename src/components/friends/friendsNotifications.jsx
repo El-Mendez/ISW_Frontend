@@ -3,11 +3,11 @@ import { useRouteMatch, Link } from 'react-router-dom';
 import Axios from 'axios';
 import Cookies from 'universal-cookie';
 import { FiSend } from 'react-icons/fi';
-import history from '../utils/history';
-import { RECEIVED_REQUEST } from '../utils/rutas';
+import { RECEIVED_REQUEST, ACCEPT_REQUEST, CANCEL_REQUEST } from '../utils/rutas';
 
 export default function FriendsNotifications() {
   const [showNotifications, setShowNotifications] = useState(false);
+  const [reload, setReload] = useState(false);
   const [requestList, setRequestList] = useState([]);
   const [requests, setRequests] = useState(false);
   const cookies = new Cookies();
@@ -16,9 +16,50 @@ export default function FriendsNotifications() {
   function onClick() {
     setShowNotifications(!showNotifications);
   }
-  function showProfile(item) {
-    history.push(`${url}/profile`);
-    history.go();
+  function showProfile(e) {
+    e.preventDefault();
+    e.stopPropagation();
+    console.log(e.target.value);
+  }
+  function acceptRequest(e) {
+    e.preventDefault();
+    e.stopPropagation();
+    const request = async () => {
+      try {
+        await Axios.post(ACCEPT_REQUEST,
+          {
+            carne: e.target.value,
+          }, {
+            headers: {
+              Authorization: `Bearer ${token}`,
+            },
+          });
+        setReload(true);
+      } catch (error) {
+        console.log(error);
+      }
+    };
+    request();
+  }
+  function cancelRequest(e) {
+    e.preventDefault();
+    e.stopPropagation();
+    const request = async () => {
+      try {
+        await Axios.post(CANCEL_REQUEST,
+          {
+            carne: e.target.value,
+          }, {
+            headers: {
+              Authorization: `Bearer ${token}`,
+            },
+          });
+        setReload(true);
+      } catch (error) {
+        console.log(error);
+      }
+    };
+    request();
   }
   function receivedRequests() {
     const request = async () => {
@@ -30,6 +71,7 @@ export default function FriendsNotifications() {
             },
           });
         setRequestList(res.data);
+        console.log(res.data);
         if (res.data[0] === undefined) {
           setRequests(false);
         } else {
@@ -43,7 +85,7 @@ export default function FriendsNotifications() {
   }
   useEffect(() => {
     receivedRequests();
-  }, []);
+  }, [reload]);
   if (requests) {
     return (
       <div className="notification">
@@ -57,22 +99,25 @@ export default function FriendsNotifications() {
             <button className="buttonClose" type="button" onClick={onClick}>X</button>
             <div className="containerNotifications container">
               {requestList.map((user) => (
-                <div key={user.carne} className="row notifications">
-                  <div className="image col-6">
-                    <span className="material-icons">
-                      account_circle
-                    </span>
-                  </div>
-                  <div className="datos col">
-                    <div className="row">
-                      {user.nombre}
+                <Link to={`${url}/profile/${user.carne}`} className="col-6" key={user.carne}>
+                  <div key={user.carne} className="row notifications">
+                    <div className="col-1 random" />
+                    <div className="image col-4">
+                      <span className="material-icons">
+                        account_circle
+                      </span>
                     </div>
-                    <div className="row buttons">
-                      <button className="button col-6 " type="button" onClick={showProfile}>Aceptar</button>
-                      <button className="button col-6 " type="button">Rechazar</button>
+                    <div className="datos col">
+                      <div className="row">
+                        {user.nombre}
+                      </div>
+                      <div className="row buttons">
+                        <button value={user.carne} className="button col-6" type="button" onClick={acceptRequest}>Aceptar</button>
+                        <button value={user.carne} className="button col-6" type="button" onClick={cancelRequest}>Rechazar</button>
+                      </div>
                     </div>
                   </div>
-                </div>
+                </Link>
               ))}
             </div>
           </div>

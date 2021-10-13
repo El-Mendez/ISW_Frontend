@@ -50,7 +50,7 @@ function Dashboard() {
             type={0}
           />
         </Route>
-        <Route exact path={`${url}/profile/:carne`}>
+        <Route path={`${url}/profile/:carne`}>
           <UserInfo
             type={0}
           />
