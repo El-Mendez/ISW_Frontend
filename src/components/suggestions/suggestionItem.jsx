@@ -18,11 +18,11 @@ function SuggestionItem(props) {
           </div>
           <div className="col suggestions">
             <div className="row align-items-start" value={item.nombre}>
-              <h1>{`${item.nombre} ${item.apellido}`}</h1>
+              <h1>{item.nombre}</h1>
             </div>
             <div className="row align-items-start">
               <h2>
-                {`${item.apellido.substring(0, 3) + item.carne}@uvg.edu.gt`}
+                {item.correo}
               </h2>
               <div className="infoser">
                 <MdClass className="infoUser" />

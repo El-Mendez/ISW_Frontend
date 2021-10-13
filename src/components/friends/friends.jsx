@@ -24,6 +24,7 @@ function Friends(props) {
             },
           });
         setFriendsList(res.data);
+        console.log(res.data)
 
         if (res.data[0] === undefined) {
           setFriends(false);
@@ -46,10 +47,10 @@ function Friends(props) {
           <div className="row align-items-center">
             {friendsList.map((user) => (
               <SuggestionItem
-                nombre={user.nombre_completo}
-                apellido=""
-                carne={user.credencial}
-                key={user.credencial}
+                nombre={user.nombre}
+                carne={user.carne}
+                correo={user.correo}
+                key={user.carne}
               />
             ))}
           </div>

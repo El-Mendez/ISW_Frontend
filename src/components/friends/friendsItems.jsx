@@ -13,7 +13,6 @@ function FriendsItems(props) {
   const cookies = new Cookies();
   const token = cookies.get('session');
   function acceptRequest() {
-    console.log(`${url}/profile/${item.carne}`);
     const request = async () => {
       try {
         await Axios.post(ACCEPT_REQUEST,

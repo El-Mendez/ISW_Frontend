@@ -63,6 +63,7 @@ export default function Profile(props) {
           cursos: res.data[0].cursos,
           hobbies: res.data[0].hobbies,
         });
+        console.log(res.data)
       } catch (error) {
         console.log(error);
       }

@@ -10,12 +10,14 @@ import UserInfo from '../profile/profile';
 import DashContent from './dashcontent';
 import FriendsList from '../friends/friends';
 import Request from '../friends/request';
+import FriendsNotifications from '../friends/friendsNotifications';
 
 function Dashboard() {
   const { url } = useRouteMatch();
   return (
     <div>
       <NavBar />
+      <FriendsNotifications />
       <Switch>
         <Route exact path={`${url}`}>
           <DashContent />
@@ -44,6 +46,11 @@ function Dashboard() {
           />
         </Route>
         <Route exact path={`${url}/friends/profile/:carne`}>
+          <UserInfo
+            type={0}
+          />
+        </Route>
+        <Route exact path={`${url}/profile/:carne`}>
           <UserInfo
             type={0}
           />
