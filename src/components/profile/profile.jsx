@@ -4,7 +4,9 @@ import Axios from 'axios';
 import Cookies from 'universal-cookie';
 import ProfileItem from './profileItem';
 import Report from './report';
-import { USER_INFO, USER_INFO_AUT, SEND_REQUEST } from '../utils/rutas';
+import {
+  USER_INFO, USER_INFO_AUT, SEND_REQUEST, DELETE_FRIEND,
+} from '../utils/rutas';
 
 export default function Profile(props) {
   const [report, setReport] = useState(false);
@@ -44,6 +46,25 @@ export default function Profile(props) {
               Authorization: `Bearer ${token}`,
             },
           });
+          alert(`Se ha enviado la solicitud al usuario ${user.carne}`);
+      } catch (error) {
+        console.log(error);
+      }
+    };
+    request();
+  }
+  function deleteFriend() {
+    const request = async () => {
+      try {
+        await Axios.post(DELETE_FRIEND,
+          {
+            carne: user.carne,
+          }, {
+            headers: {
+              Authorization: `Bearer ${token}`,
+            },
+          });
+        alert(`Se ha eliminado al usuario ${user.carne}`);
       } catch (error) {
         console.log(error);
       }
@@ -112,13 +133,25 @@ export default function Profile(props) {
               <div className="col-6">
                 <h1>{` ${user.nombre_completo}`}</h1>
               </div>
-              {(isUser && item.type) ? (
-                <button id="addFriend" className="col-3 addIcon" type="button" onClick={addFriend}>
-                  <p>Agregar amigo </p>
-                  <span className="material-icons add">
-                    person_add
-                  </span>
-                </button>
+              {(item.type === 1) ? (
+                <>
+                  <button id="addFriend" className="col-3 addIcon" type="button" onClick={addFriend}>
+                    <p>Agregar amigo </p>
+                    <span className="material-icons add">
+                      person_add
+                    </span>
+                  </button>
+                </>
+              ) : null}
+              {(item.type === 2) ? (
+                <>
+                  <button id="addFriend" className="col-3 deleteIcon" type="button" onClick={deleteFriend}>
+                    <span className="material-icons add">
+                      remove_circle_outline
+                    </span>
+                    <p>  Eliminar amigo</p>
+                  </button>
+                </>
               ) : null}
             </div>
           </div>
@@ -140,7 +173,7 @@ export default function Profile(props) {
               <span className="material-icons"> book </span>
               Hobbies
             </button>
-            {item.type === 2
+            {item.type === 1
               ? (
                 <button onClick={() => setReport(true)} id="report" type="button" className="button-report ms-3 mb-2 d-flex align-content-center">
                   <span className="material-icons"> report </span>

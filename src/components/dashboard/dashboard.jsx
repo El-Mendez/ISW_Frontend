@@ -37,22 +37,23 @@ function Dashboard() {
         </Route>
         <Route exact path={`${url}/get_request/profile/:carne`}>
           <UserInfo
-            type={0}
+            type={1}
           />
         </Route>
         <Route exact path={`${url}/sent_request/profile/:carne`}>
           <UserInfo
-            type={0}
+            type={1}
           />
         </Route>
         <Route exact path={`${url}/friends/profile/:carne`}>
           <UserInfo
-            type={0}
+            type={2}
           />
         </Route>
+        {/* No recuerdo que era este link */}
         <Route path={`${url}/profile/:carne`}>
           <UserInfo
-            type={0}
+            type={1}
           />
         </Route>
         <Route exact path={`${url}/profile`}>
@@ -78,6 +79,11 @@ function Dashboard() {
         <Route path={`${url}/search/hobbies`}>
           <Search
             type={1}
+          />
+        </Route>
+        <Route path={`${url}/search/friends`}>
+          <Search
+            type={2}
           />
         </Route>
 

@@ -27,6 +27,7 @@ const CANCEL_REQUEST = 'http://api.meetinguvg.me/auth/friends/cancelRequest';
 const GET_FRIENDS = 'http://api.meetinguvg.me/auth/friends/getFriends';
 const RECEIVED_REQUEST = 'http://api.meetinguvg.me/auth/friends/receivedRequests';
 const SENT_REQUESTS = 'http://api.meetinguvg.me/auth/friends/sentRequests';
+const DELETE_FRIEND = 'http://api.meetinguvg.me/auth/friends/deleteFriend';
 
 module.exports = {
   LOGIN,
@@ -51,4 +52,5 @@ module.exports = {
   GET_FRIENDS,
   RECEIVED_REQUEST,
   SENT_REQUESTS,
+  DELETE_FRIEND,
 };

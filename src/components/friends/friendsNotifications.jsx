@@ -16,11 +16,6 @@ export default function FriendsNotifications() {
   function onClick() {
     setShowNotifications(!showNotifications);
   }
-  function showProfile(e) {
-    e.preventDefault();
-    e.stopPropagation();
-    console.log(e.target.value);
-  }
   function acceptRequest(e) {
     e.preventDefault();
     e.stopPropagation();

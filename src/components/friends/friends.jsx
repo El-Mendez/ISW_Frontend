@@ -5,7 +5,6 @@ import { useLocation } from 'react-router-dom';
 import { GET_FRIENDS } from '../utils/rutas';
 import SuggestionItem from '../suggestions/suggestionItem';
 import NoFriends from './noFriends';
-import { NavItem } from 'react-bootstrap';
 
 function Friends(props) {
   const [friendsList, setFriendsList] = useState([]);

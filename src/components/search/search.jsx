@@ -36,7 +36,10 @@ function Search(props) {
     request();
   }
   useEffect(() => {
-    searchFriends();
+    // Esto es probicional hasta que tenga la API de las recomendaciones por amigos
+    if (item.type !== 2) {
+      searchFriends();
+    }
   }, [location]);
   return (
     <div className="userList">
