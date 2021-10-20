@@ -21,6 +21,7 @@ export default function Profile(props) {
   const [isSelectedCourses, setIsSelectedCourses] = useState(true);
   const [isSelectedHobbies, setIsSelectedHobbies] = useState(false);
   const [isSelectedContact, setIsSelectedContact] = useState(false);
+  const [image, setImage] = useState(false);
   const [user, setUser] = useState({
     carne: '',
     nombre_completo: '',
@@ -135,6 +136,12 @@ export default function Profile(props) {
           hobbies: res.data[0].hobbies,
           redes_sociales: res.data[0].redes_sociales,
         });
+        const img = new Image();
+        img.src = `../../../public/assets/${res.data[0].carne}.png`;
+        // eslint-disable-next-line no-unused-expressions
+        img.width > 0
+          ? setImage(true)
+          : null;
         pendingRequests(res.data[0].carne);
       } catch (error) {
         console.log(error);
@@ -161,6 +168,12 @@ export default function Profile(props) {
           hobbies: res.data[0].hobbies,
           redes_sociales: res.data[0].redes_sociales,
         });
+        const img = new Image();
+        img.src = `../../../public/assets/${res.data[0].carne}.png`;
+        // eslint-disable-next-line no-unused-expressions
+        img.width > 0
+          ? setImage(true)
+          : null;
       } catch (error) {
         console.log(error);
       }
@@ -178,7 +191,7 @@ export default function Profile(props) {
     <div id="profileContainer" className="container profile">
       <div className="row">
         <div className="col-sm-12 col-md-4 d-flex justify-content-center" id="profile-img">
-          <img src="https://avatars.dicebear.com/api/bottts/:seed.svg" alt="Profile" className="w-75 rounded-circle" width="inherit" />
+          <img src={`../../../public/assets/${image ? `${user.carne}.png` : 'default.svg'}`} alt="Profile" className="w-75 align-self-center" />
         </div>
         <div className="col-sm-12 col-md-7 d-flex flex-column align-self-end">
           <div className="container addName">

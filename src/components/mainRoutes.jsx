@@ -16,7 +16,6 @@ import ResetPassword from './resetPassword/resetpassword';
 import ConfirmAccount from './register/confirmAccount';
 import RegisterAccountMessage from './register/registerAccountMessage';
 import Profile from './profile/profile';
-import ImageTesting from './profile/imageTesting';
 
 export default function MainRoutes() {
   const cookies = new Cookies();
@@ -63,12 +62,12 @@ export default function MainRoutes() {
               />
             ))}
         />
-        <Route path="/data" session={session} component={UserInfo} />
+        <ProtectedRoutes path="/data" session={session} component={UserInfo} />
         <Route exact path="/signUp" component={Register} />
         <Route path="/recovery" component={ResetPassword} />
         <Route exact path="/reset-password" component={ForgotPassword} />
         <Route exact path="/confirm" component={ConfirmAccount} />
-        <Route exact path="/test" component={ImageTesting} />
+        <Route exact path="/test" component={UserInfo} />
         {/* Handle every other path that is not define */}
         <Route path="*" component={Custom404} />
       </Switch>

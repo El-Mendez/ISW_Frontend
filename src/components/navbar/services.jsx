@@ -9,7 +9,11 @@ function Services() {
   const { url } = useRouteMatch();
   const cookies = new Cookies();
   const token = cookies.get('session');
-  const [user, setUser] = useState('user');
+  const [user, setUser] = useState({
+    nombre: '',
+    carne: 0,
+  });
+  const [image, setImage] = useState(false);
 
   // TODO utilizar proptypes
 
@@ -21,13 +25,22 @@ function Services() {
   function searchFriends() {
     const request = async () => {
       try {
-        const res = await Axios.get(USER_INFO_AUT,
+        const { data } = await Axios.get(USER_INFO_AUT,
           {
             headers: {
               Authorization: `Bearer ${token}`,
             },
           });
-        setUser(res.data[0].nombre_completo.split(' ', 1));
+        setUser({
+          nombre: data[0].nombre_completo.split(' ', 1),
+          carne: data[0].carne,
+        });
+        const img = new Image();
+        img.src = `../../../public/assets/${data[0].carne}.png`;
+        // eslint-disable-next-line no-unused-expressions
+        img.width > 0
+          ? setImage(true)
+          : null;
       } catch (error) {
         console.log(error);
       }
@@ -37,16 +50,16 @@ function Services() {
   useEffect(() => {
     searchFriends();
   }, []);
+
   return (
     <div className="d-flex align-items-center ">
-      <div className="services container align-items" style={{ height: '28px' }}>
+      <div className="services container align-items-end" style={{ height: '28px' }}>
         <div className="row dropdown">
           <div className="row">
-            <span className="material-icons col-4 float-left">
-              account_circle
-            </span>
+            <img src={`../../../public/assets/${image ? `${user.carne}.png` : 'default.svg'}`} alt="Profile" className="w-25 rounded-circle align-self-center" />
+            {' '}
             <div className="col-8">
-              {user}
+              {user.nombre}
             </div>
           </div>
           <div className="row">

@@ -28,6 +28,9 @@ function UserInfo() {
   const token = cookies.get('session');
   const [hobbies, setHobbies] = useState([]);
   const [cursos, setCursos] = useState([]);
+  const [file, setFile] = useState('');
+  const [fileName, setFileName] = useState('');
+  const [uploadImage, setUploadImage] = useState();
 
   const [user, setUser] = useState({
     hobbies: [],
@@ -64,7 +67,10 @@ function UserInfo() {
         const res = await Axios.get(SEARCH_COURSE);
         res.data.map((item) => (
           item.secciones.map((section) => (
-            setCursos((prevState) => [...prevState, { value: section.seccionId, label: `${item.cursoNombre} → sección ${section.seccion}` }])
+            setCursos((prevState) => [...prevState, {
+              value: section.seccionId,
+              label: `${item.cursoNombre} → sección ${section.seccion}`,
+            }])
           ))
         ));
       } catch (error) {
@@ -117,6 +123,25 @@ function UserInfo() {
     request();
   }
 
+  const loadImage = async () => {
+    const data = new FormData();
+    data.append('file', file);
+    data.append('carne', 191025);
+    try {
+      const res = await Axios.post('http://localhost:3000/free/profile/image',
+        data,
+        {
+          headers: {
+            'Content-Type': 'multipart/form-data',
+          },
+        });
+      console.log(res);
+      setUploadImage(res.data.name);
+    } catch (e) {
+      console.log(e);
+    }
+  };
+
   const onHobbiesChange = (selectedHobbies) => {
     selectedHobbies.map((item) => (
       setUser({
@@ -157,16 +182,49 @@ function UserInfo() {
   const onSubmit = () => {
     assignSection();
     assignHobby();
+    loadImage();
     setTimeout(() => {
       history.push('/home');
       history.go();
     }, 1000);
   };
 
+  const onImageChange = (e) => {
+    setFile(e.target.files[0]);
+    setFile(e.target.files[0].name);
+  };
+
   return (
     <div className="container px-0 bg-secondary pt-2">
       <form onSubmit={handleSubmit(onSubmit)}>
         {/* DATA */}
+        <div className="container px-5 my-5">
+          <div className="d-flex align-items-center px-0">
+            <div className="progress-activate-circle d-flex justify-content-center activate me-3">
+              <h2 className="progress-number">1</h2>
+            </div>
+            <h1>Personaliza tu perfil</h1>
+          </div>
+          {/* Foto de perfil */}
+          <div className="d-flex flex-column justify-content-center align-content-center">
+            <img src={`../../../public/assets/${uploadImage || 'default.svg'}`} alt="Profile" className="w-25 rounded-circle align-self-center" />
+            <label htmlFor="file-upload" className="custom-file-upload align-self-center mt-2 d-flex justify-content-center btn-fill">
+              <span className="material-icons me-2">
+                file_upload
+              </span>
+              <div>Seleccionar una imagen...</div>
+            </label>
+            <input type="file" id="file-upload" onChange={onImageChange} />
+          </div>
+          <small className="text-danger text-small d-block mb-2 mt-1">
+            <div className="d-flex align-items-center ps-2">
+              {errors.facebook
+                ? <span className="material-icons me-1">error_outline</span>
+                : null}
+              {errors.facebook?.message}
+            </div>
+          </small>
+        </div>
         <div className="container px-5 my-5">
           <div className="d-flex align-items-center px-0">
             <div className="progress-activate-circle d-flex justify-content-center activate me-3">
@@ -216,7 +274,7 @@ function UserInfo() {
             </span>
             <input
               className="input ms-1"
-              type="facebook"
+              type="text"
               name="facebook"
               placeholder="Perfil de Facebook"
               onInput={handleInputChange}
@@ -238,7 +296,7 @@ function UserInfo() {
             </span>
             <input
               className="input ms-1"
-              type="instagram"
+              type="text"
               name="instagram"
               placeholder="Perfil de Instagram"
               onInput={handleInputChange}
