@@ -5,22 +5,22 @@ import Cookies from 'universal-cookie';
 import ProfileItem from './profileItem';
 import Report from './report';
 import {
-  USER_INFO, USER_INFO_AUT, SEND_REQUEST, DELETE_FRIEND,
+  USER_INFO, USER_INFO_AUT, SEND_REQUEST, DELETE_FRIEND, SENT_REQUESTS, CANCEL_REQUEST,
 } from '../utils/rutas';
 
 export default function Profile(props) {
   const [report, setReport] = useState(false);
   const [isUser, setIsUser] = useState(false);
+  const [pendingRequest, setPendingRequest] = useState(false);
+  const [reload, setReload] = useState(false);
   const cookies = new Cookies();
   const token = cookies.get('session');
   const id = useParams();
   const location = useLocation();
   const item = props;
-  const [isSelected, setIsSelected] = useState({
-    contact: false,
-    courses: true,
-    hobbies: false,
-  });
+  const [isSelectedCourses, setIsSelectedCourses] = useState(true);
+  const [isSelectedHobbies, setIsSelectedHobbies] = useState(false);
+  const [isSelectedContact, setIsSelectedContact] = useState(false);
   const [user, setUser] = useState({
     carne: '',
     nombre_completo: '',
@@ -31,9 +31,20 @@ export default function Profile(props) {
     redes_sociales: [],
   });
   const handleClick = (e) => {
-    setIsSelected({
-      [e.target.id]: true,
-    });
+    console.log(e.target.name);
+    if (e.target.name === 'contact') {
+      setIsSelectedCourses(false);
+      setIsSelectedHobbies(false);
+      setIsSelectedContact(true);
+    } else if (e.target.name === 'courses') {
+      setIsSelectedCourses(true);
+      setIsSelectedHobbies(false);
+      setIsSelectedContact(false);
+    } else if (e.target.name === 'hobbies') {
+      setIsSelectedCourses(false);
+      setIsSelectedHobbies(true);
+      setIsSelectedContact(false);
+    }
   };
   function addFriend() {
     const request = async () => {
@@ -46,7 +57,45 @@ export default function Profile(props) {
               Authorization: `Bearer ${token}`,
             },
           });
-          alert(`Se ha enviado la solicitud al usuario ${user.carne}`);
+        alert(`Se ha enviado la solicitud al usuario ${user.carne}`);
+      } catch (error) {
+        console.log(error);
+      }
+    };
+    request();
+  }
+  function cancelRequest() {
+    const request = async () => {
+      try {
+        await Axios.post(CANCEL_REQUEST,
+          {
+            carne: user.carne,
+          }, {
+            headers: {
+              Authorization: `Bearer ${token}`,
+            },
+          });
+        setReload(true);
+      } catch (error) {
+        console.log(error);
+      }
+    };
+    request();
+  }
+  function pendingRequests(carne) {
+    const request = async () => {
+      try {
+        const res = await Axios.get(SENT_REQUESTS,
+          {
+            headers: {
+              Authorization: `Bearer ${token}`,
+            },
+          });
+        res.data.forEach((student) => {
+          if (student.carne === carne) {
+            setPendingRequest(true);
+          }
+        });
       } catch (error) {
         console.log(error);
       }
@@ -76,6 +125,7 @@ export default function Profile(props) {
       try {
         setIsUser(true);
         const res = await Axios.get(`${USER_INFO}${id.carne}`);
+        console.log(res);
         setUser({
           carne: res.data[0].carne,
           nombre_completo: res.data[0].nombre_completo,
@@ -83,7 +133,9 @@ export default function Profile(props) {
           correo: res.data[0].correo,
           cursos: res.data[0].cursos,
           hobbies: res.data[0].hobbies,
+          redes_sociales: res.data[0].redes_sociales,
         });
+        pendingRequests(res.data[0].carne);
       } catch (error) {
         console.log(error);
       }
@@ -107,6 +159,7 @@ export default function Profile(props) {
           correo: res.data[0].correo,
           cursos: res.data[0].cursos,
           hobbies: res.data[0].hobbies,
+          redes_sociales: res.data[0].redes_sociales,
         });
       } catch (error) {
         console.log(error);
@@ -135,8 +188,13 @@ export default function Profile(props) {
               </div>
               {(item.type === 1) ? (
                 <>
-                  <button id="addFriend" className="col-3 addIcon" type="button" onClick={addFriend}>
-                    <p>Agregar amigo </p>
+                  <button id="addFriend" className="col-3 addIcon" type="button" onClick={!pendingRequest ? (addFriend) : (cancelRequest)}>
+                    {pendingRequest ? (
+                      <p>Cancelar solicitud </p>
+                    ) : (
+                      <p>Agregar amigo </p>
+
+                    )}
                     <span className="material-icons add">
                       person_add
                     </span>
@@ -161,15 +219,15 @@ export default function Profile(props) {
             {` ${user.carne}`}
           </h4>
           <div className="d-flex border-1 border-bottom mt-4">
-            <button onClick={handleClick} id="courses" type="button" className={`button-styless ms-3 mb-2 d-flex align-content-center select-item ${isSelected.courses ? 'isSelected' : ''}`}>
+            <button onClick={handleClick} name="courses" id="courses" type="button" className={`button-styless ms-3 mb-2 d-flex align-content-center select-item ${isSelectedCourses ? 'isSelected' : ''}`}>
               <span className="material-icons"> library_books </span>
               Cursos
             </button>
-            <button id="contact" type="button" className={`button-styless mb-2 d-flex align-content-center select-item ${isSelected.contact ? 'isSelected' : ''}`}>
+            <button onClick={handleClick} name="contact" id="contact" type="button" className={`button-styless mb-2 d-flex align-content-center select-item ${isSelectedContact ? 'isSelected' : ''}`}>
               <span className="material-icons"> person </span>
               Contacto
             </button>
-            <button onClick={handleClick} id="hobbies" type="button" className={`button-styless ms-3 mb-2 d-flex align-content-center d-md-none select-item ${isSelected.hobbies ? isSelected : ''}`}>
+            <button onClick={handleClick} name="hobbies" id="hobbies" type="button" className={`button-styless ms-3 mb-2 d-flex align-content-center d-md-none select-item ${isSelectedHobbies ? 'isSelected' : ''}`}>
               <span className="material-icons"> book </span>
               Hobbies
             </button>
@@ -203,10 +261,10 @@ export default function Profile(props) {
           />
         </div>
         <div className="col-sm-12 col-md-7 d-flex flex-column ms-2">
-          {isSelected.contact
+          {isSelectedContact
             ? (
               <ProfileItem
-                contact={user.cursos}
+                contact={user.redes_sociales}
                 type={1}
               />
             ) : (
@@ -222,7 +280,6 @@ export default function Profile(props) {
               show={report}
               onHide={() => setReport(false)}
             />
-
           ) : null}
       </div>
 
