@@ -66,7 +66,6 @@ export default function FriendsNotifications() {
             },
           });
         setRequestList(res.data);
-        console.log(res.data);
         if (res.data[0] === undefined) {
           setRequests(false);
         } else {

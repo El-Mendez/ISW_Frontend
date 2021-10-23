@@ -32,7 +32,6 @@ export default function Profile(props) {
     redes_sociales: [],
   });
   const handleClick = (e) => {
-    console.log(e.target.name);
     if (e.target.name === 'contact') {
       setIsSelectedCourses(false);
       setIsSelectedHobbies(false);
@@ -126,7 +125,6 @@ export default function Profile(props) {
       try {
         setIsUser(true);
         const res = await Axios.get(`${USER_INFO}${id.carne}`);
-        console.log(res);
         setUser({
           carne: res.data[0].carne,
           nombre_completo: res.data[0].nombre_completo,
@@ -236,10 +234,12 @@ export default function Profile(props) {
               <span className="material-icons"> library_books </span>
               Cursos
             </button>
-            <button onClick={handleClick} name="contact" id="contact" type="button" className={`button-styless mb-2 d-flex align-content-center select-item ${isSelectedContact ? 'isSelected' : ''}`}>
-              <span className="material-icons"> person </span>
-              Contacto
-            </button>
+            {item.friend ? (
+              <button onClick={handleClick} name="contact" id="contact" type="button" className={`button-styless mb-2 d-flex align-content-center select-item ${isSelectedContact ? 'isSelected' : ''}`}>
+                <span className="material-icons"> person </span>
+                Contacto
+              </button>
+            ) : null}
             <button onClick={handleClick} name="hobbies" id="hobbies" type="button" className={`button-styless ms-3 mb-2 d-flex align-content-center d-md-none select-item ${isSelectedHobbies ? 'isSelected' : ''}`}>
               <span className="material-icons"> book </span>
               Hobbies

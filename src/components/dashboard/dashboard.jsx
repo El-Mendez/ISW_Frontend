@@ -38,16 +38,19 @@ function Dashboard() {
         <Route exact path={`${url}/get_request/profile/:carne`}>
           <UserInfo
             type={1}
+            friend={0}
           />
         </Route>
         <Route exact path={`${url}/sent_request/profile/:carne`}>
           <UserInfo
             type={1}
+            friend={0}
           />
         </Route>
         <Route exact path={`${url}/friends/profile/:carne`}>
           <UserInfo
             type={2}
+            friend={1}
           />
         </Route>
         {/* No recuerdo que era este link */}
@@ -59,16 +62,19 @@ function Dashboard() {
         <Route exact path={`${url}/profile`}>
           <UserInfo
             type={0}
+            friend={1}
           />
         </Route>
         <Route path={`${url}/search/courses/profile/:carne`}>
           <UserInfo
             type={1}
+            friend={0}
           />
         </Route>
         <Route path={`${url}/search/hobbies/profile/:carne`}>
           <UserInfo
             type={1}
+            friend={0}
           />
         </Route>
         <Route path={`${url}/search/courses`}>
