@@ -15,8 +15,6 @@ function FriendsItems(props) {
     img.width > 0
       ? setImage(true)
       : null;
-
-    console.log(img.width);
   }, []);
 
   return (

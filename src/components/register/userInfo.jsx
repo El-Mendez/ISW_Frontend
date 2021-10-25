@@ -148,7 +148,6 @@ function UserInfo() {
             'Content-Type': 'multipart/form-data',
           },
         });
-      console.log(res);
       setUploadImage(res.data.name);
     } catch (e) {
       console.log(e);

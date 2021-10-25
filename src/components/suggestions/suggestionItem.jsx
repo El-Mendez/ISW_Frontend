@@ -16,8 +16,6 @@ function SuggestionItem(props) {
     img.width > 0
       ? setImage(true)
       : null;
-
-    console.log(img.width);
   }, []);
 
   return (
