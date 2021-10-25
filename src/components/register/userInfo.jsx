@@ -1,5 +1,4 @@
-import React, { useState, useEffect, createRef } from 'react';
-import Cropper from 'cropperjs';
+import React, { useState, useEffect } from 'react';
 import { useForm } from 'react-hook-form';
 import { SiInstagram, SiFacebook, SiWhatsapp } from 'react-icons/si';
 import Cookies from 'universal-cookie';
@@ -30,9 +29,9 @@ function UserInfo() {
   const [hobbies, setHobbies] = useState([]);
   const [cursos, setCursos] = useState([]);
   const [file, setFile] = useState('');
-  const [uploadImage, setUploadImage] = useState();
-  const [tempImg, setTempImg] = useState('');
-  const image = createRef();
+  const [image, setImage] = useState({
+    temp_path: null,
+  });
 
   const [user, setUser] = useState({
     hobbies: [],
@@ -85,17 +84,6 @@ function UserInfo() {
   useEffect(() => {
     searchHobbies();
     searchCursos();
-
-    const cropper = new Cropper(image.current, {
-      zoomable: false,
-      scalable: false,
-      aspectRatio: 1,
-      crop: () => {
-        const canvas = cropper.getCroppedCanvas();
-        setTempImg(canvas.toDataURL('image/png'));
-      },
-
-    });
   }, []);
 
   function assignSection() {
@@ -141,14 +129,14 @@ function UserInfo() {
     data.append('file', file);
     data.append('carne', 191025);
     try {
-      const res = await Axios.post('http://localhost:3000/free/profile/image',
+      // TODO cambiar por la ruta del server
+      await Axios.post('http://localhost:3000/free/profile/image',
         data,
         {
           headers: {
             'Content-Type': 'multipart/form-data',
           },
         });
-      setUploadImage(res.data.name);
     } catch (e) {
       console.log(e);
     }
@@ -204,18 +192,15 @@ function UserInfo() {
   const onImageChange = (e) => {
     setFile(e.target.files[0]);
     setFile(e.target.files[0].name);
+    setImage({
+      temp_path: URL.createObjectURL(e.target.files[0]),
+    });
   };
 
   return (
     <div className="container px-0 bg-secondary pt-2">
       <form onSubmit={handleSubmit(onSubmit)}>
         {/* DATA */}
-        <div>
-          <div className="img-container">
-            <img src={`../../../public/assets/${uploadImage || 'default.svg'}`} alt="Source" ref={image} />
-          </div>
-          <img src={tempImg} alt="Destination" className="img-preview" />
-        </div>
         <div className="container px-5 my-5">
           <div className="d-flex align-items-center px-0">
             <div className="progress-activate-circle d-flex justify-content-center activate me-3">
@@ -226,7 +211,7 @@ function UserInfo() {
           {/* Foto de perfil */}
           <div className="d-flex flex-column justify-content-center align-content-center">
             <img
-              src={`../../../public/assets/${uploadImage || 'default.svg'}`}
+              src={image.temp_path || '../../../public/assets/default.svg'}
               alt="Profile"
               className="w-25 rounded-circle align-self-center"
             />
