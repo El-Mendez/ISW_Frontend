@@ -1,4 +1,5 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, createRef } from 'react';
+import Cropper from 'cropperjs';
 import { useForm } from 'react-hook-form';
 import { SiInstagram, SiFacebook, SiWhatsapp } from 'react-icons/si';
 import Cookies from 'universal-cookie';
@@ -29,8 +30,9 @@ function UserInfo() {
   const [hobbies, setHobbies] = useState([]);
   const [cursos, setCursos] = useState([]);
   const [file, setFile] = useState('');
-  const [fileName, setFileName] = useState('');
   const [uploadImage, setUploadImage] = useState();
+  const [tempImg, setTempImg] = useState('');
+  const image = createRef();
 
   const [user, setUser] = useState({
     hobbies: [],
@@ -83,6 +85,17 @@ function UserInfo() {
   useEffect(() => {
     searchHobbies();
     searchCursos();
+
+    const cropper = new Cropper(image.current, {
+      zoomable: false,
+      scalable: false,
+      aspectRatio: 1,
+      crop: () => {
+        const canvas = cropper.getCroppedCanvas();
+        setTempImg(canvas.toDataURL('image/png'));
+      },
+
+    });
   }, []);
 
   function assignSection() {
@@ -198,6 +211,12 @@ function UserInfo() {
     <div className="container px-0 bg-secondary pt-2">
       <form onSubmit={handleSubmit(onSubmit)}>
         {/* DATA */}
+        <div>
+          <div className="img-container">
+            <img src={`../../../public/assets/${uploadImage || 'default.svg'}`} alt="Source" ref={image} />
+          </div>
+          <img src={tempImg} alt="Destination" className="img-preview" />
+        </div>
         <div className="container px-5 my-5">
           <div className="d-flex align-items-center px-0">
             <div className="progress-activate-circle d-flex justify-content-center activate me-3">
@@ -207,8 +226,15 @@ function UserInfo() {
           </div>
           {/* Foto de perfil */}
           <div className="d-flex flex-column justify-content-center align-content-center">
-            <img src={`../../../public/assets/${uploadImage || 'default.svg'}`} alt="Profile" className="w-25 rounded-circle align-self-center" />
-            <label htmlFor="file-upload" className="custom-file-upload align-self-center mt-2 d-flex justify-content-center btn-fill">
+            <img
+              src={`../../../public/assets/${uploadImage || 'default.svg'}`}
+              alt="Profile"
+              className="w-25 rounded-circle align-self-center"
+            />
+            <label
+              htmlFor="file-upload"
+              className="custom-file-upload align-self-center mt-2 d-flex justify-content-center btn-fill"
+            >
               <span className="material-icons me-2">
                 file_upload
               </span>
