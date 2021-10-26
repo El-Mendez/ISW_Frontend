@@ -4,7 +4,7 @@
   "description": "Designing a web calculator with react and eslint",
   "main": "index.js",
   "scripts": {
-    "test": "jest",
+    "test": "jest menu.test.jsx",
     "start": "webpack serve --mode development --open",
     "build": "webpack --mode production --performance-hints false",
     "e2e-test": "jest src/test/system/index.test.js"
