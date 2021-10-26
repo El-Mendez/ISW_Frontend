@@ -6,7 +6,7 @@ on:
       - prod
 
 jobs:
-  test_deploy:
+  deploy:
     - runs-on: ubuntu-latest
     - steps:
       - name: Copying the Source Code
