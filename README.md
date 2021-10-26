@@ -1,3 +1,7 @@
+[![Meeting Frontend CI-CD](https://github.com/El-Mendez/ISW_Frontend/actions/workflows/actions.yml/badge.svg?branch=prod)](https://github.com/El-Mendez/ISW_Frontend/actions/workflows/actions.yml)
+[![made-with-javascript](https://img.shields.io/badge/Made%20with-JavaScript-1f425f.svg)](https://www.javascript.com)
+
+
 # Frontend
 El proyecto utiliza un frontend con ReactJS y npm. Si quieres leer la **[documentación](doc/README.md)**, puedes verlo 
 **[aquí](doc/README.md)**.
