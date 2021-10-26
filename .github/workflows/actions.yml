@@ -4,37 +4,39 @@ on:
   push:
     branches:
       - prod
+  workflow_dispatch:
 
 jobs:
   deploy:
     runs-on: ubuntu-latest
     steps:
-#      - name: Copying the Source Code
-#        uses: actions/checkout@v2
-#
-#      - name: Setting up Node 14
-#        uses: actions/setup-node@v2
-#        with:
-#          node-version: '14'
-#
-#      - name: Instaling Libraries
-#        run: npm ci
-#
-#      - name: Running tests
-#        run: npm run test
-#
-#      - name: Building Project
-#        run: npm run build
+      - name: Copying the Source Code
+        uses: actions/checkout@v2
+
+      - name: Setting up Node 14
+        uses: actions/setup-node@v2
+        with:
+          node-version: '14'
+
+      - name: Instaling Libraries
+        run: npm ci
+
+      - name: Running tests
+        run: npm run test
+
+      - name: Building Project
+        run: npm run build
 
       - name: Deploying to instance
         uses: wlixcc/SFTP-Deploy-Action@v1.2.1
         with:
           username: ${{ secrets.SERVER_USERNAME }}
           server: ${{ secrets.SERVER_IP }}
+          port: 22
           ssh_private_key: ${{ secrets.SSH_PRIVATE_KEY }}
 
-          local_path: './test/*'
-          remote_path: '/var/www/test/'
+          local_path: './dist/*'
+          remote_path: '/var/www/html/'
 
           # sftp args
           args: '-o ConnectTimeout=5'
