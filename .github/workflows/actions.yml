@@ -29,12 +29,13 @@ jobs:
       - name: Deploying to instance
         uses: wlixcc/SFTP-Deploy-Action@v1.2.1
         with:
-          username: '${{ secrets.SERVER_USERNAME }}'
-          server: '${{ secrets.SERVER_IP }}'
-          ssh_private_key: '${{ secrets.SSH_PRIVATE_KEY }}'
+          username: ${{ secrets.SERVER_USERNAME }}
+          server: ${{ secrets.SERVER_IP }}
+          port: 22
+          ssh_private_key: ${{ secrets.SSH_PRIVATE_KEY }}
 
-          local_path: './test/*'
-          remote_path: '/var/www/test/'
+          local_path: ./test/*
+          remote_path: /var/www/test/
 
           # sftp args
           args: '-o ConnectTimeout=5'
