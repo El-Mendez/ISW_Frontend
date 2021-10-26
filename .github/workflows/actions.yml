@@ -37,5 +37,5 @@ jobs:
           local_path: dist/*
           remote_path: /var/www/html
 
-            # sftp args
-            args: '-o ConnectTimeout=5'
+          # sftp args
+          args: '-o ConnectTimeout=5'
