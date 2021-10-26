@@ -65,7 +65,7 @@
   font-size: 14px;
   font-weight: 500;
   border-radius: 0.25rem;
-  transition: color 0.15s ease-in-out, background-color 0.15s ease-in-out, border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
+  transition: color 0.15s ease-in-out, background-color 0.15s ease-in-out, border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out, transform 0.3s cubic-bezier(.86,0,0,2.26);
   &:hover{
     transform: scale(1.04);
     background-color: #413e36;
@@ -132,5 +132,17 @@
 
 .exo-font{
   font-family: 'Exo 2', serif;
+}
+
+// Upload profile image
+input[type='file']{
+  display: none;
+}
+
+.custom-file-upload {
+  border: 1px solid #ccc;
+  display: inline-block;
+  padding: 6px 12px;
+  cursor: pointer;
 }
 

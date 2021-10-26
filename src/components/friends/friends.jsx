@@ -5,7 +5,6 @@ import { useLocation } from 'react-router-dom';
 import { GET_FRIENDS } from '../utils/rutas';
 import SuggestionItem from '../suggestions/suggestionItem';
 import NoFriends from './noFriends';
-import { NavItem } from 'react-bootstrap';
 
 function Friends(props) {
   const [friendsList, setFriendsList] = useState([]);
@@ -46,10 +45,10 @@ function Friends(props) {
           <div className="row align-items-center">
             {friendsList.map((user) => (
               <SuggestionItem
-                nombre={user.nombre_completo}
-                apellido=""
-                carne={user.credencial}
-                key={user.credencial}
+                nombre={user.nombre}
+                carne={user.carne}
+                correo={user.correo}
+                key={user.carne}
               />
             ))}
           </div>

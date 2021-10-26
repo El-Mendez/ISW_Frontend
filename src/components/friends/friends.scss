@@ -1,3 +1,4 @@
+$colors: red, orange, yellow, green, blue, purple;
 .noFriends{
     display: flex;
     justify-content: center;
@@ -5,4 +6,112 @@
 }
 .noFriendsImg{
     width: 45%;
+}
+.notification{
+    position:fixed;
+    bottom: 50px;
+    right: 75px;
+    z-index: 1000;
+    &:hover{
+        .circle{
+            .message{
+                color:$icon-bg-color;
+            }
+            cursor: pointer;
+        }
+    }
+}
+.circle{
+    width: 80px;
+    height: 80px;
+    background-color:#444243;
+    border:none;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    &:hover{
+        transform: scale(1.05);
+    }
+    .message{
+        width: 100%;
+        height: 35%;
+        color:$gold;
+        position: relative;
+        right: 1%;
+    }
+}
+
+.box{
+    background-color: map-get($theme-colors, "gray");
+    width: 280px;
+    height: 340px;
+    display:block;
+    border-radius: 2%;
+    box-shadow: 5px 5px 15px 7px rgba(0, 0, 0, 0.08), -5px -5px 30px 7px rgba(0,0,0,0.08);
+    .image{
+        width: 80px;
+        height: 80px;
+        border:none;
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        span{
+            font-size: 70px;
+        }
+    }
+    .containerNotifications{
+        color: white;
+        a{
+            color: transparent;
+        }
+    }
+    .buttonClose{
+        border-radius: 20%;
+        width: 10%;
+        height: 10%;
+        position: relative;
+        right: 0;
+        border: none;
+        background-color: transparent;
+        color: black;
+        margin: 1% 0 0 89%;
+        padding: 0;
+    }
+}
+
+.datos{
+    position: relative;
+    margin-left: 3%;
+    margin-top: 5px;
+    button{
+        color: black;
+        margin-top: 2%;
+        &:hover{
+            color: black;
+            background-color: $icon-bg-color;
+        }
+    }
+}
+
+.notifications{
+    margin-top: 1%;
+    padding: 0 10px 0 10px;
+    color: black;
+    opacity: 0.6;
+    &:hover{
+        opacity: 1;
+        .random{
+            background-color: $icon-bg-color;
+        }
+    }
+    &:hover{
+        cursor: pointer;
+    }
+}
+.random{
+    padding-left: 0 !important;
+    padding-right: 0 !important;
+    width: 1%;
 }

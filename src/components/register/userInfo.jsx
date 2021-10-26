@@ -3,24 +3,21 @@ import { useForm } from 'react-hook-form';
 import { SiInstagram, SiFacebook, SiWhatsapp } from 'react-icons/si';
 import Cookies from 'universal-cookie';
 import { zodResolver } from '@hookform/resolvers/zod';
-import * as z from 'zod';
 import Select from 'react-select';
 import makeAnimated from 'react-select/animated';
 import Axios from 'axios';
 import history from '../utils/history';
-import {
-  SEARCH_HOBBY, SEARCH_COURSE, ASSIGN_HOBBY, ASSIGN_SECTION,
-} from '../utils/rutas';
+import { contact } from '../utils/schemas';
+import { ASSIGN_HOBBY, ASSIGN_SECTION } from '../utils/rutas';
+import * as Search from '../utils/search';
+import * as Assign from '../utils/assign';
+import Input from '../utils/input';
+import Circle from '../utils/circle_number';
 
-const schema = z.object({
-  facebook: z.string(),
-  instagram: z.string(),
-});
-
-function UserInfo() {
+export default function UserInfo() {
   const { register, handleSubmit, formState: { errors } } = useForm({
     mode: 'On Change',
-    resolver: zodResolver(schema),
+    resolver: zodResolver(contact),
   });
 
   const animatedComponents = makeAnimated();
@@ -28,6 +25,10 @@ function UserInfo() {
   const token = cookies.get('session');
   const [hobbies, setHobbies] = useState([]);
   const [cursos, setCursos] = useState([]);
+  const [file, setFile] = useState('');
+  const [image, setImage] = useState({
+    temp_path: null,
+  });
 
   const [user, setUser] = useState({
     hobbies: [],
@@ -43,79 +44,28 @@ function UserInfo() {
     phone: false,
   });
 
-  // Requests para mostrar cursos y hobbies al usuario
-  function searchHobbies() {
-    const fetchData = async () => {
-      try {
-        const res = await Axios.get(SEARCH_HOBBY);
-        res.data.map((item) => (
-          setHobbies((prevState) => [...prevState, { value: item.id, label: item.nombre }])
-        ));
-      } catch (error) {
-        console.log(error);
-      }
-    };
-    fetchData();
-  }
-
-  function searchCursos() {
-    const fetchData = async () => {
-      try {
-        const res = await Axios.get(SEARCH_COURSE);
-        res.data.map((item) => (
-          item.secciones.map((section) => (
-            setCursos((prevState) => [...prevState, { value: section.seccionId, label: `${item.cursoNombre} → sección ${section.seccion}` }])
-          ))
-        ));
-      } catch (error) {
-        console.log(error);
-      }
-    };
-    fetchData();
-  }
-
   useEffect(() => {
-    searchHobbies();
-    searchCursos();
+    setHobbies((prevState) => [...prevState, Search.searchHobbies()]);
+    setCursos((prevState) => [...prevState, Search.searchCourses()]);
   }, []);
 
-  function assignSection() {
-    const request = async () => {
-      try {
-        await Axios.post(ASSIGN_SECTION,
-          {
-            seccionesId: user.cursos,
+  const loadImage = async () => {
+    const data = new FormData();
+    data.append('file', file);
+    data.append('carne', 191025);
+    try {
+      // TODO cambiar por la ruta del server
+      await Axios.post('http://localhost:3000/free/profile/image',
+        data,
+        {
+          headers: {
+            'Content-Type': 'multipart/form-data',
           },
-          {
-            headers: {
-              Authorization: `Bearer ${token}`,
-            },
-          });
-      } catch (error) {
-        console.log(error);
-      }
-    };
-    request();
-  }
-
-  function assignHobby() {
-    const request = async () => {
-      try {
-        await Axios.post(ASSIGN_HOBBY,
-          {
-            hobbiesId: user.hobbies,
-          },
-          {
-            headers: {
-              Authorization: `Bearer ${token}`,
-            },
-          });
-      } catch (error) {
-        console.log(error);
-      }
-    };
-    request();
-  }
+        });
+    } catch (e) {
+      console.log(e);
+    }
+  };
 
   const onHobbiesChange = (selectedHobbies) => {
     selectedHobbies.map((item) => (
@@ -154,9 +104,18 @@ function UserInfo() {
     }
   };
 
+  const onImageChange = (e) => {
+    setFile(e.target.files[0]);
+    setFile(e.target.files[0].name);
+    setImage({
+      temp_path: URL.createObjectURL(e.target.files[0]),
+    });
+  };
+
   const onSubmit = () => {
-    assignSection();
-    assignHobby();
+    Assign(ASSIGN_HOBBY, user.hobbies, token);
+    Assign(ASSIGN_SECTION, user.cursos, token);
+    loadImage();
     setTimeout(() => {
       history.push('/home');
       history.go();
@@ -166,14 +125,31 @@ function UserInfo() {
   return (
     <div className="container px-0 bg-secondary pt-2">
       <form onSubmit={handleSubmit(onSubmit)}>
-        {/* DATA */}
+        {/* Profile image */}
         <div className="container px-5 my-5">
-          <div className="d-flex align-items-center px-0">
-            <div className="progress-activate-circle d-flex justify-content-center activate me-3">
-              <h2 className="progress-number">1</h2>
-            </div>
-            <h1>Información Personal</h1>
+          <Circle title="Personaliza tu perfil" />
+          {/* Foto de perfil */}
+          <div className="d-flex flex-column justify-content-center align-content-center">
+            <img
+              src={image.temp_path || '../../../public/assets/default.svg'}
+              alt="Profile"
+              className="w-25 rounded-circle align-self-center"
+            />
+            <label
+              htmlFor="file-upload"
+              className="custom-file-upload align-self-center mt-2 d-flex justify-content-center btn-fill"
+            >
+              <span className="material-icons me-2">
+                file_upload
+              </span>
+              <div>Seleccionar una imagen...</div>
+            </label>
+            <input type="file" id="file-upload" onChange={onImageChange} />
           </div>
+        </div>
+        {/* Personal information */}
+        <div className="container px-5 my-5">
+          <Circle title="Información Personal" />
           {/* Cursos */}
           <div className="mt-z4">
             <Select
@@ -199,82 +175,36 @@ function UserInfo() {
             />
           </div>
         </div>
+        {/* Contact information */}
         <div className="container px-5">
-          <div className="d-flex align-items-center px-0">
-            <div className="progress-activate-circle d-flex justify-content-center activate me-3">
-              <h2 className="progress-number">3</h2>
-            </div>
-            <div className="d-flex align-items-center">
-              <h1>Información de Contacto</h1>
-              <p className="text-small m-0 ms-2">(Opcional)</p>
-            </div>
-          </div>
+          <Circle title="Información de Contacto" />
           {/* Facebook */}
-          <div className="input-container mt-3">
-            <span className={`material-icons input-icon ${filled.facebook ? 'is-filled' : ' '}`}>
-              <SiFacebook />
-            </span>
-            <input
-              className="input ms-1"
-              type="facebook"
-              name="facebook"
-              placeholder="Perfil de Facebook"
-              onInput={handleInputChange}
-              {...register('facebook')}
-            />
-          </div>
-          <small className="text-danger text-small d-block mb-2 mt-1">
-            <div className="d-flex align-items-center ps-2">
-              {errors.facebook
-                ? <span className="material-icons me-1">error_outline</span>
-                : null}
-              {errors.facebook?.message}
-            </div>
-          </small>
+          <Input
+            filled={filled.facebook}
+            onChange={() => handleInputChange()}
+            register={(register('facebook'))}
+            errors={errors.facebook}
+            icon={<SiFacebook />}
+            holder="Perfil de Facebook"
+          />
           {/* Instagram */}
-          <div className="input-container mt-3">
-            <span className={`material-icons input-icon ${filled.instagram ? 'is-filled' : ' '}`}>
-              <SiInstagram />
-            </span>
-            <input
-              className="input ms-1"
-              type="instagram"
-              name="instagram"
-              placeholder="Perfil de Instagram"
-              onInput={handleInputChange}
-              {...register('instagram')}
-            />
-          </div>
-          <small className="text-danger text-small d-block mb-2 mt-1">
-            <div className="d-flex align-items-center ps-2">
-              {errors.instagram
-                ? <span className="material-icons me-1">error_outline</span>
-                : null}
-              {errors.instagram?.message}
-            </div>
-          </small>
+          <Input
+            filled={filled.instagram}
+            onChange={() => handleInputChange()}
+            register={(register('instagram'))}
+            errors={errors.instagram}
+            icon={<SiInstagram />}
+            holder="Perfil de Instagram"
+          />
           {/* Phone number */}
-          <div className="input-container mt-3">
-            <span className={`material-icons input-icon ${filled.phone ? 'is-filled' : ' '}`}>
-              <SiWhatsapp />
-            </span>
-            <input
-              className="input ms-1"
-              type="phone"
-              name="phone"
-              placeholder="Número de teléfono"
-              onInput={handleInputChange}
-            />
-          </div>
-          <small className="text-danger text-small d-block mb-2 mt-1">
-            <div className="d-flex align-items-center ps-2">
-              {errors.phone
-                ? <span className="material-icons me-1">error_outline</span>
-                : null}
-              {errors.phone?.message}
-            </div>
-          </small>
-
+          <Input
+            filled={filled.phone}
+            onChange={() => handleInputChange()}
+            register={(register('phone'))}
+            errors={errors.phone}
+            icon={<SiWhatsapp />}
+            holder="Número de Teléfono"
+          />
         </div>
         {/* NEXT BUTTON */}
         <div className="d-flex bg-gold w-100 mt-5 justify-content-end">
@@ -292,5 +222,3 @@ function UserInfo() {
 
   );
 }
-
-export default UserInfo;

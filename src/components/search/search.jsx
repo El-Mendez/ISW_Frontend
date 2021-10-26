@@ -9,7 +9,7 @@ import NoSuggestionItem from '../suggestions/noSuggestionItem';
 function Search(props) {
   const [suggestions, setSuggestions] = useState([]);
   const requests = [SUGGESTIONS_COURSES, SUGGESTIONS_HOBBIES];
-  const [recommendation, setRecommendation] = useState(true);
+  const [recommendation, setRecommendation] = useState(false);
   const cookies = new Cookies();
   const token = cookies.get('session');
   const item = props;
@@ -24,7 +24,6 @@ function Search(props) {
             },
           });
         setSuggestions(res.data);
-        console.log(res.data)
         if (res.data[0] === undefined) {
           setRecommendation(false);
         } else {
@@ -37,7 +36,10 @@ function Search(props) {
     request();
   }
   useEffect(() => {
-    searchFriends();
+    // Esto es probicional hasta que tenga la API de las recomendaciones por amigos
+    if (item.type !== 2) {
+      searchFriends();
+    }
   }, [location]);
   return (
     <div className="userList">
@@ -47,8 +49,8 @@ function Search(props) {
             {suggestions.map((user) => (
               <SuggestionItem
                 nombre={user.nombre}
-                apellido={user.apellido}
                 carne={user.carne}
+                correo={user.correo}
                 key={user.carne}
               />
             ))}

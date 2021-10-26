@@ -24,9 +24,6 @@ export default function Menu() {
           <div className="dropdown">
             <button id="mailBox" type="button" className="nav-link button">Bandeja de entrada</button>
             <div id="getRequests" className="dropdown-content container">
-              <Link to={`${url}/get_request`} className="noDecorations">
-                <p className="row">Solicitudes recibidas</p>
-              </Link>
               <Link id="sentRequest" to={`${url}/sent_request`} className="noDecorations">
                 <p className="row">Solicitudes enviadas</p>
               </Link>
@@ -42,6 +39,9 @@ export default function Menu() {
               </Link>
               <Link id="hobbiesRecommendations" to={`${url}/search/hobbies`} className="noDecorations">
                 <p className="row">Por hobbies en común</p>
+              </Link>
+              <Link id="hobbiesRecommendations" to={`${url}/search/friends`} className="noDecorations">
+                <p className="row">Por amigos en común</p>
               </Link>
             </div>
           </div>

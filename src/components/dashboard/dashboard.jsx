@@ -10,12 +10,14 @@ import UserInfo from '../profile/profile';
 import DashContent from './dashcontent';
 import FriendsList from '../friends/friends';
 import Request from '../friends/request';
+import FriendsNotifications from '../friends/friendsNotifications';
 
 function Dashboard() {
   const { url } = useRouteMatch();
   return (
     <div>
       <NavBar />
+      <FriendsNotifications />
       <Switch>
         <Route exact path={`${url}`}>
           <DashContent />
@@ -35,32 +37,44 @@ function Dashboard() {
         </Route>
         <Route exact path={`${url}/get_request/profile/:carne`}>
           <UserInfo
-            type={0}
+            type={1}
+            friend={0}
           />
         </Route>
         <Route exact path={`${url}/sent_request/profile/:carne`}>
           <UserInfo
-            type={0}
+            type={1}
+            friend={0}
           />
         </Route>
         <Route exact path={`${url}/friends/profile/:carne`}>
           <UserInfo
-            type={0}
+            type={2}
+            friend={1}
+          />
+        </Route>
+        {/* No recuerdo que era este link */}
+        <Route path={`${url}/profile/:carne`}>
+          <UserInfo
+            type={1}
           />
         </Route>
         <Route exact path={`${url}/profile`}>
           <UserInfo
             type={0}
+            friend={1}
           />
         </Route>
         <Route path={`${url}/search/courses/profile/:carne`}>
           <UserInfo
             type={1}
+            friend={0}
           />
         </Route>
         <Route path={`${url}/search/hobbies/profile/:carne`}>
           <UserInfo
             type={1}
+            friend={0}
           />
         </Route>
         <Route path={`${url}/search/courses`}>
@@ -71,6 +85,11 @@ function Dashboard() {
         <Route path={`${url}/search/hobbies`}>
           <Search
             type={1}
+          />
+        </Route>
+        <Route path={`${url}/search/friends`}>
+          <Search
+            type={2}
           />
         </Route>
 

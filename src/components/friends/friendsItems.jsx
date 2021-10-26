@@ -1,81 +1,46 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import { MdClass } from 'react-icons/md';
-import { AiOutlineCheck, AiOutlineClose } from 'react-icons/ai';
+import { AiFillCustomerService, AiFillContacts } from 'react-icons/ai';
 import { Link, useRouteMatch } from 'react-router-dom';
-import Cookies from 'universal-cookie';
-import Axios from 'axios';
-import { ACCEPT_REQUEST, CANCEL_REQUEST } from '../utils/rutas';
 
 function FriendsItems(props) {
-  // TODO utilizar proptypes, utilizar id
   const item = props;
   const { url } = useRouteMatch();
-  const cookies = new Cookies();
-  const token = cookies.get('session');
-  function acceptRequest() {
-    console.log(`${url}/profile/${item.carne}`);
-    const request = async () => {
-      try {
-        await Axios.post(ACCEPT_REQUEST,
-          {
-            carne: item.carne,
-          }, {
-            headers: {
-              Authorization: `Bearer ${token}`,
-            },
-          });
-        item.setAccept(true);
-      } catch (error) {
-        console.log(error);
-      }
-    };
-    request();
-  }
-  function cancelRequest() {
-    const request = async () => {
-      try {
-        await Axios.post(CANCEL_REQUEST,
-          {
-            carne: item.carne,
-          }, {
-            headers: {
-              Authorization: `Bearer ${token}`,
-            },
-          });
-        item.setAccept(true);
-      } catch (error) {
-        console.log(error);
-      }
-    };
-    request();
-  }
+  const [image, setImage] = useState(false);
+
+  useEffect(() => {
+    const img = new Image();
+    img.src = `../../../public/assets/${item.carne}.png`;
+    // eslint-disable-next-line no-unused-expressions
+    img.width > 0
+      ? setImage(true)
+      : null;
+  }, []);
+
   return (
-    <div className="container suggestions ">
-      <div className="row align-items-center items">
-        <div className="col-4 ">
-          <span className="material-icons suggestionsImages ">
-            account_circle
-          </span>
-        </div>
-        <div className="col suggestions">
-          <div className="row align-items-start" id="friendsRequest" value={item.nombre}>
-            <h1>{`${item.nombre} ${item.apellido}`}</h1>
+    <div id="suggestionResult" className="container suggestions ">
+      <Link to={`${url}/profile/${item.carne}`} className="noDecorations">
+        <div className="row align-items-center items">
+          <div className="col-4 ">
+            <img src={`../../../public/assets/${image ? `${item.carne}.png` : 'default.svg'}`} alt="Profile" className="w-100 rounded-circle align-self-center" />
           </div>
-          <div className="row align-items-start">
-            <div className="infoser">
-              {!item.type ? (
-                <>
-                  <AiOutlineCheck onClick={acceptRequest} className="infoUser" />
-                  <AiOutlineClose onClick={cancelRequest} className="infoUser" />
-                </>
-              ) : null}
-              <Link to={`${url}/profile/${item.carne}`} className="noDecorations">
+          <div className="col suggestions">
+            <div className="row align-items-start" value={item.nombre}>
+              <h1>{item.nombre}</h1>
+            </div>
+            <div className="row align-items-start">
+              <h2>
+                {item.correo}
+              </h2>
+              <div className="infoser">
                 <MdClass className="infoUser" />
-              </Link>
+                <AiFillCustomerService className="infoUser" />
+                <AiFillContacts className="infoUser" />
+              </div>
             </div>
           </div>
         </div>
-      </div>
+      </Link>
     </div>
   );
 }

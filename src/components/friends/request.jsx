@@ -68,31 +68,16 @@ function Request(props) {
   }, [location, accept]);
   return (
     <div className="userList">
-      {(friends && !item.type) ? (
+      {(friends && item.type) ? (
         <div className="container ">
           <div className="row align-items-center">
             {friendsList.map((user) => (
               <FriendsItems
-                nombre={user.usuario_envia}
-                apellido=""
-                carne={user.usuario_envia}
+                nombre={user.nombre}
+                carne={user.carne}
+                correo={user.correo}
                 setAccept={setAccept}
-                key={user.usuario_envia}
-                type={type}
-              />
-            ))}
-          </div>
-        </div>
-      ) : (friends && item.type) ? (
-        <div className="container ">
-          <div className="row align-items-center">
-            {friendsList.map((user) => (
-              <FriendsItems
-                nombre={user.usuario_recibe}
-                apellido=""
-                carne={user.usuario_recibe}
-                setAccept={setAccept}
-                key={user.usuario_recibe}
+                key={user.carne}
                 type={type}
               />
             ))}
