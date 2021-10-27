@@ -12,6 +12,8 @@ jobs:
     steps:
       - name: Copying the Source Code
         uses: actions/checkout@v2
+        with:
+          ref: prod
 
       - name: Setting up Node 14
         uses: actions/setup-node@v2
