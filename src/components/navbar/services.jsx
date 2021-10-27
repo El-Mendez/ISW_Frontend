@@ -14,6 +14,7 @@ function Services() {
     carne: 0,
   });
   const [image, setImage] = useState(false);
+  const img = new Image();
 
   // TODO utilizar proptypes
 
@@ -35,12 +36,16 @@ function Services() {
           nombre: data[0].nombre_completo.split(' ', 1),
           carne: data[0].carne,
         });
-        const img = new Image();
         img.src = `../../../public/assets/${data[0].carne}.png`;
         // eslint-disable-next-line no-unused-expressions
-        img.width > 0
-          ? setImage(true)
-          : null;
+        img.onload = function () {
+          // image exists and is loaded
+          setImage(true);
+        };
+        img.onerror = function () {
+          // image exists and is loaded
+          setImage(false);
+        };
       } catch (error) {
         console.log(error);
       }
@@ -53,12 +58,13 @@ function Services() {
 
   return (
     <div className="d-flex align-items-center ">
-      <div className="services container align-items-end" style={{ height: '28px' }}>
-        <div className="row dropdown">
+      <div className="services align-items-end" style={{ height: 'auto' }}>
+        <div className="dropdown container">
           <div className="row">
-            <img src={`../../../public/assets/${image ? `${user.carne}.png` : 'default.svg'}`} alt="Profile" className="w-25 rounded-circle align-self-center" />
-            {' '}
-            <div className="col-8">
+            <div className={`${!image ? ('no-image-user col-4') : 'col-2 image-user align-self-center'}`}>
+              <img src={`../../../public/assets/${image ? `${user.carne}.png` : 'default.svg'}`} alt="Profile" className="rounded-circle align-self-center" />
+            </div>
+            <div className="col align-self-center">
               {user.nombre}
             </div>
           </div>

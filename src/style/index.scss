@@ -46,3 +46,20 @@ body {
     justify-content: center;
     align-items: center;
 }
+
+.no-image-user{
+    width: auto;
+    padding: 0;
+
+    img{
+        width: 30px !important; 
+    }
+}
+
+.image-user{
+    width: auto;
+    padding: 0;
+    img{
+        width: 50px !important; 
+    }
+}

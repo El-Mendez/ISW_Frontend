@@ -8,11 +8,13 @@ import {
   USER_INFO, USER_INFO_AUT, SEND_REQUEST, DELETE_FRIEND, SENT_REQUESTS, CANCEL_REQUEST,
 } from '../utils/rutas';
 
+
 export default function Profile(props) {
   const [report, setReport] = useState(false);
   const [isUser, setIsUser] = useState(false);
   const [pendingRequest, setPendingRequest] = useState(false);
   const [reload, setReload] = useState(false);
+  const img = new Image();
   const cookies = new Cookies();
   const token = cookies.get('session');
   const id = useParams();
@@ -134,12 +136,16 @@ export default function Profile(props) {
           hobbies: res.data[0].hobbies,
           redes_sociales: res.data[0].redes_sociales,
         });
-        const img = new Image();
-        img.src = `../../../public/assets/${res.data[0].carne}.png`;
+        img.src = `../../../public/assets/${id.carne}.png`;
         // eslint-disable-next-line no-unused-expressions
-        img.width > 0
-          ? setImage(true)
-          : null;
+        img.onload = function () {
+        // image exists and is loaded
+          setImage(true);
+        };
+        img.onerror = function () {
+        // image exists and is loaded
+          setImage(false);
+        };
         pendingRequests(res.data[0].carne);
       } catch (error) {
         console.log(error);
@@ -166,12 +172,16 @@ export default function Profile(props) {
           hobbies: res.data[0].hobbies,
           redes_sociales: res.data[0].redes_sociales,
         });
-        const img = new Image();
         img.src = `../../../public/assets/${res.data[0].carne}.png`;
         // eslint-disable-next-line no-unused-expressions
-        img.width > 0
-          ? setImage(true)
-          : null;
+        img.onload = function () {
+        // image exists and is loaded
+          setImage(true);
+        };
+        img.onerror = function () {
+        // image exists and is loaded
+          setImage(false);
+        };
       } catch (error) {
         console.log(error);
       }
