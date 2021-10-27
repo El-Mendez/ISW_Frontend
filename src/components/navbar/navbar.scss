@@ -87,13 +87,9 @@ li ~ li{
 }
 
 .services{
-    margin-right: 24px;
     height: fit-content;
     cursor: pointer;
     color: #999690;
-    &:hover{
-        color: #FFC100 !important;
-    }
 }
 
 .collapseProduct{
@@ -364,6 +360,11 @@ div[aria-expanded="true"]{
   &:hover{
     .dropdown-content {
         display: block;
+    }
+    :first-child{
+        &:hover{
+            color: #FFC100 !important;
+        }
     }
   }
 }

@@ -7,14 +7,19 @@ function FriendsItems(props) {
   const item = props;
   const { url } = useRouteMatch();
   const [image, setImage] = useState(false);
+  const img = new Image();
 
   useEffect(() => {
-    const img = new Image();
     img.src = `../../../public/assets/${item.carne}.png`;
     // eslint-disable-next-line no-unused-expressions
-    img.width > 0
-      ? setImage(true)
-      : null;
+    img.onload = function () {
+      // image exists and is loaded
+      setImage(true);
+    };
+    img.onerror = function () {
+      // image exists and is loaded
+      setImage(false);
+    };
   }, []);
 
   return (

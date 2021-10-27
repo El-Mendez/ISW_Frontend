@@ -10,12 +10,18 @@ function SuggestionItem(props) {
   const [image, setImage] = useState(false);
 
   useEffect(() => {
-    const img = new Image();
-    img.src = `../../../public/assets/${item.carne}.png`;
     // eslint-disable-next-line no-unused-expressions
-    img.width > 0
-      ? setImage(true)
-      : null;
+    const img = new Image();
+    img.onload = function () {
+    // image exists and is loaded
+      setImage(true);
+    };
+    img.onerror = function () {
+    // image exists and is loaded
+      setImage(false);
+    };
+
+    img.src = `../../../public/assets/${item.carne}.png`;
   }, []);
 
   return (
