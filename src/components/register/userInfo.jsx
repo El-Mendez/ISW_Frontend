@@ -23,8 +23,8 @@ export default function UserInfo() {
   const animatedComponents = makeAnimated();
   const cookies = new Cookies();
   const token = cookies.get('session');
-  const [hobbies, setHobbies] = useState([]);
-  const [cursos, setCursos] = useState([]);
+  const hobbies = Search.searchHobbies();
+  const cursos = Search.searchCourses();
   const [file, setFile] = useState('');
   const [image, setImage] = useState({
     temp_path: null,
@@ -43,11 +43,6 @@ export default function UserInfo() {
     instagram: false,
     phone: false,
   });
-
-  useEffect(() => {
-    setHobbies((prevState) => [...prevState, Search.searchHobbies()]);
-    setCursos((prevState) => [...prevState, Search.searchCourses()]);
-  }, []);
 
   const loadImage = async () => {
     const data = new FormData();
