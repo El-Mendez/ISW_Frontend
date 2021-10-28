@@ -2,13 +2,13 @@ import React, { useState, useEffect } from 'react';
 import Cookies from 'universal-cookie';
 import Axios from 'axios';
 import { useLocation } from 'react-router-dom';
-import { SUGGESTIONS_HOBBIES, SUGGESTIONS_COURSES } from '../utils/rutas';
+import { SUGGESTIONS_HOBBIES, SUGGESTIONS_COURSES, SUGGESTIONS_FRIENDS } from '../utils/rutas';
 import SuggestionItem from '../suggestions/suggestionItem';
 import NoSuggestionItem from '../suggestions/noSuggestionItem';
 
 function Search(props) {
   const [suggestions, setSuggestions] = useState([]);
-  const requests = [SUGGESTIONS_COURSES, SUGGESTIONS_HOBBIES];
+  const requests = [SUGGESTIONS_COURSES, SUGGESTIONS_HOBBIES, SUGGESTIONS_FRIENDS];
   const [recommendation, setRecommendation] = useState(false);
   const cookies = new Cookies();
   const token = cookies.get('session');
@@ -37,9 +37,7 @@ function Search(props) {
   }
   useEffect(() => {
     // Esto es probicional hasta que tenga la API de las recomendaciones por amigos
-    if (item.type !== 2) {
-      searchFriends();
-    }
+    searchFriends();
   }, [location]);
   return (
     <div className="userList">

@@ -13,6 +13,7 @@ const ASSIGN_SECTION = 'http://api.meetinguvg.me/auth/seccion';
 const ASSIGN_HOBBY = 'http://api.meetinguvg.me/auth/hobby';
 const SUGGESTIONS_COURSES = 'http://api.meetinguvg.me/auth/suggestions/courses';
 const SUGGESTIONS_HOBBIES = 'http://api.meetinguvg.me/auth/suggestions/hobbies';
+const SUGGESTIONS_FRIENDS = 'http://api.meetinguvg.me/auth/suggestions/friends';
 const USER_INFO_AUT = 'http://api.meetinguvg.me/auth/profile';
 
 // REQUESTS
@@ -53,4 +54,5 @@ module.exports = {
   RECEIVED_REQUEST,
   SENT_REQUESTS,
   DELETE_FRIEND,
+  SUGGESTIONS_FRIENDS,
 };
