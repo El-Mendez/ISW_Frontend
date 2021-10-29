@@ -19,9 +19,10 @@ jobs:
         uses: actions/setup-node@v2
         with:
           node-version: '14'
+          cache: 'npm'
 
       - name: Instaling Libraries
-        run: npm ci
+        run: npm install
 
       - name: Running tests
         run: npm run test

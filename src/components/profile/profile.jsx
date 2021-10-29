@@ -2,18 +2,23 @@ import React, { useState, useEffect } from 'react';
 import { useParams, useLocation } from 'react-router-dom';
 import Axios from 'axios';
 import Cookies from 'universal-cookie';
+import Select from 'react-select';
+import makeAnimated from 'react-select/animated';
+import * as Search from '../utils/search';
 import ProfileItem from './profileItem';
 import Report from './report';
 import {
   USER_INFO, USER_INFO_AUT, SEND_REQUEST, DELETE_FRIEND, SENT_REQUESTS, CANCEL_REQUEST,
 } from '../utils/rutas';
 
-
 export default function Profile(props) {
   const [report, setReport] = useState(false);
   const [isUser, setIsUser] = useState(false);
+  const [cursos, setCursos] = useState([]);
+  const [edit, setEdit] = useState(false);
   const [pendingRequest, setPendingRequest] = useState(false);
   const [reload, setReload] = useState(false);
+  const animatedComponents = makeAnimated();
   const img = new Image();
   const cookies = new Cookies();
   const token = cookies.get('session');
@@ -32,6 +37,13 @@ export default function Profile(props) {
     cursos: [],
     hobbies: [],
     redes_sociales: [],
+  });
+  const [user2, setUser2] = useState({
+    hobbies: [],
+    cursos: [],
+    facebook: '',
+    instagram: '',
+    phone: 0,
   });
   const handleClick = (e) => {
     if (e.target.name === 'contact') {
@@ -136,6 +148,7 @@ export default function Profile(props) {
           hobbies: res.data[0].hobbies,
           redes_sociales: res.data[0].redes_sociales,
         });
+        setCursos(res.data[0].cursos);
         img.src = `../../../public/assets/${id.carne}.png`;
         // eslint-disable-next-line no-unused-expressions
         img.onload = function () {
@@ -153,6 +166,14 @@ export default function Profile(props) {
     };
     request();
   }
+  const onCoursesChange = (selectedCourses) => {
+    selectedCourses.map((course) => (
+      setUser2({
+        ...user2,
+        cursos: [...user2.cursos, course.value],
+      })
+    ));
+  };
   function userInfoAut() {
     const request = async () => {
       try {
@@ -172,6 +193,7 @@ export default function Profile(props) {
           hobbies: res.data[0].hobbies,
           redes_sociales: res.data[0].redes_sociales,
         });
+        setCursos((prevState) => [...prevState, res.data[0].cursos]);
         img.src = `../../../public/assets/${res.data[0].carne}.png`;
         // eslint-disable-next-line no-unused-expressions
         img.onload = function () {
@@ -188,6 +210,20 @@ export default function Profile(props) {
     };
     request();
   }
+
+  function editProfile() {
+    setEdit(!edit);
+    console.log(cursos)
+    //setCursos((prevState) => [...prevState, Search.searchCourses()]);
+  }
+  const handleInputChange = (e) => {
+    if (e.target.value !== '') {
+      setUser({
+        ...user,
+        [e.target.name]: e.target.value,
+      });
+    }
+  };
   useEffect(() => {
     if (typeof id.carne === 'undefined') {
       userInfoAut();
@@ -205,7 +241,29 @@ export default function Profile(props) {
           <div className="container addName">
             <div className="row">
               <div className="col-6">
-                <h1>{` ${user.nombre_completo}`}</h1>
+                {!edit ? (
+                  <h1>{` ${user.nombre_completo}`}</h1>
+                ) : (
+                  <input
+                    className="input ms-1"
+                    type="text"
+                    name="nombre_completo"
+                    placeholder={user.nombre_completo}
+                    onInput={handleInputChange}
+                    value={user.nombre_completo}
+                  />
+                )}
+              </div>
+              <div className="mt-z4">
+                <Select
+                  isMulti
+                  closeMenuOnSelect={false}
+                  components={animatedComponents}
+                  placeholder="Agrega tus cursos"
+                  value={cursos.find((obj) => obj.value === user.cursos)}
+                  onChange={onCoursesChange}
+                  options={cursos}
+                />
               </div>
               {(item.type === 1) ? (
                 <>
@@ -229,6 +287,20 @@ export default function Profile(props) {
                       remove_circle_outline
                     </span>
                     <p>  Eliminar amigo</p>
+                  </button>
+                </>
+              ) : null}
+              {(item.type === 0) ? (
+                <>
+                  <button id="addFriend" className="col-3 editIcon" type="button" onClick={editProfile}>
+                    <span className="material-icons add">
+                      edit
+                    </span>
+                    {!edit ? (
+                      <p>Editar perfil</p>
+                    ) : (
+                      <p>Confirmar</p>
+                    )}
                   </button>
                 </>
               ) : null}
