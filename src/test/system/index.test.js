@@ -19,7 +19,7 @@ describe('testing', () => {
     await driver.findElement(By.name('password')).sendKeys('123456789');
     await driver.findElement(By.id('logIn')).click();
     jest.setTimeout(100);
-    driver.wait(until.elementLocated(By.id('dash-container')), 100);
+    driver.wait(until.elementLocated(By.id('dash-container')), 100).sendKeys('test');
     const element = await driver.findElement(By.id('dash-container')).isDisplayed();
     expect(element).toBeTruthy();
   });
