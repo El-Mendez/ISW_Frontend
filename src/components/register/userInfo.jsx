@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { SiInstagram, SiFacebook, SiWhatsapp } from 'react-icons/si';
 import Cookies from 'universal-cookie';
@@ -47,10 +47,9 @@ export default function UserInfo() {
   const loadImage = async () => {
     const data = new FormData();
     data.append('file', file);
-    data.append('carne', 191025);
     try {
       // TODO cambiar por la ruta del server
-      await Axios.post('http://localhost:3000/free/profile/image',
+      await Axios.post('http://meetinguvg.me/free/profile/image',
         data,
         {
           headers: {
@@ -115,6 +114,7 @@ export default function UserInfo() {
       history.push('/home');
       history.go();
     }, 1000);
+    console.log('test');
   };
 
   return (

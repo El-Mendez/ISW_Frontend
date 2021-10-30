@@ -45,7 +45,7 @@ export default function MainRoutes() {
   return (
     <Router>
       <Switch>
-        <ProtectedRoutes path="/home" session={session} component={Dashboard} />
+        <ProtectedRoutes exact path="/home" session={session} component={Dashboard} />
         <Route
           exact
           path="/"
@@ -62,7 +62,7 @@ export default function MainRoutes() {
               />
             ))}
         />
-        <ProtectedRoutes path="/data" session={session} component={UserInfo} />
+        <Route exact path="/data" component={UserInfo} />
         <Route exact path="/signUp" component={Register} />
         <Route path="/recovery" component={ResetPassword} />
         <Route exact path="/reset-password" component={ForgotPassword} />
