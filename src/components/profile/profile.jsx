@@ -209,11 +209,12 @@ export default function Profile(props) {
           redes_sociales: res.data[0].redes_sociales,
         });
         img.src = `../../../public/assets/${res.data[0].carne}.png`;
-        // eslint-disable-next-line no-unused-expressions
+        // eslint-disable-next-line no-unused-expressions,func-names
         img.onload = function () {
         // image exists and is loaded
           setImage(true);
         };
+        // eslint-disable-next-line func-names
         img.onerror = function () {
         // image exists and is loaded
           setImage(false);
@@ -239,10 +240,10 @@ export default function Profile(props) {
       ...user,
       cursos: coursesUser,
     });
-    console.log(user.cursos)
+    console.log(user.cursos);
   }
   const handleInputChange = (e) => {
-    console.log(e.target.value)
+    console.log(e.target.value);
     if (e.target.value !== '') {
       setUser2({
         ...user2,

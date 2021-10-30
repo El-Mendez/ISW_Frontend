@@ -45,7 +45,7 @@ export default function MainRoutes() {
   return (
     <Router>
       <Switch>
-        <ProtectedRoutes exact path="/home" session={session} component={Dashboard} />
+        <ProtectedRoutes path="/home" session={session} component={Dashboard} />
         <Route
           exact
           path="/"
