@@ -14,7 +14,8 @@ import {
 export default function Profile(props) {
   const [report, setReport] = useState(false);
   const [isUser, setIsUser] = useState(false);
-  let coursesUser = [];
+  const [cursosUsuario, setCursosUsuario] = useState([]);
+  const [hobbiesUsuario, setHobbiesUsuario] = useState([]);
   const cursos = Search.searchCourses();
   const hobbies = Search.searchHobbies();
   const [edit, setEdit] = useState(false);
@@ -175,17 +176,17 @@ export default function Profile(props) {
   }
   const onCoursesChange = (selectedCourses) => {
     selectedCourses.map((course) => (
-      setUser2({
-        ...user2,
-        cursos: [...user2.cursos, course.value],
+      setUser({
+        ...user,
+        cursos: [...user.cursos, course.label],
       })
     ));
   };
   const onHobbiesChange = (selectedHobbies) => {
-    selectedHobbies.map((hobbies) => (
-      setUser2({
-        ...user2,
-        hobbies: [...user2.hobbies, hobbies.value],
+    selectedHobbies.map((hobbiesSelected) => (
+      setUser({
+        ...user,
+        hobbies: [...user.hobbies, hobbiesSelected.label],
       })
     ));
   };
@@ -227,20 +228,30 @@ export default function Profile(props) {
   }
 
   function editProfile() {
-    setEdit(!edit);
-    coursesUser = [];
+    const coursesUser = [];
+    const hobbiesUser = [];
+    setCursosUsuario([]);
     for (let i = 0; i < cursos.length; i += 1) {
       for (let j = 0; j < user.cursos.length; j += 1) {
         if (cursos[i].label === user.cursos[j].replace(/:/g, '')) {
-          coursesUser.push(cursos[i].label);
+          coursesUser.push({ label: cursos[i].label, value: cursos[i].value });
         }
       }
     }
-    setUser({
-      ...user,
-      cursos: coursesUser,
-    });
-    console.log(user.cursos);
+    for (let i = 0; i < hobbies.length; i += 1) {
+      for (let j = 0; j < user.hobbies.length; j += 1) {
+        if (hobbies[i].label === user.hobbies[j]) {
+          hobbiesUser.push({ label: hobbies[i].label, value: hobbies[i].value });
+        }
+      }
+    }
+    setCursosUsuario(
+      coursesUser,
+    );
+    setHobbiesUsuario(
+      hobbiesUser,
+    );
+    setEdit(!edit);
   }
   const handleInputChange = (e) => {
     console.log(e.target.value);
@@ -376,6 +387,7 @@ export default function Profile(props) {
                 closeMenuOnSelect
                 components={animatedComponents}
                 placeholder="Ingresa tus hobbies"
+                defaultValue={hobbiesUsuario}
                 value={hobbies.find((obj) => obj.value === user2.hobbies)}
                 onChange={onHobbiesChange}
                 options={hobbies}
@@ -396,8 +408,8 @@ export default function Profile(props) {
                 isMulti
                 closeMenuOnSelect
                 components={animatedComponents}
-                defaultValue={coursesUser.map((obj) => (cursos[obj].label))}
                 placeholder="Agrega tus cursos"
+                defaultValue={cursosUsuario}
                 value={cursos.find((obj) => obj.value === user2.cursos)}
                 onChange={onCoursesChange}
                 options={cursos}
