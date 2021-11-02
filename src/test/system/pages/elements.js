@@ -1,12 +1,11 @@
 import { until, By } from 'selenium-webdriver';
-import { NULL } from 'node-sass';
 
 export default class Elements {
   constructor(driver) {
     this.driver = driver;
   }
 
-  explicitWait(element, click = false, keys = false, msg = NULL) {
+  explicitWait(element: By, click = false, keys = false, msg = '') {
     try {
       // Espera por 10 segundos
       if (keys) {
@@ -15,7 +14,6 @@ export default class Elements {
         this.driver.wait(until.elementLocated(element, 10000)).click();
       }
     } catch (e) {
-      console.log('test');
       console.log(e);
     }
   }

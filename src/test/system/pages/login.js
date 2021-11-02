@@ -1,8 +1,8 @@
 /* eslint-disable no-underscore-dangle */
-import { By, until } from 'selenium-webdriver';
+import { By } from 'selenium-webdriver';
 import Elements from './elements';
 
-export default class LogIn extends Elements {
+export default class Login extends Elements {
   // eslint-disable-next-line no-useless-constructor
     // TODO revisar cómo hacer los fields private
     _passwordInput = By.name('password');
