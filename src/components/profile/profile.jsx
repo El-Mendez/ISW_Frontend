@@ -8,7 +8,7 @@ import * as Search from '../utils/search';
 import ProfileItem from './profileItem';
 import Report from './report';
 import {
-  USER_INFO, USER_INFO_AUT, SEND_REQUEST, DELETE_FRIEND, SENT_REQUESTS, CANCEL_REQUEST,
+  USER_INFO, USER_INFO_AUT, SEND_REQUEST, DELETE_FRIEND, SENT_REQUESTS, CANCEL_REQUEST, ASSIGN_HOBBY, ASSIGN_SECTION,
 } from '../utils/rutas';
 
 export default function Profile(props) {
@@ -174,21 +174,72 @@ export default function Profile(props) {
     };
     request();
   }
+  function assignCourse(courseId) {
+    const obj = [courseId];
+    const request = async () => {
+      try {
+        await Axios.post(ASSIGN_SECTION,
+          {
+            seccionesId: obj,
+          },
+          {
+            headers: {
+              Authorization: `Bearer ${token}`,
+            },
+          });
+      } catch (error) {
+        console.log(error);
+        console.log(error.response);
+      }
+    };
+    request();
+  }
   const onCoursesChange = (selectedCourses) => {
-    selectedCourses.map((course) => (
+    if (selectedCourses.length > user.cursos.length) {
+      console.log('Se añadio un dato');
       setUser({
         ...user,
-        cursos: [...user.cursos, course.label],
-      })
-    ));
+        cursos: [...user.cursos, selectedCourses[selectedCourses.length - 1].label],
+      });
+      console.log(selectedCourses[selectedCourses.length - 1].value);
+      assignCourse(selectedCourses[selectedCourses.length - 1].value);
+    } else {
+      console.log('Se elimino un dato');
+    }
   };
+  function assignHobbie(hobbieId) {
+    const obj = [hobbieId];
+    const request = async () => {
+      try {
+        await Axios.post(ASSIGN_HOBBY,
+          {
+            hobbiesId: obj,
+          },
+          {
+            headers: {
+              Authorization: `Bearer ${token}`,
+            },
+          });
+      } catch (error) {
+        console.log(error);
+        console.log(error.response);
+      }
+    };
+    request();
+  }
   const onHobbiesChange = (selectedHobbies) => {
-    selectedHobbies.map((hobbiesSelected) => (
+    const hobbie = 0;
+    if (selectedHobbies.length > user.hobbies.length) {
+      console.log('Se añadio un dato');
       setUser({
         ...user,
-        hobbies: [...user.hobbies, hobbiesSelected.label],
-      })
-    ));
+        hobbies: [...user.hobbies, selectedHobbies[selectedHobbies.length - 1].label],
+      });
+      console.log(selectedHobbies[selectedHobbies.length - 1].value);
+      assignHobbie(selectedHobbies[selectedHobbies.length - 1].value);
+    } else {
+      console.log('Se elimino un dato');
+    }
   };
   function userInfoAut() {
     const request = async () => {
