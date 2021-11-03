@@ -4,6 +4,7 @@ import {
   Route,
   useRouteMatch,
 } from 'react-router-dom';
+
 import NavBar from '../navbar/navbar';
 import Search from '../search/search';
 import UserInfo from '../profile/profile';
@@ -13,7 +14,7 @@ import Request from '../friends/request';
 import FriendsNotifications from '../friends/friendsNotifications';
 
 function Dashboard() {
-  const { url } = useRouteMatch();
+  const { url } = useRouteMatch(); 
   return (
     <div>
       <NavBar />

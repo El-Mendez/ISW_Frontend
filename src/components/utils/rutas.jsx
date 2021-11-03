@@ -15,6 +15,7 @@ const SUGGESTIONS_COURSES = 'http://api.meetinguvg.me/auth/suggestions/courses';
 const SUGGESTIONS_HOBBIES = 'http://api.meetinguvg.me/auth/suggestions/hobbies';
 const SUGGESTIONS_FRIENDS = 'http://api.meetinguvg.me/auth/suggestions/friends';
 const USER_INFO_AUT = 'http://api.meetinguvg.me/auth/profile';
+const REPORT = 'http://api.meetinguvg.me/auth/report';
 
 // REQUESTS
 const PASSWORD_RESET = 'http://api.meetinguvg.me/request/passwordReset';
@@ -55,4 +56,5 @@ module.exports = {
   SENT_REQUESTS,
   DELETE_FRIEND,
   SUGGESTIONS_FRIENDS,
+  REPORT,
 };
