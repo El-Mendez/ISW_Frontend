@@ -54,15 +54,16 @@ export default function UserInfo() {
     data.append('file', file);
     try {
       // TODO cambiar por la ruta del server
-      await Axios.post('http://meetinguvg.me/free/profile/image',
+      await Axios.post('http://localhost:3000/auth/profile/image',
         data,
         {
           headers: {
+            Authorization: `Bearer ${token}`,
             'Content-Type': 'multipart/form-data',
           },
         });
     } catch (e) {
-      console.log(e);
+      console.log(e.response);
     }
   };
 
@@ -112,8 +113,8 @@ export default function UserInfo() {
   };
 
   const onSubmit = () => {
-    Assign.assignHobbies(ASSIGN_HOBBY, user.hobbies, token);
-    Assign.assignCourses(ASSIGN_SECTION, user.cursos, token);
+    // Assign.assignHobbies(ASSIGN_HOBBY, user.hobbies, token);
+    // Assign.assignCourses(ASSIGN_SECTION, user.cursos, token);
     loadImage();
     // setTimeout(() => {
     //   history.push('/home');
