@@ -1,10 +1,15 @@
 import React, { useState } from 'react';
 import Modal from 'react-bootstrap/Modal';
+import Axios from 'axios';
 import Select from 'react-select';
+import Cookies from 'universal-cookie';
 import logo from '../../assets/logo.svg';
+import { REPORT } from '../utils/rutas';
 
 export default function Report(props) {
   const item = props;
+  const cookies = new Cookies();
+  const token = cookies.get('session');
 
   const options = [
     { value: 'spam', label: 'Es sospechoso o spam' },
@@ -19,7 +24,7 @@ export default function Report(props) {
   });
 
   const handleChange = (e) => {
-    setReport(e.value);
+    setReport(e.label);
     if (e.value !== '') {
       setFilled({
         type: true,
@@ -34,9 +39,27 @@ export default function Report(props) {
     setComment(e.target.value);
   };
   const onSubmit = () => {
+    const request = async () => {
+      try {
+        await Axios.post(REPORT,
+          {
+            reported: item.user,
+            reason: report,
+          }, {
+            headers: {
+              Authorization: `Bearer ${token}`,
+            },
+          });
+        alert(`Se ha enviado el reporte al usuario ${item.user}`);
+      } catch (error) {
+        console.log(error);
+        console.log(error.response);
+      }
+    };
+    request();
     console.log(report);
-    console.log(comment);
-    console.log(filled);
+    console.log(item.user);
+    item.onHide();
   };
   // FIXME Validar funcionamiento
   const cleanUp = () => {
@@ -75,18 +98,6 @@ export default function Report(props) {
               name="type"
               placeholder="Motivo..."
               onChange={handleChange}
-            />
-          </div>
-          <div className="input-container">
-            <span className={`material-icons input-icon ${filled ? 'is-filled' : ' '}`}>
-              message
-            </span>
-            <input
-              className="input ms-1"
-              type="email"
-              name="comment"
-              placeholder="Añadir comentario (opcional)"
-              onInput={handleInputChange}
             />
           </div>
           <div className="d-flex flex-column justify-content-center align-items-center mt-4 px-2">
