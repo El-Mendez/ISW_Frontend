@@ -60,7 +60,6 @@ it('Probando dirigirse a las recomendaciones por hobbies', () => {
   const courseItem = screen.getByText('Por hobbies en común');
   userEvent.click(courseItem);
   expect(history.location.pathname).toBe('//search/hobbies');
-  expect(1).toBe(2);
 });
 it('Probando dirigirse a las recomendaciones por hobbies', () => {
   const history = createMemoryHistory();
