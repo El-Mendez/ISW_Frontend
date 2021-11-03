@@ -1,23 +1,28 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { SiInstagram, SiFacebook, SiWhatsapp } from 'react-icons/si';
 import Cookies from 'universal-cookie';
-import { zodResolver } from '@hookform/resolvers/zod';
 import Select from 'react-select';
 import makeAnimated from 'react-select/animated';
 import Axios from 'axios';
+import { zodResolver } from '@hookform/resolvers/zod';
+import * as z from 'zod';
 import history from '../utils/history';
-import { contact } from '../utils/schemas';
 import { ASSIGN_HOBBY, ASSIGN_SECTION } from '../utils/rutas';
 import * as Search from '../utils/search';
 import * as Assign from '../utils/assign';
 import Input from '../utils/input';
 import Circle from '../utils/circle_number';
 
+const schema = z.object({
+  facebook: z.string(),
+  instagram: z.string(),
+});
+
 export default function UserInfo() {
   const { register, handleSubmit, formState: { errors } } = useForm({
     mode: 'On Change',
-    resolver: zodResolver(contact),
+    resolver: zodResolver(schema),
   });
 
   const animatedComponents = makeAnimated();
@@ -47,10 +52,9 @@ export default function UserInfo() {
   const loadImage = async () => {
     const data = new FormData();
     data.append('file', file);
-    data.append('carne', 191025);
     try {
       // TODO cambiar por la ruta del server
-      await Axios.post('http://localhost:3000/free/profile/image',
+      await Axios.post('http://meetinguvg.me/free/profile/image',
         data,
         {
           headers: {
@@ -108,13 +112,14 @@ export default function UserInfo() {
   };
 
   const onSubmit = () => {
-    Assign(ASSIGN_HOBBY, user.hobbies, token);
-    Assign(ASSIGN_SECTION, user.cursos, token);
+    Assign.assignHobbies(ASSIGN_HOBBY, user.hobbies, token);
+    Assign.assignCourses(ASSIGN_SECTION, user.cursos, token);
     loadImage();
-    setTimeout(() => {
-      history.push('/home');
-      history.go();
-    }, 1000);
+    // setTimeout(() => {
+    //   history.push('/home');
+    //   history.go();
+    // }, 1000);
+    console.log('test');
   };
 
   return (
@@ -174,31 +179,60 @@ export default function UserInfo() {
         <div className="container px-5">
           <Circle title="Información de Contacto" />
           {/* Facebook */}
-          <Input
-            filled={filled.facebook}
-            onChange={() => handleInputChange()}
-            register={(register('facebook'))}
-            errors={errors.facebook}
-            icon={<SiFacebook />}
-            holder="Perfil de Facebook"
-          />
+          <div className="input-container mt-3">
+            <span className={`material-icons input-icon ${filled.facebook ? 'is-filled' : ' '}`}>
+              <SiFacebook />
+            </span>
+            <input
+              className="input ms-1"
+              type="text"
+              name="facebook"
+              placeholder="Perfil de Facebook"
+              onInput={handleInputChange}
+              {...register('facebook')}
+
+            />
+          </div>
+          <small className="text-danger text-small d-block mb-2 mt-1">
+            <div className="d-flex align-items-center ps-2">
+              {errors.facebook
+                ? <span className="material-icons me-1">error_outline</span>
+                : null}
+              {errors.facebook?.message}
+            </div>
+          </small>
           {/* Instagram */}
-          <Input
-            filled={filled.instagram}
-            onChange={() => handleInputChange()}
-            register={(register('instagram'))}
-            errors={errors.instagram}
-            icon={<SiInstagram />}
-            holder="Perfil de Instagram"
-          />
+          <div className="input-container mt-3">
+            <span className={`material-icons input-icon ${filled.instagram ? 'is-filled' : ' '}`}>
+              <SiFacebook />
+            </span>
+            <input
+              className="input ms-1"
+              type="text"
+              name="instagram"
+              placeholder="Perfil de Facebook"
+              onInput={handleInputChange}
+              {...register('instagram')}
+
+            />
+          </div>
+          <small className="text-danger text-small d-block mb-2 mt-1">
+            <div className="d-flex align-items-center ps-2">
+              {errors.instagram
+                ? <span className="material-icons me-1">error_outline</span>
+                : null}
+              {errors.instagram?.message}
+            </div>
+          </small>
           {/* Phone number */}
           <Input
             filled={filled.phone}
-            onChange={() => handleInputChange()}
-            register={(register('phone'))}
-            errors={errors.phone}
+            onChange={(e) => handleInputChange(e)}
+            // register={() => register('phone')}
+            // errors={errors.phone}
             icon={<SiWhatsapp />}
             holder="Número de Teléfono"
+            name="phone"
           />
         </div>
         {/* NEXT BUTTON */}

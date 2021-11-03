@@ -5,7 +5,7 @@ import { By, until } from 'selenium-webdriver';
 import Actions from '../pages/LogIn';
 import BaseConfig from '../base_config';
 
-export default class LogIn extends BaseConfig {
+export default class Login extends BaseConfig {
   constructor(browser) {
     super();
     this.init(browser);

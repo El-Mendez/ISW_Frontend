@@ -14,7 +14,10 @@ import {
 export default function Profile(props) {
   const [report, setReport] = useState(false);
   const [isUser, setIsUser] = useState(false);
-  const [cursos, setCursos] = useState([]);
+  const [cursosUsuario, setCursosUsuario] = useState([]);
+  const [hobbiesUsuario, setHobbiesUsuario] = useState([]);
+  const cursos = Search.searchCourses();
+  const hobbies = Search.searchHobbies();
   const [edit, setEdit] = useState(false);
   const [pendingRequest, setPendingRequest] = useState(false);
   const [reload, setReload] = useState(false);
@@ -26,7 +29,7 @@ export default function Profile(props) {
   const location = useLocation();
   const item = props;
   const [isSelectedCourses, setIsSelectedCourses] = useState(true);
-  const [isSelectedHobbies, setIsSelectedHobbies] = useState(false);
+  const [isSelectedHobbies, setIsSelectedHobbies] = useState(true);
   const [isSelectedContact, setIsSelectedContact] = useState(false);
   const [image, setImage] = useState(false);
   const [user, setUser] = useState({
@@ -48,16 +51,22 @@ export default function Profile(props) {
   const handleClick = (e) => {
     if (e.target.name === 'contact') {
       setIsSelectedCourses(false);
-      setIsSelectedHobbies(false);
       setIsSelectedContact(true);
+      if (window.screen.width < 716) {
+        setIsSelectedHobbies(false);
+      }
     } else if (e.target.name === 'courses') {
       setIsSelectedCourses(true);
-      setIsSelectedHobbies(false);
       setIsSelectedContact(false);
+      if (window.screen.width < 716) {
+        setIsSelectedHobbies(false);
+      }
     } else if (e.target.name === 'hobbies') {
       setIsSelectedCourses(false);
-      setIsSelectedHobbies(true);
       setIsSelectedContact(false);
+      if (window.screen.width < 716) {
+        setIsSelectedHobbies(true);
+      }
     }
   };
   function addFriend() {
@@ -148,7 +157,6 @@ export default function Profile(props) {
           hobbies: res.data[0].hobbies,
           redes_sociales: res.data[0].redes_sociales,
         });
-        setCursos(res.data[0].cursos);
         img.src = `../../../public/assets/${id.carne}.png`;
         // eslint-disable-next-line no-unused-expressions
         img.onload = function () {
@@ -168,9 +176,17 @@ export default function Profile(props) {
   }
   const onCoursesChange = (selectedCourses) => {
     selectedCourses.map((course) => (
-      setUser2({
-        ...user2,
-        cursos: [...user2.cursos, course.value],
+      setUser({
+        ...user,
+        cursos: [...user.cursos, course.label],
+      })
+    ));
+  };
+  const onHobbiesChange = (selectedHobbies) => {
+    selectedHobbies.map((hobbiesSelected) => (
+      setUser({
+        ...user,
+        hobbies: [...user.hobbies, hobbiesSelected.label],
       })
     ));
   };
@@ -193,13 +209,13 @@ export default function Profile(props) {
           hobbies: res.data[0].hobbies,
           redes_sociales: res.data[0].redes_sociales,
         });
-        setCursos((prevState) => [...prevState, res.data[0].cursos]);
         img.src = `../../../public/assets/${res.data[0].carne}.png`;
-        // eslint-disable-next-line no-unused-expressions
+        // eslint-disable-next-line no-unused-expressions,func-names
         img.onload = function () {
         // image exists and is loaded
           setImage(true);
         };
+        // eslint-disable-next-line func-names
         img.onerror = function () {
         // image exists and is loaded
           setImage(false);
@@ -212,19 +228,44 @@ export default function Profile(props) {
   }
 
   function editProfile() {
+    const coursesUser = [];
+    const hobbiesUser = [];
+    setCursosUsuario([]);
+    for (let i = 0; i < cursos.length; i += 1) {
+      for (let j = 0; j < user.cursos.length; j += 1) {
+        if (cursos[i].label === user.cursos[j].replace(/:/g, '')) {
+          coursesUser.push({ label: cursos[i].label, value: cursos[i].value });
+        }
+      }
+    }
+    for (let i = 0; i < hobbies.length; i += 1) {
+      for (let j = 0; j < user.hobbies.length; j += 1) {
+        if (hobbies[i].label === user.hobbies[j]) {
+          hobbiesUser.push({ label: hobbies[i].label, value: hobbies[i].value });
+        }
+      }
+    }
+    setCursosUsuario(
+      coursesUser,
+    );
+    setHobbiesUsuario(
+      hobbiesUser,
+    );
     setEdit(!edit);
-    console.log(cursos)
-    //setCursos((prevState) => [...prevState, Search.searchCourses()]);
   }
   const handleInputChange = (e) => {
+    console.log(e.target.value);
     if (e.target.value !== '') {
-      setUser({
-        ...user,
+      setUser2({
+        ...user2,
         [e.target.name]: e.target.value,
       });
     }
   };
   useEffect(() => {
+    if (window.screen.width < 716) {
+      setIsSelectedHobbies(false);
+    }
     if (typeof id.carne === 'undefined') {
       userInfoAut();
     } else {
@@ -241,7 +282,7 @@ export default function Profile(props) {
           <div className="container addName">
             <div className="row">
               <div className="col-6">
-                {!edit ? (
+                {(true) ? (
                   <h1>{` ${user.nombre_completo}`}</h1>
                 ) : (
                   <input
@@ -253,17 +294,6 @@ export default function Profile(props) {
                     value={user.nombre_completo}
                   />
                 )}
-              </div>
-              <div className="mt-z4">
-                <Select
-                  isMulti
-                  closeMenuOnSelect={false}
-                  components={animatedComponents}
-                  placeholder="Agrega tus cursos"
-                  value={cursos.find((obj) => obj.value === user.cursos)}
-                  onChange={onCoursesChange}
-                  options={cursos}
-                />
               </div>
               {(item.type === 1) ? (
                 <>
@@ -350,24 +380,57 @@ export default function Profile(props) {
             </p>
             <div className="ms-1 bottom-border" />
           </div>
-          <ProfileItem
-            contact={user.hobbies}
-            type={0}
-          />
+          {(isSelectedHobbies && edit) && (
+            <div className="editsHobbies">
+              <Select
+                isMulti
+                closeMenuOnSelect
+                components={animatedComponents}
+                placeholder="Ingresa tus hobbies"
+                defaultValue={hobbiesUsuario}
+                value={hobbies.find((obj) => obj.value === user2.hobbies)}
+                onChange={onHobbiesChange}
+                options={hobbies}
+              />
+            </div>
+          )}
+          {(isSelectedHobbies && !edit) && (
+            <ProfileItem
+              contact={user.hobbies}
+              type={0}
+            />
+          )}
         </div>
         <div className="col-sm-12 col-md-7 d-flex flex-column ms-2">
-          {isSelectedContact
-            ? (
-              <ProfileItem
-                contact={user.redes_sociales}
-                type={1}
+          {(isSelectedCourses && edit) && (
+            <div className="editsCourses">
+              <Select
+                isMulti
+                closeMenuOnSelect
+                components={animatedComponents}
+                placeholder="Agrega tus cursos"
+                defaultValue={cursosUsuario}
+                value={cursos.find((obj) => obj.value === user2.cursos)}
+                onChange={onCoursesChange}
+                options={cursos}
               />
-            ) : (
-              <ProfileItem
-                contact={user.cursos}
-                type={0}
-              />
-            )}
+            </div>
+          )}
+          {(isSelectedContact && edit) && (
+            null
+          )}
+          {(isSelectedContact && !edit) && (
+          <ProfileItem
+            contact={user.redes_sociales}
+            type={1}
+          />
+          )}
+          {(isSelectedCourses && !edit) && (
+          <ProfileItem
+            contact={user.cursos}
+            type={0}
+          />
+          )}
         </div>
         {item.type === 2
           ? (

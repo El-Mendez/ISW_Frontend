@@ -62,7 +62,7 @@ export default function MainRoutes() {
               />
             ))}
         />
-        <ProtectedRoutes path="/data" session={session} component={UserInfo} />
+        <Route path="/data" session={session} component={UserInfo} />
         <Route exact path="/signUp" component={Register} />
         <Route path="/recovery" component={ResetPassword} />
         <Route exact path="/reset-password" component={ForgotPassword} />
