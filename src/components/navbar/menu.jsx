@@ -1,5 +1,6 @@
 import React from 'react';
 import { Link, useRouteMatch } from 'react-router-dom';
+import themeToggler from '../app';
 
 export default function Menu() {
   const { url } = useRouteMatch();
@@ -45,6 +46,9 @@ export default function Menu() {
               </Link>
             </div>
           </div>
+        </li>
+        <li>
+          <button className="modeChanger" onClick={() => themeToggler()}>Change Theme</button>
         </li>
       </ul>
     </div>
