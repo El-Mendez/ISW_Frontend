@@ -432,11 +432,12 @@ export default function Profile(props) {
           />
           )}
         </div>
-        {item.type === 2
+        {item.type === 1
           ? (
             <Report
               show={report}
               onHide={() => setReport(false)}
+              user={user.carne}
             />
           ) : null}
       </div>
