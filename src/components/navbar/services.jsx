@@ -59,22 +59,18 @@ function Services() {
   return (
     <div className="d-flex align-items-center ">
       <div className="services align-items-end" style={{ height: 'auto' }}>
-        <div className="dropdown container">
-          <div className="row">
-            <div className={`${!image ? ('no-image-user col-4') : 'col-2 image-user align-self-center'}`}>
-              <img src={`../../../public/assets/${image ? `${user.carne}.png` : 'default.svg'}`} alt="Profile" className="rounded-circle align-self-center" />
-            </div>
-            <div className="col align-self-center">
-              {user.nombre}
-            </div>
+        <div className="d-flex">
+          <div className={`${!image ? ('no-image-user col-4') : 'col-2 image-user align-self-center'} me-2`}>
+            <img src={`../../../public/assets/${image ? `${user.carne}.png` : 'default.svg'}`} alt="Profile" className="rounded-circle align-self-center" />
           </div>
-          <div className="row">
-            <div className="dropdown-content container">
-              <Link to={`${url}/profile`} className="noDecorations">
+          <div className="dropdown">
+            <button id="account-name" type="button" className="nav-link button">{user.nombre}</button>
+            <div id="getRequests" className="dropdown-content container">
+              <Link id="account" to={`${url}/profile`} className="noDecorations">
                 <p className="row">Cuenta</p>
               </Link>
-              <a className="noDecorations" onClick={logout}>
-                <p className="row">Cerrar sesion</p>
+              <a id="close-session" className="noDecorations" onClick={logout}>
+                <p className="row">Cerrar sesión</p>
               </a>
             </div>
           </div>

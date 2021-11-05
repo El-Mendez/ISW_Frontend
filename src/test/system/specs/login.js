@@ -1,37 +1,23 @@
 /* eslint-disable no-undef */
 // eslint-disable-next-line import/no-extraneous-dependencies
-import { cleanup } from '@testing-library/react';
 import { By, until } from 'selenium-webdriver';
-import Actions from '../pages/LogIn';
-import BaseConfig from '../base_config';
+import LoginActions from '../pages/login';
 
-export default class Login extends BaseConfig {
-  constructor(browser) {
-    super();
-    this.init(browser);
+export default class Login {
+  constructor(driver, host) {
+    this.driver = driver;
+    this.host = host;
   }
 
-  async start(url) {
-    describe('LOG IN', () => {
-      beforeAll(async () => {
-        // Access to the website
-        await this.driver.get(url);
-        this.login = await new Actions(this.driver);
-      }, 100000);
+  async logIn() {
+    beforeAll(async () => {
+      this.login = await new LoginActions(this.driver);
+    }, 100000);
 
-      test('Log in', async () => {
-        await this.login.logInAction();
-        await this.driver.wait(until.elementLocated(By.id('dash-container')), 10000);
-        expect(await this.driver.getCurrentUrl()).toEqual('http://meetinguvg.me/home');
-      }, 100000);
-
-      beforeEach(() => {
-        cleanup();
-      }, 30000);
-
-      afterAll(() => {
-        this.close();
-      });
-    });
+    test('Log in', async () => {
+      await this.login.logInAction();
+      await this.driver.wait(until.elementLocated(By.id('dash-container')), 10000);
+      expect(await this.driver.getCurrentUrl()).toEqual(`http://${this.host}/home`);
+    }, 10000);
   }
 }

@@ -40,12 +40,13 @@ export default function Menu() {
               <Link id="hobbiesRecommendations" to={`${url}/search/hobbies`} className="noDecorations">
                 <p className="row">Por hobbies en común</p>
               </Link>
-              <Link id="hobbiesRecommendations" to={`${url}/search/friends`} className="noDecorations">
+              <Link id="mutualRecommendations" to={`${url}/search/friends`} className="noDecorations">
                 <p className="row">Por amigos en común</p>
               </Link>
             </div>
           </div>
         </li>
+
       </ul>
     </div>
 

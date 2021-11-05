@@ -1,22 +1,23 @@
 import { Builder } from 'selenium-webdriver';
 
-export default class InitDriver {
-  #driver;
+export default class BaseConfig {
+  driver;
 
   init(browser) {
-    const setUp = async (browser) => {
-      if (browser === 'firefox') this.driver = new Builder().forBrowser('firefox').build();
-      // TODO agg más browsers
-      else this.driver = await new Builder().forBrowser('firefox').build();
-    };
-    setUp(browser);
+    if (browser === 'firefox') this.driver = new Builder().forBrowser('firefox').build();
+    // TODO agg más browsers
+    else this.driver = new Builder().forBrowser('firefox').build();
   }
 
-  async close() {
+  async openPage(url) {
+    await this.driver.get(url);
+  }
+
+  close() {
     try {
-      await this.driver.quit();
+      this.driver.quit();
     } catch (e) {
-      e.printStackTrace();
+      console.log(e);
     }
   }
 }

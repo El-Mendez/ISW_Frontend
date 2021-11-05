@@ -1,11 +1,11 @@
-import { until, By } from 'selenium-webdriver';
+import { until } from 'selenium-webdriver';
 
 export default class Elements {
   constructor(driver) {
     this.driver = driver;
   }
 
-  explicitWait(element: By, click = false, keys = false, msg = '') {
+  explicitWait(element, click = false, keys = false, msg = '') {
     try {
       // Espera por 10 segundos
       if (keys) {

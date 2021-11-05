@@ -3,8 +3,8 @@
 import { By } from 'selenium-webdriver';
 import Elements from './elements';
 
-export default class Login extends Elements {
-    _friendRequest = By.xpath(`//div[@value=${this.name}]`);
+export default class SendRequest extends Elements {
+    _friendRequest = By.xpath(`//div[@value=\'${this.name}\']`);
 
     _addFriend = By.id('addFriend');
 
@@ -13,7 +13,7 @@ export default class Login extends Elements {
     _sentRequest = By.id('sentRequest');
 
     // eslint-disable-next-line no-useless-constructor
-    constructor(driver, name = 'Maria') {
+    constructor(driver, name) {
       super(driver);
       this.name = name;
     }
@@ -26,7 +26,7 @@ export default class Login extends Elements {
       this.explicitWait(element, true);
     }
 
-    logInAction() {
+    sendRequestAction() {
       this.clickButton(this._friendRequest);
       this.clickButton(this._addFriend);
       this.clickButton(this._mailBox);
