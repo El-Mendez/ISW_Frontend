@@ -16,7 +16,7 @@ jobs:
       - name: Copying the Source Code
         uses: actions/checkout@v2
         with:
-          ref: ${{ github.event.pull_request.head.sha }}d
+          ref: ${{ github.event.pull_request.head.sha }}
 
       - name: Setting up Node 14
         uses: actions/setup-node@v2

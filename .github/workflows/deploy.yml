@@ -1,4 +1,4 @@
-name: Meeting Frontend CI-CD
+name: Frontend Deploy
 
 on:
   push:
