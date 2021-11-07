@@ -1,0 +1,31 @@
+name: Frontend Testing
+
+on:
+  pull_request:
+    types:
+      - opened
+      - synchronize
+    branches:
+      - prod
+      - dev
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Copying the Source Code
+        uses: actions/checkout@v2
+        with:
+          ref: ${{ github.event.pull_request.head.sha }}
+
+      - name: Setting up Node 14
+        uses: actions/setup-node@v2
+        with:
+          node-version: '14'
+          cache: 'npm'
+
+      - name: Instaling Libraries
+        run: npm install
+
+      - name: Running tests
+        run: npm run test
