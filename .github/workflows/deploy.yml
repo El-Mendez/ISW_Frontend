@@ -4,7 +4,6 @@ on:
   push:
     branches:
       - prod
-  workflow_dispatch:
 
 jobs:
   deploy:
@@ -23,9 +22,6 @@ jobs:
 
       - name: Instaling Libraries
         run: npm install
-
-      - name: Running tests
-        run: npm run test
 
       - name: Building Project
         run: npm run build
