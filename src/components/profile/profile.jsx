@@ -210,8 +210,9 @@ export default function Profile(props) {
     };
     request();
   }
-  function deleteCoursee(courseId) {
+  function deleteCourse(courseId) {
     const request = async () => {
+      const obj = `${courseId}`;
       try {
         await Axios.delete(ASSIGN_SECTION,
           {
@@ -219,7 +220,7 @@ export default function Profile(props) {
               Authorization: `Bearer ${token}`,
             },
             data: {
-              hobbyId: courseId,
+              seccionId: obj,
             },
           });
       } catch (error) {
@@ -247,16 +248,18 @@ export default function Profile(props) {
       assignCourse(selectedCourses[selectedCourses.length - 1].value);
     } else {
       console.log('Se elimino un dato');
-      /* for (let i = 0; i < user.hobbies.length; i += 1) {
-        if (!course.includes(user.hobbies[i])) {
-          onDeleteCourse = user.hobbies[i];
+      for (let i = 0; i < user.cursos.length; i += 1) {
+        if (!course.includes(user.cursos[i])) {
+          onDeleteCourse = user.cursos[i];
         }
       }
-      deleteCoursee(hobbies.find((obj) => obj.label === onDeleteCourse).value);
+      console.log(onDeleteCourse.replace(/:/g, ''))
+      console.log(cursos)
+      deleteCourse(cursos.find((obj) => obj.label === onDeleteCourse.replace(/:/g, '')).value);
       setUser({
         ...user,
         cursos: course,
-      }); */
+      });
     }
   };
   function assignHobbie(hobbieId) {
