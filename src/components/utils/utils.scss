@@ -150,6 +150,7 @@ input[type='file']{
   width: 100%;
   background-color: white;
   border-radius: 0.5rem;
+  border: 0.2px solid rgba(0, 0, 0, 0.1);
   isolation: isolate;
   transition: transform 0.4s ease-in-out;
   box-shadow: rgba(0, 0, 0, 0.15) 0 5px 15px 0;

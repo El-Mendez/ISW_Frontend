@@ -1,16 +1,32 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import PropTypes from 'prop-types';
-import img from '../../assets/3.svg';
 
 export default function Card(props) {
+  const [image, setImage] = useState(false);
+
+  useEffect(() => {
+    // eslint-disable-next-line no-unused-expressions
+    const img = new Image();
+    img.onload = () => {
+      // image exists and is loaded
+      setImage(true);
+    };
+    img.onerror = () => {
+      // image exists and is loaded
+      setImage(false);
+    };
+
+    img.src = `../../../public/assets/${props.carne}.png`;
+  }, []);
+
   // TODO hacer el texto responsive → que se ajuste al ancho del elemento
   return (
     <>
       <div className="card-item">
         <div className="p-2">
           <div className="image-container">
-            <img src={img} className="image-top rounded-circle" alt="Profile" />
+            <img src={`../../../public/assets/${image ? `${props.carne}.png` : 'default.svg'}`} className="image-top rounded-circle" alt="Profile" />
           </div>
           <div className="card-body p-1 mt-1 w-100 d-flex flex-column justify-content-center align-items-center">
             <p className="card-title">{props.name}</p>
@@ -25,6 +41,7 @@ export default function Card(props) {
 }
 
 Card.propTypes = {
+  carne: PropTypes.number,
   name: PropTypes.string,
   email: PropTypes.string,
   career: PropTypes.string,
@@ -32,6 +49,7 @@ Card.propTypes = {
 };
 
 Card.defaultProps = {
+  carne: 191025,
   name: 'Juanito Prueba',
   email: 'juanito@meetinguvg.me',
   career: 'Ingeniería en mentiras',
