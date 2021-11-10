@@ -231,36 +231,9 @@ export default function Profile(props) {
     request();
   }
   const onCoursesChange = (selectedCourses) => {
-    const course = [];
-    const courseId = [];
-    let onDeleteCourse = ' ';
-    for (let i = 0; i < selectedCourses.length; i += 1) {
-      course.push(selectedCourses[i].label);
-      courseId.push(selectedCourses[i].value);
-    }
-    if (selectedCourses.length > user.cursos.length) {
-      console.log('Se añadio un dato');
-      setUser({
-        ...user,
-        cursos: [...user.cursos, selectedCourses[selectedCourses.length - 1].label],
-      });
-      console.log(selectedCourses[selectedCourses.length - 1].value);
-      assignCourse(selectedCourses[selectedCourses.length - 1].value);
-    } else {
-      console.log('Se elimino un dato');
-      for (let i = 0; i < user.cursos.length; i += 1) {
-        if (!course.includes(user.cursos[i])) {
-          onDeleteCourse = user.cursos[i];
-        }
-      }
-      console.log(onDeleteCourse.replace(/:/g, ''))
-      console.log(cursos)
-      deleteCourse(cursos.find((obj) => obj.label === onDeleteCourse.replace(/:/g, '')).value);
-      setUser({
-        ...user,
-        cursos: course,
-      });
-    }
+    setCursosUsuario(
+      selectedCourses,
+    );
   };
   function assignHobbie(hobbieId) {
     const obj = [hobbieId];
@@ -283,8 +256,7 @@ export default function Profile(props) {
     request();
   }
   function deleteHobbie(hobbieId) {
-    const obj = `${hobbieId}`;
-    console.log(obj);
+    const obj = [hobbieId];
     const request = async () => {
       try {
         await Axios.delete(ASSIGN_HOBBY,
@@ -304,36 +276,11 @@ export default function Profile(props) {
     request();
   }
   const onHobbiesChange = (selectedHobbies) => {
-    const hobbie = [];
-    const hobbieId = [];
-    let onDeleteHobbie = ' ';
-    for (let i = 0; i < selectedHobbies.length; i += 1) {
-      hobbie.push(selectedHobbies[i].label);
-      hobbieId.push(selectedHobbies[i].value);
-    }
-    if (selectedHobbies.length > user.hobbies.length) {
-      console.log('Se añadio un dato');
-      setUser({
-        ...user,
-        hobbies: [...user.hobbies, selectedHobbies[selectedHobbies.length - 1].label],
-      });
-      console.log(selectedHobbies[selectedHobbies.length - 1].value);
-      console.log(selectedHobbies[selectedHobbies.length - 1].label);
-      assignHobbie(selectedHobbies[selectedHobbies.length - 1].value);
-    } else {
-      console.log('Se elimino un dato');
-      for (let i = 0; i < user.hobbies.length; i += 1) {
-        if (!hobbie.includes(user.hobbies[i])) {
-          onDeleteHobbie = user.hobbies[i];
-        }
-      }
-      deleteHobbie(hobbies.find((obj) => obj.label === onDeleteHobbie).value);
-      setUser({
-        ...user,
-        hobbies: hobbie,
-      });
-    }
+    setHobbiesUsuario(
+      selectedHobbies,
+    );
   };
+
   function userInfoAut() {
     const request = async () => {
       try {
@@ -371,31 +318,105 @@ export default function Profile(props) {
     request();
   }
 
+  function checkEditData() {
+    const newsHobbies = [];
+    const newsCourses = [];
+    const hobbiesToDelete = [];
+    const coursesToDelete = [];
+    const hobbiesUsuarioLabel = [];
+    const hobbiesUsuarioValue = [];
+    const coursesUsuarioLabel = [];
+    const coursesUsuarioValue = [];
+    for (let i = 0; i < hobbiesUsuario.length; i += 1) {
+      if (!user.hobbies.includes(hobbiesUsuario[i].label)) {
+        newsHobbies.push(hobbiesUsuario[i].value);
+      }
+    }
+    for (let i = 0; i < cursosUsuario.length; i += 1) {
+      if (!user.cursos.replace(/:/g, '').includes(cursosUsuario[i].label)) {
+        newsCourses.push(cursosUsuario[i].value);
+      }
+    }
+    hobbiesUsuario.forEach((obj) => {
+      hobbiesUsuarioLabel.push(obj.label);
+    });
+    cursosUsuario.forEach((obj) => {
+      coursesUsuarioLabel.push(obj.label);
+    });
+    for (let i = 0; i < user.hobbies.length; i += 1) {
+      if (!hobbiesUsuarioLabel.includes(user.hobbies[i])) {
+        hobbiesToDelete.push(user.hobbies[i]);
+      }
+    }
+    for (let i = 0; i < user.cursos.length; i += 1) {
+      if (!coursesUsuarioLabel.includes(user.cursos[i])) {
+        coursesToDelete.push(user.cursos[i]);
+      }
+    }
+    hobbies.forEach((obj) => {
+      for (let i = 0; i < hobbiesToDelete.length; i += 1) {
+        if (obj.label === hobbiesToDelete[i]) {
+          hobbiesUsuarioValue.push(obj.value);
+        }
+      }
+    });
+    cursos.forEach((obj) => {
+      for (let i = 0; i < coursesToDelete.length; i += 1) {
+        if (obj.label === coursesToDelete[i]) {
+          coursesUsuarioValue.push(obj.value);
+        }
+      }
+    });
+    if (hobbiesUsuarioValue > 0) {
+      deleteHobbie(hobbiesUsuarioValue);
+    }
+    if (newsHobbies > 0) {
+      assignHobbie(newsHobbies);
+    }
+    if (coursesUsuarioValue > 0) {
+      deleteCourse(coursesUsuarioValue);
+    }
+    if (newsCourses > 0) {
+      assignCourse(newsCourses);
+    }
+    setUser({
+      ...user,
+      hobbies: hobbiesUsuarioLabel,
+      cursos: coursesUsuarioLabel,
+    });
+  }
+
   function editProfile() {
-    const coursesUser = [];
-    const hobbiesUser = [];
-    setCursosUsuario([]);
-    for (let i = 0; i < cursos.length; i += 1) {
-      for (let j = 0; j < user.cursos.length; j += 1) {
-        if (cursos[i].label === user.cursos[j].replace(/:/g, '')) {
-          coursesUser.push({ label: cursos[i].label, value: cursos[i].value });
+    if (!edit) {
+      const coursesUser = [];
+      const hobbiesUser = [];
+      setCursosUsuario([]);
+      setHobbiesUsuario([]);
+      for (let i = 0; i < cursos.length; i += 1) {
+        for (let j = 0; j < user.cursos.length; j += 1) {
+          if (cursos[i].label === user.cursos[j].replace(/:/g, '')) {
+            coursesUser.push({ label: cursos[i].label, value: cursos[i].value });
+          }
         }
       }
-    }
-    for (let i = 0; i < hobbies.length; i += 1) {
-      for (let j = 0; j < user.hobbies.length; j += 1) {
-        if (hobbies[i].label === user.hobbies[j]) {
-          hobbiesUser.push({ label: hobbies[i].label, value: hobbies[i].value });
+      for (let i = 0; i < hobbies.length; i += 1) {
+        for (let j = 0; j < user.hobbies.length; j += 1) {
+          if (hobbies[i].label === user.hobbies[j]) {
+            hobbiesUser.push({ label: hobbies[i].label, value: hobbies[i].value });
+          }
         }
       }
+      setCursosUsuario(
+        coursesUser,
+      );
+      setHobbiesUsuario(
+        hobbiesUser,
+      );
+      setEdit(!edit);
+    } else {
+      checkEditData();
+      setEdit(!edit);
     }
-    setCursosUsuario(
-      coursesUser,
-    );
-    setHobbiesUsuario(
-      hobbiesUser,
-    );
-    setEdit(!edit);
   }
   const handleInputChange = (e) => {
     console.log(e.target.value);
@@ -552,6 +573,7 @@ export default function Profile(props) {
               <Select
                 isMulti
                 closeMenuOnSelect
+                isClearable={false}
                 components={animatedComponents}
                 placeholder="Agrega tus cursos"
                 defaultValue={cursosUsuario}
