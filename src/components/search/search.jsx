@@ -1,10 +1,11 @@
 import React, { useState, useEffect } from 'react';
 import Cookies from 'universal-cookie';
 import Axios from 'axios';
-import { useLocation } from 'react-router-dom';
+import { useLocation, useRouteMatch } from 'react-router-dom';
 import { SUGGESTIONS_HOBBIES, SUGGESTIONS_COURSES, SUGGESTIONS_FRIENDS } from '../utils/rutas';
-import SuggestionItem from '../suggestions/suggestionItem';
+import Card from '../utils/card';
 import NoSuggestionItem from '../suggestions/noSuggestionItem';
+import history from '../utils/history';
 
 function Search(props) {
   const [suggestions, setSuggestions] = useState([]);
@@ -14,6 +15,8 @@ function Search(props) {
   const token = cookies.get('session');
   const item = props;
   const location = useLocation();
+  const { url } = useRouteMatch();
+
   function searchFriends() {
     const request = async () => {
       try {
@@ -35,21 +38,26 @@ function Search(props) {
     };
     request();
   }
+
   useEffect(() => {
     // Esto es probicional hasta que tenga la API de las recomendaciones por amigos
     searchFriends();
   }, [location]);
+
   return (
     <div className="userList">
       {recommendation ? (
-        <div className="container ">
-          <div className="row align-items-center">
+        <div className="container mt-4">
+          <div className="songs-container">
             {suggestions.map((user) => (
-              <SuggestionItem
-                nombre={user.nombre}
-                carne={user.carne}
-                correo={user.correo}
+              <Card
                 key={user.carne}
+                name={user.nombre}
+                  // TODO retornar carrera
+                career={user.carne}
+                email={user.correo}
+                carne={user.carne}
+                viewProfile={`${url}/profile/${user.carne}`}
               />
             ))}
           </div>
