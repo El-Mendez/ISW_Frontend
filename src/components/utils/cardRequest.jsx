@@ -62,7 +62,7 @@ export default function CardRequest(props) {
           <Link className="btn-profile request mx-2 mb-2" type="button" to={props.viewProfile}>
             PERFIL
           </Link>
-          <button className="btn-cancel request mx-2 mb-2" type="button" onClick={handleClickCancel}>
+          <button className="btn-cancel mx-2 mb-2" type="button" onClick={handleClickCancel}>
             CANCELAR
           </button>
         </div>

@@ -243,8 +243,8 @@ input[type='file']{
 
 .btn-profile{
   --font-size: calc(0.8em + 1vmin);
-  --hover-bck-color: $serenity;
-  --hover-color: $primary;
+  --hover-bck-color: #93B2C0;
+  --hover-color: #444243;
   text-decoration: none;
   display: inline-block;
   cursor: pointer;
@@ -273,7 +273,6 @@ input[type='file']{
 
 .btn-cancel{
   text-decoration: none;
-  display: inline-block;
   cursor: pointer;
   width: 50%;
   background-color: transparent;
