@@ -48,7 +48,7 @@ function Search(props) {
     <div className="userList">
       {recommendation ? (
         <div className="container mt-4">
-          <div className="songs-container">
+          <div className="card-container">
             {suggestions.map((user) => (
               <Card
                 key={user.carne}

@@ -163,12 +163,14 @@ input[type='file']{
   position: relative;
   display: flex;
   justify-content: center;
-  margin-bottom: 16px;
+  margin-bottom: 15px;
+  margin-top: 10px;
 }
 
 .image-top{
-  width: 60%;
-  border-radius: 2px;
+  width: 58%;
+  aspect-ratio: 1;
+  object-fit: cover;
 }
 
 .card-title{
@@ -201,7 +203,7 @@ input[type='file']{
   display: flex;
 }
 
-.songs-container{
+.card-container{
   padding: 16px;
   --minimumColumnWidth: 250px;
   overflow-y: hidden;
