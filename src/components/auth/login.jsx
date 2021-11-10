@@ -113,7 +113,7 @@ export default function Login(props) {
             </p>
             <img src={logo} alt="Logo" className="img-size w-50" />
             <p className="mt-1 description text-center px-4">
-              Inicia sesión y disfruta de una nueva experiencia mientras haces nuevos amigos
+              Inicia sesión y disfruta de nuevas experiencias mientras haces nuevos amigos
             </p>
           </div>
         </Modal.Title>
