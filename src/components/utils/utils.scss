@@ -146,3 +146,87 @@ input[type='file']{
   cursor: pointer;
 }
 
+.item-card{
+  width: 100%;
+  //padding: 16px;
+  align-items: center;
+  justify-content: center;
+  align-content: center;
+  background-color: white;
+  cursor: pointer;
+  border-radius: 0.5rem;
+  isolation: isolate;
+  transition: background-color .3s ease;
+}
+
+.card-text{
+  color: #707070;
+  font-size: 14px;
+}
+
+.email{
+  font-weight: 900;
+  color: #707070;
+  font-size: 20px;
+}
+
+.card-song-title{
+  font-weight: 700;
+  font-size: 22px;
+  color: #000000;
+  text-overflow: ellipsis;
+  overflow: hidden;
+  white-space: nowrap;
+  margin-bottom: -5px;
+}
+
+.image-container{
+  position: relative;
+  display: flex;
+ justify-content: center;
+  margin-bottom: 16px;
+}
+
+.image-top{
+  width: 80%;
+  border-radius: 2px;
+}
+
+.section-container{
+  flex-direction: column;
+  position: relative;
+  min-height: 300px;
+  min-width: 100%;
+  margin-bottom: 16px;
+  display: flex;
+}
+
+.songs-container{
+  --minimumColumnWidth: 250px;
+  overflow-y: hidden;
+  //grid-auto-rows: 0; tengo que revisar para que lo separe por secciones
+  grid-template-rows: 1fr;
+  display: grid;
+  grid-gap: 24px;
+  grid-template-columns: repeat(auto-fill,minmax(var(--minimumColumnWidth),1fr));
+}
+
+.btn-profile{
+  width: inherit;
+  background-color: $primary;
+  border: none;
+  padding: 0.6rem 25px;
+  color: #fff;
+  font-size: 20px;
+  font-weight: 700;
+  border-radius: 0 0 0.5rem  0.5rem ;
+  transition: color 0.15s ease-in-out, background-color 0.15s ease-in-out, border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out, transform 0.3s cubic-bezier(.86,0,0,2.26);
+  &:hover{
+    background-color: #413e36;
+    border-color: #3e3a33;
+  }
+}
+
+
+
+

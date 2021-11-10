@@ -54,7 +54,7 @@ export default function UserInfo() {
     data.append('file', file);
     try {
       // TODO cambiar por la ruta del server
-      await Axios.post('http://localhost:3000/auth/profile/image',
+      await Axios.post('http://api.meetinguvg.me/auth/profile/image',
         data,
         {
           headers: {
@@ -113,14 +113,13 @@ export default function UserInfo() {
   };
 
   const onSubmit = () => {
-    // Assign.assignHobbies(ASSIGN_HOBBY, user.hobbies, token);
-    // Assign.assignCourses(ASSIGN_SECTION, user.cursos, token);
-    loadImage();
-    // setTimeout(() => {
-    //   history.push('/home');
-    //   history.go();
-    // }, 1000);
-    console.log('test');
+    Assign.assignHobbies(ASSIGN_HOBBY, user.hobbies, token);
+    Assign.assignCourses(ASSIGN_SECTION, user.cursos, token);
+    // loadImage();
+    setTimeout(() => {
+      history.push('/home');
+      history.go();
+    }, 1000);
   };
 
   return (
