@@ -8,7 +8,7 @@ import * as Search from '../utils/search';
 import ProfileItem from './profileItem';
 import Report from './report';
 import {
-  USER_INFO, USER_INFO_AUT, SEND_REQUEST, DELETE_FRIEND, SENT_REQUESTS, CANCEL_REQUEST, ASSIGN_HOBBY, ASSIGN_SECTION,
+  USER_INFO, USER_INFO_AUT, SEND_REQUEST, DELETE_FRIEND, SENT_REQUESTS, CANCEL_REQUEST, ASSIGN_HOBBY, ASSIGN_SECTION, AUTH,
 } from '../utils/rutas';
 
 export default function Profile(props) {
@@ -143,6 +143,22 @@ export default function Profile(props) {
     };
     request();
   }
+  function ping() {
+    const request = async () => {
+      try {
+        const res = await Axios.get(AUTH,
+          {
+            headers: {
+              Authorization: `Bearer ${token}`,
+            },
+          });
+        console.log(res);
+      } catch (error) {
+        console.log(error);
+      }
+    };
+    request();
+  }
   function userInfo() {
     const request = async () => {
       try {
@@ -227,8 +243,35 @@ export default function Profile(props) {
     };
     request();
   }
+  function deleteHobbie(hobbieId) {
+    const obj = `${hobbieId}`;
+    console.log(obj);
+    const request = async () => {
+      try {
+        await Axios.delete(ASSIGN_HOBBY,
+          {
+            headers: {
+              Authorization: `Bearer ${token}`,
+            },
+            data: {
+              hobbyId: obj,
+            },
+          });
+      } catch (error) {
+        console.log(error);
+        console.log(error.response);
+      }
+    };
+    request();
+  }
   const onHobbiesChange = (selectedHobbies) => {
-    const hobbie = 0;
+    const hobbie = [];
+    const hobbieId = [];
+    let onDeleteHobbie = ' ';
+    for (let i = 0; i < selectedHobbies.length; i += 1) {
+      hobbie.push(selectedHobbies[i].label);
+      hobbieId.push(selectedHobbies[i].value);
+    }
     if (selectedHobbies.length > user.hobbies.length) {
       console.log('Se añadio un dato');
       setUser({
@@ -236,9 +279,20 @@ export default function Profile(props) {
         hobbies: [...user.hobbies, selectedHobbies[selectedHobbies.length - 1].label],
       });
       console.log(selectedHobbies[selectedHobbies.length - 1].value);
+      console.log(selectedHobbies[selectedHobbies.length - 1].label);
       assignHobbie(selectedHobbies[selectedHobbies.length - 1].value);
     } else {
       console.log('Se elimino un dato');
+      for (let i = 0; i < user.hobbies.length; i += 1) {
+        if (!hobbie.includes(user.hobbies[i])) {
+          onDeleteHobbie = user.hobbies[i];
+        }
+      }
+      deleteHobbie(hobbiesUsuario.find((obj) => obj.label === onDeleteHobbie).value);
+      setUser({
+        ...user,
+        hobbies: hobbie,
+      });
     }
   };
   function userInfoAut() {
@@ -436,6 +490,7 @@ export default function Profile(props) {
               <Select
                 isMulti
                 closeMenuOnSelect
+                isClearable={false}
                 components={animatedComponents}
                 placeholder="Ingresa tus hobbies"
                 defaultValue={hobbiesUsuario}
