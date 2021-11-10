@@ -162,13 +162,16 @@ input[type='file']{
 .image-container{
   position: relative;
   display: flex;
+  width: 50%;
   justify-content: center;
-  margin-bottom: 15px;
-  margin-top: 10px;
+  align-items: center;
+  margin-bottom: 5px;
+  margin-top: 7px;
+  margin-left: 10px;
 }
 
 .image-top{
-  width: 58%;
+  width: 100%;
   aspect-ratio: 1;
   object-fit: cover;
 }
@@ -183,15 +186,30 @@ input[type='file']{
   margin-bottom: -5px;
 }
 
+.card-hor-title{
+  font-weight: 700;
+  font-size: calc(1.5em + 1vmin);
+  color: #000000;
+  text-overflow: ellipsis;
+  overflow: hidden;
+  white-space: nowrap;
+  margin-bottom: -5px;
+}
+
 .card-email{
   color: #707070;
   font-size: calc(0.5em + 1vmin);;
 }
 
 .card-career{
+  --font-size: calc(0.9em + 1vmin);
   font-weight: 900;
   color: #707070;
-  font-size: calc(0.9em + 1vmin);
+  font-size: var(--font-size);
+}
+
+.card-career.horizontal{
+  --font-size: calc(0.8em + 1vmin);
 }
 
 .section-container{
@@ -212,6 +230,10 @@ input[type='file']{
   display: grid;
   grid-gap: 60px 40px;
   grid-template-columns: repeat(auto-fill,minmax(var(--minimumColumnWidth),1fr));
+}
+
+.card-container.horizontal{
+  --minimumColumnWidth: 340px;
 }
 
 .btn-profile{

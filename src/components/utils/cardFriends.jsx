@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import PropTypes from 'prop-types';
 
-export default function Card(props) {
+export default function CardFriends(props) {
   const [image, setImage] = useState(false);
 
   useEffect(() => {
@@ -23,25 +23,26 @@ export default function Card(props) {
 
   // TODO hacer el texto responsive → que se ajuste al ancho del elemento
   return (
-    <>
+  // eslint-disable-next-line react/style-prop-object
+    <div className="card-container horizontal">
       <div className="card-item">
-        <div className="p-2 d-flex flex-column justify-content-center align-items-center">
+        <div className="p-2 d-flex ">
           <div className="image-container">
             <img src={`../../../public/assets/${image ? `${props.carne}.png` : '191025.png'}`} className="image-top rounded-circle" alt="Profile" />
           </div>
           <div className="card-body p-1 mt-1 w-100 d-flex flex-column justify-content-center align-items-center">
-            <p className="card-title">{props.name}</p>
+            <p className="card-hor-title">{props.name}</p>
             <p className="card-email mt-1 mb-0">{props.email}</p>
-            <p className="card-career mb-0">{props.career}</p>
+            <p className="card-career horizontal mb-0">{props.career}</p>
           </div>
         </div>
         <Link className="btn-profile" type="button" to={props.viewProfile}> VER PERFIL </Link>
       </div>
-    </>
+    </div>
   );
 }
 
-Card.propTypes = {
+CardFriends.propTypes = {
   carne: PropTypes.number,
   name: PropTypes.string,
   email: PropTypes.string,
@@ -49,7 +50,7 @@ Card.propTypes = {
   viewProfile: PropTypes.string,
 };
 
-Card.defaultProps = {
+CardFriends.defaultProps = {
   carne: 191025,
   name: 'Juanito Prueba',
   email: 'juanito@meetinguvg.me',
