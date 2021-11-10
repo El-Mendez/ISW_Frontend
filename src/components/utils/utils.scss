@@ -147,6 +147,7 @@ input[type='file']{
 }
 
 .card-item{
+  --hover-transform: scale(1.04);
   width: 100%;
   background-color: white;
   border-radius: 0.5rem;
@@ -155,8 +156,12 @@ input[type='file']{
   transition: transform 0.4s ease-in-out;
   box-shadow: rgba(0, 0, 0, 0.15) 0 5px 15px 0;
   &:hover{
-    transform: scale(1.04);
+    transform: var(--hover-transform)
   }
+}
+
+.card-item.request{
+  --hover-transform: none;
 }
 
 .image-container{
@@ -237,6 +242,9 @@ input[type='file']{
 }
 
 .btn-profile{
+  --font-size: calc(0.8em + 1vmin);
+  --hover-bck-color: $serenity;
+  --hover-color: $primary;
   text-decoration: none;
   display: inline-block;
   cursor: pointer;
@@ -245,13 +253,40 @@ input[type='file']{
   border: none;
   padding: 0.6rem 25px;
   color: #fff;
-  font-size: 20px;
+  font-size: var(--font-size);
   font-weight: 700;
-  border-radius: 0 0 0.5rem  0.5rem ;
+  border-radius: 0 0 0.5rem  0.5rem;
   transition: color 0.15s ease-in-out, background-color 0.15s ease-in-out, border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out, transform 0.3s cubic-bezier(.86,0,0,2.26);
   &:hover{
-    background-color: $serenity;
-    color: $primary
+    background-color: var(--hover-bck-color);
+    color: var(--hover-color)
+  }
+}
+
+.btn-profile.request{
+  font-size: 18px;
+  width: 50%;
+  border-radius: 0.5rem 0.5rem 0.5rem  0.5rem;
+  --hover-bck-color: #3a3839;
+  --hover-color: white;
+}
+
+.btn-cancel{
+  text-decoration: none;
+  display: inline-block;
+  cursor: pointer;
+  width: 50%;
+  background-color: transparent;
+  border: 1px solid $gold;
+  padding: 0.6rem 25px;
+  color: $primary;
+  font-size: 18px;
+  font-weight: 700;
+  border-radius: 0.5rem 0.5rem 0.5rem  0.5rem ;
+  transition: color 0.15s ease-in-out, background-color 0.15s ease-in-out, border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out, transform 0.3s cubic-bezier(.86,0,0,2.26);
+  &:hover{
+    background-color: $gold;
+    color: white
   }
 }
 
