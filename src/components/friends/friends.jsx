@@ -48,7 +48,6 @@ function Friends() {
                 key={user.carne}
                 name={user.nombre}
                     // TODO retornar carrera
-                career={user.carne}
                 email={user.correo}
                 carne={user.carne}
                 viewProfile={`${url}/profile/${user.carne}`}

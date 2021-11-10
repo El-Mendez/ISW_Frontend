@@ -40,7 +40,6 @@ function Search(props) {
   }
 
   useEffect(() => {
-    // Esto es probicional hasta que tenga la API de las recomendaciones por amigos
     searchFriends();
   }, [location]);
 
@@ -54,7 +53,6 @@ function Search(props) {
                 key={user.carne}
                 name={user.nombre}
                   // TODO retornar carrera
-                career={user.carne}
                 email={user.correo}
                 carne={user.carne}
                 viewProfile={`${url}/profile/${user.carne}`}
