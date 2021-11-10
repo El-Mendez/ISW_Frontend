@@ -24,11 +24,11 @@ export default function CardFriends(props) {
   // TODO hacer el texto responsive → que se ajuste al ancho del elemento
   return (
   // eslint-disable-next-line react/style-prop-object
-    <div className="card-container horizontal">
+    <>
       <div className="card-item">
         <div className="p-2 d-flex ">
           <div className="image-container">
-            <img src={`../../../public/assets/${image ? `${props.carne}.png` : '191025.png'}`} className="image-top rounded-circle" alt="Profile" />
+            <img src={`../../../public/assets/${image ? `${props.carne}.png` : 'default.svg'}`} className="image-top rounded-circle" alt="Profile" />
           </div>
           <div className="card-body p-1 mt-1 w-100 d-flex flex-column justify-content-center align-items-center">
             <p className="card-hor-title">{props.name}</p>
@@ -38,7 +38,7 @@ export default function CardFriends(props) {
         </div>
         <Link className="btn-profile" type="button" to={props.viewProfile}> VER PERFIL </Link>
       </div>
-    </div>
+    </>
   );
 }
 
