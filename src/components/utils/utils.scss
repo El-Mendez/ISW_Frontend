@@ -146,3 +146,149 @@ input[type='file']{
   cursor: pointer;
 }
 
+.card-item{
+  --hover-transform: scale(1.04);
+  width: 100%;
+  background-color: white;
+  border-radius: 0.5rem;
+  border: 0.2px solid rgba(0, 0, 0, 0.1);
+  isolation: isolate;
+  transition: transform 0.4s ease-in-out;
+  box-shadow: rgba(0, 0, 0, 0.15) 0 5px 15px 0;
+  &:hover{
+    transform: var(--hover-transform)
+  }
+}
+
+.card-item.request{
+  --hover-transform: none;
+}
+
+.image-container{
+  position: relative;
+  display: flex;
+  width: 50%;
+  justify-content: center;
+  align-items: center;
+  margin-bottom: 5px;
+  margin-top: 7px;
+  margin-left: 10px;
+}
+
+.image-top{
+  width: 100%;
+  aspect-ratio: 1;
+  object-fit: cover;
+}
+
+.card-title{
+  font-weight: 700;
+  font-size: calc(1em + 1vmin);
+  color: #000000;
+  text-overflow: ellipsis;
+  overflow: hidden;
+  white-space: nowrap;
+  margin-bottom: -5px;
+}
+
+.card-hor-title{
+  font-weight: 700;
+  font-size: calc(1.5em + 1vmin);
+  color: #000000;
+  text-overflow: ellipsis;
+  overflow: hidden;
+  white-space: nowrap;
+  margin-bottom: -5px;
+}
+
+.card-email{
+  color: #707070;
+  font-size: calc(0.5em + 1vmin);;
+}
+
+.card-career{
+  --font-size: calc(0.9em + 1vmin);
+  font-weight: 900;
+  color: #707070;
+  font-size: var(--font-size);
+}
+
+.card-career.horizontal{
+  --font-size: calc(0.8em + 1vmin);
+}
+
+.section-container{
+  flex-direction: column;
+  position: relative;
+  min-height: 300px;
+  min-width: 100%;
+  margin-bottom: 16px;
+  display: flex;
+}
+
+.card-container{
+  padding: 16px;
+  --minimumColumnWidth: 250px;
+  overflow-y: hidden;
+  //grid-auto-rows: 0; //tengo que revisar para que lo separe por secciones
+  grid-template-rows: 1fr;
+  display: grid;
+  grid-gap: 60px 40px;
+  grid-template-columns: repeat(auto-fill,minmax(var(--minimumColumnWidth),1fr));
+}
+
+.card-container.horizontal{
+  --minimumColumnWidth: 340px;
+}
+
+.btn-profile{
+  --font-size: calc(0.8em + 1vmin);
+  --hover-bck-color: #93B2C0;
+  --hover-color: #444243;
+  text-decoration: none;
+  display: inline-block;
+  cursor: pointer;
+  width: inherit;
+  background-color: $primary;
+  border: none;
+  padding: 0.6rem 25px;
+  color: #fff;
+  font-size: var(--font-size);
+  font-weight: 700;
+  border-radius: 0 0 0.5rem  0.5rem;
+  transition: color 0.15s ease-in-out, background-color 0.15s ease-in-out, border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out, transform 0.3s cubic-bezier(.86,0,0,2.26);
+  &:hover{
+    background-color: var(--hover-bck-color);
+    color: var(--hover-color)
+  }
+}
+
+.btn-profile.request{
+  font-size: 18px;
+  width: 50%;
+  border-radius: 0.5rem 0.5rem 0.5rem  0.5rem;
+  --hover-bck-color: #3a3839;
+  --hover-color: white;
+}
+
+.btn-cancel{
+  text-decoration: none;
+  cursor: pointer;
+  width: 50%;
+  background-color: transparent;
+  border: 1px solid $gold;
+  padding: 0.6rem 25px;
+  color: $primary;
+  font-size: 18px;
+  font-weight: 700;
+  border-radius: 0.5rem 0.5rem 0.5rem  0.5rem ;
+  transition: color 0.15s ease-in-out, background-color 0.15s ease-in-out, border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out, transform 0.3s cubic-bezier(.86,0,0,2.26);
+  &:hover{
+    background-color: $gold;
+    color: white
+  }
+}
+
+
+
+

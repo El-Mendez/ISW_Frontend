@@ -59,9 +59,9 @@ function Services() {
   return (
     <div className="d-flex align-items-center ">
       <div className="services align-items-end" style={{ height: 'auto' }}>
-        <div className="d-flex">
+        <div className="d-flex align-items-center">
           <div className={`${!image ? ('no-image-user col-4') : 'col-2 image-user align-self-center'} me-2`}>
-            <img src={`../../../public/assets/${image ? `${user.carne}.png` : 'default.svg'}`} alt="Profile" className="rounded-circle align-self-center" />
+            <img src={`../../../public/assets/${image ? `${user.carne}.png` : 'default.svg'}`} alt="Profile" className="rounded-circle profile-img" />
           </div>
           <div className="dropdown">
             <button id="account-name" type="button" className="nav-link button">{user.nombre}</button>
