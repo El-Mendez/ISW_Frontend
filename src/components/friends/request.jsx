@@ -2,10 +2,10 @@
 import React, { useState, useEffect } from 'react';
 import Cookies from 'universal-cookie';
 import Axios from 'axios';
-import { useLocation } from 'react-router-dom';
+import { useLocation, useRouteMatch } from 'react-router-dom';
 import { RECEIVED_REQUEST, SENT_REQUESTS } from '../utils/rutas';
-import FriendsItems from './friendsItems';
 import NoFriends from './noFriends';
+import Card from '../utils/cardRequest';
 
 function Request(props) {
   const [friendsList, setFriendsList] = useState([]);
@@ -13,9 +13,12 @@ function Request(props) {
   const [accept, setAccept] = useState(false);
   const item = props;
   const [type, setType] = useState(item.type);
+  const [reload, setReload] = useState(false);
   const cookies = new Cookies();
   const token = cookies.get('session');
   const location = useLocation();
+  const { url } = useRouteMatch();
+
   function searchFriends1() {
     const request = async () => {
       try {
@@ -65,20 +68,21 @@ function Request(props) {
       searchFriends2();
     }
     setType(item.type);
-  }, [location, accept]);
+  }, [location, accept, reload]);
   return (
     <div className="userList">
       {(friends && item.type) ? (
         <div className="container ">
-          <div className="row align-items-center">
+          <div className="card-container">
             {friendsList.map((user) => (
-              <FriendsItems
-                nombre={user.nombre}
-                carne={user.carne}
-                correo={user.correo}
-                setAccept={setAccept}
+              <Card
                 key={user.carne}
-                type={type}
+                name={user.nombre}
+                    // TODO retornar carrera
+                email={user.correo}
+                carne={user.carne}
+                viewProfile={`${url}/profile/${user.carne}`}
+                setReload={() => setReload()}
               />
             ))}
           </div>

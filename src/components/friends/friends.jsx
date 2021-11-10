@@ -1,17 +1,17 @@
 import React, { useState, useEffect } from 'react';
 import Cookies from 'universal-cookie';
 import Axios from 'axios';
-import { useLocation } from 'react-router-dom';
+import { useLocation, useRouteMatch } from 'react-router-dom';
 import { GET_FRIENDS } from '../utils/rutas';
-import SuggestionItem from '../suggestions/suggestionItem';
+import Card from '../utils/cardFriends';
 import NoFriends from './noFriends';
 
-function Friends(props) {
+function Friends() {
   const [friendsList, setFriendsList] = useState([]);
   const [friends, setFriends] = useState(true);
   const cookies = new Cookies();
   const token = cookies.get('session');
-  const item = props;
+  const { url } = useRouteMatch();
   const location = useLocation();
   function searchFriends() {
     const request = async () => {
@@ -41,14 +41,16 @@ function Friends(props) {
   return (
     <div className="userList">
       {friends ? (
-        <div className="container ">
-          <div className="row align-items-center">
+        <div className="container mt-4">
+          <div className="card-container horizontal">
             {friendsList.map((user) => (
-              <SuggestionItem
-                nombre={user.nombre}
-                carne={user.carne}
-                correo={user.correo}
+              <Card
                 key={user.carne}
+                name={user.nombre}
+                    // TODO retornar carrera
+                email={user.correo}
+                carne={user.carne}
+                viewProfile={`${url}/profile/${user.carne}`}
               />
             ))}
           </div>
