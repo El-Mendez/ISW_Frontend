@@ -210,7 +210,33 @@ export default function Profile(props) {
     };
     request();
   }
+  function deleteCoursee(courseId) {
+    const request = async () => {
+      try {
+        await Axios.delete(ASSIGN_SECTION,
+          {
+            headers: {
+              Authorization: `Bearer ${token}`,
+            },
+            data: {
+              hobbyId: courseId,
+            },
+          });
+      } catch (error) {
+        console.log(error);
+        console.log(error.response);
+      }
+    };
+    request();
+  }
   const onCoursesChange = (selectedCourses) => {
+    const course = [];
+    const courseId = [];
+    let onDeleteCourse = ' ';
+    for (let i = 0; i < selectedCourses.length; i += 1) {
+      course.push(selectedCourses[i].label);
+      courseId.push(selectedCourses[i].value);
+    }
     if (selectedCourses.length > user.cursos.length) {
       console.log('Se añadio un dato');
       setUser({
@@ -221,6 +247,16 @@ export default function Profile(props) {
       assignCourse(selectedCourses[selectedCourses.length - 1].value);
     } else {
       console.log('Se elimino un dato');
+      /* for (let i = 0; i < user.hobbies.length; i += 1) {
+        if (!course.includes(user.hobbies[i])) {
+          onDeleteCourse = user.hobbies[i];
+        }
+      }
+      deleteCoursee(hobbies.find((obj) => obj.label === onDeleteCourse).value);
+      setUser({
+        ...user,
+        cursos: course,
+      }); */
     }
   };
   function assignHobbie(hobbieId) {
@@ -288,7 +324,7 @@ export default function Profile(props) {
           onDeleteHobbie = user.hobbies[i];
         }
       }
-      deleteHobbie(hobbiesUsuario.find((obj) => obj.label === onDeleteHobbie).value);
+      deleteHobbie(hobbies.find((obj) => obj.label === onDeleteHobbie).value);
       setUser({
         ...user,
         hobbies: hobbie,
