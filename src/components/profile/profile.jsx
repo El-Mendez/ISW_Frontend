@@ -191,7 +191,7 @@ export default function Profile(props) {
     request();
   }
   function assignCourse(courseId) {
-    const obj = [courseId];
+    const obj = courseId;
     const request = async () => {
       try {
         await Axios.post(ASSIGN_SECTION,
@@ -212,7 +212,7 @@ export default function Profile(props) {
   }
   function deleteCourse(courseId) {
     const request = async () => {
-      const obj = `${courseId}`;
+      const obj = courseId;
       try {
         await Axios.delete(ASSIGN_SECTION,
           {
@@ -220,7 +220,7 @@ export default function Profile(props) {
               Authorization: `Bearer ${token}`,
             },
             data: {
-              seccionId: obj,
+              seccionesId: obj,
             },
           });
       } catch (error) {
@@ -236,7 +236,7 @@ export default function Profile(props) {
     );
   };
   function assignHobbie(hobbieId) {
-    const obj = [hobbieId];
+    const obj = hobbieId;
     const request = async () => {
       try {
         await Axios.post(ASSIGN_HOBBY,
@@ -256,7 +256,7 @@ export default function Profile(props) {
     request();
   }
   function deleteHobbie(hobbieId) {
-    const obj = [hobbieId];
+    const obj = hobbieId;
     const request = async () => {
       try {
         await Axios.delete(ASSIGN_HOBBY,
@@ -265,7 +265,7 @@ export default function Profile(props) {
               Authorization: `Bearer ${token}`,
             },
             data: {
-              hobbyId: obj,
+              hobbiesId: obj,
             },
           });
       } catch (error) {
@@ -333,7 +333,7 @@ export default function Profile(props) {
       }
     }
     for (let i = 0; i < cursosUsuario.length; i += 1) {
-      if (!user.cursos.replace(/:/g, '').includes(cursosUsuario[i].label)) {
+      if (!user.cursos.includes(cursosUsuario[i].label)) {
         newsCourses.push(cursosUsuario[i].value);
       }
     }
@@ -367,16 +367,16 @@ export default function Profile(props) {
         }
       }
     });
-    if (hobbiesUsuarioValue > 0) {
+    if (hobbiesUsuarioValue.length > 0) {
       deleteHobbie(hobbiesUsuarioValue);
     }
-    if (newsHobbies > 0) {
+    if (newsHobbies.length > 0) {
       assignHobbie(newsHobbies);
     }
-    if (coursesUsuarioValue > 0) {
+    if (coursesUsuarioValue.length > 0) {
       deleteCourse(coursesUsuarioValue);
     }
-    if (newsCourses > 0) {
+    if (newsCourses.length > 0) {
       assignCourse(newsCourses);
     }
     setUser({
@@ -394,7 +394,7 @@ export default function Profile(props) {
       setHobbiesUsuario([]);
       for (let i = 0; i < cursos.length; i += 1) {
         for (let j = 0; j < user.cursos.length; j += 1) {
-          if (cursos[i].label === user.cursos[j].replace(/:/g, '')) {
+          if (cursos[i].label === user.cursos[j]) {
             coursesUser.push({ label: cursos[i].label, value: cursos[i].value });
           }
         }
