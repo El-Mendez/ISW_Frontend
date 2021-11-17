@@ -1,8 +1,10 @@
 import React from 'react';
 import { Link, useRouteMatch } from 'react-router-dom';
+import Help from '../utils/helpModal';
 
 export default function Menu() {
   const { url } = useRouteMatch();
+  const [help, setHelp] = React.useState(false);
   return (
     <div className="products">
       <ul className="navbar-nav mr-auto mt-2 mt-lg-0">
@@ -46,6 +48,15 @@ export default function Menu() {
             </div>
           </div>
         </li>
+        <li className="nav-item product-font ml-20">
+          <button id="friends" className="nav-link button" type="button" onClick={() => setHelp(true)}>
+            Ayuda
+          </button>
+        </li>
+        <Help
+          show={help}
+          onHide={() => setHelp(false)}
+        />
 
       </ul>
     </div>
