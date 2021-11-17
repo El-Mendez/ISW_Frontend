@@ -21,7 +21,7 @@ export default function Help(props) {
   });
 
   const [filled, setFilled] = useState({
-    type: false,
+    message: false,
   });
 
   const [mensaje, setMensaje] = useState('');
@@ -32,10 +32,19 @@ export default function Help(props) {
   const handleInputChange = (e) => {
     setMensaje(e.target.value);
     console.log(mensaje);
+    if (e.target.value !== '') {
+      setFilled({
+        message: true,
+      });
+    } else {
+      setFilled({
+        message: false,
+      });
+    }
   };
   const onSubmit = () => {
-    console.log('prueba');
     console.log(mensaje);
+    alert('El mensaje se ha enviado');
   };
   // FIXME Validar funcionamiento
   const cleanUp = () => {
@@ -86,7 +95,7 @@ export default function Help(props) {
               />
             </div>
             <div className="d-flex flex-column justify-content-center align-items-center mt-4 px-2">
-              <button onClick={onSubmit} className="btn-fill arrow-button w-50" type="submit">
+              <button className="btn-fill arrow-button w-50" type="submit">
                 Enviar
                 <span className="material-icons position-absolute ms-1">
                   arrow_forward
