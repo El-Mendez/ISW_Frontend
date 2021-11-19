@@ -46,6 +46,13 @@ export default function Menu() {
             </div>
           </div>
         </li>
+        <li className="nav-item product-font ml-20">
+          <Link to={`${url}/search`} className="noDecorations">
+            <button id="friends" className="nav-link button" type="button">
+              Buscar usuarios
+            </button>
+          </Link>
+        </li>
 
       </ul>
     </div>
