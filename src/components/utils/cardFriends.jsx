@@ -1,9 +1,11 @@
 import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import PropTypes from 'prop-types';
+import { SEARCH_IMG } from './rutas';
 
 export default function CardFriends(props) {
   const [image, setImage] = useState(false);
+
 
   useEffect(() => {
     // eslint-disable-next-line no-unused-expressions
@@ -18,7 +20,7 @@ export default function CardFriends(props) {
       setImage(false);
     };
 
-    img.src = `../../../public/assets/${props.carne}.png`;
+    img.src = `${SEARCH_IMG}/${props.carne}.png`;
   }, []);
 
   // TODO hacer el texto responsive → que se ajuste al ancho del elemento
@@ -28,7 +30,7 @@ export default function CardFriends(props) {
       <div className="card-item">
         <div className="p-2 d-flex ">
           <div className="image-container">
-            <img src={`../../../public/assets/${image ? `${props.carne}.png` : 'default.svg'}`} className="image-top rounded-circle" alt="Profile" />
+            <img src={`${SEARCH_IMG}/${image ? `${props.carne}.png` : 'default.svg'}`} className="image-top rounded-circle" alt="Profile" />
           </div>
           <div className="card-body p-1 mt-1 w-100 d-flex flex-column justify-content-center align-items-center">
             <p className="card-hor-title">{props.name}</p>

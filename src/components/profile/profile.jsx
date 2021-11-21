@@ -8,7 +8,7 @@ import * as Search from '../utils/search';
 import ProfileItem from './profileItem';
 import Report from './report';
 import {
-  USER_INFO, USER_INFO_AUT, SEND_REQUEST, DELETE_FRIEND, SENT_REQUESTS, CANCEL_REQUEST, ASSIGN_HOBBY, ASSIGN_SECTION,
+  USER_INFO, USER_INFO_AUT, SEND_REQUEST, DELETE_FRIEND, SENT_REQUESTS, CANCEL_REQUEST, ASSIGN_HOBBY, ASSIGN_SECTION, SEARCH_IMG,
 } from '../utils/rutas';
 
 export default function Profile(props) {
@@ -157,7 +157,7 @@ export default function Profile(props) {
           hobbies: res.data[0].hobbies,
           redes_sociales: res.data[0].redes_sociales,
         });
-        img.src = `../../../public/assets/${id.carne}.png`;
+        img.src = `${SEARCH_IMG}/${id.carne}.png`;
         // eslint-disable-next-line no-unused-expressions
         img.onload = function () {
         // image exists and is loaded
@@ -260,7 +260,7 @@ export default function Profile(props) {
           hobbies: res.data[0].hobbies,
           redes_sociales: res.data[0].redes_sociales,
         });
-        img.src = `../../../public/assets/${res.data[0].carne}.png`;
+        img.src = `${SEARCH_IMG}/${res.data[0].carne}.png`;
         // eslint-disable-next-line no-unused-expressions,func-names
         img.onload = function () {
         // image exists and is loaded
@@ -327,7 +327,7 @@ export default function Profile(props) {
     <div id="profileContainer" className="container profile">
       <div className="row">
         <div className="col-sm-12 col-md-4 d-flex justify-content-center" id="profile-img">
-          <img src={`../../../public/assets/${image ? `${user.carne}.png` : 'default.svg'}`} alt="Profile" className="w-75 align-self-center" />
+          <img src={`${SEARCH_IMG}/${image ? `${user.carne}.png` : 'default.svg'}`} alt="Profile" className="w-75 align-self-center" />
         </div>
         <div className="col-sm-12 col-md-7 d-flex flex-column align-self-end">
           <div className="container addName">

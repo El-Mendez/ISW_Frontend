@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import PropTypes from 'prop-types';
+import { SEARCH_IMG } from './rutas';
 
 export default function Card(props) {
   const [image, setImage] = useState(false);
@@ -18,7 +19,7 @@ export default function Card(props) {
       setImage(false);
     };
 
-    img.src = `../../../public/assets/${props.carne}.png`;
+    img.src = `${SEARCH_IMG}/${props.carne}.png`;
   }, []);
 
   return (
@@ -26,7 +27,7 @@ export default function Card(props) {
       <div className="card-item">
         <div className="p-2 d-flex flex-column justify-content-center align-items-center">
           <div className="image-container">
-            <img src={`../../../public/assets/${image ? `${props.carne}.png` : 'default.svg'}`} className="image-top rounded-circle" alt="Profile" />
+            <img src={`${SEARCH_IMG}/${image ? `${props.carne}.png` : 'default.svg'}`} className="image-top rounded-circle" alt="Profile" />
           </div>
           <div className="card-body p-1 mt-1 w-100 d-flex flex-column justify-content-center align-items-center">
             <p className="card-title">{props.name}</p>

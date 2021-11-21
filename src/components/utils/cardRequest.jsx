@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import Axios from 'axios';
 import Cookies from 'universal-cookie';
-import { CANCEL_REQUEST } from './rutas';
+import { CANCEL_REQUEST, SEARCH_IMG} from './rutas';
 
 export default function CardRequest(props) {
   const [image, setImage] = useState(false);
@@ -42,7 +42,7 @@ export default function CardRequest(props) {
       setImage(false);
     };
 
-    img.src = `../../../public/assets/${props.carne}.png`;
+    img.src = `${SEARCH_IMG}/${props.carne}.png`;
   }, []);
 
   return (
@@ -50,7 +50,7 @@ export default function CardRequest(props) {
       <div className="card-item request">
         <div className="p-2 d-flex flex-column justify-content-center align-items-center">
           <div className="image-container">
-            <img src={`../../../public/assets/${image ? `${props.carne}.png` : 'default.svg'}`} className="image-top rounded-circle" alt="Profile" />
+            <img src={`${SEARCH_IMG}/${image ? `${props.carne}.png` : 'default.svg'}`} className="image-top rounded-circle" alt="Profile" />
           </div>
           <div className="card-body p-1 mt-1 w-100 d-flex flex-column justify-content-center align-items-center border-bottom">
             <p className="card-title">{props.name}</p>
