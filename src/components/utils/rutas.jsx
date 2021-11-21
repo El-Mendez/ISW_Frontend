@@ -1,37 +1,41 @@
 // Rutas para hacer requests
 // No necesita estar loggeado → no auth
-const LOGIN = 'http://api.meetinguvg.me/free/login';
-const SIGNUP = 'http://api.meetinguvg.me/free/signup';
-const SEARCH_CAREER = 'http://api.meetinguvg.me/free/carrera';
-const SEARCH_HOBBY = 'http://api.meetinguvg.me/free/hobby';
-const SEARCH_COURSE = 'http://api.meetinguvg.me/free/curso';
-const USER_INFO = 'http://api.meetinguvg.me/free/profile/';
-const SEARCH_USERH = 'http://api.meetinguvg.me/free/profile/hobbies';
-const SEARCH_USERS = 'http://api.meetinguvg.me/free/profile/secciones';
+const server = 'api.meetinguvg.me';
+
+const LOGIN = `http://${server}/free/login`;
+const SIGNUP = `http://${server}/free/signup`;
+const SEARCH_CAREER = `http://${server}/free/carrera`;
+const SEARCH_HOBBY = `http://${server}/free/hobby`;
+const SEARCH_COURSE = `http://${server}/free/curso`;
+const USER_INFO = `http://${server}/free/profile/`;
+const SEARCH_USERH = `http://${server}/free/profile/hobbies`;
+const SEARCH_USERS = `http://${server}/free/profile/secciones`;
 
 // Necesita estar loggeado
-const AUTH = 'http://api.meetinguvg.me/auth/ping';
-const ASSIGN_SECTION = 'http://api.meetinguvg.me/auth/seccion';
-const ASSIGN_HOBBY = 'http://api.meetinguvg.me/auth/hobby';
-const SUGGESTIONS_COURSES = 'http://api.meetinguvg.me/auth/suggestions/courses';
-const SUGGESTIONS_HOBBIES = 'http://api.meetinguvg.me/auth/suggestions/hobbies';
-const SUGGESTIONS_FRIENDS = 'http://api.meetinguvg.me/auth/suggestions/friends';
-const USER_INFO_AUT = 'http://api.meetinguvg.me/auth/profile';
-const REPORT = 'http://api.meetinguvg.me/auth/report';
+const AUTH = `http://${server}/auth/ping`;
+const ASSIGN_SECTION = `http://${server}/auth/seccion`;
+const ASSIGN_HOBBY = `http://${server}/auth/hobby`;
+const SUGGESTIONS_COURSES = `http://${server}/auth/suggestions/courses`;
+const SUGGESTIONS_HOBBIES = `http://${server}/auth/suggestions/hobbies`;
+const SUGGESTIONS_FRIENDS = `http://${server}/auth/suggestions/friends`;
+const USER_INFO_AUT = `http://${server}/auth/profile`;
+const UPLOAD_IMG = `http://${server}/auth/profile/image`;
+const REPORT = `http://${server}/auth/report`;
+const SEARCH_IMG = 'http://meetinguvg.me/public/assets';
 
 // REQUESTS
-const PASSWORD_RESET = 'http://api.meetinguvg.me/request/passwordReset';
-const ACCEPT_PASSWORD_RESET = 'http://api.meetinguvg.me/request/acceptPasswordReset';
-const ACCOUNT_REQUEST = 'http://api.meetinguvg.me/request/signup';
-const ACCEPT_ACCOUNT_REQUEST = 'http://api.meetinguvg.me/request/acceptSignUp';
+const PASSWORD_RESET = `http://${server}/request/passwordReset`;
+const ACCEPT_PASSWORD_RESET = `http://${server}/request/acceptPasswordReset`;
+const ACCOUNT_REQUEST = `http://${server}/request/signup`;
+const ACCEPT_ACCOUNT_REQUEST = `http://${server}/request/acceptSignUp`;
 // AMISTADES
-const SEND_REQUEST = 'http://api.meetinguvg.me/auth/friends/sendRequest';
-const ACCEPT_REQUEST = 'http://api.meetinguvg.me/auth/friends/acceptRequest';
-const CANCEL_REQUEST = 'http://api.meetinguvg.me/auth/friends/cancelRequest';
-const GET_FRIENDS = 'http://api.meetinguvg.me/auth/friends/getFriends';
-const RECEIVED_REQUEST = 'http://api.meetinguvg.me/auth/friends/receivedRequests';
-const SENT_REQUESTS = 'http://api.meetinguvg.me/auth/friends/sentRequests';
-const DELETE_FRIEND = 'http://api.meetinguvg.me/auth/friends/deleteFriend';
+const SEND_REQUEST = `http://${server}/auth/friends/sendRequest`;
+const ACCEPT_REQUEST = `http://${server}/auth/friends/acceptRequest`;
+const CANCEL_REQUEST = `http://${server}/auth/friends/cancelRequest`;
+const GET_FRIENDS = `http://${server}/auth/friends/getFriends`;
+const RECEIVED_REQUEST = `http://${server}/auth/friends/receivedRequests`;
+const SENT_REQUESTS = `http://${server}/auth/friends/sentRequests`;
+const DELETE_FRIEND = `http://${server}/auth/friends/deleteFriend`;
 
 module.exports = {
   LOGIN,
@@ -61,4 +65,6 @@ module.exports = {
   DELETE_FRIEND,
   SUGGESTIONS_FRIENDS,
   REPORT,
+  UPLOAD_IMG,
+  SEARCH_IMG,
 };

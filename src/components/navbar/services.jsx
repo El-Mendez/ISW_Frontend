@@ -36,7 +36,7 @@ function Services() {
           nombre: data[0].nombre_completo.split(' ', 1),
           carne: data[0].carne,
         });
-        img.src = `../../../public/assets/${data[0].carne}.png`;
+        img.src = `http://meetinguvg.me/public/assets/${data[0].carne}.png`;
         // eslint-disable-next-line no-unused-expressions
         img.onload = function () {
           // image exists and is loaded
@@ -61,7 +61,7 @@ function Services() {
       <div className="services align-items-end" style={{ height: 'auto' }}>
         <div className="d-flex align-items-center">
           <div className={`${!image ? ('no-image-user col-4') : 'col-2 image-user align-self-center'} me-2`}>
-            <img src={`../../../public/assets/${image ? `${user.carne}.png` : 'default.svg'}`} alt="Profile" className="rounded-circle profile-img" />
+            <img src={`http://meetinguvg.me/public/assets/${image ? `${user.carne}.png` : 'default.svg'}`} alt="Profile" className="rounded-circle profile-img" />
           </div>
           <div className="dropdown">
             <button id="account-name" type="button" className="nav-link button">{user.nombre}</button>
