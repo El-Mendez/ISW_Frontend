@@ -7,14 +7,7 @@ export default function Menu() {
   const [help, setHelp] = React.useState(false);
   return (
     <div>
-      <ul className="navbar-nav mr-auto mt-2 mt-lg-0">
-        <li className="nav-item product-font ml-20">
-          <Link to={`${url}/profile`} className="noDecorations">
-            <button className="nav-link button" type="button">
-              Perfil
-            </button>
-          </Link>
-        </li>
+      <ul className="navbar-nav mr-auto mt-4 mt-lg-0">
         <li className="nav-item product-font ml-20">
           <Link to={`${url}/friends`} className="noDecorations">
             <button id="friends" className="nav-link button" type="button">
@@ -23,14 +16,11 @@ export default function Menu() {
           </Link>
         </li>
         <li className="nav-item product-font ml-20">
-          <div className="dropdown">
-            <button id="mailBox" type="button" className="nav-link button">Bandeja de entrada</button>
-            <div id="getRequests" className="dropdown-content container">
-              <Link id="sentRequest" to={`${url}/sent_request`} className="noDecorations">
-                <p className="row">Solicitudes enviadas</p>
-              </Link>
-            </div>
-          </div>
+          <Link to={`${url}/sent_request`} className="noDecorations">
+            <button id="friends" className="nav-link button" type="button">
+              Solicitudes enviadas
+            </button>
+          </Link>
         </li>
         <li className="nav-item product-font ml-20">
           <div className="dropdown">
@@ -57,7 +47,6 @@ export default function Menu() {
           show={help}
           onHide={() => setHelp(false)}
         />
-
         <li className="nav-item product-font ml-20">
           <Link to={`${url}/search`} className="noDecorations">
             <button id="friends" className="nav-link button" type="button">

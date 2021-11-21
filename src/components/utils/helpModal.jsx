@@ -7,7 +7,7 @@ import { zodResolver } from '@hookform/resolvers/zod';
 import * as z from 'zod';
 import Cookies from 'universal-cookie';
 import logo from '../../assets/logo.svg';
-import { REPORT } from './rutas';
+import { HELP } from './rutas';
 
 const schema = z.object({
   text: z.string().nonempty({ message: 'Ingrese un mensaje' }).min(8, { message: 'Mínimo 10 caracteres' }),
@@ -16,6 +16,7 @@ const schema = z.object({
 export default function Help(props) {
   const item = props;
   const cookies = new Cookies();
+  const token = cookies.get('session');
   const { register, handleSubmit, formState: { errors } } = useForm({
     resolver: zodResolver(schema),
   });
@@ -43,8 +44,24 @@ export default function Help(props) {
     }
   };
   const onSubmit = () => {
+    const request = async () => {
+      try {
+        await Axios.post(HELP,
+          {
+            message: mensaje,
+          }, {
+            headers: {
+              Authorization: `Bearer ${token}`,
+            },
+          });
+        alert(`Se ha enviado el mensaje`);
+      } catch (error) {
+        console.log(error);
+        console.log(error.response);
+      }
+    };
+    request();
     console.log(mensaje);
-    alert('El mensaje se ha enviado');
   };
   // FIXME Validar funcionamiento
   const cleanUp = () => {
