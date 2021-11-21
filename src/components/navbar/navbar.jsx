@@ -3,6 +3,7 @@ import { Link, useRouteMatch } from 'react-router-dom';
 import Menu from './menu';
 import Services from './services';
 import logo from '../../assets/logo.svg';
+import 'bootstrap/dist/js/bootstrap.bundle';
 
 export default function NavBar() {
   const { url } = useRouteMatch();
@@ -14,14 +15,14 @@ export default function NavBar() {
   return (
     <div>
       {/* NavBar menu */}
-      <div className="navbar-container bg-secondary navbar-fixed-top">
+      <div className="navbar-container bg-secondary">
         <div style={{ height: '56px' }}>
           <nav className="navbar navbar-expand-lg navbar-light text-light">
             <button
               className="navbar-toggler mr-3"
               type="button"
-              data-toggle="collapse"
-              data-target="#products"
+              data-bs-toggle="collapse"
+              data-bs-target="#products"
               aria-controls="products"
               aria-expanded="false"
               aria-label="Toggle navigation"
@@ -37,7 +38,7 @@ export default function NavBar() {
                   <img src={logo} alt="Logo" className="temporary-style" />
                 </div>
               </Link>
-              <div className="collapse navbar-collapse align-items-center" style={{ height: 'inherit' }}>
+              <div className="collapse navbar-collapse" id="products">
                 <Menu
                   suggestionsOptions={suggestionsOptions}
                   openWindowSuggestions={() => { setSuggestionsOptions(!suggestionsOptions); }}

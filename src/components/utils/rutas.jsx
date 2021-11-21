@@ -1,6 +1,8 @@
 // Rutas para hacer requests
 // No necesita estar loggeado → no auth
 const server = 'api.meetinguvg.me';
+const SEARCH_USERH = 'http://api.meetinguvg.me/free/profile/hobbies';
+const SEARCH_USERS = 'http://api.meetinguvg.me/free/profile/secciones';
 
 const LOGIN = `http://${server}/free/login`;
 const SIGNUP = `http://${server}/free/signup`;
@@ -41,6 +43,8 @@ module.exports = {
   SEARCH_CAREER,
   SEARCH_COURSE,
   SEARCH_HOBBY,
+  SEARCH_USERH,
+  SEARCH_USERS,
   AUTH,
   ASSIGN_SECTION,
   ASSIGN_HOBBY,

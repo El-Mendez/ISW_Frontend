@@ -35,6 +35,7 @@ export default function UserInfo() {
     temp_path: null,
   });
 
+
   const [user, setUser] = useState({
     hobbies: [],
     cursos: [],

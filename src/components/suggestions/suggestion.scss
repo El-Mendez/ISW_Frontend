@@ -41,7 +41,7 @@
         h1{
             font-size: 25px;
         }
-        
+
         h2{
             font-size: 15px;
         }
@@ -68,4 +68,17 @@
         background-color: #ffbf0086;
     }
     transition: background-color 1s ease-out;
+}
+
+.userList {
+    height: 90vh;
+    display: flex;
+    text-align: center;
+    justify-content: center;
+    margin-top: 0;
+
+}
+
+.datosUsuario{
+    color: black;
 }
