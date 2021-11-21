@@ -6,7 +6,7 @@ export default function Menu() {
   const { url } = useRouteMatch();
   const [help, setHelp] = React.useState(false);
   return (
-    <div className="products">
+    <div>
       <ul className="navbar-nav mr-auto mt-2 mt-lg-0">
         <li className="nav-item product-font ml-20">
           <Link to={`${url}/profile`} className="noDecorations">
@@ -58,6 +58,13 @@ export default function Menu() {
           onHide={() => setHelp(false)}
         />
 
+        <li className="nav-item product-font ml-20">
+          <Link to={`${url}/search`} className="noDecorations">
+            <button id="friends" className="nav-link button" type="button">
+              Buscar usuarios
+            </button>
+          </Link>
+        </li>
       </ul>
     </div>
 

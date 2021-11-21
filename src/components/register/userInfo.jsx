@@ -35,6 +35,7 @@ export default function UserInfo() {
     temp_path: null,
   });
 
+
   const [user, setUser] = useState({
     hobbies: [],
     cursos: [],
@@ -204,7 +205,7 @@ export default function UserInfo() {
           {/* Instagram */}
           <div className="input-container mt-3">
             <span className={`material-icons input-icon ${filled.instagram ? 'is-filled' : ' '}`}>
-              <SiFacebook />
+              <SiInstagram />
             </span>
             <input
               className="input ms-1"

@@ -6,6 +6,8 @@ const SEARCH_CAREER = 'http://api.meetinguvg.me/free/carrera';
 const SEARCH_HOBBY = 'http://api.meetinguvg.me/free/hobby';
 const SEARCH_COURSE = 'http://api.meetinguvg.me/free/curso';
 const USER_INFO = 'http://api.meetinguvg.me/free/profile/';
+const SEARCH_USERH = 'http://api.meetinguvg.me/free/profile/hobbies';
+const SEARCH_USERS = 'http://api.meetinguvg.me/free/profile/secciones';
 
 // Necesita estar loggeado
 const AUTH = 'http://api.meetinguvg.me/auth/ping';
@@ -37,6 +39,8 @@ module.exports = {
   SEARCH_CAREER,
   SEARCH_COURSE,
   SEARCH_HOBBY,
+  SEARCH_USERH,
+  SEARCH_USERS,
   AUTH,
   ASSIGN_SECTION,
   ASSIGN_HOBBY,
