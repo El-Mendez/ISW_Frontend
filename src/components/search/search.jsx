@@ -1,4 +1,4 @@
-import React, { useState, useRef, useEffect } from 'react';
+import React, { useState, useRef } from 'react';
 import Select from 'react-select';
 import makeAnimated from 'react-select/animated';
 import { useRouteMatch } from 'react-router-dom';
@@ -17,18 +17,18 @@ export default function Search() {
     placeholder: 'Seleccione un hobbie',
     options: hobbies,
     selected: [],
+    selected_label: [],
   });
   const [result, setResult] = useState([]);
   const animatedComponents = makeAnimated();
   const selectInputRef = useRef();
   const { url } = useRouteMatch();
-  let trigger = false;
 
   const colourStyles = {
     control: (styles) => ({
       ...styles,
       backgroundColor: 'transparent',
-      padding: 9,
+      padding: 8,
       border: 0,
       boxShadow: 'none',
     }),
@@ -67,6 +67,7 @@ export default function Search() {
       setSearch({
         ...search,
         selected: [...search.selected, item.value],
+        selected_label: [...search.selected_label, item.label],
       })
     ));
   };
@@ -78,31 +79,25 @@ export default function Search() {
     } else {
       users = Options.searchUserHobbies(search.selected);
     }
-    trigger = !trigger;
-    console.log(users);
-    setResult(users);
-    selectInputRef.current.select.clearValue();
+    setTimeout(() => { setResult(users); }, 300);
+    // selectInputRef.current.select.clearValue();
     setSearch({
       ...search,
       selected: [],
     });
   };
 
-  useEffect(() => {
-    console.log('Updated State', result);
-  }, [trigger]);
-
   return (
     <>
-      <div className="container d-flex flex-column justify-content-center align-items-center mt-1">
+      <div className="container d-flex flex-column justify-content-center align-items-center mt-1" id="search-container">
         <div className="rounded-3 search-container row justify-content-center">
           <div className="row w-75 mt-2 mb-5">
-            <h2 className="col-lg-6 text-center align-self-center quote-font">
+            <h3 className="col-lg-6 text-center align-self-center quote-font mb-4">
               Un nuevo amigo
               <br />
               A tan solo un Click
-            </h2>
-            <img src={img} alt="Friends" className="col-lg-6 w-40" />
+            </h3>
+            <img src={img} alt="Friends" className="col-lg-6 d-none d-lg-block w-40" />
           </div>
         </div>
         <div className="w-80">
@@ -151,8 +146,8 @@ export default function Search() {
           {' '}
           Resultado de la búsqueda por
           {selected.hobbies
-            ? ' hobbies'
-            : 'cursos'}
+            ? ' hobbies '
+            : ' cursos'}
         </h2>
         <div className="card-container w-100 mt-2">
           {result.map((user) => (

@@ -57,10 +57,26 @@
   border-radius: 0.5rem;
   border: none;
   margin: 3px;
-  padding-bottom: 12px;
-  padding-top: 12px;
+  padding-bottom: 6px;
+  padding-top: 6px;
   background-color: $gold;
+  font-size: 22px;
   &:hover{
     background-color: #DBAA12;
+  }
+}
+
+@include media-breakpoint-down(lg) {
+  .w-80 {
+    width: 100%
+  }
+  .quote-font{
+    font-size: 28px;
+  }
+  .search-btn{
+    width: 15%;
+    font-size: 18px;
+    padding-bottom: 10px;
+    padding-top: 10px;
   }
 }
