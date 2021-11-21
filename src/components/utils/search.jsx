@@ -1,6 +1,8 @@
 // Requests para Obtener todos los cursos y hobbies en la base de datos
 import Axios from 'axios';
-import { SEARCH_COURSE, SEARCH_HOBBY } from './rutas';
+import {
+  SEARCH_COURSE, SEARCH_HOBBY, SEARCH_USERH, SEARCH_USERS,
+} from './rutas';
 
 export function searchHobbies() {
   const response = [];
@@ -30,6 +32,46 @@ export function searchCourses() {
             label: `${item.cursoNombre} → sección ${section.seccion}`,
           })
         ))
+      ));
+    } catch (error) {
+      console.log(error);
+    }
+  };
+  fetchData();
+  return response;
+}
+
+export function searchUserHobbies(elements) {
+  const response = [];
+  // eslint-disable-next-line consistent-return
+  const fetchData = async () => {
+    try {
+      const { data } = await Axios.post(SEARCH_USERH,
+        {
+          hobbiesId: elements,
+        });
+      data.map((item) => (
+        response.push(item)
+      ));
+    } catch (error) {
+      console.log(error);
+    }
+  };
+  fetchData();
+  return response;
+}
+
+export function searchUserCourses(elements) {
+  const response = [];
+  // eslint-disable-next-line consistent-return
+  const fetchData = async () => {
+    try {
+      const { data } = await Axios.post(SEARCH_USERS,
+        {
+          seccionesId: elements,
+        });
+      data.map((item) => (
+        response.push(item)
       ));
     } catch (error) {
       console.log(error);

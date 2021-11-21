@@ -1,8 +1,10 @@
-import React, { useState, useRef } from 'react';
+import React, { useState, useRef, useEffect } from 'react';
 import Select from 'react-select';
 import makeAnimated from 'react-select/animated';
+import { useRouteMatch } from 'react-router-dom';
 import img from '../../assets/search.svg';
 import * as Options from '../utils/search';
+import Card from '../utils/card';
 
 export default function Search() {
   const [selected, setSelected] = useState({
@@ -14,9 +16,13 @@ export default function Search() {
   const [search, setSearch] = useState({
     placeholder: 'Seleccione un hobbie',
     options: hobbies,
+    selected: [],
   });
+  const [result, setResult] = useState([]);
   const animatedComponents = makeAnimated();
   const selectInputRef = useRef();
+  const { url } = useRouteMatch();
+  let trigger = false;
 
   const colourStyles = {
     control: (styles) => ({
@@ -34,8 +40,10 @@ export default function Search() {
       cursos: false,
     });
     setSearch({
+      ...search,
       placeholder: 'Seleccione un hobbie',
       options: hobbies,
+      selected: [],
     });
     selectInputRef.current.select.clearValue();
   };
@@ -46,15 +54,43 @@ export default function Search() {
       cursos: true,
     });
     setSearch({
+      ...search,
       placeholder: 'Seleccione un curso',
       options: cursos,
+      selected: [],
     });
     selectInputRef.current.select.clearValue();
   };
 
-  const handleClick = () => {
-    selectInputRef.current.select.clearValue();
+  const onSearchChange = (selectedHobbies) => {
+    selectedHobbies.map((item) => (
+      setSearch({
+        ...search,
+        selected: [...search.selected, item.value],
+      })
+    ));
   };
+
+  const handleClick = () => {
+    let users = [];
+    if (!selected.hobbies) {
+      users = Options.searchUserCourses(search.selected);
+    } else {
+      users = Options.searchUserHobbies(search.selected);
+    }
+    trigger = !trigger;
+    console.log(users);
+    setResult(users);
+    selectInputRef.current.select.clearValue();
+    setSearch({
+      ...search,
+      selected: [],
+    });
+  };
+
+  useEffect(() => {
+    console.log('Updated State', result);
+  }, [trigger]);
 
   return (
     <>
@@ -98,8 +134,8 @@ export default function Search() {
                 isSearchable
                 components={animatedComponents}
                 closeMenuOnSelect={false}
-                // value={result.find((obj) => obj.value === user.carreraId)}
-                // onChange={handleChange}
+                value={search.options.find((obj) => obj.value === search.selected)}
+                onChange={onSearchChange}
                 name="carreraId"
                 options={search.options}
                 placeholder={search.placeholder}
@@ -110,6 +146,25 @@ export default function Search() {
               Buscar
             </button>
           </div>
+        </div>
+        <h2 className="w-100 mt-3">
+          {' '}
+          Resultado de la búsqueda por
+          {selected.hobbies
+            ? ' hobbies'
+            : 'cursos'}
+        </h2>
+        <div className="card-container w-100 mt-2">
+          {result.map((user) => (
+            <Card
+              key={user.carne}
+              name={user.nombre}
+              email={user.correo}
+              carne={user.carne}
+              carrera={user.carrera}
+              viewProfile={`${url}/profile/${user.carne}`}
+            />
+          ))}
         </div>
       </div>
     </>
