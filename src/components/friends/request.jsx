@@ -69,10 +69,11 @@ function Request(props) {
     }
     setType(item.type);
   }, [location, accept, reload]);
+
   return (
     <div className="userList">
       {(friends && item.type) ? (
-        <div className="container ">
+        <div className="container mt-4">
           <div className="card-container">
             {friendsList.map((user) => (
               <Card
