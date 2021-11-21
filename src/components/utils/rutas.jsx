@@ -1,8 +1,6 @@
 // Rutas para hacer requests
 // No necesita estar loggeado → no auth
 const server = 'api.meetinguvg.me';
-const SEARCH_USERH = 'http://api.meetinguvg.me/free/profile/hobbies';
-const SEARCH_USERS = 'http://api.meetinguvg.me/free/profile/secciones';
 
 const LOGIN = `http://${server}/free/login`;
 const SIGNUP = `http://${server}/free/signup`;
@@ -10,6 +8,8 @@ const SEARCH_CAREER = `http://${server}/free/carrera`;
 const SEARCH_HOBBY = `http://${server}/free/hobby`;
 const SEARCH_COURSE = `http://${server}/free/curso`;
 const USER_INFO = `http://${server}/free/profile/`;
+const SEARCH_USERH = `http://${server}/free/profile/hobbies`;
+const SEARCH_USERS = `http://${server}/free/profile/secciones`;
 
 // Necesita estar loggeado
 const AUTH = `http://${server}/auth/ping`;

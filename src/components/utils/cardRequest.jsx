@@ -44,7 +44,6 @@ export default function CardRequest(props) {
       email: `${email}px`,
       career: `${career}px`,
     });
-    console.log(name, email, career);
   };
 
   useEffect(() => {
