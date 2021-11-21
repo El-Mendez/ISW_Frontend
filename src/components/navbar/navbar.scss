@@ -22,6 +22,7 @@
     margin: 0 auto;
     max-width: 1440px;
     height: inherit;
+    display: block !important;
 }
 
 .navbar-toggler{
@@ -31,7 +32,7 @@
     width: 48px;
     color: #5f6368 !important;
 }
-@media screen and (max-width: 600px) {
+@media screen and (max-width: 768px) {
     .logo-bg-large{
     display:none;
     }
@@ -91,6 +92,11 @@ li ~ li{
     cursor: pointer;
     color: #999690;
 }
+@media screen and (max-width: 768px) {
+    .services{
+    margin-top: 1rem;
+    }
+    }
 
 .collapseProduct{
     width: 56%;
@@ -260,10 +266,11 @@ div[aria-expanded="true"]{
 .navbar-container{
     width: 100%;
     backface-visibility: hidden;
-    height: 56px;
+    justify-content: space-between;
     position: relative;
     z-index: 91;
     transition: box-shadow 250ms;
+    min-height: 56px;
 }
 
 .fixed{
@@ -357,6 +364,7 @@ div[aria-expanded="true"]{
 .dropdown {
   position: relative;
   display: inline-block;
+  align-self: center;
   &:hover{
     .dropdown-content {
         display: block;
