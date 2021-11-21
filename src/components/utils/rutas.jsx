@@ -21,6 +21,7 @@ const SUGGESTIONS_FRIENDS = `http://${server}/auth/suggestions/friends`;
 const USER_INFO_AUT = `http://${server}/auth/profile`;
 const UPLOAD_IMG = `http://${server}/auth/profile/image`;
 const REPORT = `http://${server}/auth/report`;
+const HELP = `http://${server}/auth/help`;
 const SEARCH_IMG = 'http://meetinguvg.me/public/assets';
 
 // REQUESTS
@@ -67,4 +68,5 @@ module.exports = {
   REPORT,
   UPLOAD_IMG,
   SEARCH_IMG,
+  HELP,
 };
