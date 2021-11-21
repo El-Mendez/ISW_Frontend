@@ -8,7 +8,7 @@ import Axios from 'axios';
 import { zodResolver } from '@hookform/resolvers/zod';
 import * as z from 'zod';
 import history from '../utils/history';
-import { ASSIGN_HOBBY, ASSIGN_SECTION } from '../utils/rutas';
+import { ASSIGN_HOBBY, ASSIGN_SECTION, UPLOAD_IMG} from '../utils/rutas';
 import * as Search from '../utils/search';
 import * as Assign from '../utils/assign';
 import Input from '../utils/input';
@@ -35,6 +35,7 @@ export default function UserInfo() {
     temp_path: null,
   });
 
+
   const [user, setUser] = useState({
     hobbies: [],
     cursos: [],
@@ -53,8 +54,7 @@ export default function UserInfo() {
     const data = new FormData();
     data.append('file', file);
     try {
-      // TODO cambiar por la ruta del server
-      await Axios.post('http://api.meetinguvg.me/auth/profile/image',
+      await Axios.post(UPLOAD_IMG,
         data,
         {
           headers: {
@@ -106,16 +106,15 @@ export default function UserInfo() {
 
   const onImageChange = (e) => {
     setFile(e.target.files[0]);
-    setFile(e.target.files[0].name);
     setImage({
       temp_path: URL.createObjectURL(e.target.files[0]),
     });
   };
 
   const onSubmit = () => {
-    Assign.assignHobbies(ASSIGN_HOBBY, user.hobbies, token);
-    Assign.assignCourses(ASSIGN_SECTION, user.cursos, token);
-    // loadImage();
+    // Assign.assignHobbies(ASSIGN_HOBBY, user.hobbies, token);
+    // Assign.assignCourses(ASSIGN_SECTION, user.cursos, token);
+    loadImage();
     setTimeout(() => {
       history.push('/home');
       history.go();
@@ -204,7 +203,7 @@ export default function UserInfo() {
           {/* Instagram */}
           <div className="input-container mt-3">
             <span className={`material-icons input-icon ${filled.instagram ? 'is-filled' : ' '}`}>
-              <SiFacebook />
+              <SiInstagram />
             </span>
             <input
               className="input ms-1"

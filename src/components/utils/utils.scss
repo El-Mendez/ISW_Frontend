@@ -183,34 +183,26 @@ input[type='file']{
 
 .card-title{
   font-weight: 700;
-  font-size: calc(1em + 1vmin);
   color: #000000;
-  text-overflow: ellipsis;
   overflow: hidden;
-  white-space: nowrap;
   margin-bottom: -5px;
+  text-align: center;
+  line-height: initial;
 }
 
-.card-hor-title{
-  font-weight: 700;
+.card-tittle.horizontal{
   font-size: calc(1.5em + 1vmin);
-  color: #000000;
-  text-overflow: ellipsis;
-  overflow: hidden;
-  white-space: nowrap;
-  margin-bottom: -5px;
 }
 
 .card-email{
   color: #707070;
-  font-size: calc(0.5em + 1vmin);;
 }
 
 .card-career{
-  --font-size: calc(0.9em + 1vmin);
   font-weight: 900;
   color: #707070;
-  font-size: var(--font-size);
+  text-align: center;
+  line-height: initial;
 }
 
 .card-career.horizontal{
