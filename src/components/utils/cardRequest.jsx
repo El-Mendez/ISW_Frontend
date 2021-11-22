@@ -101,11 +101,11 @@ export default function CardRequest(props) {
             PERFIL
           </Link>
           {!props.type ? (
-            <button className="btn-cancel mx-2 mb-2" type="button" onClick={handleClickAccept}>
+            <button className="btn-cancel mx-2 mb-2" type="button" onClick={handleClickAccept} id={props.name}>
               Aceptar
             </button>
           ) : (
-            <button className="btn-cancel mx-2 mb-2" type="button" onClick={handleClickCancel}>
+            <button className="btn-cancel mx-2 mb-2" type="button" onClick={handleClickCancel} id={props.name}>
               CANCELAR
             </button>
           )}
