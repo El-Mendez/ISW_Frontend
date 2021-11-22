@@ -49,7 +49,7 @@ export default function CardFriends(props) {
             <img src={`${SEARCH_IMG}/${image ? `${props.carne}.png` : 'default.svg'}`} className="image-top rounded-circle" alt="Profile" />
           </div>
           <div className="card-body p-1 mt-1 w-100 d-flex flex-column justify-content-center align-items-center">
-            <p className="card-title" style={{ fontSize: font.name }}>{props.name}</p>
+            <div className="card-title" style={{ fontSize: font.name }} value={props.name}>{props.name}</div>
             <p className="card-email mt-1 mb-2" style={{ fontSize: font.email }}>{props.email}</p>
             <p className="card-career mb-0" style={{ fontSize: font.career }}>{props.career}</p>
           </div>
