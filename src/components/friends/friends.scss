@@ -12,6 +12,7 @@ $colors: red, orange, yellow, green, blue, purple;
     bottom: 50px;
     right: 75px;
     z-index: 1000;
+    display: initial;
     &:hover{
         .circle{
             .message{
@@ -21,6 +22,13 @@ $colors: red, orange, yellow, green, blue, purple;
         }
     }
 }
+
+@media screen and (max-width: 991px) {
+    .notification{
+        display:none;
+    }
+}
+
 .circle{
     width: 80px;
     height: 80px;

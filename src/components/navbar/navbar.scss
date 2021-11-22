@@ -451,3 +451,11 @@ div[aria-expanded="true"]{
         }
     }
 }
+#notification{
+    display:inherit;
+}
+@media screen and (min-width: 991px) {
+    #notification{
+        display:none;
+    }
+}

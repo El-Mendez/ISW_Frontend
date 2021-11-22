@@ -3,12 +3,14 @@ import { useRouteMatch, Link } from 'react-router-dom';
 import Axios from 'axios';
 import Cookies from 'universal-cookie';
 import history from '../utils/history';
+import Help from '../utils/helpModal';
 import { USER_INFO_AUT } from '../utils/rutas';
 
 function Services() {
   const { url } = useRouteMatch();
   const cookies = new Cookies();
   const token = cookies.get('session');
+  const [help, setHelp] = React.useState(false);
   const [user, setUser] = useState({
     nombre: '',
     carne: 0,
@@ -69,6 +71,9 @@ function Services() {
               <Link id="account" to={`${url}/profile`} className="noDecorations">
                 <p className="row">Cuenta</p>
               </Link>
+              <a id="close-session" className="noDecorations" onClick={() => setHelp(true)}>
+                <p className="row">Ayuda</p>
+              </a>
               <a id="close-session" className="noDecorations" onClick={logout}>
                 <p className="row">Cerrar sesión</p>
               </a>
@@ -76,6 +81,10 @@ function Services() {
           </div>
         </div>
       </div>
+      <Help
+        show={help}
+        onHide={() => setHelp(false)}
+      />
     </div>
 
   );

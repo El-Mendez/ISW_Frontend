@@ -35,6 +35,11 @@ function Dashboard() {
             type={1}
           />
         </Route>
+        <Route exact path={`${url}/recieved_request`}>
+          <Request
+            type={0}
+          />
+        </Route>
         {/* VER PERFIL DE USUARIO */}
         <Route exact path={`${url}/get_request/profile/:carne`}>
           <UserInfo
@@ -43,6 +48,12 @@ function Dashboard() {
           />
         </Route>
         <Route exact path={`${url}/sent_request/profile/:carne`}>
+          <UserInfo
+            type={1}
+            friend={0}
+          />
+        </Route>
+        <Route exact path={`${url}/recieved_request/profile/:carne`}>
           <UserInfo
             type={1}
             friend={0}

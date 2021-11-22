@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import Axios from 'axios';
 import Cookies from 'universal-cookie';
-import { CANCEL_REQUEST, SEARCH_IMG} from './rutas';
+import { CANCEL_REQUEST, SEARCH_IMG, ACCEPT_REQUEST } from './rutas';
 
 export default function CardRequest(props) {
   const [image, setImage] = useState(false);
@@ -26,6 +26,25 @@ export default function CardRequest(props) {
               Authorization: `Bearer ${token}`,
             },
           });
+        props.setReload(true);
+      } catch (error) {
+        console.log(error);
+      }
+    };
+    request();
+  }
+  function handleClickAccept() {
+    const request = async () => {
+      try {
+        await Axios.post(ACCEPT_REQUEST,
+          {
+            carne: props.carne,
+          }, {
+            headers: {
+              Authorization: `Bearer ${token}`,
+            },
+          });
+        alert(`Se ha aceptado la solicitud de${props.name}`);
         props.setReload(true);
       } catch (error) {
         console.log(error);
@@ -81,9 +100,15 @@ export default function CardRequest(props) {
           <Link className="btn-profile request mx-2 mb-2" type="button" to={props.viewProfile}>
             PERFIL
           </Link>
-          <button className="btn-cancel mx-2 mb-2" type="button" onClick={handleClickCancel}>
-            CANCELAR
-          </button>
+          {!props.type ? (
+            <button className="btn-cancel mx-2 mb-2" type="button" onClick={handleClickAccept}>
+              Aceptar
+            </button>
+          ) : (
+            <button className="btn-cancel mx-2 mb-2" type="button" onClick={handleClickCancel}>
+              CANCELAR
+            </button>
+          )}
         </div>
       </div>
     </>
@@ -97,6 +122,7 @@ CardRequest.propTypes = {
   career: PropTypes.string,
   viewProfile: PropTypes.string,
   setReload: PropTypes.func,
+  type: PropTypes.number,
 };
 
 CardRequest.defaultProps = {
@@ -105,5 +131,6 @@ CardRequest.defaultProps = {
   email: 'juanito@meetinguvg.me',
   career: 'Ingeniería en Ciencias de la Computación y Tecnología de la Información',
   viewProfile: 'home/search/courses/profile/0',
+  type: 0,
   setReload() { console.log('No props'); },
 };
