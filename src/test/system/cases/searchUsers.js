@@ -29,19 +29,17 @@ export default class Suggestions extends BaseConfig {
         expect(await this.driver.getCurrentUrl()).toEqual(`http://${this.host}/home`);
       }, 10000);
 
-      test('Search users by courses', async () => {
-        await this.searchHobbies.searchAction();
-        const suggestion = await this.driver.wait(until.elementLocated(By.xpath(`//div[@value='Orlando Cabrera']`)), 10000);
-        expect(suggestion).toBeTruthy();
-      }, 100000);
-
       test('Search users by hobbies', async () => {
-        await this.searchCourses.searchAction();
-        const suggestion = await this.driver.wait(until.elementLocated(By.xpath(`//div[@value='Mario Gonzales']`)), 10000);
+        await this.searchHobbies.searchAction();
+        const suggestion = await this.driver.wait(until.elementLocated(By.xpath('//div[@value=\'Orlando Cabrera\']')), 10000);
         expect(suggestion).toBeTruthy();
       }, 100000);
 
-
+      test('Search users by courses', async () => {
+        await this.searchCourses.searchAction();
+        const suggestion = await this.driver.wait(until.elementLocated(By.xpath('//div[@value=\'Mario Gonzales\']')), 10000);
+        expect(suggestion).toBeTruthy();
+      }, 100000);
 
       beforeEach(() => {
         cleanup();
