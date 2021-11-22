@@ -4,9 +4,15 @@ export default class BaseConfig {
   driver;
 
   init(browser) {
-    if (browser === 'firefox') this.driver = new Builder().forBrowser('firefox').build();
-    // TODO agg más browsers
-    else this.driver = new Builder().forBrowser('firefox').build();
+    if (process.env.ENVIRONMENT === 'CI') {
+      this.driver = new Builder()
+        // .forBrowser('firefox')
+        // .setFirefoxOptions(new firefox.Options().headless())
+        .usingServer('http://localhost:4444/wd/hub')
+        .build();
+    } else {
+      this.driver = new Builder().forBrowser('firefox').build();
+    }
   }
 
   async openPage(url) {
