@@ -1,13 +1,11 @@
 import React from 'react';
 import { Link, useRouteMatch } from 'react-router-dom';
-import Help from '../utils/helpModal';
 
 export default function Menu() {
   const { url } = useRouteMatch();
-  const [help, setHelp] = React.useState(false);
   return (
-    <div>
-      <ul className="navbar-nav mr-auto mt-4 mt-lg-0">
+    <div style={{ height: '100%' }}>
+      <ul className="menu navbar-nav mr-auto mt-lg-0 d-flex align-items-center">
         <li className="nav-item product-font ml-20">
           <Link to={`${url}/friends`} className="noDecorations">
             <button id="friends" className="nav-link button" type="button">
@@ -22,10 +20,17 @@ export default function Menu() {
             </button>
           </Link>
         </li>
+        <li id="notification" className="nav-item product-font ml-20">
+          <Link to={`${url}/recieved_request`} className="noDecorations">
+            <button id="friends" className="nav-link button" type="button">
+              Socilicitudes de amistad
+            </button>
+          </Link>
+        </li>
         <li className="nav-item product-font ml-20">
-          <div className="dropdown">
+          <div className="dropdown prueba">
             <button id="recommendations" type="button" className="nav-link button">Recomendaciones</button>
-            <div className="dropdown-content container">
+            <div id="recomendations2" className="dropdown-content container" style={{ width: '170px', right: '-2rem' }}>
               <Link id="coursesRecommendations" to={`${url}/search/courses`} className="noDecorations">
                 <p className="row">Por cursos en común</p>
               </Link>
@@ -38,15 +43,6 @@ export default function Menu() {
             </div>
           </div>
         </li>
-        <li className="nav-item product-font ml-20">
-          <button id="friends" className="nav-link button" type="button" onClick={() => setHelp(true)}>
-            Ayuda
-          </button>
-        </li>
-        <Help
-          show={help}
-          onHide={() => setHelp(false)}
-        />
         <li className="nav-item product-font ml-20">
           <Link to={`${url}/search`} className="noDecorations">
             <button id="search" className="nav-link button" type="button">
