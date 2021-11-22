@@ -7,7 +7,7 @@ export default function Menu() {
   const [help, setHelp] = React.useState(false);
   return (
     <div>
-      <ul className="navbar-nav mr-auto mt-4 mt-lg-0">
+      <ul className="navbar-nav mr-auto mt-lg-0">
         <li className="nav-item product-font ml-20">
           <Link to={`${url}/friends`} className="noDecorations">
             <button id="friends" className="nav-link button" type="button">
@@ -25,7 +25,7 @@ export default function Menu() {
         <li className="nav-item product-font ml-20">
           <div className="dropdown">
             <button id="recommendations" type="button" className="nav-link button">Recomendaciones</button>
-            <div className="dropdown-content container">
+            <div className="dropdown-content container" style={{ width: '170px', right: '-2rem' }}>
               <Link id="coursesRecommendations" to={`${url}/search/courses`} className="noDecorations">
                 <p className="row">Por cursos en común</p>
               </Link>

@@ -16,7 +16,7 @@ export default function NavBar() {
     <div>
       {/* NavBar menu */}
       <div className="navbar-container bg-secondary d-flex align-item-center">
-        <nav className="navbar-expand-lg navbar-light text-light d-lg-flex">
+        <nav className="ms-3 ms-lg-5 navbar-expand-lg navbar-light text-light d-lg-flex">
           <button
             className="navbar-toggler mr-3"
             type="button"
@@ -30,7 +30,7 @@ export default function NavBar() {
               menu
             </span>
           </button>
-          <div className="d-flex flex-grow-1 justify-content-between align-items-center" style={{ height: 'inherit' }}>
+          <div className="d-lg-flex flex-lg-grow-1 justify-content-between align-items-center" style={{ height: 'inherit' }}>
             {/* LOGO */}
             <Link to={`${url}`} style={{ height: '24px' }} aria-label="Google store logo">
               <div className="logo-bg-large">
