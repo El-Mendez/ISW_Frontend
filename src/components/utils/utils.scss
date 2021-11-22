@@ -225,7 +225,7 @@ input[type='file']{
   //grid-auto-rows: 0; //tengo que revisar para que lo separe por secciones
   grid-template-rows: 1fr;
   display: grid;
-  grid-gap: 60px 40px;
+  grid-gap: 60px 50px;
   grid-template-columns: repeat(auto-fill,minmax(var(--minimumColumnWidth),1fr));
 }
 
