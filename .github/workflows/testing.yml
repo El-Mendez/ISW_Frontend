@@ -12,6 +12,7 @@ on:
 jobs:
   test:
     runs-on: ubuntu-latest
+
     steps:
       - name: Copying the Source Code
         uses: actions/checkout@v2
@@ -29,3 +30,8 @@ jobs:
 
       - name: Running tests
         run: npm run test
+
+      - name: Running Selenium
+        run: npm run e2e-test
+        env:
+          ENVIRONMENT: CI
