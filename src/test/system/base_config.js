@@ -1,3 +1,4 @@
+import firefox from 'selenium-webdriver/firefox';
 import { Builder } from 'selenium-webdriver';
 
 export default class BaseConfig {
