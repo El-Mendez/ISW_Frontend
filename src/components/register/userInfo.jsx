@@ -34,8 +34,6 @@ export default function UserInfo() {
   const [image, setImage] = useState({
     temp_path: null,
   });
-
-
   const [user, setUser] = useState({
     hobbies: [],
     cursos: [],
