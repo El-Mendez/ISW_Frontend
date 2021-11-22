@@ -91,7 +91,7 @@ export default function CardRequest(props) {
             <img src={`${SEARCH_IMG}/${image ? `${props.carne}.png` : 'default.svg'}`} className="image-top rounded-circle" alt="Profile" />
           </div>
           <div className="card-body p-1 my-1 pb-1 w-100 d-flex flex-column justify-content-center align-items-center border-bottom">
-            <p className="card-title" style={{ fontSize: font.name }}>{props.name}</p>
+            <div className="card-title" style={{ fontSize: font.name }}>{props.name}</div>
             <p className="card-email mt-1 mb-2" style={{ fontSize: font.email }}>{props.email}</p>
             <p className="card-career mb-0" style={{ fontSize: font.career }}>{props.career}</p>
           </div>
@@ -101,11 +101,11 @@ export default function CardRequest(props) {
             PERFIL
           </Link>
           {!props.type ? (
-            <button className="btn-cancel mx-2 mb-2" type="button" onClick={handleClickAccept}>
+            <button className="btn-cancel mx-2 mb-2" type="button" onClick={handleClickAccept} id={props.name}>
               Aceptar
             </button>
           ) : (
-            <button className="btn-cancel mx-2 mb-2" type="button" onClick={handleClickCancel}>
+            <button className="btn-cancel mx-2 mb-2" type="button" onClick={handleClickCancel} id={props.name}>
               CANCELAR
             </button>
           )}

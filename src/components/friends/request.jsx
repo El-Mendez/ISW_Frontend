@@ -74,12 +74,12 @@ function Request(props) {
     <div className="userList">
       {(friends) ? (
         <div className="container mt-4">
-          <div className="card-container">
+          <div className="card-container" id="sentRequests">
             {friendsList.map((user) => (
               <Card
                 key={user.carne}
                 name={user.nombre}
-                    // TODO retornar carrera
+                career={user.carrera}
                 email={user.correo}
                 carne={user.carne}
                 viewProfile={`${url}/profile/${user.carne}`}

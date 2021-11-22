@@ -105,6 +105,7 @@ export default function Search() {
             className={`hobbies-search-btn px-2 py-1 ms-3 is-select ${selected.hobbies ? 'is-selected' : ' '}`}
             type="button"
             onClick={hobbiesSearchButton}
+            id="hobbies"
           >
             Hobbies
           </button>
@@ -112,6 +113,7 @@ export default function Search() {
             className={`hobbies-search-btn px-2 py-1 ms-1 ${selected.cursos ? 'is-selected' : ' '}`}
             type="button"
             onClick={coursesSearchButton}
+            id="courses"
           >
             Cursos
           </button>
@@ -121,6 +123,7 @@ export default function Search() {
             </span>
             <div className="w-90">
               <Select
+                id="searchSelect"
                 ref={selectInputRef}
                 isMulti
                 className="basic-single"
@@ -137,7 +140,7 @@ export default function Search() {
                 styles={colourStyles}
               />
             </div>
-            <button className="search-btn" type="button" onClick={handleClick}>
+            <button className="search-btn" type="button" onClick={handleClick} id="searchButton">
               Buscar
             </button>
           </div>
