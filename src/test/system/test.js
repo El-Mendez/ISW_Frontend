@@ -4,7 +4,7 @@ import Suggestions from './cases/suggestions';
 import SendRequest from './cases/sendRequest';
 import SearchUser from './cases/searchUsers';
 
-const host = 'localhost:8080';
+const host = process.env.ENVIRONMENT === 'CI' ? 'meetinguvg.me' : 'localhost:8080';
 
 // Courses suggestions
 const test_case_courses_suggestions = new Suggestions('firefox', host);

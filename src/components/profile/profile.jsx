@@ -8,7 +8,10 @@ import * as Search from '../utils/search';
 import ProfileItem from './profileItem';
 import Report from './report';
 import {
-  USER_INFO, USER_INFO_AUT, SEND_REQUEST, DELETE_FRIEND, SENT_REQUESTS, CANCEL_REQUEST, ASSIGN_HOBBY, ASSIGN_SECTION, SEARCH_IMG,
+  USER_INFO, USER_INFO_AUT, SEND_REQUEST,
+  DELETE_FRIEND, SENT_REQUESTS, CANCEL_REQUEST,
+  ASSIGN_HOBBY, ASSIGN_SECTION, SEARCH_IMG,
+  UPLOAD_IMG,
 } from '../utils/rutas';
 
 export default function Profile(props) {
@@ -32,6 +35,7 @@ export default function Profile(props) {
   const [isSelectedHobbies, setIsSelectedHobbies] = useState(true);
   const [isSelectedContact, setIsSelectedContact] = useState(false);
   const [image, setImage] = useState(false);
+  const [file, setFile] = useState('');
   const [user, setUser] = useState({
     carne: '',
     nombre_completo: '',
@@ -52,19 +56,19 @@ export default function Profile(props) {
     if (e.target.name === 'contact') {
       setIsSelectedCourses(false);
       setIsSelectedContact(true);
-      if (window.screen.width < 716) {
+      if (window.screen.width < 767) {
         setIsSelectedHobbies(false);
       }
     } else if (e.target.name === 'courses') {
       setIsSelectedCourses(true);
       setIsSelectedContact(false);
-      if (window.screen.width < 716) {
+      if (window.screen.width < 767) {
         setIsSelectedHobbies(false);
       }
     } else if (e.target.name === 'hobbies') {
       setIsSelectedCourses(false);
       setIsSelectedContact(false);
-      if (window.screen.width < 716) {
+      if (window.screen.width < 767) {
         setIsSelectedHobbies(true);
       }
     }
@@ -317,7 +321,28 @@ export default function Profile(props) {
     };
     request();
   }
-
+  const onImageChange = (e) => {
+    setFile(e.target.files[0]);
+    setImage({
+      temp_path: URL.createObjectURL(e.target.files[0]),
+    });
+  };
+  const loadImage = async () => {
+    const data = new FormData();
+    data.append('file', file);
+    try {
+      await Axios.post(UPLOAD_IMG,
+        data,
+        {
+          headers: {
+            Authorization: `Bearer ${token}`,
+            'Content-Type': 'multipart/form-data',
+          },
+        });
+    } catch (e) {
+      console.log(e.response);
+    }
+  };
   function checkEditData() {
     const newsHobbies = [];
     const newsCourses = [];
@@ -384,6 +409,10 @@ export default function Profile(props) {
       hobbies: hobbiesUsuarioLabel,
       cursos: coursesUsuarioLabel,
     });
+    if (image.temp_path) {
+      loadImage();
+      alert('Puede ser que la imagen tarde unos segundos en actualizarse...');
+    }
   }
 
   function editProfile() {
@@ -428,7 +457,7 @@ export default function Profile(props) {
     }
   };
   useEffect(() => {
-    if (window.screen.width < 716) {
+    if (window.screen.width < 767) {
       setIsSelectedHobbies(false);
     }
     if (typeof id.carne === 'undefined') {
@@ -440,13 +469,28 @@ export default function Profile(props) {
   return (
     <div id="profileContainer" className="container profile">
       <div className="row">
-        <div className="col-sm-12 col-md-4 d-flex justify-content-center" id="profile-img">
-          <img src={`${SEARCH_IMG}/${image ? `${user.carne}.png` : 'default.svg'}`} alt="Profile" className="w-75 align-self-center" />
+        <div className="col-sm-12 col-md-4 d-flex justify-content-center prueba flex-column" id="profile-img">
+          <img src={image.temp_path || `${SEARCH_IMG}/${image ? `${user.carne}.png` : 'default.svg'}`} alt="Profile" className="w-75 align-self-center" />
+          {edit ? (
+            <>
+              <label
+                htmlFor="file-upload"
+                className="custom-file-upload align-self-center mt-2 d-flex justify-content-center btn-fill"
+                style={{ width: '100%' }}
+              >
+                <span className="material-icons me-2">
+                  file_upload
+                </span>
+                <div>Seleccionar una imagen...</div>
+              </label>
+              <input type="file" id="file-upload" onChange={onImageChange} />
+            </>
+          ) : null}
         </div>
         <div className="col-sm-12 col-md-7 d-flex flex-column align-self-end">
           <div className="container addName">
             <div className="row">
-              <div className="col-6">
+              <div className="col-xs-12 col-lg-6">
                 {(true) ? (
                   <h1>{` ${user.nombre_completo}`}</h1>
                 ) : (
@@ -462,7 +506,7 @@ export default function Profile(props) {
               </div>
               {(item.type === 1) ? (
                 <>
-                  <button id="addFriend" className="col-3 addIcon" type="button" onClick={!pendingRequest ? (addFriend) : (cancelRequest)}>
+                  <button id="addFriend" className="py-2 col-xs-12 col-lg-6 addIcon" type="button" onClick={!pendingRequest ? (addFriend) : (cancelRequest)}>
                     {pendingRequest ? (
                       <p>Cancelar solicitud </p>
                     ) : (
@@ -477,7 +521,7 @@ export default function Profile(props) {
               ) : null}
               {(item.type === 2) ? (
                 <>
-                  <button id="addFriend" className="col-3 deleteIcon" type="button" onClick={deleteFriend}>
+                  <button id="addFriend" className="py-2 col-xs-12 col-lg-6 deleteIcon" type="button" onClick={deleteFriend}>
                     <span className="material-icons add">
                       remove_circle_outline
                     </span>
@@ -487,7 +531,7 @@ export default function Profile(props) {
               ) : null}
               {(item.type === 0) ? (
                 <>
-                  <button id="addFriend" className="col-3 editIcon" type="button" onClick={editProfile}>
+                  <button id="addFriend" className="py-2 col-xs-12 col-lg-6 editIcon" type="button" onClick={editProfile}>
                     <span className="material-icons add">
                       edit
                     </span>
@@ -501,7 +545,7 @@ export default function Profile(props) {
               ) : null}
             </div>
           </div>
-          <h5>{` ${user.carrera}`}</h5>
+          <h3>{` ${user.carrera}`}</h3>
           <h4 className="mt-4">
             Carné:
             {` ${user.carne}`}
@@ -582,6 +626,12 @@ export default function Profile(props) {
                 options={cursos}
               />
             </div>
+          )}
+          {(isSelectedHobbies && !edit) && (
+            <ProfileItem
+              contact={user.hobbies}
+              type={0}
+            />
           )}
           {(isSelectedContact && edit) && (
             null
