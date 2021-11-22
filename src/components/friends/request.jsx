@@ -79,7 +79,7 @@ function Request(props) {
               <Card
                 key={user.carne}
                 name={user.nombre}
-                    // TODO retornar carrera
+                career={user.carrera}
                 email={user.correo}
                 carne={user.carne}
                 viewProfile={`${url}/profile/${user.carne}`}

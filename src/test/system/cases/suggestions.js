@@ -12,10 +12,13 @@ export default class Suggestions extends BaseConfig {
     this.init(browser);
     this.host = host;
     this.type = type;
+    if (type === 1) this.suggest = 'cursos';
+    else if (type === 2) this.suggest = 'hobbies';
+    else this.suggest = 'amigos en común';
   }
 
   async start() {
-    describe('Visit my profile', () => {
+    describe(`Recomendación de amigos por ${this.suggest}`, () => {
       beforeAll(async () => {
         await this.openPage(`http://${this.host}/`);
         this.login = await new Login(this.driver);

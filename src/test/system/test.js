@@ -1,5 +1,5 @@
 /* eslint-disable camelcase */
-import VisitProfile from './cases/sendRequest';
+import VisitProfile from './cases/suggestions';
 
 const host = 'localhost:8080';
 

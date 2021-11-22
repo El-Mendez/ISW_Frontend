@@ -43,7 +43,7 @@ export default function Card(props) {
 
   return (
     <>
-      <div className="card-item">
+      <div className="card-item" id="suggestionResult">
         <div className="p-2 d-flex flex-column justify-content-center align-items-center">
           <div className="image-container">
             <img src={`${SEARCH_IMG}/${image ? `${props.carne}.png` : 'default.svg'}`} className="image-top rounded-circle" alt="Profile" />
