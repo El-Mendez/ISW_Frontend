@@ -7,12 +7,11 @@ import NavBar from './navbar';
 // Diseñar ventana principal que verá el usuario
 export default function Home() {
   return (
-    <div className="vh-100 vw-100">
+    <div className="vh-100 vw-100" id="home">
       <section className="col">
         <NavBar />
         <div className="first_section" />
       </section>
-      
 
       <div className="h-100 navbar-padding bg-beige" id="test">
         <div className="container-fluid h-100" id="test">
