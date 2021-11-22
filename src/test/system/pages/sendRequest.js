@@ -1,21 +1,18 @@
 /* eslint-disable no-underscore-dangle */
 /* eslint-disable-next-line no-useless-constructor */
-import { By } from 'selenium-webdriver';
+import {By, until} from 'selenium-webdriver';
 import Elements from './elements';
 
 export default class SendRequest extends Elements {
-    _friendRequest = By.xpath(`//div[@value=\'${this.name}\']`);
+    _friendRequest = By.xpath(`//div[@value='Maria Gonzales']`);
 
     _addFriend = By.id('addFriend');
-
-    _mailBox = By.id('mailBox');
 
     _sentRequest = By.id('sentRequest');
 
     // eslint-disable-next-line no-useless-constructor
-    constructor(driver, name) {
+    constructor(driver) {
       super(driver);
-      this.name = name;
     }
 
     writeText(element, text) {
@@ -26,10 +23,12 @@ export default class SendRequest extends Elements {
       this.explicitWait(element, true);
     }
 
-    sendRequestAction() {
+    async sendRequestAction() {
       this.clickButton(this._friendRequest);
       this.clickButton(this._addFriend);
-      this.clickButton(this._mailBox);
+      await this.driver.wait(until.alertIsPresent());
+      const alert = await this.driver.switchTo().alert();
+      await alert.accept();
       this.clickButton(this._sentRequest);
     }
 }

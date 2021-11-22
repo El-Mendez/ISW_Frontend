@@ -74,7 +74,7 @@ function Request(props) {
     <div className="userList">
       {(friends && item.type) ? (
         <div className="container mt-4">
-          <div className="card-container">
+          <div className="card-container" id="sentRequests">
             {friendsList.map((user) => (
               <Card
                 key={user.carne}

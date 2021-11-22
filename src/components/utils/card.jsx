@@ -51,7 +51,9 @@ export default function Card(props) {
           <div
             className="card-body p-1 mt-1 w-100 d-flex flex-column justify-content-center align-items-center"
           >
-            <p className="card-title" style={{ fontSize: font.name }}>{props.name}</p>
+            <Link className="noDecorations" to={props.viewProfile}>
+              <div className="card-title" style={{ fontSize: font.name }} value={props.name}>{props.name}</div>
+            </Link>
             <p className="card-email mt-1 mb-2" style={{ fontSize: font.email }}>{props.email}</p>
             <p className="card-career mb-0" style={{ fontSize: font.career }}>{props.career}</p>
           </div>
