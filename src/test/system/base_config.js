@@ -6,7 +6,7 @@ export default class BaseConfig {
   init(browser) {
     if (process.env.ENVIRONMENT === 'CI') {
       this.driver = new Builder()
-        // .forBrowser('firefox')
+        .forBrowser('firefox')
         // .setFirefoxOptions(new firefox.Options().headless())
         .usingServer('http://localhost:4444/wd/hub')
         .build();
