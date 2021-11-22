@@ -12,13 +12,13 @@ export default class Suggestions extends BaseConfig {
     this.init(browser);
     this.host = host;
     this.type = type;
-    if (type === 1) this.suggest = 'cursos';
+    if (type === 1) this.suggest = 'courses';
     else if (type === 2) this.suggest = 'hobbies';
-    else this.suggest = 'amigos en común';
+    else this.suggest = 'mutual friends';
   }
 
   async start() {
-    describe(`Recomendación de amigos por ${this.suggest}`, () => {
+    describe(`Friend suggestions by ${this.suggest}`, () => {
       beforeAll(async () => {
         await this.openPage(`http://${this.host}/`);
         this.login = await new Login(this.driver);
@@ -31,7 +31,7 @@ export default class Suggestions extends BaseConfig {
         expect(await this.driver.getCurrentUrl()).toEqual(`http://${this.host}/home`);
       }, 10000);
 
-      test('Look up for courses recommendations', async () => {
+      test('Look up for recommendations', async () => {
         await this.recommendations.suggestionsAction(this.type);
         const suggestion = await this.driver.wait(until.elementLocated(By.id('suggestionResult')), 10000);
         expect(suggestion).toBeTruthy();

@@ -48,13 +48,13 @@ export default class Suggestions extends BaseConfig {
       test('Visit a possible friend profile', async () => {
         await this.visitProfile.visitProfileAction();
         await this.driver.wait(until.elementLocated(By.id('profile-img')), 10000);
-        expect(await this.driver.getCurrentUrl()).toEqual(`http://${this.host}/home/profile/19948`);
+        expect(await this.driver.getCurrentUrl()).toEqual(`http://${this.host}/home/search/profile/19948`);
       }, 100000);
 
       test('Log out', async () => {
         await this.logout.logoutAction();
-        await this.driver.wait(until.elementLocated(By.id('profile-img')), 10000);
-        expect(await this.driver.getCurrentUrl()).toEqual(`http://${this.host}/home/profile/19948`);
+        await this.driver.wait(until.elementLocated(By.id('home')), 10000);
+        expect(await this.driver.getCurrentUrl()).toEqual(`http://${this.host}/`);
       }, 100000);
 
       beforeEach(() => {
