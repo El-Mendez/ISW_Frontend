@@ -71,7 +71,7 @@ function Services() {
               <Link id="account" to={`${url}/profile`} className="noDecorations">
                 <p className="row">Cuenta</p>
               </Link>
-              <a id="close-session" className="noDecorations" onClick={() => setHelp(true)}>
+              <a id="help" className="noDecorations" onClick={() => setHelp(true)}>
                 <p className="row">Ayuda</p>
               </a>
               <a id="close-session" className="noDecorations" onClick={logout}>
