@@ -56,19 +56,19 @@ export default function Profile(props) {
     if (e.target.name === 'contact') {
       setIsSelectedCourses(false);
       setIsSelectedContact(true);
-      if (window.screen.width < 716) {
+      if (window.screen.width < 767) {
         setIsSelectedHobbies(false);
       }
     } else if (e.target.name === 'courses') {
       setIsSelectedCourses(true);
       setIsSelectedContact(false);
-      if (window.screen.width < 716) {
+      if (window.screen.width < 767) {
         setIsSelectedHobbies(false);
       }
     } else if (e.target.name === 'hobbies') {
       setIsSelectedCourses(false);
       setIsSelectedContact(false);
-      if (window.screen.width < 716) {
+      if (window.screen.width < 767) {
         setIsSelectedHobbies(true);
       }
     }
@@ -457,7 +457,7 @@ export default function Profile(props) {
     }
   };
   useEffect(() => {
-    if (window.screen.width < 716) {
+    if (window.screen.width < 767) {
       setIsSelectedHobbies(false);
     }
     if (typeof id.carne === 'undefined') {
@@ -626,6 +626,12 @@ export default function Profile(props) {
                 options={cursos}
               />
             </div>
+          )}
+          {(isSelectedHobbies && !edit) && (
+            <ProfileItem
+              contact={user.hobbies}
+              type={0}
+            />
           )}
           {(isSelectedContact && edit) && (
             null
