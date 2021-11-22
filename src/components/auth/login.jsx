@@ -1,6 +1,5 @@
 import React, { useState } from 'react';
 import Modal from 'react-bootstrap/Modal';
-import GoogleLogin from 'react-google-login';
 import Axios from 'axios';
 import { useForm } from 'react-hook-form';
 import Cookies from 'universal-cookie';
@@ -11,8 +10,6 @@ import PropTypes from 'prop-types';
 import { LOGIN } from '../utils/rutas';
 import logo from '../../assets/logo.svg';
 import history from '../utils/history';
-
-const clientId = '405374042535-g3sqooe9ncnj7lm394iu27u9vd99ma16.apps.googleusercontent.com';
 
 const schema = z.object({
   carne: z.string().min(3, { message: 'EL mínimo de un carné UVG es de 3 dígitos' }),
@@ -54,12 +51,6 @@ export default function Login(props) {
     };
     fetchData();
   }
-
-  const googleLogin = (respuesta) => {
-    // token en respuesta.profileObj → necesito hacer un parser a json para extraer el token
-    history.push('/home');
-    history.go();
-  };
 
   const onLoginFailure = () => {
     console.log('Login Failed:');
@@ -175,17 +166,6 @@ export default function Login(props) {
             </div>
           </form>
           <span className="divider">○</span>
-          {/* Google */}
-          <div>
-            <GoogleLogin
-              clientId={clientId}
-              buttonText="Continúa con Google"
-              onSuccess={googleLogin}
-              onFailure={onLoginFailure}
-              hostedDomain="uvg.edu.gt"
-              cookiePolicy="single_host_origin"
-            />
-          </div>
         </div>
       </Modal.Body>
     </Modal>

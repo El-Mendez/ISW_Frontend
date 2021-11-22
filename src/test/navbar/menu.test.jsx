@@ -6,22 +6,10 @@ import userEvent from '@testing-library/user-event';
 import { createMemoryHistory } from 'history';
 import React from 'react';
 import { Router } from 'react-router-dom';
-//import Menu from '../../components/navbar/menu';
+import Menu from '../../components/navbar/menu';
 import '@testing-library/jest-dom';
 
-/* it('Probando dirigirse al perfil de usuario', () => {
-  const history = createMemoryHistory();
-  render(
-    <Router history={history}>
-      <Menu />
-    </Router>,
-  );
-  const perfilItem = screen.getByText('Perfil');
-  userEvent.click(perfilItem);
-  expect(history.location.pathname).toBe('//profile');
-}); */
-
-/* it('Probando dirigirse a la lista de amigos', () => {
+it('Probando dirigirse a la lista de amigos', () => {
   const history = createMemoryHistory();
   render(
     <Router history={history}>
@@ -31,9 +19,9 @@ import '@testing-library/jest-dom';
   const item = screen.getByText('Ver amigos');
   userEvent.click(item);
   expect(history.location.pathname).toBe('//friends');
-}); */
+});
 
-/* it('Probando dirigirse a las recomendaciones por cursos', () => {
+it('Probando dirigirse a las recomendaciones por cursos', () => {
   const history = createMemoryHistory();
   render(
     <Router history={history}>
@@ -95,7 +83,4 @@ it('Probando que los botones de las recomendaciones lleven a distintas páginas'
   userEvent.click(hobbiesItem);
   const hobbies = history.location.pathname;
   expect(courses).not.toEqual(hobbies);
-}); */
-it('Probando que los botones de las recomendaciones lleven a distintas páginas', () => {
-  expect(1).not.toEqual(2);
 });
