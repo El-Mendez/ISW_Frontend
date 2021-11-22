@@ -411,6 +411,7 @@ export default function Profile(props) {
     });
     if (image.temp_path) {
       loadImage();
+      alert('Puede ser que la imagen tarde unos segundos en actualizarse...');
     }
   }
 
