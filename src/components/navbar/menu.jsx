@@ -1,10 +1,8 @@
 import React from 'react';
 import { Link, useRouteMatch } from 'react-router-dom';
-import Help from '../utils/helpModal';
 
 export default function Menu() {
   const { url } = useRouteMatch();
-  const [help, setHelp] = React.useState(false);
   return (
     <div style={{ height: '100%' }}>
       <ul className="menu navbar-nav mr-auto mt-lg-0 d-flex align-items-center">
@@ -19,6 +17,13 @@ export default function Menu() {
           <Link to={`${url}/sent_request`} className="noDecorations">
             <button id="friends" className="nav-link button" type="button">
               Solicitudes enviadas
+            </button>
+          </Link>
+        </li>
+        <li id="notification" className="nav-item product-font ml-20">
+          <Link to={`${url}/recieved_request`} className="noDecorations">
+            <button id="friends" className="nav-link button" type="button">
+              Socilicitudes de amistad
             </button>
           </Link>
         </li>
@@ -38,15 +43,6 @@ export default function Menu() {
             </div>
           </div>
         </li>
-        <li className="nav-item product-font ml-20">
-          <button id="friends" className="nav-link button" type="button" onClick={() => setHelp(true)}>
-            Ayuda
-          </button>
-        </li>
-        <Help
-          show={help}
-          onHide={() => setHelp(false)}
-        />
         <li className="nav-item product-font ml-20">
           <Link to={`${url}/search`} className="noDecorations">
             <button id="friends" className="nav-link button" type="button">

@@ -72,7 +72,7 @@ function Request(props) {
 
   return (
     <div className="userList">
-      {(friends && item.type) ? (
+      {(friends) ? (
         <div className="container mt-4">
           <div className="card-container">
             {friendsList.map((user) => (
@@ -84,6 +84,7 @@ function Request(props) {
                 carne={user.carne}
                 viewProfile={`${url}/profile/${user.carne}`}
                 setReload={() => setReload()}
+                type={item.type}
               />
             ))}
           </div>
