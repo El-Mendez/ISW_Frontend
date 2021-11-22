@@ -57,8 +57,8 @@ function Services() {
   }, []);
 
   return (
-    <div className="d-flex me-4">
-      <div className="services align-items-end align-self-lg-center" style={{ height: 'auto' }}>
+    <div className="d-flex me-lg-8 me-5">
+      <div className="services align-items-end align-self-lg-center">
         <div className="d-flex align-items-center">
           <div className={`${!image ? ('no-image-user col-4') : 'col-2 image-user align-self-center'} me-2`}>
             <img src={`http://meetinguvg.me/public/assets/${image ? `${user.carne}.png` : 'default.svg'}`} alt="Profile" className="rounded-circle profile-img" />
