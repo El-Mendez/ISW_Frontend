@@ -88,6 +88,15 @@ li ~ li{
 }
 
 .services{
+    &:hover{
+        :first-child{
+            .dropdown{
+                .dropdown-content{
+                    display: block;
+                }
+            }
+        }
+    }
     height: fit-content;
     cursor: pointer;
     color: #999690;
@@ -254,10 +263,12 @@ div[aria-expanded="true"]{
     }
 }
 
-.ml-20{
-    margin-left: 20px;
-}
 
+@media screen and (min-width: 991px) {
+    .ml-20{
+        margin-left: 20px;
+    }
+}
 .navbar-container{
     width: 100%;
     backface-visibility: hidden;
@@ -383,7 +394,10 @@ div[aria-expanded="true"]{
     width: 135px;
     right: 0rem;
     transition: 10s display;
-    top: 1.8rem;
+    top: 2.2rem;
+    &:hover{
+        display: block;
+    }
     a {
         display: flex;
         justify-content: end;
@@ -407,4 +421,33 @@ div[aria-expanded="true"]{
     width: 80%;
     aspect-ratio: 1;
     object-fit: cover;
+}
+
+#recomendations2{
+    p{
+        padding-left: 2rem;
+    }
+}
+
+.prueba{
+    width: auto;
+}
+#products{
+    height: 100%;
+}
+
+.menu{
+    height: 100%;
+    li{
+        height: 100%;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        .dropdown{
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            height: 100%;
+        }
+    }
 }
