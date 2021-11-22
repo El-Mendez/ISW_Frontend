@@ -13,14 +13,6 @@ jobs:
   test:
     runs-on: ubuntu-latest
 
-    services:
-      hub:
-        image: selenium/hub
-      firefox:
-        image: selenium/node-firefox
-        env:
-          HUB_HOST: hub
-          HUB_PORT: 4444
     steps:
       - name: Copying the Source Code
         uses: actions/checkout@v2
